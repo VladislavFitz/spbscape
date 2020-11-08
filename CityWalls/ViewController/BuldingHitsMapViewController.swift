@@ -60,7 +60,6 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
     let buildings = hitsSource?.getCurrentHits() ?? []
     let annotations = buildings.map(BuildingAnnotation.init)
     mapView.addAnnotations(annotations)
-//    mapView.showAnnotations(annotations, animated: false)
   }
       
   func reload() {
@@ -78,6 +77,7 @@ extension BuldingHitsMapViewController: MKMapViewDelegate {
   
   func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
     guard let buildingAnnotation = view.annotation as? BuildingAnnotation else { return }
+    mapView.setCenter(buildingAnnotation.coordinate, animated: true)
     didSelect?(buildingAnnotation.building)
   }
   

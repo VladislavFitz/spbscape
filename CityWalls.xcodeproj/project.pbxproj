@@ -38,6 +38,7 @@
 		AFFA76BD25582F9100578914 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFFA76BC25582F9100578914 /* Credentials.plist */; };
 		AFFA76C1255833AF00578914 /* ClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C0255833AF00578914 /* ClusterView.swift */; };
 		AFFA76C42558340200578914 /* HitAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C32558340200578914 /* HitAnnotationView.swift */; };
+		AFFA76C9255853F100578914 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C8255853F100578914 /* MainSplitViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		AFFA76C0255833AF00578914 /* ClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterView.swift; sourceTree = "<group>"; };
 		AFFA76C32558340200578914 /* HitAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitAnnotationView.swift; sourceTree = "<group>"; };
 		AFFA76C62558367900578914 /* CityWalls.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CityWalls.entitlements; sourceTree = "<group>"; };
+		AFFA76C8255853F100578914 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 				AF7943D3253B925B006CEB2B /* FilterViewController.swift */,
 				AF7943CC253B5043006CEB2B /* MainTabBarViewController.swift */,
 				AF7943D0253B8469006CEB2B /* FilterModePickerViewController.swift */,
+				AFFA76C8255853F100578914 /* MainSplitViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				AF82DD1C244CB6C200CE8B95 /* UIView+Convenience.swift in Sources */,
 				AF7943D4253B925B006CEB2B /* FilterViewController.swift in Sources */,
 				AF7943DA253C4981006CEB2B /* SegmentedBuildingHitsController.swift in Sources */,
+				AFFA76C9255853F100578914 /* MainSplitViewController.swift in Sources */,
 				AF82DCF5244C77A300CE8B95 /* SceneDelegate.swift in Sources */,
 				AF82DD0C244CB54B00CE8B95 /* Builder.swift in Sources */,
 				AF7943EE253C51F9006CEB2B /* BuildingAttributeHitsViewController.swift in Sources */,
