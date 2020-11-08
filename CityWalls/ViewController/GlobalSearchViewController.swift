@@ -68,6 +68,8 @@ class GlobalSearchViewController: UIViewController {
       searcher.indexQueryStates[0].query.insideBoundingBox = [BoundingBox(region)]
       searcher.search()
     }
+    
+    hitsConnector.searcher.indexQueryStates[0].query.hitsPerPage = 1000
 
   }
   
