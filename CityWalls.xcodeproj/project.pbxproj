@@ -76,6 +76,7 @@
 		AFFA76BC25582F9100578914 /* Credentials.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
 		AFFA76C0255833AF00578914 /* ClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterView.swift; sourceTree = "<group>"; };
 		AFFA76C32558340200578914 /* HitAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitAnnotationView.swift; sourceTree = "<group>"; };
+		AFFA76C62558367900578914 /* CityWalls.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CityWalls.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +113,7 @@
 		AF82DCF1244C77A300CE8B95 /* CityWalls */ = {
 			isa = PBXGroup;
 			children = (
+				AFFA76C62558367900578914 /* CityWalls.entitlements */,
 				AF82DD24244CBA3400CE8B95 /* View */,
 				AF82DD23244CB9FD00CE8B95 /* Helper */,
 				AF82DD22244CB9ED00CE8B95 /* ViewController */,
@@ -423,6 +425,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CityWalls/CityWalls.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JF98Q6D3JZ;
 				INFOPLIST_FILE = CityWalls/Info.plist;
@@ -432,6 +435,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fitc.CityWalls;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -441,6 +445,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CityWalls/CityWalls.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JF98Q6D3JZ;
 				INFOPLIST_FILE = CityWalls/Info.plist;
@@ -450,6 +455,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fitc.CityWalls;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
