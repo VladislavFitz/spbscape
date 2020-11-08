@@ -27,6 +27,8 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
     self.mapView = MKMapView()
     self.button = UIButton()
     super.init(nibName: nil, bundle: nil)
+    mapView.register(HitAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+    mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
   }
   
   required init?(coder: NSCoder) {

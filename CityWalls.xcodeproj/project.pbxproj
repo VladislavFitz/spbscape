@@ -36,6 +36,8 @@
 		AF82DD21244CB9D600CE8B95 /* UIStackView+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DD20244CB9D600CE8B95 /* UIStackView+Convenience.swift */; };
 		AF82DD26244CBA4300CE8B95 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DD25244CBA4300CE8B95 /* ImageCell.swift */; };
 		AFFA76BD25582F9100578914 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFFA76BC25582F9100578914 /* Credentials.plist */; };
+		AFFA76C1255833AF00578914 /* ClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C0255833AF00578914 /* ClusterView.swift */; };
+		AFFA76C42558340200578914 /* HitAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C32558340200578914 /* HitAnnotationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +74,8 @@
 		AF82DD20244CB9D600CE8B95 /* UIStackView+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Convenience.swift"; sourceTree = "<group>"; };
 		AF82DD25244CBA4300CE8B95 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		AFFA76BC25582F9100578914 /* Credentials.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
+		AFFA76C0255833AF00578914 /* ClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterView.swift; sourceTree = "<group>"; };
+		AFFA76C32558340200578914 /* HitAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitAnnotationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +176,8 @@
 			isa = PBXGroup;
 			children = (
 				AF82DD25244CBA4300CE8B95 /* ImageCell.swift */,
+				AFFA76C0255833AF00578914 /* ClusterView.swift */,
+				AFFA76C32558340200578914 /* HitAnnotationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -263,6 +269,7 @@
 				AF7943EB253C51F0006CEB2B /* BuildingAttributeSearchViewController.swift in Sources */,
 				AF7943D7253BA6D1006CEB2B /* GlobalSearchViewController.swift in Sources */,
 				AF7943E1253C4A36006CEB2B /* BuildingTableViewCell.swift in Sources */,
+				AFFA76C42558340200578914 /* HitAnnotationView.swift in Sources */,
 				AF7943CA253B4C32006CEB2B /* BuildingSearchViewController.swift in Sources */,
 				AF82DCF7244C77A300CE8B95 /* BuldingHitsMapViewController.swift in Sources */,
 				AF7943D1253B8469006CEB2B /* FilterModePickerViewController.swift in Sources */,
@@ -270,6 +277,7 @@
 				AF7943DE253C49D2006CEB2B /* BuldingHitsListViewController.swift in Sources */,
 				AF7943E5253C4C9A006CEB2B /* IndexName+Convenience.swift in Sources */,
 				AF82DD1E244CB6CE00CE8B95 /* UIViewController+Convenience.swift in Sources */,
+				AFFA76C1255833AF00578914 /* ClusterView.swift in Sources */,
 				AF82DCF3244C77A300CE8B95 /* AppDelegate.swift in Sources */,
 				AF82DD21244CB9D600CE8B95 /* UIStackView+Convenience.swift in Sources */,
 				AF82DD0E244CB56B00CE8B95 /* GalleryViewController.swift in Sources */,
