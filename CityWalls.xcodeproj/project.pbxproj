@@ -39,6 +39,7 @@
 		AFFA76C1255833AF00578914 /* ClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C0255833AF00578914 /* ClusterView.swift */; };
 		AFFA76C42558340200578914 /* HitAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C32558340200578914 /* HitAnnotationView.swift */; };
 		AFFA76C9255853F100578914 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C8255853F100578914 /* MainSplitViewController.swift */; };
+		AFFA76CC25585B3200578914 /* MasterSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76CB25585B3200578914 /* MasterSearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,7 @@
 		AFFA76C32558340200578914 /* HitAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitAnnotationView.swift; sourceTree = "<group>"; };
 		AFFA76C62558367900578914 /* CityWalls.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CityWalls.entitlements; sourceTree = "<group>"; };
 		AFFA76C8255853F100578914 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
+		AFFA76CB25585B3200578914 /* MasterSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterSearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 				AF7943CC253B5043006CEB2B /* MainTabBarViewController.swift */,
 				AF7943D0253B8469006CEB2B /* FilterModePickerViewController.swift */,
 				AFFA76C8255853F100578914 /* MainSplitViewController.swift */,
+				AFFA76CB25585B3200578914 /* MasterSearchViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 			files = (
 				AF82DD10244CB59D00CE8B95 /* BuildingViewController.swift in Sources */,
 				AF7943CD253B5043006CEB2B /* MainTabBarViewController.swift in Sources */,
+				AFFA76CC25585B3200578914 /* MasterSearchViewController.swift in Sources */,
 				AF7943EB253C51F0006CEB2B /* BuildingAttributeSearchViewController.swift in Sources */,
 				AF7943D7253BA6D1006CEB2B /* GlobalSearchViewController.swift in Sources */,
 				AF7943E1253C4A36006CEB2B /* BuildingTableViewCell.swift in Sources */,
