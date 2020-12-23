@@ -21,7 +21,7 @@ class HitAnnotationView: MKMarkerAnnotationView {
   func configure(with annotation: MKAnnotation) {
     guard annotation is BuildingAnnotation else { fatalError("Unexpected annotation type: \(annotation)") }
     
-    markerTintColor = .systemGreen
+    markerTintColor = .systemTeal
     glyphImage = UIImage(systemName: "building.2")
     clusteringIdentifier = String(describing: HitAnnotationView.self)
   }
@@ -37,7 +37,7 @@ final class HitMKAnnotationDecorator: NSObject, MKAnnotation {
   }
   
   var title: String? {
-    return hit.title
+    return hit.titles.first
   }
   
   var subtitle: String? {

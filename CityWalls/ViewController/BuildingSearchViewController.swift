@@ -62,6 +62,7 @@ class BuildingSearchViewController: UIViewController {
   @objc func presentFilters() {
     let filtersViewController = FilterViewController(filterState: filterState)
     let filtersNavigationController = UINavigationController(rootViewController: filtersViewController)
+    filtersNavigationController.isToolbarHidden = false
     present(filtersNavigationController, animated: true, completion: nil)
   }
   

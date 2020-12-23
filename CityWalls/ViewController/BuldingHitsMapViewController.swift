@@ -13,9 +13,10 @@ import CityWallsCore
 
 class BuldingHitsMapViewController: UIViewController, HitsController {
   
+  let locationManager: CLLocationManager
   let mapView: MKMapView
-  let button: UIButton
   var hitsSource: HitsInteractor<Building>?
+  let userTrackingButton: MKUserTrackingButton
 
   private var isInitialMapFocusDone: Bool = false
   private var nextRegionChangeIsFromUserInteraction = false
@@ -25,7 +26,8 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
     
   init() {
     self.mapView = MKMapView()
-    self.button = UIButton()
+    self.locationManager = .init()
+    self.userTrackingButton = MKUserTrackingButton(mapView: mapView)
     super.init(nibName: nil, bundle: nil)
     mapView.register(HitAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
     mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
@@ -42,6 +44,20 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
     configureLayout()
     placeAnnotations()
     mapView.delegate = self
+    locationManager.requestWhenInUseAuthorization()
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    locationManager.distanceFilter = kCLDistanceFilterNone
+    locationManager.startUpdatingLocation()
+    mapView.showsUserLocation = true
+    mapView.showsBuildings = true
+    mapView.showsCompass = true
+    
+    mapView.addSubview(userTrackingButton)
+    userTrackingButton.translatesAutoresizingMaskIntoConstraints = false
+    userTrackingButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+    userTrackingButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+    userTrackingButton.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -50).isActive = true
+    userTrackingButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -20).isActive = true
   }
 
   private func configureLayout() {
@@ -70,7 +86,13 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
     
   }
   
-
+  func highlight(_ building: Building) {
+    guard let buildingAnnotation = mapView.annotations.first(where: { annotation in (annotation as? BuildingAnnotation)?.building.id == building.id
+    }) else { return }
+    mapView.showAnnotations([buildingAnnotation], animated: true)
+    mapView.selectAnnotation(buildingAnnotation, animated: true)
+  }
+  
 }
 
 extension BuldingHitsMapViewController: MKMapViewDelegate {
@@ -80,11 +102,7 @@ extension BuldingHitsMapViewController: MKMapViewDelegate {
     mapView.setCenter(buildingAnnotation.coordinate, animated: true)
     didSelect?(buildingAnnotation.building)
   }
-  
-//  func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-//    didChangeVisibleRegion?(mapView.visibleMapRect)
-//  }
-  
+    
   func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
    
     // A hack which makes possible to determine if region was changed by user's gesture

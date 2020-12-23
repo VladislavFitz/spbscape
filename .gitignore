@@ -81,3 +81,8 @@ fastlane/screenshots
 fastlane/test_output
 fastlane/README.md
 fastlane/report.xml
+
+# Local packages
+algoliasearch-client-swift
+instantsearch-ios
+

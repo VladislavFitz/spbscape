@@ -19,7 +19,7 @@ class BuildingAnnotation: NSObject, MKAnnotation {
   }
   
   var title: String? {
-    return building.title
+    return building.titles.first
   }
   
   init(building: Building) {

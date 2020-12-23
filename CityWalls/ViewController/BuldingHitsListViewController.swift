@@ -23,6 +23,12 @@ class BuldingHitsListViewController: UITableViewController, HitsController {
     tableView.rowHeight = 130
   }
   
+  func highlight(_ building: Building) {
+    guard let buildingIndex = hitsSource?.getCurrentHits().firstIndex(where: { $0.id == building.id }) else { return }
+    let buildingIndexPath = IndexPath(row: buildingIndex, section: 0)
+    tableView.selectRow(at: buildingIndexPath, animated: true, scrollPosition: .middle)
+  }
+  
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return hitsSource?.numberOfHits() ?? 0
   }

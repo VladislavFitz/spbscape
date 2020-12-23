@@ -69,7 +69,7 @@ class GlobalSearchViewController: UIViewController {
       searcher.search()
     }
     
-    hitsConnector.searcher.indexQueryStates[0].query.hitsPerPage = 1000
+    hitsConnector.searcher.indexQueryStates[0].query.hitsPerPage = 20
 
   }
   

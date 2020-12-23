@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF1ECBF52580FD32002C532F /* CityWallsCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF1ECBF42580FD32002C532F /* CityWallsCore */; };
+		AF3B4559258563C20048BBB8 /* AlgoliaSearchClient in Frameworks */ = {isa = PBXBuildFile; productRef = AF3B4558258563C20048BBB8 /* AlgoliaSearchClient */; };
+		AF3B455B258563C20048BBB8 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF3B455A258563C20048BBB8 /* InstantSearch */; };
 		AF46B4302557807A003DA57E /* BuildingAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DD17244CB67700CE8B95 /* BuildingAnnotation.swift */; };
-		AF46B44625581139003DA57E /* CityWallsCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF46B44525581139003DA57E /* CityWallsCore */; };
-		AF48C4EA2536376100262367 /* InstantSearchCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF48C4E92536376100262367 /* InstantSearchCore */; };
-		AF48C4EC2536376100262367 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF48C4EB2536376100262367 /* InstantSearch */; };
+		AF6D857C2584F83C004D699A /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D857B2584F83C004D699A /* ContainerViewController.swift */; };
+		AF6D85802584F84F004D699A /* FilterSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D857F2584F84F004D699A /* FilterSection.swift */; };
 		AF7943CA253B4C32006CEB2B /* BuildingSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943C9253B4C32006CEB2B /* BuildingSearchViewController.swift */; };
 		AF7943CD253B5043006CEB2B /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943CC253B5043006CEB2B /* MainTabBarViewController.swift */; };
 		AF7943D1253B8469006CEB2B /* FilterModePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943D0253B8469006CEB2B /* FilterModePickerViewController.swift */; };
@@ -35,6 +37,8 @@
 		AF82DD1E244CB6CE00CE8B95 /* UIViewController+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DD1D244CB6CE00CE8B95 /* UIViewController+Convenience.swift */; };
 		AF82DD21244CB9D600CE8B95 /* UIStackView+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DD20244CB9D600CE8B95 /* UIStackView+Convenience.swift */; };
 		AF82DD26244CBA4300CE8B95 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DD25244CBA4300CE8B95 /* ImageCell.swift */; };
+		AF98955A2561ACB500B61F15 /* Petr.gpx in Resources */ = {isa = PBXBuildFile; fileRef = AF9895592561ACB500B61F15 /* Petr.gpx */; };
+		AF98955D2561AD3B00B61F15 /* Center.gpx in Resources */ = {isa = PBXBuildFile; fileRef = AF98955C2561AD3B00B61F15 /* Center.gpx */; };
 		AFFA76BD25582F9100578914 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFFA76BC25582F9100578914 /* Credentials.plist */; };
 		AFFA76C1255833AF00578914 /* ClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C0255833AF00578914 /* ClusterView.swift */; };
 		AFFA76C42558340200578914 /* HitAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C32558340200578914 /* HitAnnotationView.swift */; };
@@ -43,8 +47,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF3B4552258563510048BBB8 /* instantsearch-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "instantsearch-ios"; sourceTree = "<group>"; };
+		AF3B4555258563880048BBB8 /* algoliasearch-client-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "algoliasearch-client-swift"; sourceTree = "<group>"; };
 		AF48C4F7253639EE00262367 /* Architect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Architect.swift; sourceTree = "<group>"; };
 		AF48C4F8253639EE00262367 /* Street.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Street.swift; sourceTree = "<group>"; };
+		AF6D857B2584F83C004D699A /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		AF6D857F2584F84F004D699A /* FilterSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSection.swift; sourceTree = "<group>"; };
 		AF7943C9253B4C32006CEB2B /* BuildingSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingSearchViewController.swift; sourceTree = "<group>"; };
 		AF7943CC253B5043006CEB2B /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		AF7943D0253B8469006CEB2B /* FilterModePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModePickerViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +83,9 @@
 		AF82DD1D244CB6CE00CE8B95 /* UIViewController+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Convenience.swift"; sourceTree = "<group>"; };
 		AF82DD20244CB9D600CE8B95 /* UIStackView+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Convenience.swift"; sourceTree = "<group>"; };
 		AF82DD25244CBA4300CE8B95 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		AF9895582561AC5900B61F15 /* VO.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VO.gpx; sourceTree = "<group>"; };
+		AF9895592561ACB500B61F15 /* Petr.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Petr.gpx; sourceTree = "<group>"; };
+		AF98955C2561AD3B00B61F15 /* Center.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Center.gpx; sourceTree = "<group>"; };
 		AFFA76BC25582F9100578914 /* Credentials.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
 		AFFA76C0255833AF00578914 /* ClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterView.swift; sourceTree = "<group>"; };
 		AFFA76C32558340200578914 /* HitAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitAnnotationView.swift; sourceTree = "<group>"; };
@@ -88,21 +99,41 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF3B455B258563C20048BBB8 /* InstantSearch in Frameworks */,
+				AF3B4559258563C20048BBB8 /* AlgoliaSearchClient in Frameworks */,
 				AF82DD0A244C8A3500CE8B95 /* SDWebImage in Frameworks */,
-				AF48C4EC2536376100262367 /* InstantSearch in Frameworks */,
-				AF46B44625581139003DA57E /* CityWallsCore in Frameworks */,
-				AF48C4EA2536376100262367 /* InstantSearchCore in Frameworks */,
+				AF1ECBF52580FD32002C532F /* CityWallsCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF3B4557258563C20048BBB8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AF6D857A2584F82F004D699A /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				AF7943D3253B925B006CEB2B /* FilterViewController.swift */,
+				AF6D857B2584F83C004D699A /* ContainerViewController.swift */,
+				AF6D857F2584F84F004D699A /* FilterSection.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
 		AF82DCE6244C77A300CE8B95 = {
 			isa = PBXGroup;
 			children = (
 				AF82DCF1244C77A300CE8B95 /* CityWalls */,
+				AF3B4552258563510048BBB8 /* instantsearch-ios */,
+				AF3B4555258563880048BBB8 /* algoliasearch-client-swift */,
 				AF82DCF0244C77A300CE8B95 /* Products */,
+				AF3B4557258563C20048BBB8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,6 +158,9 @@
 				AF82DCFB244C77A500CE8B95 /* Assets.xcassets */,
 				AF82DCFD244C77A500CE8B95 /* LaunchScreen.storyboard */,
 				AF82DD00244C77A500CE8B95 /* Info.plist */,
+				AF98955C2561AD3B00B61F15 /* Center.gpx */,
+				AF9895592561ACB500B61F15 /* Petr.gpx */,
+				AF9895582561AC5900B61F15 /* VO.gpx */,
 				AFFA76BC25582F9100578914 /* Credentials.plist */,
 				AF82DD0B244CB54B00CE8B95 /* Builder.swift */,
 			);
@@ -150,6 +184,7 @@
 		AF82DD22244CB9ED00CE8B95 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				AF6D857A2584F82F004D699A /* Filter */,
 				AF82DCF6244C77A300CE8B95 /* BuldingHitsMapViewController.swift */,
 				AF7943DD253C49D2006CEB2B /* BuldingHitsListViewController.swift */,
 				AF7943E0253C4A36006CEB2B /* BuildingTableViewCell.swift */,
@@ -160,7 +195,6 @@
 				AF82DD0F244CB59D00CE8B95 /* BuildingViewController.swift */,
 				AF7943EA253C51F0006CEB2B /* BuildingAttributeSearchViewController.swift */,
 				AF7943C9253B4C32006CEB2B /* BuildingSearchViewController.swift */,
-				AF7943D3253B925B006CEB2B /* FilterViewController.swift */,
 				AF7943CC253B5043006CEB2B /* MainTabBarViewController.swift */,
 				AF7943D0253B8469006CEB2B /* FilterModePickerViewController.swift */,
 				AFFA76C8255853F100578914 /* MainSplitViewController.swift */,
@@ -208,9 +242,9 @@
 			name = CityWalls;
 			packageProductDependencies = (
 				AF82DD09244C8A3500CE8B95 /* SDWebImage */,
-				AF48C4E92536376100262367 /* InstantSearchCore */,
-				AF48C4EB2536376100262367 /* InstantSearch */,
-				AF46B44525581139003DA57E /* CityWallsCore */,
+				AF1ECBF42580FD32002C532F /* CityWallsCore */,
+				AF3B4558258563C20048BBB8 /* AlgoliaSearchClient */,
+				AF3B455A258563C20048BBB8 /* InstantSearch */,
 			);
 			productName = CityWalls;
 			productReference = AF82DCEF244C77A300CE8B95 /* CityWalls.app */;
@@ -242,8 +276,7 @@
 			mainGroup = AF82DCE6244C77A300CE8B95;
 			packageReferences = (
 				AF82DD08244C8A3500CE8B95 /* XCRemoteSwiftPackageReference "SDWebImage" */,
-				AF48C4E82536376100262367 /* XCRemoteSwiftPackageReference "instantsearch-ios" */,
-				AF46B44425581139003DA57E /* XCRemoteSwiftPackageReference "citywalls-crawler" */,
+				AF1ECBF32580FD32002C532F /* XCRemoteSwiftPackageReference "citywalls-crawler" */,
 			);
 			productRefGroup = AF82DCF0244C77A300CE8B95 /* Products */;
 			projectDirPath = "";
@@ -259,7 +292,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF98955A2561ACB500B61F15 /* Petr.gpx in Resources */,
 				AF82DCFF244C77A500CE8B95 /* LaunchScreen.storyboard in Resources */,
+				AF98955D2561AD3B00B61F15 /* Center.gpx in Resources */,
 				AFFA76BD25582F9100578914 /* Credentials.plist in Resources */,
 				AF82DCFC244C77A500CE8B95 /* Assets.xcassets in Resources */,
 			);
@@ -278,12 +313,14 @@
 				AF7943EB253C51F0006CEB2B /* BuildingAttributeSearchViewController.swift in Sources */,
 				AF7943D7253BA6D1006CEB2B /* GlobalSearchViewController.swift in Sources */,
 				AF7943E1253C4A36006CEB2B /* BuildingTableViewCell.swift in Sources */,
+				AF6D857C2584F83C004D699A /* ContainerViewController.swift in Sources */,
 				AFFA76C42558340200578914 /* HitAnnotationView.swift in Sources */,
 				AF7943CA253B4C32006CEB2B /* BuildingSearchViewController.swift in Sources */,
 				AF82DCF7244C77A300CE8B95 /* BuldingHitsMapViewController.swift in Sources */,
 				AF7943D1253B8469006CEB2B /* FilterModePickerViewController.swift in Sources */,
 				AF46B4302557807A003DA57E /* BuildingAnnotation.swift in Sources */,
 				AF7943DE253C49D2006CEB2B /* BuldingHitsListViewController.swift in Sources */,
+				AF6D85802584F84F004D699A /* FilterSection.swift in Sources */,
 				AF7943E5253C4C9A006CEB2B /* IndexName+Convenience.swift in Sources */,
 				AF82DD1E244CB6CE00CE8B95 /* UIViewController+Convenience.swift in Sources */,
 				AFFA76C1255833AF00578914 /* ClusterView.swift in Sources */,
@@ -493,20 +530,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AF46B44425581139003DA57E /* XCRemoteSwiftPackageReference "citywalls-crawler" */ = {
+		AF1ECBF32580FD32002C532F /* XCRemoteSwiftPackageReference "citywalls-crawler" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/VladislavFitz/citywalls-crawler.git";
+			repositoryURL = "https://github.com/VladislavFitz/citywalls-crawler";
 			requirement = {
 				branch = master;
 				kind = branch;
-			};
-		};
-		AF48C4E82536376100262367 /* XCRemoteSwiftPackageReference "instantsearch-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/algolia/instantsearch-ios";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.5.0;
 			};
 		};
 		AF82DD08244C8A3500CE8B95 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
@@ -520,19 +549,17 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AF46B44525581139003DA57E /* CityWallsCore */ = {
+		AF1ECBF42580FD32002C532F /* CityWallsCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AF46B44425581139003DA57E /* XCRemoteSwiftPackageReference "citywalls-crawler" */;
+			package = AF1ECBF32580FD32002C532F /* XCRemoteSwiftPackageReference "citywalls-crawler" */;
 			productName = CityWallsCore;
 		};
-		AF48C4E92536376100262367 /* InstantSearchCore */ = {
+		AF3B4558258563C20048BBB8 /* AlgoliaSearchClient */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AF48C4E82536376100262367 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
-			productName = InstantSearchCore;
+			productName = AlgoliaSearchClient;
 		};
-		AF48C4EB2536376100262367 /* InstantSearch */ = {
+		AF3B455A258563C20048BBB8 /* InstantSearch */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AF48C4E82536376100262367 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
 			productName = InstantSearch;
 		};
 		AF82DD09244C8A3500CE8B95 /* SDWebImage */ = {

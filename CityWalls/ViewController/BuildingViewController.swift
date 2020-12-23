@@ -24,7 +24,7 @@ class BuildingViewController: UIViewController {
     self.galleryViewController = .init(images: building.photos.map(\.url))
     self.goToCityWallsButton = .init()
     super.init(nibName: nil, bundle: nil)
-    titleLabel.text = building.title
+    titleLabel.text = building.titles.joined(separator: ", ")
     titleLabel.font = .systemFont(ofSize: 28, weight: .heavy)
     titleLabel.numberOfLines = 0
     configureLayout()
@@ -54,19 +54,24 @@ class BuildingViewController: UIViewController {
     stackView.axis = .vertical
     stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.spacing = 10
+    stackView.distribution = .equalSpacing
     view.addSubview(stackView)
     
     galleryViewController.pageControl.hidesForSinglePage = true
     galleryViewController.pageControl.pageIndicatorTintColor = .lightGray
     galleryViewController.pageControl.currentPageIndicatorTintColor = .black
 
+    galleryViewController.pageControl.layer.masksToBounds = true
+    galleryViewController.pageControl.translatesAutoresizingMaskIntoConstraints = false
+    
     stackView.addArrangedSubview(titleLabel)
     stackView.addArrangedSubview(galleryViewController.view)
     stackView.addArrangedSubview(galleryViewController.pageControl)
     [
-      ("Архитекторы", building.architects.map(\.title)),
-      ("Год постройки:", building.constructionYears.map(\.description)),
-      ("Стиль:", building.styles.map(\.title))
+      ("Расположение:", building.addresses.map(\.description)),
+      ("Архитекторы:", building.architects.map(\.title)),
+      ("Годы постройки:", building.constructionYears.map(\.description)),
+      ("Стиль:", building.styles.map(\.title)),
     ]
       .filter { !$0.1.isEmpty }
       .map { getSV(title: $0.0, values: $0.1) }
@@ -78,10 +83,10 @@ class BuildingViewController: UIViewController {
     stackView.addArrangedSubview(goToCityWallsButton)
     
     activate(
-      stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 15),
-      stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-      stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-      stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+      stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
+      stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -25),
+      stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+      stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
       galleryViewController.view.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.5),
       goToCityWallsButton.heightAnchor.constraint(equalToConstant: 50)
     )

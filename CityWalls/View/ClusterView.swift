@@ -36,7 +36,7 @@ private extension ClusterView {
     let count = annotation.memberAnnotations.count
     
     image = renderer.image { _ in
-      UIColor.systemGreen.setFill()
+      UIColor.systemTeal.setFill()
       UIBezierPath(ovalIn: CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0)).fill()
       let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 20.0)]
       let text = "\(count)"

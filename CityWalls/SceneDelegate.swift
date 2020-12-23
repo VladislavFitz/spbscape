@@ -20,14 +20,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     window = UIWindow(frame: windowScene.coordinateSpace.bounds)
     window?.windowScene = windowScene
-    switch UIDevice.current.userInterfaceIdiom {
-    case .phone:
-      let globalSearchViewController = GlobalSearchViewController()
-      let globalSearchNavigationController = UINavigationController(rootViewController: globalSearchViewController)
-      window?.rootViewController = globalSearchNavigationController
-    default:
+//    switch UIDevice.current.userInterfaceIdiom {
+//    case .phone:
+//      let globalSearchViewController = GlobalSearchViewController()
+//      let globalSearchNavigationController = UINavigationController(rootViewController: globalSearchViewController)
+//      window?.rootViewController = globalSearchNavigationController
+//    default:
+//    let color: UIColor = .
+//    UINavigationBar.appearance().barTintColor = color
+//    UIToolbar.appearance().barTintColor = color
+//    UISegmentedControl.appearance().selectedSegmentTintColor = .systemTeal
+      window?.tintColor = .systemTeal
       window?.rootViewController = MainSplitViewController(nibName: nil, bundle: nil)
-    }
+//    }
     window?.makeKeyAndVisible()
   }
 
