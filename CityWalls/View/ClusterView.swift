@@ -30,13 +30,27 @@ private extension ClusterView {
   
   func configure(with annotation: MKAnnotation) {
     
-    guard let annotation = annotation as? MKClusterAnnotation else { return }
+    
+    let count: Int
+    let color: UIColor
+
+//    guard let annotation = annotation as? MKClusterAnnotation else { return }
+    switch annotation {
+    case let clusterAnnotation as MKClusterAnnotation:
+      count = clusterAnnotation.memberAnnotations.count
+      color = .systemTeal
+    case let buildingClusterAnnotation as BuildingClusterAnnotation:
+      count = buildingClusterAnnotation.count
+      color = .systemTeal
+    default:
+      return
+    }
     
     let renderer = UIGraphicsImageRenderer(size: CGSize(width: 40.0, height: 40.0))
-    let count = annotation.memberAnnotations.count
+//    let count = annotation.memberAnnotations.count
     
     image = renderer.image { _ in
-      UIColor.systemTeal.setFill()
+      color.setFill()
       UIBezierPath(ovalIn: CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0)).fill()
       let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 20.0)]
       let text = "\(count)"

@@ -16,20 +16,23 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
   let locationManager: CLLocationManager
   let mapView: MKMapView
   var hitsSource: HitsInteractor<Building>?
+  var hashFacets: [Attribute: [Facet]]
   let userTrackingButton: MKUserTrackingButton
 
   private var isInitialMapFocusDone: Bool = false
   private var nextRegionChangeIsFromUserInteraction = false
   
-  var didSelect: ((Building) -> Void)?
+  var didSelect: ((Building, MKAnnotationView) -> Void)?
   var didChangeVisibleRegion: ((MKMapRect) -> Void)? = nil
     
   init() {
     self.mapView = MKMapView()
     self.locationManager = .init()
+    self.hashFacets = [:]
     self.userTrackingButton = MKUserTrackingButton(mapView: mapView)
     super.init(nibName: nil, bundle: nil)
-    mapView.register(HitAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+    mapView.register(HitAnnotationView.self, forAnnotationViewWithReuseIdentifier: "buildingAnnotationView")
+//    mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: "buildingClusterAnnotation")
     mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
     let saintPetersburgCenterCoordinate = CLLocationCoordinate2D(latitude: 59.9411, longitude: 30.3009)
     mapView.setCamera(.init(lookingAtCenter: saintPetersburgCenterCoordinate, fromDistance: 20000, pitch: 0, heading: 0), animated: false)
@@ -59,7 +62,7 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
     userTrackingButton.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -50).isActive = true
     userTrackingButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -20).isActive = true
   }
-
+  
   private func configureLayout() {
     mapView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(mapView)
@@ -70,12 +73,30 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
       mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
     )
   }
-  
+   
   private func placeAnnotations() {
-    mapView.removeAnnotations(mapView.annotations)
     let buildings = hitsSource?.getCurrentHits() ?? []
-    let annotations = buildings.map(BuildingAnnotation.init)
-    mapView.addAnnotations(annotations)
+    
+    let fetchedBuildingsIDs = Set(buildings.map(\.id))
+    let presentedBuildingsIDs = Set(mapView.annotations.compactMap { $0 as? BuildingAnnotation }.map(\.building.id))
+    let buildingIDsToKeep = fetchedBuildingsIDs.intersection(presentedBuildingsIDs)
+    let buildingIDsToRemove = presentedBuildingsIDs.subtracting(buildingIDsToKeep)
+    let buildingIDsToAdd = fetchedBuildingsIDs.subtracting(buildingIDsToKeep)
+    
+    let annotationsToRemove = mapView.annotations.compactMap { ($0 as? BuildingAnnotation)?.building.id }.filter(buildingIDsToRemove.contains)
+    
+    if !annotationsToRemove.isEmpty {
+      mapView.removeAnnotations(mapView.annotations.compactMap { $0 as? BuildingAnnotation }.filter { annotationsToRemove.contains($0.building.id) })
+    }
+    
+    let annotationsToAdd = buildings.filter { buildingIDsToAdd.contains($0.id) }.map(BuildingAnnotation.init)
+    if !annotationsToAdd.isEmpty {
+      mapView.addAnnotations(annotationsToAdd)
+    }
+    
+//    print("Fetched buildings: \(fetchedBuildingsIDs.count)")
+//    print("Presenting buildings: \(presentedBuildingsIDs.count)")
+//    print("Buildings diff: \(buildingIDsToAdd.count)")
   }
       
   func reload() {
@@ -99,8 +120,8 @@ extension BuldingHitsMapViewController: MKMapViewDelegate {
   
   func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
     guard let buildingAnnotation = view.annotation as? BuildingAnnotation else { return }
-    mapView.setCenter(buildingAnnotation.coordinate, animated: true)
-    didSelect?(buildingAnnotation.building)
+//    mapView.setCenter(buildingAnnotation.coordinate, animated: true)
+    didSelect?(buildingAnnotation.building, view)
   }
     
   func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
@@ -128,7 +149,19 @@ extension BuldingHitsMapViewController: MKMapViewDelegate {
 //      isInitialMapFocusDone = true
       didChangeVisibleRegion?(mapView.visibleMapRect)
 //    }
-    
+  }
+  
+  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    switch annotation {
+    case is BuildingAnnotation:
+      return mapView.dequeueReusableAnnotationView(withIdentifier: "buildingAnnotationView", for: annotation)
+//    case is MKClusterAnnotation:
+//      return mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier, for: annotation)
+//    case is BuildingClusterAnnotation:
+//      return mapView.dequeueReusableAnnotationView(withIdentifier: "buildingClusterAnnotation", for: annotation)
+    default:
+      return nil
+    }
   }
   
 }

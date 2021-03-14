@@ -28,7 +28,7 @@ class ContainerViewController: UIViewController {
   
   func setVisibleViewController(atIndex index: Int) {
     guard index < viewControllers.count else { return }
-    viewControllers
+    self.viewControllers
       .map(\.view)
       .enumerated()
       .forEach { viewIndex, view in

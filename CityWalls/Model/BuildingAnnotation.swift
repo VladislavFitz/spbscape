@@ -26,4 +26,14 @@ class BuildingAnnotation: NSObject, MKAnnotation {
     self.building = building
   }
   
+  override var hash: Int {
+    return building.id.hashValue
+  }
+  
+
+//  override func hash(into hasher: inout Hasher) {
+//    hasher.combine(building.id)
+//    super.hash(into: &hasher)
+//  }
+  
 }

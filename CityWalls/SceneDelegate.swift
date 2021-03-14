@@ -11,7 +11,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   var window: UIWindow?
-
+  var toolbarDelegate = ToolbarDelegate()
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -20,6 +20,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     window = UIWindow(frame: windowScene.coordinateSpace.bounds)
     window?.windowScene = windowScene
+    
+    #if targetEnvironment(macCatalyst)
+    if #available(macCatalyst 14.0, *) {
+      let toolbar = NSToolbar(identifier: "main")
+      toolbar.delegate = toolbarDelegate
+      toolbar.displayMode = .iconOnly
+      if let titlebar = windowScene.titlebar {
+        titlebar.titleVisibility = .visible
+        titlebar.toolbar = toolbar
+        titlebar.toolbarStyle = .automatic
+      }
+      windowScene.title = "Санкт-Петербург"
+    }
+    #endif
+      // Fallback on earlier versions
 //    switch UIDevice.current.userInterfaceIdiom {
 //    case .phone:
 //      let globalSearchViewController = GlobalSearchViewController()
@@ -30,6 +45,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //    UINavigationBar.appearance().barTintColor = color
 //    UIToolbar.appearance().barTintColor = color
 //    UISegmentedControl.appearance().selectedSegmentTintColor = .systemTeal
+    UIToolbar.appearance().tintColor = .systemTeal
       window?.tintColor = .systemTeal
       window?.rootViewController = MainSplitViewController(nibName: nil, bundle: nil)
 //    }

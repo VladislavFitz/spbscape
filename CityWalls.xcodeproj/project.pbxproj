@@ -7,23 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AF1ECBF52580FD32002C532F /* CityWallsCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF1ECBF42580FD32002C532F /* CityWallsCore */; };
+		AF2BDCB825B79B2600E4E078 /* CityWallsCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF2BDCB725B79B2600E4E078 /* CityWallsCore */; };
 		AF3B4559258563C20048BBB8 /* AlgoliaSearchClient in Frameworks */ = {isa = PBXBuildFile; productRef = AF3B4558258563C20048BBB8 /* AlgoliaSearchClient */; };
 		AF3B455B258563C20048BBB8 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF3B455A258563C20048BBB8 /* InstantSearch */; };
 		AF46B4302557807A003DA57E /* BuildingAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DD17244CB67700CE8B95 /* BuildingAnnotation.swift */; };
 		AF6D857C2584F83C004D699A /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D857B2584F83C004D699A /* ContainerViewController.swift */; };
 		AF6D85802584F84F004D699A /* FilterSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D857F2584F84F004D699A /* FilterSection.swift */; };
-		AF7943CA253B4C32006CEB2B /* BuildingSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943C9253B4C32006CEB2B /* BuildingSearchViewController.swift */; };
-		AF7943CD253B5043006CEB2B /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943CC253B5043006CEB2B /* MainTabBarViewController.swift */; };
-		AF7943D1253B8469006CEB2B /* FilterModePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943D0253B8469006CEB2B /* FilterModePickerViewController.swift */; };
 		AF7943D4253B925B006CEB2B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943D3253B925B006CEB2B /* FilterViewController.swift */; };
-		AF7943D7253BA6D1006CEB2B /* GlobalSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943D6253BA6D1006CEB2B /* GlobalSearchViewController.swift */; };
-		AF7943DA253C4981006CEB2B /* SegmentedBuildingHitsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943D9253C4980006CEB2B /* SegmentedBuildingHitsController.swift */; };
 		AF7943DE253C49D2006CEB2B /* BuldingHitsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943DD253C49D2006CEB2B /* BuldingHitsListViewController.swift */; };
 		AF7943E1253C4A36006CEB2B /* BuildingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943E0253C4A36006CEB2B /* BuildingTableViewCell.swift */; };
 		AF7943E5253C4C9A006CEB2B /* IndexName+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943E4253C4C9A006CEB2B /* IndexName+Convenience.swift */; };
-		AF7943EB253C51F0006CEB2B /* BuildingAttributeSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943EA253C51F0006CEB2B /* BuildingAttributeSearchViewController.swift */; };
-		AF7943EE253C51F9006CEB2B /* BuildingAttributeHitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943ED253C51F9006CEB2B /* BuildingAttributeHitsViewController.swift */; };
 		AF82DCF3244C77A300CE8B95 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DCF2244C77A300CE8B95 /* AppDelegate.swift */; };
 		AF82DCF5244C77A300CE8B95 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DCF4244C77A300CE8B95 /* SceneDelegate.swift */; };
 		AF82DCF7244C77A300CE8B95 /* BuldingHitsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DCF6244C77A300CE8B95 /* BuldingHitsMapViewController.swift */; };
@@ -39,6 +32,11 @@
 		AF82DD26244CBA4300CE8B95 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DD25244CBA4300CE8B95 /* ImageCell.swift */; };
 		AF98955A2561ACB500B61F15 /* Petr.gpx in Resources */ = {isa = PBXBuildFile; fileRef = AF9895592561ACB500B61F15 /* Petr.gpx */; };
 		AF98955D2561AD3B00B61F15 /* Center.gpx in Resources */ = {isa = PBXBuildFile; fileRef = AF98955C2561AD3B00B61F15 /* Center.gpx */; };
+		AFB533B725B4FCBF0079EE21 /* ToolbarContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB533B625B4FCBE0079EE21 /* ToolbarContainer.swift */; };
+		AFB533BB25B4FD250079EE21 /* UISearchTextField+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB533BA25B4FD250079EE21 /* UISearchTextField+Convenience.swift */; };
+		AFB533BF25B4FD3F0079EE21 /* UISearchToken+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB533BE25B4FD3F0079EE21 /* UISearchToken+Convenience.swift */; };
+		AFE9BFFE25FD57A700BF0E2D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE9BFFD25FD57A700BF0E2D /* SearchViewModel.swift */; };
+		AFE9C00125FD5B3700BF0E2D /* ToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE9C00025FD5B3700BF0E2D /* ToolbarDelegate.swift */; };
 		AFFA76BD25582F9100578914 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFFA76BC25582F9100578914 /* Credentials.plist */; };
 		AFFA76C1255833AF00578914 /* ClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C0255833AF00578914 /* ClusterView.swift */; };
 		AFFA76C42558340200578914 /* HitAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C32558340200578914 /* HitAnnotationView.swift */; };
@@ -53,18 +51,11 @@
 		AF48C4F8253639EE00262367 /* Street.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Street.swift; sourceTree = "<group>"; };
 		AF6D857B2584F83C004D699A /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		AF6D857F2584F84F004D699A /* FilterSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSection.swift; sourceTree = "<group>"; };
-		AF7943C9253B4C32006CEB2B /* BuildingSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingSearchViewController.swift; sourceTree = "<group>"; };
-		AF7943CC253B5043006CEB2B /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
-		AF7943D0253B8469006CEB2B /* FilterModePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModePickerViewController.swift; sourceTree = "<group>"; };
 		AF7943D3253B925B006CEB2B /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
-		AF7943D6253BA6D1006CEB2B /* GlobalSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalSearchViewController.swift; sourceTree = "<group>"; };
-		AF7943D9253C4980006CEB2B /* SegmentedBuildingHitsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedBuildingHitsController.swift; sourceTree = "<group>"; };
 		AF7943DD253C49D2006CEB2B /* BuldingHitsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuldingHitsListViewController.swift; sourceTree = "<group>"; };
 		AF7943E0253C4A36006CEB2B /* BuildingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingTableViewCell.swift; sourceTree = "<group>"; };
 		AF7943E4253C4C9A006CEB2B /* IndexName+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IndexName+Convenience.swift"; sourceTree = "<group>"; };
 		AF7943E7253C4FC7006CEB2B /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
-		AF7943EA253C51F0006CEB2B /* BuildingAttributeSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingAttributeSearchViewController.swift; sourceTree = "<group>"; };
-		AF7943ED253C51F9006CEB2B /* BuildingAttributeHitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingAttributeHitsViewController.swift; sourceTree = "<group>"; };
 		AF82DCEF244C77A300CE8B95 /* CityWalls.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CityWalls.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF82DCF2244C77A300CE8B95 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF82DCF4244C77A300CE8B95 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +77,11 @@
 		AF9895582561AC5900B61F15 /* VO.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VO.gpx; sourceTree = "<group>"; };
 		AF9895592561ACB500B61F15 /* Petr.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Petr.gpx; sourceTree = "<group>"; };
 		AF98955C2561AD3B00B61F15 /* Center.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Center.gpx; sourceTree = "<group>"; };
+		AFB533B625B4FCBE0079EE21 /* ToolbarContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarContainer.swift; sourceTree = "<group>"; };
+		AFB533BA25B4FD250079EE21 /* UISearchTextField+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchTextField+Convenience.swift"; sourceTree = "<group>"; };
+		AFB533BE25B4FD3F0079EE21 /* UISearchToken+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchToken+Convenience.swift"; sourceTree = "<group>"; };
+		AFE9BFFD25FD57A700BF0E2D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		AFE9C00025FD5B3700BF0E2D /* ToolbarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDelegate.swift; sourceTree = "<group>"; };
 		AFFA76BC25582F9100578914 /* Credentials.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
 		AFFA76C0255833AF00578914 /* ClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterView.swift; sourceTree = "<group>"; };
 		AFFA76C32558340200578914 /* HitAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitAnnotationView.swift; sourceTree = "<group>"; };
@@ -101,8 +97,8 @@
 			files = (
 				AF3B455B258563C20048BBB8 /* InstantSearch in Frameworks */,
 				AF3B4559258563C20048BBB8 /* AlgoliaSearchClient in Frameworks */,
+				AF2BDCB825B79B2600E4E078 /* CityWallsCore in Frameworks */,
 				AF82DD0A244C8A3500CE8B95 /* SDWebImage in Frameworks */,
-				AF1ECBF52580FD32002C532F /* CityWallsCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +149,7 @@
 				AF82DD23244CB9FD00CE8B95 /* Helper */,
 				AF82DD22244CB9ED00CE8B95 /* ViewController */,
 				AF82DD1F244CB6FD00CE8B95 /* Model */,
+				AFB533B925B4FD100079EE21 /* Extensions */,
 				AF82DCF2244C77A300CE8B95 /* AppDelegate.swift */,
 				AF82DCF4244C77A300CE8B95 /* SceneDelegate.swift */,
 				AF82DCFB244C77A500CE8B95 /* Assets.xcassets */,
@@ -177,6 +174,7 @@
 				AF48C4F7253639EE00262367 /* Architect.swift */,
 				AF7943E7253C4FC7006CEB2B /* Style.swift */,
 				AF48C4F8253639EE00262367 /* Street.swift */,
+				AFE9BFFD25FD57A700BF0E2D /* SearchViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -188,17 +186,12 @@
 				AF82DCF6244C77A300CE8B95 /* BuldingHitsMapViewController.swift */,
 				AF7943DD253C49D2006CEB2B /* BuldingHitsListViewController.swift */,
 				AF7943E0253C4A36006CEB2B /* BuildingTableViewCell.swift */,
-				AF7943D9253C4980006CEB2B /* SegmentedBuildingHitsController.swift */,
 				AF82DD0D244CB56B00CE8B95 /* GalleryViewController.swift */,
-				AF7943D6253BA6D1006CEB2B /* GlobalSearchViewController.swift */,
-				AF7943ED253C51F9006CEB2B /* BuildingAttributeHitsViewController.swift */,
 				AF82DD0F244CB59D00CE8B95 /* BuildingViewController.swift */,
-				AF7943EA253C51F0006CEB2B /* BuildingAttributeSearchViewController.swift */,
-				AF7943C9253B4C32006CEB2B /* BuildingSearchViewController.swift */,
-				AF7943CC253B5043006CEB2B /* MainTabBarViewController.swift */,
-				AF7943D0253B8469006CEB2B /* FilterModePickerViewController.swift */,
 				AFFA76C8255853F100578914 /* MainSplitViewController.swift */,
 				AFFA76CB25585B3200578914 /* MasterSearchViewController.swift */,
+				AFB533B625B4FCBE0079EE21 /* ToolbarContainer.swift */,
+				AFE9C00025FD5B3700BF0E2D /* ToolbarDelegate.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -224,6 +217,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		AFB533B925B4FD100079EE21 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AFB533BA25B4FD250079EE21 /* UISearchTextField+Convenience.swift */,
+				AFB533BE25B4FD3F0079EE21 /* UISearchToken+Convenience.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -242,9 +244,9 @@
 			name = CityWalls;
 			packageProductDependencies = (
 				AF82DD09244C8A3500CE8B95 /* SDWebImage */,
-				AF1ECBF42580FD32002C532F /* CityWallsCore */,
 				AF3B4558258563C20048BBB8 /* AlgoliaSearchClient */,
 				AF3B455A258563C20048BBB8 /* InstantSearch */,
+				AF2BDCB725B79B2600E4E078 /* CityWallsCore */,
 			);
 			productName = CityWalls;
 			productReference = AF82DCEF244C77A300CE8B95 /* CityWalls.app */;
@@ -276,7 +278,7 @@
 			mainGroup = AF82DCE6244C77A300CE8B95;
 			packageReferences = (
 				AF82DD08244C8A3500CE8B95 /* XCRemoteSwiftPackageReference "SDWebImage" */,
-				AF1ECBF32580FD32002C532F /* XCRemoteSwiftPackageReference "citywalls-crawler" */,
+				AF2BDCB625B79B2600E4E078 /* XCRemoteSwiftPackageReference "citywalls-crawler" */,
 			);
 			productRefGroup = AF82DCF0244C77A300CE8B95 /* Products */;
 			projectDirPath = "";
@@ -308,32 +310,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF82DD10244CB59D00CE8B95 /* BuildingViewController.swift in Sources */,
-				AF7943CD253B5043006CEB2B /* MainTabBarViewController.swift in Sources */,
 				AFFA76CC25585B3200578914 /* MasterSearchViewController.swift in Sources */,
-				AF7943EB253C51F0006CEB2B /* BuildingAttributeSearchViewController.swift in Sources */,
-				AF7943D7253BA6D1006CEB2B /* GlobalSearchViewController.swift in Sources */,
 				AF7943E1253C4A36006CEB2B /* BuildingTableViewCell.swift in Sources */,
 				AF6D857C2584F83C004D699A /* ContainerViewController.swift in Sources */,
+				AFE9C00125FD5B3700BF0E2D /* ToolbarDelegate.swift in Sources */,
 				AFFA76C42558340200578914 /* HitAnnotationView.swift in Sources */,
-				AF7943CA253B4C32006CEB2B /* BuildingSearchViewController.swift in Sources */,
 				AF82DCF7244C77A300CE8B95 /* BuldingHitsMapViewController.swift in Sources */,
-				AF7943D1253B8469006CEB2B /* FilterModePickerViewController.swift in Sources */,
 				AF46B4302557807A003DA57E /* BuildingAnnotation.swift in Sources */,
 				AF7943DE253C49D2006CEB2B /* BuldingHitsListViewController.swift in Sources */,
 				AF6D85802584F84F004D699A /* FilterSection.swift in Sources */,
 				AF7943E5253C4C9A006CEB2B /* IndexName+Convenience.swift in Sources */,
 				AF82DD1E244CB6CE00CE8B95 /* UIViewController+Convenience.swift in Sources */,
+				AFB533B725B4FCBF0079EE21 /* ToolbarContainer.swift in Sources */,
 				AFFA76C1255833AF00578914 /* ClusterView.swift in Sources */,
 				AF82DCF3244C77A300CE8B95 /* AppDelegate.swift in Sources */,
 				AF82DD21244CB9D600CE8B95 /* UIStackView+Convenience.swift in Sources */,
 				AF82DD0E244CB56B00CE8B95 /* GalleryViewController.swift in Sources */,
 				AF82DD1C244CB6C200CE8B95 /* UIView+Convenience.swift in Sources */,
 				AF7943D4253B925B006CEB2B /* FilterViewController.swift in Sources */,
-				AF7943DA253C4981006CEB2B /* SegmentedBuildingHitsController.swift in Sources */,
 				AFFA76C9255853F100578914 /* MainSplitViewController.swift in Sources */,
+				AFB533BF25B4FD3F0079EE21 /* UISearchToken+Convenience.swift in Sources */,
 				AF82DCF5244C77A300CE8B95 /* SceneDelegate.swift in Sources */,
+				AFE9BFFE25FD57A700BF0E2D /* SearchViewModel.swift in Sources */,
 				AF82DD0C244CB54B00CE8B95 /* Builder.swift in Sources */,
-				AF7943EE253C51F9006CEB2B /* BuildingAttributeHitsViewController.swift in Sources */,
+				AFB533BB25B4FD250079EE21 /* UISearchTextField+Convenience.swift in Sources */,
 				AF82DD26244CBA4300CE8B95 /* ImageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -471,6 +471,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CityWalls/CityWalls.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JF98Q6D3JZ;
 				INFOPLIST_FILE = CityWalls/Info.plist;
@@ -491,6 +492,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CityWalls/CityWalls.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JF98Q6D3JZ;
 				INFOPLIST_FILE = CityWalls/Info.plist;
@@ -530,7 +532,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AF1ECBF32580FD32002C532F /* XCRemoteSwiftPackageReference "citywalls-crawler" */ = {
+		AF2BDCB625B79B2600E4E078 /* XCRemoteSwiftPackageReference "citywalls-crawler" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/VladislavFitz/citywalls-crawler";
 			requirement = {
@@ -549,9 +551,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AF1ECBF42580FD32002C532F /* CityWallsCore */ = {
+		AF2BDCB725B79B2600E4E078 /* CityWallsCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AF1ECBF32580FD32002C532F /* XCRemoteSwiftPackageReference "citywalls-crawler" */;
+			package = AF2BDCB625B79B2600E4E078 /* XCRemoteSwiftPackageReference "citywalls-crawler" */;
 			productName = CityWallsCore;
 		};
 		AF3B4558258563C20048BBB8 /* AlgoliaSearchClient */ = {

@@ -27,7 +27,7 @@ class FilterViewController: UIViewController {
   init(filterState: FilterState) {
     
     self.filterState = filterState
-    hitsCountBarButtonItem = .init(title: "Результатов: 0", style: .done, target: nil, action: nil)
+    hitsCountBarButtonItem = .init(title: "Зданий: 0", style: .done, target: nil, action: nil)
     
     let viewControllers: [UITableViewController] = FilterSection.allCases.map { _ in .init(style: .plain) }
     
@@ -41,7 +41,7 @@ class FilterViewController: UIViewController {
     facetListConnectors = zip(FilterSection.allCases.map(\.attribute), viewControllers).map { attribute, viewController in
       let facetSearcher = FacetSearcher(appID: .cityWallsAppID, apiKey: .cityWallsApiKey, indexName: .buildings, facetName: attribute.rawValue)
       let facetListController = FacetListTableController(tableView: viewController.tableView)
-      let facetListConnector = FacetListConnector(searcher: facetSearcher, filterState: filterState, attribute: attribute, operator: .or, controller: facetListController)
+      let facetListConnector = FacetListConnector(searcher: facetSearcher, filterState: filterState, attribute: attribute, operator: .or, controller: facetListController, presenter: nil)
       facetSearcher.connectFilterState(filterState)
       queryInputInteractor.connectSearcher(facetSearcher)
       return facetListConnector
@@ -50,14 +50,24 @@ class FilterViewController: UIViewController {
     self.queryInputInteractor = queryInputInteractor
     
     super.init(nibName: nil, bundle: nil)
+    searchController.hidesNavigationBarDuringPresentation = false
     navigationItem.searchController = searchController
-    let resetBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark.circle"), style: .done, target: self, action: #selector(resetFilters))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .done, target: self, action: #selector(dismissViewController))
+    let resetBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .done, target: self, action: #selector(resetFilters))
     toolbarItems = [
       UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
       hitsCountBarButtonItem,
       UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
       resetBarButtonItem
     ]
+    filterState.onChange.subscribePast(with: self) { (vc, filters) in
+      let hasAppliedFilter = !FilterSection.allCases
+        .map(\.attribute.rawValue)
+        .map { vc.filterState[or: $0] as OrGroupAccessor<Filter.Facet> }
+        .map(\.isEmpty)
+        .allSatisfy { $0 }
+      resetBarButtonItem.isEnabled = hasAppliedFilter
+    }.onQueue(.main)
 
   }
     
@@ -68,17 +78,22 @@ class FilterViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Фильтры"
-    view.backgroundColor = .systemBackground
+//    view.backgroundColor = .systemBackground
     searchController.searchBar.showsScopeBar = true
     searchController.automaticallyShowsSearchResultsController = false
+    searchController.obscuresBackgroundDuringPresentation = false
     searchController.showsSearchResultsController = true
     searchController.isActive = true
     searchController.searchBar.showsCancelButton = false
     searchController.searchBar.scopeButtonTitles = FilterSection.allCases.map(\.title)
     searchController.searchBar.delegate = self
     queryInputInteractor.onQueryChanged.fire(nil)
-    
     navigationController?.isToolbarHidden = false
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    searchController.isActive = true
   }
   
   @objc private func resetFilters() {
@@ -86,6 +101,11 @@ class FilterViewController: UIViewController {
     (filterState[or: FilterSection.style.attribute.rawValue] as OrGroupAccessor<Filter.Facet>).removeAll()
     (filterState[or: FilterSection.street.attribute.rawValue] as OrGroupAccessor<Filter.Facet>).removeAll()
     filterState.notifyChange()
+  }
+  
+  @objc
+  private func dismissViewController() {
+    navigationController?.dismiss(animated: true, completion: nil)
   }
   
 }
