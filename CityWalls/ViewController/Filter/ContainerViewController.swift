@@ -46,7 +46,7 @@ class ContainerViewController: UIViewController {
     }
     view.addSubview(stackView)
     activate(
-      stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      stackView.topAnchor.constraint(equalTo: view.topAnchor),
       stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
       stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor)

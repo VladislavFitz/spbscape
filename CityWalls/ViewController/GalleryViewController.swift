@@ -58,7 +58,7 @@ class GalleryViewController: UICollectionViewController, UICollectionViewDelegat
   override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
     guard let imageCell = cell as? ImageCell else { return }
     imageCell.imageView.sd_setImage(with: images[indexPath.row])
-    imageCell.imageView.contentMode = .scaleAspectFit
+    imageCell.imageView.contentMode = .scaleAspectFill
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

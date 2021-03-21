@@ -24,10 +24,10 @@ class FilterViewController: UIViewController {
   
   let hitsCountBarButtonItem: UIBarButtonItem
   
-  init(filterState: FilterState) {
+  init(filterState: FilterState, hitsCountBarButtonItem: UIBarButtonItem) {
     
     self.filterState = filterState
-    hitsCountBarButtonItem = .init(title: "Зданий: 0", style: .done, target: nil, action: nil)
+    self.hitsCountBarButtonItem = hitsCountBarButtonItem
     
     let viewControllers: [UITableViewController] = FilterSection.allCases.map { _ in .init(style: .plain) }
     
@@ -53,12 +53,12 @@ class FilterViewController: UIViewController {
     searchController.hidesNavigationBarDuringPresentation = false
     navigationItem.searchController = searchController
     navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .done, target: self, action: #selector(dismissViewController))
-    let resetBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .done, target: self, action: #selector(resetFilters))
+    let clearFiltersBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .done, target: self, action: #selector(resetFilters))
     toolbarItems = [
       UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
       hitsCountBarButtonItem,
       UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-      resetBarButtonItem
+      clearFiltersBarButtonItem
     ]
     filterState.onChange.subscribePast(with: self) { (vc, filters) in
       let hasAppliedFilter = !FilterSection.allCases
@@ -66,8 +66,14 @@ class FilterViewController: UIViewController {
         .map { vc.filterState[or: $0] as OrGroupAccessor<Filter.Facet> }
         .map(\.isEmpty)
         .allSatisfy { $0 }
-      resetBarButtonItem.isEnabled = hasAppliedFilter
+      clearFiltersBarButtonItem.isEnabled = hasAppliedFilter
     }.onQueue(.main)
+    let hasAppliedFilter = !FilterSection.allCases
+      .map(\.attribute.rawValue)
+      .map { filterState[or: $0] as OrGroupAccessor<Filter.Facet> }
+      .map(\.isEmpty)
+      .allSatisfy { $0 }
+    clearFiltersBarButtonItem.isEnabled = hasAppliedFilter
 
   }
     
@@ -78,7 +84,7 @@ class FilterViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Фильтры"
-//    view.backgroundColor = .systemBackground
+    view.backgroundColor = .systemBackground
     searchController.searchBar.showsScopeBar = true
     searchController.automaticallyShowsSearchResultsController = false
     searchController.obscuresBackgroundDuringPresentation = false

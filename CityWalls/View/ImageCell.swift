@@ -24,14 +24,20 @@ class ImageCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    imageView.image = nil
+  }
+  
   private func configureLayout() {
     imageView.translatesAutoresizingMaskIntoConstraints = false
+    imageView.clipsToBounds = true
     contentView.addSubview(imageView)
     activate(
-      imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-      imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
-      imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-      imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5)
+      imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+      imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+      imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+      imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
     )
   }
   

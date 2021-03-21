@@ -19,11 +19,10 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
   var hashFacets: [Attribute: [Facet]]
   let userTrackingButton: MKUserTrackingButton
 
-  private var isInitialMapFocusDone: Bool = false
   private var nextRegionChangeIsFromUserInteraction = false
   
   var didSelect: ((Building, MKAnnotationView) -> Void)?
-  var didChangeVisibleRegion: ((MKMapRect) -> Void)? = nil
+  var didChangeVisibleRegion: ((MKMapRect, Bool) -> Void)? = nil
     
   init() {
     self.mapView = MKMapView()
@@ -93,10 +92,6 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
     if !annotationsToAdd.isEmpty {
       mapView.addAnnotations(annotationsToAdd)
     }
-    
-//    print("Fetched buildings: \(fetchedBuildingsIDs.count)")
-//    print("Presenting buildings: \(presentedBuildingsIDs.count)")
-//    print("Buildings diff: \(buildingIDsToAdd.count)")
   }
       
   func reload() {
@@ -106,12 +101,26 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
   func scrollToTop() {
     
   }
+
   
-  func highlight(_ building: Building) {
+  func isVisible(_ building: Building) -> Bool {
+    return mapView.annotations.contains(where: { annotation in (annotation as? BuildingAnnotation)?.building.id == building.id })
+  }
+  
+  func highlight(_ building: Building, completion: @escaping () -> Void = {}) {
     guard let buildingAnnotation = mapView.annotations.first(where: { annotation in (annotation as? BuildingAnnotation)?.building.id == building.id
     }) else { return }
-    mapView.showAnnotations([buildingAnnotation], animated: true)
-    mapView.selectAnnotation(buildingAnnotation, animated: true)
+    
+    MKMapView.animate(withDuration: 1) { [weak mapView] in
+      guard let mapView = mapView else { return }
+      if !mapView.visibleMapRect.contains(MKMapPoint(buildingAnnotation.coordinate)) {
+        mapView.setCenter(buildingAnnotation.coordinate, animated: true)
+      }
+    } completion: { [weak mapView] _ in
+      guard let mapView = mapView else { return }
+      mapView.selectAnnotation(buildingAnnotation, animated: true)
+      completion()
+    }
   }
   
 }
@@ -120,7 +129,6 @@ extension BuldingHitsMapViewController: MKMapViewDelegate {
   
   func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
     guard let buildingAnnotation = view.annotation as? BuildingAnnotation else { return }
-//    mapView.setCenter(buildingAnnotation.coordinate, animated: true)
     didSelect?(buildingAnnotation.building, view)
   }
     
@@ -141,14 +149,12 @@ extension BuldingHitsMapViewController: MKMapViewDelegate {
   
   func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
     
+    didChangeVisibleRegion?(mapView.visibleMapRect, nextRegionChangeIsFromUserInteraction)
+    
     if nextRegionChangeIsFromUserInteraction {
       nextRegionChangeIsFromUserInteraction = false
     }
-    
-//    if !isInitialMapFocusDone {
-//      isInitialMapFocusDone = true
-      didChangeVisibleRegion?(mapView.visibleMapRect)
-//    }
+
   }
   
   func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -181,6 +187,40 @@ extension Point {
   
   init(_ mapPoint: MKMapPoint) {
     self.init(latitude: mapPoint.coordinate.latitude, longitude: mapPoint.coordinate.longitude)
+  }
+  
+}
+
+extension BuldingHitsMapViewController {
+  
+  func presentPopover(for building: Building, from annotation: MKAnnotationView) {
+    let buildingViewController = BuildingViewController(building: building)
+    let item = UIBarButtonItem(image: UIImage(systemName: "arrow.up.left.and.arrow.down.right"), style: .done, target: self, action: #selector(tryFullscreen))
+    buildingViewController.navigationItem.rightBarButtonItem = item
+    let navigationController = UINavigationController(rootViewController: buildingViewController)
+    navigationController.preferredContentSize = .init(width: 300, height: 320)
+    navigationController.modalPresentationStyle = .popover
+    navigationController.popoverPresentationController?.sourceView = annotation
+    navigationController.popoverPresentationController?.sourceRect = annotation.bounds.insetBy(dx: annotation.calloutOffset.x - 50, dy: annotation.calloutOffset.y - 20)
+    present(navigationController, animated: true, completion: nil)
+  }
+  
+  @objc func tryFullscreen() {
+    
+    if let navigationController = presentedViewController as? UINavigationController, navigationController.viewControllers.first is BuildingViewController, navigationController.modalPresentationStyle == .popover {
+      navigationController.dismiss(animated: true) {
+        let dismissBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .done, target: self, action: #selector(self.dismissFullscreen))
+        navigationController.viewControllers.first?.navigationItem.rightBarButtonItem = dismissBarButtonItem
+        navigationController.modalPresentationStyle = .overCurrentContext
+        self.present(navigationController, animated: true, completion: nil)
+      }
+    }
+  }
+  
+  @objc func dismissFullscreen() {
+    if let navigationController = presentedViewController as? UINavigationController, navigationController.viewControllers.first is BuildingViewController, navigationController.modalPresentationStyle == .overCurrentContext {
+      navigationController.dismiss(animated: true, completion: nil)
+    }
   }
   
 }

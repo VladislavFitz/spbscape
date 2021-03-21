@@ -7,11 +7,19 @@
 //
 
 import UIKit
+import Combine
+
+struct ColorScheme {
+  static let tintColor = UIColor(red: 253/255, green: 184/255, blue: 19/255, alpha: 1)
+}
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   var window: UIWindow?
   var toolbarDelegate = ToolbarDelegate()
+  let searchViewModel = SearchViewModel()
+  private var showFilterSubscriber: AnyCancellable?
+  lazy var filtersHelper = FiltersHelper(searchViewModel: searchViewModel)
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -34,22 +42,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       windowScene.title = "Санкт-Петербург"
     }
     #endif
-      // Fallback on earlier versions
-//    switch UIDevice.current.userInterfaceIdiom {
-//    case .phone:
-//      let globalSearchViewController = GlobalSearchViewController()
-//      let globalSearchNavigationController = UINavigationController(rootViewController: globalSearchViewController)
-//      window?.rootViewController = globalSearchNavigationController
-//    default:
-//    let color: UIColor = .
-//    UINavigationBar.appearance().barTintColor = color
-//    UIToolbar.appearance().barTintColor = color
-//    UISegmentedControl.appearance().selectedSegmentTintColor = .systemTeal
-    UIToolbar.appearance().tintColor = .systemTeal
-      window?.tintColor = .systemTeal
-      window?.rootViewController = MainSplitViewController(nibName: nil, bundle: nil)
-//    }
+
+
+    UIToolbar.appearance().tintColor = ColorScheme.tintColor
+    window?.tintColor = ColorScheme.tintColor
+    window?.rootViewController = SceneDelegate.buildRootViewController(searchViewModel: searchViewModel, filterHelper: filtersHelper)
     window?.makeKeyAndVisible()
+
+    showFilterSubscriber = NotificationCenter.default.publisher(for: .showFilters)
+          .receive(on: RunLoop.main)
+          .sink(receiveValue: { [weak self] notification in
+              guard let self = self else { return }
+            self.filtersHelper.presentFilters()
+          })
   }
 
   func sceneDidDisconnect(_ scene: UIScene) {
@@ -79,7 +84,42 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // Use this method to save data, release shared resources, and store enough scene-specific state information
     // to restore the scene back to its current state.
   }
+  
+}
 
-
+extension SceneDelegate {
+  
+  static func buildRootViewController(searchViewModel: SearchViewModel, filterHelper: FiltersHelper) -> UIViewController {
+    let mapHitsViewController = buildHitsMapViewController(searchViewModel: searchViewModel)
+    let listHitsViewController = buildHitsListViewController(searchViewModel: searchViewModel)
+    if UIDevice.current.userInterfaceIdiom == .phone {
+      return buildRootPhoneViewController(listHitsViewController: listHitsViewController, mapHitsViewController: mapHitsViewController, searchViewModel: searchViewModel, filterHelper: filterHelper)
+    } else {
+      return buildRootPadViewController(listHitsViewController: listHitsViewController, mapHitsViewController: mapHitsViewController, searchViewModel: searchViewModel, filterHelper: filterHelper)
+    }
+  }
+  
+  static func buildHitsMapViewController(searchViewModel: SearchViewModel) -> BuldingHitsMapViewController {
+    let mapHitsViewController = BuldingHitsMapViewController()
+    mapHitsViewController.mapView.showsUserLocation = true
+    mapHitsViewController.didChangeVisibleRegion = { [weak searchViewModel, weak mapHitsViewController] visibleRect, byUser in
+      guard let searchViewModel = searchViewModel, byUser else { return }
+      if let centerCoordinate = mapHitsViewController?.mapView.centerCoordinate {
+        searchViewModel.searcher.indexQueryState.query.aroundLatLng = .init(.init(centerCoordinate))
+      }
+      searchViewModel.searcher.indexQueryState.query.aroundRadius = .all
+      searchViewModel.searcher.search()
+    }
+    searchViewModel.hitsConnector.connectController(mapHitsViewController)
+    return mapHitsViewController
+  }
+  
+  static func buildHitsListViewController(searchViewModel: SearchViewModel) -> BuldingHitsListViewController {
+    let listHitsViewController = BuldingHitsListViewController()
+    listHitsViewController.tableView.keyboardDismissMode = .onDrag
+    searchViewModel.hitsConnector.connectController(listHitsViewController)
+    return listHitsViewController
+  }
+    
 }
 

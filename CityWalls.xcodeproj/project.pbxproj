@@ -13,6 +13,8 @@
 		AF46B4302557807A003DA57E /* BuildingAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DD17244CB67700CE8B95 /* BuildingAnnotation.swift */; };
 		AF6D857C2584F83C004D699A /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D857B2584F83C004D699A /* ContainerViewController.swift */; };
 		AF6D85802584F84F004D699A /* FilterSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D857F2584F84F004D699A /* FilterSection.swift */; };
+		AF6F4FED260803EC00408DF7 /* SceneDelegate+Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6F4FEC260803EC00408DF7 /* SceneDelegate+Phone.swift */; };
+		AF6F4FF0260803F500408DF7 /* SceneDelegate+Pad.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6F4FEF260803F500408DF7 /* SceneDelegate+Pad.swift */; };
 		AF7943D4253B925B006CEB2B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943D3253B925B006CEB2B /* FilterViewController.swift */; };
 		AF7943DE253C49D2006CEB2B /* BuldingHitsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943DD253C49D2006CEB2B /* BuldingHitsListViewController.swift */; };
 		AF7943E1253C4A36006CEB2B /* BuildingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943E0253C4A36006CEB2B /* BuildingTableViewCell.swift */; };
@@ -40,8 +42,10 @@
 		AFFA76BD25582F9100578914 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFFA76BC25582F9100578914 /* Credentials.plist */; };
 		AFFA76C1255833AF00578914 /* ClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C0255833AF00578914 /* ClusterView.swift */; };
 		AFFA76C42558340200578914 /* HitAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C32558340200578914 /* HitAnnotationView.swift */; };
-		AFFA76C9255853F100578914 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C8255853F100578914 /* MainSplitViewController.swift */; };
-		AFFA76CC25585B3200578914 /* MasterSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76CB25585B3200578914 /* MasterSearchViewController.swift */; };
+		AFFA76CC25585B3200578914 /* SidebarViewConttroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76CB25585B3200578914 /* SidebarViewConttroller.swift */; };
+		AFFE9E5E25FE813E000C3AC9 /* HitsPresentationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFE9E5D25FE813E000C3AC9 /* HitsPresentationMode.swift */; };
+		AFFE9E6225FE9B69000C3AC9 /* CombinedHitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFE9E6125FE9B69000C3AC9 /* CombinedHitsViewController.swift */; };
+		AFFE9E6525FEAD1E000C3AC9 /* FiltersHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFE9E6425FEAD1E000C3AC9 /* FiltersHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +55,8 @@
 		AF48C4F8253639EE00262367 /* Street.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Street.swift; sourceTree = "<group>"; };
 		AF6D857B2584F83C004D699A /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		AF6D857F2584F84F004D699A /* FilterSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSection.swift; sourceTree = "<group>"; };
+		AF6F4FEC260803EC00408DF7 /* SceneDelegate+Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+Phone.swift"; sourceTree = "<group>"; };
+		AF6F4FEF260803F500408DF7 /* SceneDelegate+Pad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+Pad.swift"; sourceTree = "<group>"; };
 		AF7943D3253B925B006CEB2B /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		AF7943DD253C49D2006CEB2B /* BuldingHitsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuldingHitsListViewController.swift; sourceTree = "<group>"; };
 		AF7943E0253C4A36006CEB2B /* BuildingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingTableViewCell.swift; sourceTree = "<group>"; };
@@ -59,7 +65,7 @@
 		AF82DCEF244C77A300CE8B95 /* CityWalls.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CityWalls.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF82DCF2244C77A300CE8B95 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF82DCF4244C77A300CE8B95 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AF82DCF6244C77A300CE8B95 /* BuldingHitsMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuldingHitsMapViewController.swift; sourceTree = "<group>"; };
+		AF82DCF6244C77A300CE8B95 /* BuldingHitsMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuldingHitsMapViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		AF82DCFB244C77A500CE8B95 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF82DCFE244C77A500CE8B95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF82DD00244C77A500CE8B95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -86,8 +92,10 @@
 		AFFA76C0255833AF00578914 /* ClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterView.swift; sourceTree = "<group>"; };
 		AFFA76C32558340200578914 /* HitAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitAnnotationView.swift; sourceTree = "<group>"; };
 		AFFA76C62558367900578914 /* CityWalls.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CityWalls.entitlements; sourceTree = "<group>"; };
-		AFFA76C8255853F100578914 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
-		AFFA76CB25585B3200578914 /* MasterSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterSearchViewController.swift; sourceTree = "<group>"; };
+		AFFA76CB25585B3200578914 /* SidebarViewConttroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewConttroller.swift; sourceTree = "<group>"; };
+		AFFE9E5D25FE813E000C3AC9 /* HitsPresentationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitsPresentationMode.swift; sourceTree = "<group>"; };
+		AFFE9E6125FE9B69000C3AC9 /* CombinedHitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedHitsViewController.swift; sourceTree = "<group>"; };
+		AFFE9E6425FEAD1E000C3AC9 /* FiltersHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +160,8 @@
 				AFB533B925B4FD100079EE21 /* Extensions */,
 				AF82DCF2244C77A300CE8B95 /* AppDelegate.swift */,
 				AF82DCF4244C77A300CE8B95 /* SceneDelegate.swift */,
+				AF6F4FEC260803EC00408DF7 /* SceneDelegate+Phone.swift */,
+				AF6F4FEF260803F500408DF7 /* SceneDelegate+Pad.swift */,
 				AF82DCFB244C77A500CE8B95 /* Assets.xcassets */,
 				AF82DCFD244C77A500CE8B95 /* LaunchScreen.storyboard */,
 				AF82DD00244C77A500CE8B95 /* Info.plist */,
@@ -175,6 +185,7 @@
 				AF7943E7253C4FC7006CEB2B /* Style.swift */,
 				AF48C4F8253639EE00262367 /* Street.swift */,
 				AFE9BFFD25FD57A700BF0E2D /* SearchViewModel.swift */,
+				AFFE9E5D25FE813E000C3AC9 /* HitsPresentationMode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -188,8 +199,9 @@
 				AF7943E0253C4A36006CEB2B /* BuildingTableViewCell.swift */,
 				AF82DD0D244CB56B00CE8B95 /* GalleryViewController.swift */,
 				AF82DD0F244CB59D00CE8B95 /* BuildingViewController.swift */,
-				AFFA76C8255853F100578914 /* MainSplitViewController.swift */,
-				AFFA76CB25585B3200578914 /* MasterSearchViewController.swift */,
+				AFFE9E6125FE9B69000C3AC9 /* CombinedHitsViewController.swift */,
+				AFFE9E6425FEAD1E000C3AC9 /* FiltersHelper.swift */,
+				AFFA76CB25585B3200578914 /* SidebarViewConttroller.swift */,
 				AFB533B625B4FCBE0079EE21 /* ToolbarContainer.swift */,
 				AFE9C00025FD5B3700BF0E2D /* ToolbarDelegate.swift */,
 			);
@@ -310,9 +322,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF82DD10244CB59D00CE8B95 /* BuildingViewController.swift in Sources */,
-				AFFA76CC25585B3200578914 /* MasterSearchViewController.swift in Sources */,
+				AFFA76CC25585B3200578914 /* SidebarViewConttroller.swift in Sources */,
 				AF7943E1253C4A36006CEB2B /* BuildingTableViewCell.swift in Sources */,
 				AF6D857C2584F83C004D699A /* ContainerViewController.swift in Sources */,
+				AF6F4FED260803EC00408DF7 /* SceneDelegate+Phone.swift in Sources */,
 				AFE9C00125FD5B3700BF0E2D /* ToolbarDelegate.swift in Sources */,
 				AFFA76C42558340200578914 /* HitAnnotationView.swift in Sources */,
 				AF82DCF7244C77A300CE8B95 /* BuldingHitsMapViewController.swift in Sources */,
@@ -327,12 +340,15 @@
 				AF82DD21244CB9D600CE8B95 /* UIStackView+Convenience.swift in Sources */,
 				AF82DD0E244CB56B00CE8B95 /* GalleryViewController.swift in Sources */,
 				AF82DD1C244CB6C200CE8B95 /* UIView+Convenience.swift in Sources */,
+				AFFE9E6525FEAD1E000C3AC9 /* FiltersHelper.swift in Sources */,
 				AF7943D4253B925B006CEB2B /* FilterViewController.swift in Sources */,
-				AFFA76C9255853F100578914 /* MainSplitViewController.swift in Sources */,
+				AFFE9E6225FE9B69000C3AC9 /* CombinedHitsViewController.swift in Sources */,
 				AFB533BF25B4FD3F0079EE21 /* UISearchToken+Convenience.swift in Sources */,
 				AF82DCF5244C77A300CE8B95 /* SceneDelegate.swift in Sources */,
+				AFFE9E5E25FE813E000C3AC9 /* HitsPresentationMode.swift in Sources */,
 				AFE9BFFE25FD57A700BF0E2D /* SearchViewModel.swift in Sources */,
 				AF82DD0C244CB54B00CE8B95 /* Builder.swift in Sources */,
+				AF6F4FF0260803F500408DF7 /* SceneDelegate+Pad.swift in Sources */,
 				AFB533BB25B4FD250079EE21 /* UISearchTextField+Convenience.swift in Sources */,
 				AF82DD26244CBA4300CE8B95 /* ImageCell.swift in Sources */,
 			);

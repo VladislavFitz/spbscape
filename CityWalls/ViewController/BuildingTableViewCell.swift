@@ -29,6 +29,9 @@ class BuildingTableViewCell: UITableViewCell {
     addressLabel = .init()
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     setupLayout()
+    backgroundColor = .clear
+    contentView.backgroundColor = .clear
+    backgroundView = UIView()
   }
   
   required init?(coder: NSCoder) {
@@ -36,7 +39,7 @@ class BuildingTableViewCell: UITableViewCell {
   }
   
   override func setSelected(_ selected: Bool, animated: Bool) {
-    let backgroundColor = selected ? UIColor.systemTeal.withAlphaComponent(0.2) : .clear
+    let backgroundColor = selected ? ColorScheme.tintColor.withAlphaComponent(0.2) : .clear
     contentView.backgroundColor = backgroundColor
   }
   
@@ -75,17 +78,20 @@ class BuildingTableViewCell: UITableViewCell {
     infoStackView.axis = .vertical
     infoStackView.spacing = 5
     infoStackView.addArrangedSubview(titleLabel)
-    infoStackView.addArrangedSubview(architectsLabel)
-    infoStackView.addArrangedSubview(constructionYearsLabel)
-    infoStackView.addArrangedSubview(stylesLabel)
+//    infoStackView.addArrangedSubview(architectsLabel)
+//    infoStackView.addArrangedSubview(constructionYearsLabel)
+//    infoStackView.addArrangedSubview(stylesLabel)
     infoStackView.addArrangedSubview(addressLabel)
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
     infoStackView.addArrangedSubview(view)
-    buildingImageView.contentMode = .scaleAspectFit
-    buildingImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.33).isActive = true
+    buildingImageView.layer.cornerRadius = 10
+    buildingImageView.contentMode = .scaleAspectFill
+    buildingImageView.clipsToBounds = true
+    buildingImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2).isActive = true
     
     titleLabel.font = .systemFont(ofSize: 14, weight: .semibold)
+    titleLabel.numberOfLines = 0
     [architectsLabel, constructionYearsLabel, stylesLabel, addressLabel].forEach { $0.font = . systemFont(ofSize: 12, weight: .light)}
   }
   
@@ -99,8 +105,7 @@ extension BuildingTableViewCell {
     architectsLabel.text = "Архитекторы: " + building.architects.map(\.title).joined(separator: ", ")
     constructionYearsLabel.text = "Годы постройки: " + building.constructionYears.map(\.description).joined(separator: ", ")
     stylesLabel.text = "Стили: " + building.styles.map(\.title).joined(separator: ", ")
-    addressLabel.text = "Адрес: " + building.addresses.map(\.description).joined(separator: ", ")
-
+    addressLabel.text = /*"Адрес: " +*/ building.addresses.map(\.description).joined(separator: ", ")
   }
   
 }

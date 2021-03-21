@@ -38,10 +38,10 @@ private extension ClusterView {
     switch annotation {
     case let clusterAnnotation as MKClusterAnnotation:
       count = clusterAnnotation.memberAnnotations.count
-      color = .systemTeal
+      color = ColorScheme.tintColor
     case let buildingClusterAnnotation as BuildingClusterAnnotation:
       count = buildingClusterAnnotation.count
-      color = .systemTeal
+      color = ColorScheme.tintColor
     default:
       return
     }

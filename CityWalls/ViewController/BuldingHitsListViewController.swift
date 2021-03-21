@@ -14,14 +14,17 @@ import CityWallsCore
 class BuldingHitsListViewController: UITableViewController, HitsController {
   
   var hitsSource: HitsInteractor<Building>?
-  
+    
   var didSelect: ((Building) -> Void)?
-  
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.register(BuildingTableViewCell.self, forCellReuseIdentifier: "buildingCell")
-    tableView.rowHeight = 130
+    tableView.rowHeight = 80
+    tableView.backgroundView = nil
+    tableView.backgroundColor = .clear
   }
+
   
   func highlight(_ building: Building) {
     guard let buildingIndex = hitsSource?.getCurrentHits().firstIndex(where: { $0.id == building.id }) else { return }
