@@ -53,7 +53,7 @@ final class BuildingViewController: UIViewController {
     let stackView = UIStackView()
     stackView.axis = .vertical
     stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.spacing = 10
+    stackView.spacing = 6
     stackView.distribution = .equalSpacing
     view.addSubview(stackView)
     
@@ -64,7 +64,6 @@ final class BuildingViewController: UIViewController {
     galleryViewController.pageControl.layer.masksToBounds = true
     galleryViewController.pageControl.translatesAutoresizingMaskIntoConstraints = false
     
-//    stackView.addArrangedSubview(titleLabel)
     let imageStackView = UIStackView()
     imageStackView.axis = .vertical
     imageStackView.translatesAutoresizingMaskIntoConstraints = false

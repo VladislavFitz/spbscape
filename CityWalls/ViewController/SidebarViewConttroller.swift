@@ -15,57 +15,32 @@ import CityWallsCore
 class SidebarViewConttroller: UIViewController {
 
   let searchBar: UISearchTextField
-  let hitsController: UIViewController
-  
-  #if targetEnvironment(macCatalyst)
-  let searchBarContainer = UIView()
-  #else
-  let searchBarContainer = UIVisualEffectView(effect: UIBlurEffect(style: .prominent))
-  #endif
-
+  let searchBarContainer: UIView
+  let contentController: UIViewController
   
   lazy var toolbarContainer: ToolbarContainer = {
     let toolbar = UIToolbar()
+    toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
+    toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .compact)
     toolbar.items = toolbarItems
     return .init(toolbar: toolbar)
   }()
-  
-  let stackView = UIStackView()
-  
+    
   override var inputAccessoryView: UIView? {
     return UIDevice.current.userInterfaceIdiom == .phone ? toolbarContainer : nil
   }
       
-  init(hitsController: UIViewController) {
+  init(contentController: UIViewController) {
     self.searchBar = .init()
-    self.hitsController = hitsController
+    self.searchBarContainer = .init()
+    self.contentController = contentController
     super.init(nibName: nil, bundle: nil)
-    
-//    searchBar.addTarget(self, action: #selector(searchBarEditingBegin), for: .editingDidBegin)
-//    searchBar.addTarget(self, action: #selector(searchBarEditingEnd), for: .editingDidEnd)
-
-//    NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification, object: self, queue: .main) { _ in
-//      self.becomeFirstResponder()
-//    }
   }
     
   override var canBecomeFirstResponder: Bool {
     return true
   }
-    
-  @objc func searchBarEditingBegin() {
-//    if UIDevice.current.userInterfaceIdiom == .phone {
-//      searchBar.inputAccessoryView = toolbarContainer
-//    }
-  }
-  
-  @objc func searchBarEditingEnd() {
-//    if UIDevice.current.userInterfaceIdiom == .phone {
-//      searchBar.inputAccessoryView = nil
-//    }
-//    becomeFirstResponder()
-  }
-  
+      
   func searchInRect(_ mapRect: MKMapRect) {
     searchBar.removeTokensForBoundingBox()
     let boundingBox = BoundingBox(mapRect)
@@ -74,93 +49,76 @@ class SidebarViewConttroller: UIViewController {
     searchBar.sendActions(for: .editingChanged)
   }
     
-
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
   override func viewDidLoad() {
-    addChild(hitsController)
-    hitsController.didMove(toParent: self)
+    addChild(contentController)
+    contentController.didMove(toParent: self)
     super.viewDidLoad()
+    
     navigationController?.isNavigationBarHidden = true
+    
     #if targetEnvironment(macCatalyst)
     view.backgroundColor = .clear
     #else
     view.backgroundColor = .systemBackground
     #endif
-    navigationItem.hidesSearchBarWhenScrolling = false
         
     searchBar.tokenBackgroundColor = ColorScheme.tintColor
-    becomeFirstResponder()
-        
-    stackView.axis = .vertical
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    
-//    view.addSubview(stackView)
-//    activate(
-//      stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//      stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//      stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//      stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-//    )
     searchBar.translatesAutoresizingMaskIntoConstraints = false
-    
-    #if targetEnvironment(macCatalyst)
+        
     searchBarContainer.addSubview(searchBar)
-    #else
-    searchBarContainer.contentView.addSubview(searchBar)
-    #endif
-
     searchBarContainer.translatesAutoresizingMaskIntoConstraints = false
     
     activate(
-      searchBar.topAnchor.constraint(equalTo: searchBarContainer.safeAreaLayoutGuide.topAnchor, constant: 10),
-      searchBar.bottomAnchor.constraint(equalTo: searchBarContainer.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+      searchBar.topAnchor.constraint(equalTo: searchBarContainer.safeAreaLayoutGuide.topAnchor, constant: 7),
+      searchBar.bottomAnchor.constraint(equalTo: searchBarContainer.safeAreaLayoutGuide.bottomAnchor, constant: -7),
       searchBar.leadingAnchor.constraint(equalTo: searchBarContainer.safeAreaLayoutGuide.leadingAnchor, constant: 10),
       searchBar.trailingAnchor.constraint(equalTo: searchBarContainer.safeAreaLayoutGuide.trailingAnchor, constant: -10)
     )
-//    stackView.addArrangedSubview(searchBarContainer)
-//    stackView.addArrangedSubview(hitsController.view)
-    
-    view.addSubview(hitsController.view)
-    hitsController.view.translatesAutoresizingMaskIntoConstraints = false
-//    hitsController.view.safeArea
-    
 
+    contentController.view.translatesAutoresizingMaskIntoConstraints = false
     
-    view.addSubview(searchBarContainer)
-    activate(
-      searchBarContainer.topAnchor.constraint(equalTo: view.topAnchor),
-      searchBarContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      searchBarContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-    )
+    switch UIDevice.current.userInterfaceIdiom {
+    case .phone:
+      view.addSubview(contentController.view)
+      activate(
+        contentController.view.topAnchor.constraint(equalTo: view.topAnchor),
+        contentController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        contentController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        contentController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+      )
+      
+      view.addSubview(searchBarContainer)
+      activate(
+        searchBarContainer.topAnchor.constraint(equalTo: view.topAnchor),
+        searchBarContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        searchBarContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+      )
+      
+    default:
+      let stackView = UIStackView()
+      stackView.axis = .vertical
+      stackView.translatesAutoresizingMaskIntoConstraints = false
+      
+      view.addSubview(stackView)
+      activate(
+        stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+        stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+      )
+      stackView.addArrangedSubview(searchBarContainer)
+      stackView.addArrangedSubview(contentController.view)
+    }
     
-    
-    activate(
-      hitsController.view.topAnchor.constraint(equalTo: view.topAnchor),
-      hitsController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-      hitsController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      hitsController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-    )
-  
   }
     
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    hitsController.additionalSafeAreaInsets = .init(top: searchBarContainer.frame.height - view.safeAreaInsets.top, left: 0, bottom: 0, right: 0)
+    contentController.additionalSafeAreaInsets = .init(top: searchBarContainer.frame.height - view.safeAreaInsets.top, left: 0, bottom: 0, right: 0)
   }
-  
-//  override func viewWillDisappear(_ animated: Bool) {
-//    super.viewWillDisappear(animated)
-//    toolbarContainer.isHidden = true
-//  }
-//
-//  override func viewWillAppear(_ animated: Bool) {
-//    super.viewWillAppear(animated)
-//    toolbarContainer.isHidden = false
-//  }
-  
-  
-  
+    
 }

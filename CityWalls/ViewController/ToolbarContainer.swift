@@ -25,6 +25,13 @@ class ToolbarContainer: UIView {
   
   func setup() {
     translatesAutoresizingMaskIntoConstraints = false
+    
+    let backgroundView = UIView()
+    backgroundView.backgroundColor = .systemBackground
+    backgroundView.translatesAutoresizingMaskIntoConstraints = false
+    addSubview(backgroundView)
+    backgroundView.pin(to: self)
+    
     toolbar.translatesAutoresizingMaskIntoConstraints = false
     addSubview(toolbar)
     NSLayoutConstraint.activate([

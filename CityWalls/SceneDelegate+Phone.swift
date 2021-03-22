@@ -17,7 +17,7 @@ extension SceneDelegate {
                                            filterHelper: FiltersHelper) -> UIViewController {
     
     let unitViewController = CombinedHitsViewController(listViewController: listHitsViewController, mapViewController: mapHitsViewController)
-    let sidebarViewController = SidebarViewConttroller(hitsController: unitViewController)
+    let sidebarViewController = SidebarViewConttroller(contentController: unitViewController)
     searchViewModel.configure(sidebarViewController.searchBar)
     filterHelper.sourceViewController = sidebarViewController
     sidebarViewController.toolbarItems = [
@@ -29,8 +29,6 @@ extension SceneDelegate {
     ]
     
     let navigationController = UINavigationController(rootViewController: sidebarViewController)
-    navigationController.isNavigationBarHidden = true
-
     
     mapHitsViewController.didSelect = { [weak navigationController] building, _ in
       let buildingViewController = BuildingViewController(building: building)
