@@ -83,6 +83,7 @@ class SidebarViewConttroller: UIViewController {
     
     switch UIDevice.current.userInterfaceIdiom {
     case .phone:
+      searchBarContainer.backgroundColor = .systemBackground
       view.addSubview(contentController.view)
       activate(
         contentController.view.topAnchor.constraint(equalTo: view.topAnchor),
