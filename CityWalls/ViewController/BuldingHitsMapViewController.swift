@@ -18,6 +18,10 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
   var hitsSource: HitsInteractor<Building>?
   var hashFacets: [Attribute: [Facet]]
   let userTrackingButton: MKUserTrackingButton
+  
+  var window: UIWindow?
+  
+  var detailsTransitioningDelegate: TransitioningDelegate!
 
   private var nextRegionChangeIsFromUserInteraction = false
   
@@ -60,6 +64,8 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
     userTrackingButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
     userTrackingButton.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -50).isActive = true
     userTrackingButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -20).isActive = true
+    
+    view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTap)))
   }
   
   private func configureLayout() {
@@ -100,6 +106,12 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
   
   func scrollToTop() {
     
+  }
+  
+  @objc func didTap() {
+    if let presentedViewController = presentedViewController {
+      presentedViewController.dismiss(animated: true, completion: nil)
+    }
   }
 
   

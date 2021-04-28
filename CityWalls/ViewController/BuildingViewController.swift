@@ -54,7 +54,7 @@ final class BuildingViewController: UIViewController {
     stackView.axis = .vertical
     stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.spacing = 6
-    stackView.distribution = .equalSpacing
+    stackView.distribution = .fill
     view.addSubview(stackView)
     
     galleryViewController.pageControl.hidesForSinglePage = true
@@ -121,7 +121,7 @@ final class BuildingViewController: UIViewController {
   
   func configureButton() {
     goToCityWallsButton.setTitle("Перейти на CityWalls", for: .normal)
-    goToCityWallsButton.backgroundColor = .systemBlue
+    goToCityWallsButton.backgroundColor = ColorScheme.tintColor
     goToCityWallsButton.layer.cornerRadius = 10
     goToCityWallsButton.addTarget(self, action: #selector(goToCityWalls), for: .touchUpInside)
   }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF0684532610DC51001E6F56 /* DetailsOverlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0684522610DC51001E6F56 /* DetailsOverlayController.swift */; };
 		AF2BDCB825B79B2600E4E078 /* CityWallsCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF2BDCB725B79B2600E4E078 /* CityWallsCore */; };
 		AF3B4559258563C20048BBB8 /* AlgoliaSearchClient in Frameworks */ = {isa = PBXBuildFile; productRef = AF3B4558258563C20048BBB8 /* AlgoliaSearchClient */; };
 		AF3B455B258563C20048BBB8 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF3B455A258563C20048BBB8 /* InstantSearch */; };
@@ -49,6 +50,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF0684522610DC51001E6F56 /* DetailsOverlayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsOverlayController.swift; sourceTree = "<group>"; };
 		AF3B4552258563510048BBB8 /* instantsearch-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "instantsearch-ios"; sourceTree = "<group>"; };
 		AF3B4555258563880048BBB8 /* algoliasearch-client-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "algoliasearch-client-swift"; sourceTree = "<group>"; };
 		AF48C4F7253639EE00262367 /* Architect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Architect.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				AFFE9E6125FE9B69000C3AC9 /* CombinedHitsViewController.swift */,
 				AFFE9E6425FEAD1E000C3AC9 /* FiltersHelper.swift */,
 				AFFA76CB25585B3200578914 /* SidebarViewConttroller.swift */,
+				AF0684522610DC51001E6F56 /* DetailsOverlayController.swift */,
 				AFB533B625B4FCBE0079EE21 /* ToolbarContainer.swift */,
 				AFE9C00025FD5B3700BF0E2D /* ToolbarDelegate.swift */,
 			);
@@ -345,6 +348,7 @@
 				AFFE9E6225FE9B69000C3AC9 /* CombinedHitsViewController.swift in Sources */,
 				AFB533BF25B4FD3F0079EE21 /* UISearchToken+Convenience.swift in Sources */,
 				AF82DCF5244C77A300CE8B95 /* SceneDelegate.swift in Sources */,
+				AF0684532610DC51001E6F56 /* DetailsOverlayController.swift in Sources */,
 				AFFE9E5E25FE813E000C3AC9 /* HitsPresentationMode.swift in Sources */,
 				AFE9BFFE25FD57A700BF0E2D /* SearchViewModel.swift in Sources */,
 				AF82DD0C244CB54B00CE8B95 /* Builder.swift in Sources */,
