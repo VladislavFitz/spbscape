@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import InstantSearch
+import InstantSearchCore
 
 extension UISearchTextField {
     

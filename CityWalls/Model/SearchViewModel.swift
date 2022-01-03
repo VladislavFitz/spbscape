@@ -13,20 +13,20 @@ import CityWallsCore
 
 class SearchViewModel {
   
-  let searcher: SingleIndexSearcher
+  let searcher: HitsSearcher
   let queryInputConnector: QueryInputConnector
   let hitsConnector: HitsConnector<Building>
   let filterState: FilterState
 
   init() {
     filterState = .init()
-    searcher = SingleIndexSearcher(appID: .cityWallsAppID, apiKey: .cityWallsApiKey, indexName: .buildings)
+    searcher = HitsSearcher(appID: .cityWallsAppID, apiKey: .cityWallsApiKey, indexName: .buildings)
     hitsConnector = .init(searcher: searcher, filterState: filterState)
     queryInputConnector = .init(searcher: searcher)
 
     searcher.connectFilterState(filterState)
 
-    searcher.indexQueryState.query.hitsPerPage = 100
+    searcher.request.query.hitsPerPage = 100
   }
   
   func configure(_ textField: UISearchTextField) {

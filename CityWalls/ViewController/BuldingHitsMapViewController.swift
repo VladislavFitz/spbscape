@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import InstantSearch
+import InstantSearchCore
 import MapKit
 import CityWallsCore
 

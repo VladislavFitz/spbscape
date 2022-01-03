@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import InstantSearch
+import InstantSearchCore
 
 extension IndexName {
   

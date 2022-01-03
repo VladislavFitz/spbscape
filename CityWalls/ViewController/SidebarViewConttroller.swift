@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import MapKit
-import InstantSearch
+import InstantSearchCore
 import CityWallsCore
 
 class SidebarViewConttroller: UIViewController {

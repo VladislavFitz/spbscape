@@ -105,9 +105,9 @@ extension SceneDelegate {
     mapHitsViewController.didChangeVisibleRegion = { [weak searchViewModel, weak mapHitsViewController] visibleRect, byUser in
       guard let searchViewModel = searchViewModel, byUser else { return }
       if let centerCoordinate = mapHitsViewController?.mapView.centerCoordinate {
-        searchViewModel.searcher.indexQueryState.query.aroundLatLng = .init(.init(centerCoordinate))
+        searchViewModel.searcher.request.query.aroundLatLng = .init(.init(centerCoordinate))
       }
-      searchViewModel.searcher.indexQueryState.query.aroundRadius = .all
+      searchViewModel.searcher.request.query.aroundRadius = .all
       searchViewModel.searcher.search()
     }
     searchViewModel.hitsConnector.connectController(mapHitsViewController)

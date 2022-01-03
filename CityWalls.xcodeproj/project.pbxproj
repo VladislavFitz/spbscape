@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		AF0684532610DC51001E6F56 /* DetailsOverlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0684522610DC51001E6F56 /* DetailsOverlayController.swift */; };
-		AF2BDCB825B79B2600E4E078 /* CityWallsCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF2BDCB725B79B2600E4E078 /* CityWallsCore */; };
 		AF3B4559258563C20048BBB8 /* AlgoliaSearchClient in Frameworks */ = {isa = PBXBuildFile; productRef = AF3B4558258563C20048BBB8 /* AlgoliaSearchClient */; };
-		AF3B455B258563C20048BBB8 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF3B455A258563C20048BBB8 /* InstantSearch */; };
 		AF46B4302557807A003DA57E /* BuildingAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DD17244CB67700CE8B95 /* BuildingAnnotation.swift */; };
+		AF60556C27838E82006B2D04 /* InstantSearchCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF60556B27838E82006B2D04 /* InstantSearchCore */; };
+		AF60556F27839082006B2D04 /* CityWallsCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF60556E27839082006B2D04 /* CityWallsCore */; };
+		AF60557127839320006B2D04 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF60557027839320006B2D04 /* InstantSearch */; };
+		AF60557527839640006B2D04 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF60557427839640006B2D04 /* Credentials.plist */; };
 		AF6D857C2584F83C004D699A /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D857B2584F83C004D699A /* ContainerViewController.swift */; };
 		AF6D85802584F84F004D699A /* FilterSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D857F2584F84F004D699A /* FilterSection.swift */; };
 		AF6F4FED260803EC00408DF7 /* SceneDelegate+Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6F4FEC260803EC00408DF7 /* SceneDelegate+Phone.swift */; };
@@ -40,7 +42,6 @@
 		AFB533BF25B4FD3F0079EE21 /* UISearchToken+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB533BE25B4FD3F0079EE21 /* UISearchToken+Convenience.swift */; };
 		AFE9BFFE25FD57A700BF0E2D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE9BFFD25FD57A700BF0E2D /* SearchViewModel.swift */; };
 		AFE9C00125FD5B3700BF0E2D /* ToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE9C00025FD5B3700BF0E2D /* ToolbarDelegate.swift */; };
-		AFFA76BD25582F9100578914 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFFA76BC25582F9100578914 /* Credentials.plist */; };
 		AFFA76C1255833AF00578914 /* ClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C0255833AF00578914 /* ClusterView.swift */; };
 		AFFA76C42558340200578914 /* HitAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C32558340200578914 /* HitAnnotationView.swift */; };
 		AFFA76CC25585B3200578914 /* SidebarViewConttroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76CB25585B3200578914 /* SidebarViewConttroller.swift */; };
@@ -51,10 +52,9 @@
 
 /* Begin PBXFileReference section */
 		AF0684522610DC51001E6F56 /* DetailsOverlayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsOverlayController.swift; sourceTree = "<group>"; };
-		AF3B4552258563510048BBB8 /* instantsearch-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "instantsearch-ios"; sourceTree = "<group>"; };
-		AF3B4555258563880048BBB8 /* algoliasearch-client-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "algoliasearch-client-swift"; sourceTree = "<group>"; };
 		AF48C4F7253639EE00262367 /* Architect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Architect.swift; sourceTree = "<group>"; };
 		AF48C4F8253639EE00262367 /* Street.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Street.swift; sourceTree = "<group>"; };
+		AF60557427839640006B2D04 /* Credentials.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
 		AF6D857B2584F83C004D699A /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		AF6D857F2584F84F004D699A /* FilterSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSection.swift; sourceTree = "<group>"; };
 		AF6F4FEC260803EC00408DF7 /* SceneDelegate+Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+Phone.swift"; sourceTree = "<group>"; };
@@ -90,7 +90,6 @@
 		AFB533BE25B4FD3F0079EE21 /* UISearchToken+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchToken+Convenience.swift"; sourceTree = "<group>"; };
 		AFE9BFFD25FD57A700BF0E2D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		AFE9C00025FD5B3700BF0E2D /* ToolbarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDelegate.swift; sourceTree = "<group>"; };
-		AFFA76BC25582F9100578914 /* Credentials.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
 		AFFA76C0255833AF00578914 /* ClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterView.swift; sourceTree = "<group>"; };
 		AFFA76C32558340200578914 /* HitAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitAnnotationView.swift; sourceTree = "<group>"; };
 		AFFA76C62558367900578914 /* CityWalls.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CityWalls.entitlements; sourceTree = "<group>"; };
@@ -105,10 +104,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF3B455B258563C20048BBB8 /* InstantSearch in Frameworks */,
+				AF60556C27838E82006B2D04 /* InstantSearchCore in Frameworks */,
 				AF3B4559258563C20048BBB8 /* AlgoliaSearchClient in Frameworks */,
-				AF2BDCB825B79B2600E4E078 /* CityWallsCore in Frameworks */,
+				AF60556F27839082006B2D04 /* CityWallsCore in Frameworks */,
 				AF82DD0A244C8A3500CE8B95 /* SDWebImage in Frameworks */,
+				AF60557127839320006B2D04 /* InstantSearch in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,6 +120,13 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AF6055672783652B006B2D04 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 		AF6D857A2584F82F004D699A /* Filter */ = {
@@ -135,9 +142,8 @@
 		AF82DCE6244C77A300CE8B95 = {
 			isa = PBXGroup;
 			children = (
+				AF6055672783652B006B2D04 /* Packages */,
 				AF82DCF1244C77A300CE8B95 /* CityWalls */,
-				AF3B4552258563510048BBB8 /* instantsearch-ios */,
-				AF3B4555258563880048BBB8 /* algoliasearch-client-swift */,
 				AF82DCF0244C77A300CE8B95 /* Products */,
 				AF3B4557258563C20048BBB8 /* Frameworks */,
 			);
@@ -167,10 +173,10 @@
 				AF82DCFB244C77A500CE8B95 /* Assets.xcassets */,
 				AF82DCFD244C77A500CE8B95 /* LaunchScreen.storyboard */,
 				AF82DD00244C77A500CE8B95 /* Info.plist */,
+				AF60557427839640006B2D04 /* Credentials.plist */,
 				AF98955C2561AD3B00B61F15 /* Center.gpx */,
 				AF9895592561ACB500B61F15 /* Petr.gpx */,
 				AF9895582561AC5900B61F15 /* VO.gpx */,
-				AFFA76BC25582F9100578914 /* Credentials.plist */,
 				AF82DD0B244CB54B00CE8B95 /* Builder.swift */,
 			);
 			path = CityWalls;
@@ -260,8 +266,9 @@
 			packageProductDependencies = (
 				AF82DD09244C8A3500CE8B95 /* SDWebImage */,
 				AF3B4558258563C20048BBB8 /* AlgoliaSearchClient */,
-				AF3B455A258563C20048BBB8 /* InstantSearch */,
-				AF2BDCB725B79B2600E4E078 /* CityWallsCore */,
+				AF60556B27838E82006B2D04 /* InstantSearchCore */,
+				AF60556E27839082006B2D04 /* CityWallsCore */,
+				AF60557027839320006B2D04 /* InstantSearch */,
 			);
 			productName = CityWalls;
 			productReference = AF82DCEF244C77A300CE8B95 /* CityWalls.app */;
@@ -293,7 +300,8 @@
 			mainGroup = AF82DCE6244C77A300CE8B95;
 			packageReferences = (
 				AF82DD08244C8A3500CE8B95 /* XCRemoteSwiftPackageReference "SDWebImage" */,
-				AF2BDCB625B79B2600E4E078 /* XCRemoteSwiftPackageReference "citywalls-crawler" */,
+				AF60556A27838E82006B2D04 /* XCRemoteSwiftPackageReference "instantsearch-ios" */,
+				AF60556D27839082006B2D04 /* XCRemoteSwiftPackageReference "citywalls-crawler" */,
 			);
 			productRefGroup = AF82DCF0244C77A300CE8B95 /* Products */;
 			projectDirPath = "";
@@ -311,8 +319,8 @@
 			files = (
 				AF98955A2561ACB500B61F15 /* Petr.gpx in Resources */,
 				AF82DCFF244C77A500CE8B95 /* LaunchScreen.storyboard in Resources */,
+				AF60557527839640006B2D04 /* Credentials.plist in Resources */,
 				AF98955D2561AD3B00B61F15 /* Center.gpx in Resources */,
-				AFFA76BD25582F9100578914 /* Credentials.plist in Resources */,
 				AF82DCFC244C77A500CE8B95 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -493,7 +501,7 @@
 				CODE_SIGN_ENTITLEMENTS = CityWalls/CityWalls.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JF98Q6D3JZ;
+				DEVELOPMENT_TEAM = 3MM327Z8HD;
 				INFOPLIST_FILE = CityWalls/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -514,7 +522,7 @@
 				CODE_SIGN_ENTITLEMENTS = CityWalls/CityWalls.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JF98Q6D3JZ;
+				DEVELOPMENT_TEAM = 3MM327Z8HD;
 				INFOPLIST_FILE = CityWalls/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -552,7 +560,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AF2BDCB625B79B2600E4E078 /* XCRemoteSwiftPackageReference "citywalls-crawler" */ = {
+		AF60556A27838E82006B2D04 /* XCRemoteSwiftPackageReference "instantsearch-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/algolia/instantsearch-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+		AF60556D27839082006B2D04 /* XCRemoteSwiftPackageReference "citywalls-crawler" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/VladislavFitz/citywalls-crawler";
 			requirement = {
@@ -571,17 +587,23 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AF2BDCB725B79B2600E4E078 /* CityWallsCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AF2BDCB625B79B2600E4E078 /* XCRemoteSwiftPackageReference "citywalls-crawler" */;
-			productName = CityWallsCore;
-		};
 		AF3B4558258563C20048BBB8 /* AlgoliaSearchClient */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AlgoliaSearchClient;
 		};
-		AF3B455A258563C20048BBB8 /* InstantSearch */ = {
+		AF60556B27838E82006B2D04 /* InstantSearchCore */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = AF60556A27838E82006B2D04 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
+			productName = InstantSearchCore;
+		};
+		AF60556E27839082006B2D04 /* CityWallsCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF60556D27839082006B2D04 /* XCRemoteSwiftPackageReference "citywalls-crawler" */;
+			productName = CityWallsCore;
+		};
+		AF60557027839320006B2D04 /* InstantSearch */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF60556A27838E82006B2D04 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
 			productName = InstantSearch;
 		};
 		AF82DD09244C8A3500CE8B95 /* SDWebImage */ = {

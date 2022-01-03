@@ -39,7 +39,7 @@ class FilterViewController: UIViewController {
     queryInputInteractor.connectController(queryInputController)
 
     facetListConnectors = zip(FilterSection.allCases.map(\.attribute), viewControllers).map { attribute, viewController in
-      let facetSearcher = FacetSearcher(appID: .cityWallsAppID, apiKey: .cityWallsApiKey, indexName: .buildings, facetName: attribute.rawValue)
+      let facetSearcher = FacetSearcher(appID: .cityWallsAppID, apiKey: .cityWallsApiKey, indexName: .buildings, facetName: attribute)
       let facetListController = FacetListTableController(tableView: viewController.tableView)
       let facetListConnector = FacetListConnector(searcher: facetSearcher, filterState: filterState, attribute: attribute, operator: .or, controller: facetListController, presenter: nil)
       facetSearcher.connectFilterState(filterState)
