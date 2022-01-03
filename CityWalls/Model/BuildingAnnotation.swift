@@ -9,6 +9,7 @@
 import Foundation
 import MapKit
 import CityWallsCore
+import InstantSearchCore
 
 class BuildingAnnotation: NSObject, MKAnnotation {
   
@@ -25,6 +26,11 @@ class BuildingAnnotation: NSObject, MKAnnotation {
   init(building: Building) {
     self.building = building
   }
+  
+  convenience init(buildingHit: Hit<Building>) {
+    self.init(building: buildingHit.object)
+  }
+  
   
   override var hash: Int {
     return building.id.hashValue

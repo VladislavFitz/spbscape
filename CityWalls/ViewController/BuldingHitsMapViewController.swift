@@ -15,7 +15,7 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
   
   let locationManager: CLLocationManager
   let mapView: MKMapView
-  var hitsSource: HitsInteractor<Building>?
+  var hitsSource: HitsInteractor<Hit<Building>>?
   var hashFacets: [Attribute: [Facet]]
   let userTrackingButton: MKUserTrackingButton
   
@@ -82,7 +82,7 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
   private func placeAnnotations() {
     let buildings = hitsSource?.getCurrentHits() ?? []
     
-    let fetchedBuildingsIDs = Set(buildings.map(\.id))
+    let fetchedBuildingsIDs = Set(buildings.map(\.object.id))
     let presentedBuildingsIDs = Set(mapView.annotations.compactMap { $0 as? BuildingAnnotation }.map(\.building.id))
     let buildingIDsToKeep = fetchedBuildingsIDs.intersection(presentedBuildingsIDs)
     let buildingIDsToRemove = presentedBuildingsIDs.subtracting(buildingIDsToKeep)
@@ -94,7 +94,7 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
       mapView.removeAnnotations(mapView.annotations.compactMap { $0 as? BuildingAnnotation }.filter { annotationsToRemove.contains($0.building.id) })
     }
     
-    let annotationsToAdd = buildings.filter { buildingIDsToAdd.contains($0.id) }.map(BuildingAnnotation.init)
+    let annotationsToAdd = buildings.filter { buildingIDsToAdd.contains($0.object.id) }.map(BuildingAnnotation.init)
     if !annotationsToAdd.isEmpty {
       mapView.addAnnotations(annotationsToAdd)
     }

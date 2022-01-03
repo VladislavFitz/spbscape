@@ -14,6 +14,7 @@
 		AF60556F27839082006B2D04 /* CityWallsCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF60556E27839082006B2D04 /* CityWallsCore */; };
 		AF60557127839320006B2D04 /* InstantSearch in Frameworks */ = {isa = PBXBuildFile; productRef = AF60557027839320006B2D04 /* InstantSearch */; };
 		AF60557527839640006B2D04 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF60557427839640006B2D04 /* Credentials.plist */; };
+		AF60557727839BD6006B2D04 /* BuildingTableViewCell+Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF60557627839BD6006B2D04 /* BuildingTableViewCell+Building.swift */; };
 		AF6D857C2584F83C004D699A /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D857B2584F83C004D699A /* ContainerViewController.swift */; };
 		AF6D85802584F84F004D699A /* FilterSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D857F2584F84F004D699A /* FilterSection.swift */; };
 		AF6F4FED260803EC00408DF7 /* SceneDelegate+Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6F4FEC260803EC00408DF7 /* SceneDelegate+Phone.swift */; };
@@ -55,6 +56,7 @@
 		AF48C4F7253639EE00262367 /* Architect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Architect.swift; sourceTree = "<group>"; };
 		AF48C4F8253639EE00262367 /* Street.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Street.swift; sourceTree = "<group>"; };
 		AF60557427839640006B2D04 /* Credentials.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
+		AF60557627839BD6006B2D04 /* BuildingTableViewCell+Building.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BuildingTableViewCell+Building.swift"; sourceTree = "<group>"; };
 		AF6D857B2584F83C004D699A /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		AF6D857F2584F84F004D699A /* FilterSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSection.swift; sourceTree = "<group>"; };
 		AF6F4FEC260803EC00408DF7 /* SceneDelegate+Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+Phone.swift"; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				AF82DCF6244C77A300CE8B95 /* BuldingHitsMapViewController.swift */,
 				AF7943DD253C49D2006CEB2B /* BuldingHitsListViewController.swift */,
 				AF7943E0253C4A36006CEB2B /* BuildingTableViewCell.swift */,
+				AF60557627839BD6006B2D04 /* BuildingTableViewCell+Building.swift */,
 				AF82DD0D244CB56B00CE8B95 /* GalleryViewController.swift */,
 				AF82DD0F244CB59D00CE8B95 /* BuildingViewController.swift */,
 				AFFE9E6125FE9B69000C3AC9 /* CombinedHitsViewController.swift */,
@@ -357,6 +360,7 @@
 				AFB533BF25B4FD3F0079EE21 /* UISearchToken+Convenience.swift in Sources */,
 				AF82DCF5244C77A300CE8B95 /* SceneDelegate.swift in Sources */,
 				AF0684532610DC51001E6F56 /* DetailsOverlayController.swift in Sources */,
+				AF60557727839BD6006B2D04 /* BuildingTableViewCell+Building.swift in Sources */,
 				AFFE9E5E25FE813E000C3AC9 /* HitsPresentationMode.swift in Sources */,
 				AFE9BFFE25FD57A700BF0E2D /* SearchViewModel.swift in Sources */,
 				AF82DD0C244CB54B00CE8B95 /* Builder.swift in Sources */,

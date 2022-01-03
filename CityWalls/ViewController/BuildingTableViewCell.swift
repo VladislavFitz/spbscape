@@ -96,16 +96,3 @@ class BuildingTableViewCell: UITableViewCell {
   }
   
 }
-
-extension BuildingTableViewCell {
-  
-  func configureWith(_ building: Building) {
-    buildingImageView.sd_setImage(with: building.photos.first?.url)
-    titleLabel.text = building.titles.first
-    architectsLabel.text = "Архитекторы: " + building.architects.map(\.title).joined(separator: ", ")
-    constructionYearsLabel.text = "Годы постройки: " + building.constructionYears.map(\.description).joined(separator: ", ")
-    stylesLabel.text = "Стили: " + building.styles.map(\.title).joined(separator: ", ")
-    addressLabel.text = /*"Адрес: " +*/ building.addresses.map(\.description).joined(separator: ", ")
-  }
-  
-}

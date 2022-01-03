@@ -13,7 +13,7 @@ import CityWallsCore
 
 class BuldingHitsListViewController: UITableViewController, HitsController {
   
-  var hitsSource: HitsInteractor<Building>?
+  var hitsSource: HitsInteractor<Hit<Building>>?
     
   var didSelect: ((Building) -> Void)?
     
@@ -27,7 +27,7 @@ class BuldingHitsListViewController: UITableViewController, HitsController {
 
   
   func highlight(_ building: Building) {
-    guard let buildingIndex = hitsSource?.getCurrentHits().firstIndex(where: { $0.id == building.id }) else { return }
+    guard let buildingIndex = hitsSource?.getCurrentHits().firstIndex(where: { $0.object.id == building.id }) else { return }
     let buildingIndexPath = IndexPath(row: buildingIndex, section: 0)
     tableView.selectRow(at: buildingIndexPath, animated: true, scrollPosition: .middle)
   }
@@ -49,7 +49,7 @@ class BuldingHitsListViewController: UITableViewController, HitsController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let building = hitsSource?.hit(atIndex: indexPath.row) {
-      didSelect?(building)
+      didSelect?(building.object)
     }
   }
     

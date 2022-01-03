@@ -15,7 +15,7 @@ class SearchViewModel {
   
   let searcher: HitsSearcher
   let queryInputConnector: QueryInputConnector
-  let hitsConnector: HitsConnector<Building>
+  let hitsConnector: HitsConnector<Hit<Building>>
   let filterState: FilterState
 
   init() {
