@@ -24,26 +24,32 @@ class FilterViewController: UIViewController {
   
   let hitsCountBarButtonItem: UIBarButtonItem
   
+  let multiSearcher: MultiSearcher
+  
   init(filterState: FilterState, hitsCountBarButtonItem: UIBarButtonItem) {
     
+    self.multiSearcher = MultiSearcher(appID: .cityWallsAppID, apiKey: .cityWallsApiKey)
     self.filterState = filterState
     self.hitsCountBarButtonItem = hitsCountBarButtonItem
     
-    let viewControllers: [UITableViewController] = FilterSection.allCases.map { _ in .init(style: .plain) }
+    let viewControllers: [FacetListViewController] = FilterSection.allCases.map { _ in .init(style: .plain) }
     
     resultsViewController = ContainerViewController(viewControllers: viewControllers)
     searchController = UISearchController(searchResultsController: resultsViewController)
     
     let queryInputInteractor = QueryInputInteractor()
     queryInputController = .init(searchBar: searchController.searchBar)
+    queryInputInteractor.connectSearcher(multiSearcher)
     queryInputInteractor.connectController(queryInputController)
-
-    facetListConnectors = zip(FilterSection.allCases.map(\.attribute), viewControllers).map { attribute, viewController in
-      let facetSearcher = FacetSearcher(appID: .cityWallsAppID, apiKey: .cityWallsApiKey, indexName: .buildings, facetName: attribute)
-      let facetListController = FacetListTableController(tableView: viewController.tableView)
-      let facetListConnector = FacetListConnector(searcher: facetSearcher, filterState: filterState, attribute: attribute, operator: .or, controller: facetListController, presenter: nil)
+    
+    facetListConnectors = zip(FilterSection.allCases.map(\.attribute), viewControllers).map { [unowned multiSearcher] attribute, viewController in
+      let facetSearcher = multiSearcher.addFacetsSearcher(indexName: .buildings, attribute: attribute)
+      let facetListConnector = FacetListConnector(searcher: facetSearcher,
+                                                  filterState: filterState,
+                                                  attribute: attribute,
+                                                  operator: .or,
+                                                  controller: viewController)
       facetSearcher.connectFilterState(filterState)
-      queryInputInteractor.connectSearcher(facetSearcher)
       return facetListConnector
     }
     
@@ -123,3 +129,4 @@ extension FilterViewController: UISearchBarDelegate {
   }
   
 }
+

@@ -43,6 +43,7 @@
 		AFB533BF25B4FD3F0079EE21 /* UISearchToken+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB533BE25B4FD3F0079EE21 /* UISearchToken+Convenience.swift */; };
 		AFE9BFFE25FD57A700BF0E2D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE9BFFD25FD57A700BF0E2D /* SearchViewModel.swift */; };
 		AFE9C00125FD5B3700BF0E2D /* ToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE9C00025FD5B3700BF0E2D /* ToolbarDelegate.swift */; };
+		AFF4F6782783B98F0054100B /* FacetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF4F6772783B98F0054100B /* FacetListViewController.swift */; };
 		AFFA76C1255833AF00578914 /* ClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C0255833AF00578914 /* ClusterView.swift */; };
 		AFFA76C42558340200578914 /* HitAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C32558340200578914 /* HitAnnotationView.swift */; };
 		AFFA76CC25585B3200578914 /* SidebarViewConttroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76CB25585B3200578914 /* SidebarViewConttroller.swift */; };
@@ -92,6 +93,7 @@
 		AFB533BE25B4FD3F0079EE21 /* UISearchToken+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchToken+Convenience.swift"; sourceTree = "<group>"; };
 		AFE9BFFD25FD57A700BF0E2D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		AFE9C00025FD5B3700BF0E2D /* ToolbarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDelegate.swift; sourceTree = "<group>"; };
+		AFF4F6772783B98F0054100B /* FacetListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetListViewController.swift; sourceTree = "<group>"; };
 		AFFA76C0255833AF00578914 /* ClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterView.swift; sourceTree = "<group>"; };
 		AFFA76C32558340200578914 /* HitAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitAnnotationView.swift; sourceTree = "<group>"; };
 		AFFA76C62558367900578914 /* CityWalls.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CityWalls.entitlements; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				AF7943D3253B925B006CEB2B /* FilterViewController.swift */,
+				AFF4F6772783B98F0054100B /* FacetListViewController.swift */,
 				AF6D857B2584F83C004D699A /* ContainerViewController.swift */,
 				AF6D857F2584F84F004D699A /* FilterSection.swift */,
 			);
@@ -347,6 +350,7 @@
 				AF7943DE253C49D2006CEB2B /* BuldingHitsListViewController.swift in Sources */,
 				AF6D85802584F84F004D699A /* FilterSection.swift in Sources */,
 				AF7943E5253C4C9A006CEB2B /* IndexName+Convenience.swift in Sources */,
+				AFF4F6782783B98F0054100B /* FacetListViewController.swift in Sources */,
 				AF82DD1E244CB6CE00CE8B95 /* UIViewController+Convenience.swift in Sources */,
 				AFB533B725B4FCBF0079EE21 /* ToolbarContainer.swift in Sources */,
 				AFFA76C1255833AF00578914 /* ClusterView.swift in Sources */,
