@@ -16,16 +16,25 @@ class BuldingHitsListViewController: UITableViewController, HitsController {
   var hitsSource: HitsInteractor<Hit<Building>>?
     
   var didSelect: ((Building) -> Void)?
+  
+  private let noResultsView = NoResultsView()
     
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.register(BuildingTableViewCell.self, forCellReuseIdentifier: "buildingCell")
     tableView.rowHeight = 80
-    tableView.backgroundView = nil
     tableView.backgroundColor = .clear
   }
-
   
+  func reload() {
+    if hitsSource?.numberOfHits() ?? 0 == 0 {
+      tableView.backgroundView = noResultsView
+    } else {
+      tableView.backgroundView = nil
+    }
+    tableView.reloadData()
+  }
+
   func highlight(_ building: Building) {
     guard let buildingIndex = hitsSource?.getCurrentHits().firstIndex(where: { $0.object.id == building.id }) else { return }
     let buildingIndexPath = IndexPath(row: buildingIndex, section: 0)

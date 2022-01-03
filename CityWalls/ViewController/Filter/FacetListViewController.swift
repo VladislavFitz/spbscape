@@ -18,8 +18,11 @@ class FacetListViewController: UITableViewController, FacetListController {
   
   let cellID: String = "facetCellID"
   
+  private let noResultsView = NoResultsView()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    tableView.backgroundView = NoResultsView()
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
   }
   
@@ -28,6 +31,11 @@ class FacetListViewController: UITableViewController, FacetListController {
   }
   
   func reload() {
+    if selectableItems.isEmpty {
+      tableView.backgroundView = noResultsView
+    } else {
+      tableView.backgroundView = nil
+    }
     tableView.reloadData()
   }
   

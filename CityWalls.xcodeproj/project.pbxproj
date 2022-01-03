@@ -44,6 +44,7 @@
 		AFE9BFFE25FD57A700BF0E2D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE9BFFD25FD57A700BF0E2D /* SearchViewModel.swift */; };
 		AFE9C00125FD5B3700BF0E2D /* ToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE9C00025FD5B3700BF0E2D /* ToolbarDelegate.swift */; };
 		AFF4F6782783B98F0054100B /* FacetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF4F6772783B98F0054100B /* FacetListViewController.swift */; };
+		AFF4F67A2783BFC50054100B /* NoResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF4F6792783BFC50054100B /* NoResultsView.swift */; };
 		AFFA76C1255833AF00578914 /* ClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C0255833AF00578914 /* ClusterView.swift */; };
 		AFFA76C42558340200578914 /* HitAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76C32558340200578914 /* HitAnnotationView.swift */; };
 		AFFA76CC25585B3200578914 /* SidebarViewConttroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA76CB25585B3200578914 /* SidebarViewConttroller.swift */; };
@@ -94,6 +95,7 @@
 		AFE9BFFD25FD57A700BF0E2D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		AFE9C00025FD5B3700BF0E2D /* ToolbarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDelegate.swift; sourceTree = "<group>"; };
 		AFF4F6772783B98F0054100B /* FacetListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetListViewController.swift; sourceTree = "<group>"; };
+		AFF4F6792783BFC50054100B /* NoResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultsView.swift; sourceTree = "<group>"; };
 		AFFA76C0255833AF00578914 /* ClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterView.swift; sourceTree = "<group>"; };
 		AFFA76C32558340200578914 /* HitAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitAnnotationView.swift; sourceTree = "<group>"; };
 		AFFA76C62558367900578914 /* CityWalls.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CityWalls.entitlements; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				AF82DD25244CBA4300CE8B95 /* ImageCell.swift */,
 				AFFA76C0255833AF00578914 /* ClusterView.swift */,
 				AFFA76C32558340200578914 /* HitAnnotationView.swift */,
+				AFF4F6792783BFC50054100B /* NoResultsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				AF82DD21244CB9D600CE8B95 /* UIStackView+Convenience.swift in Sources */,
 				AF82DD0E244CB56B00CE8B95 /* GalleryViewController.swift in Sources */,
 				AF82DD1C244CB6C200CE8B95 /* UIView+Convenience.swift in Sources */,
+				AFF4F67A2783BFC50054100B /* NoResultsView.swift in Sources */,
 				AFFE9E6525FEAD1E000C3AC9 /* FiltersHelper.swift in Sources */,
 				AF7943D4253B925B006CEB2B /* FilterViewController.swift in Sources */,
 				AFFE9E6225FE9B69000C3AC9 /* CombinedHitsViewController.swift in Sources */,
