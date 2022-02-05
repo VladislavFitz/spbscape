@@ -30,6 +30,14 @@ final class FiltersHelper {
   func presentFilters() {
     guard let sourceViewController = sourceViewController else { return }
     let filtersViewController = UINavigationController(rootViewController: FilterViewController(filterState: searchViewModel.filterState, hitsCountBarButtonItem: searchViewModel.hitsCountBarButtonItem()))
+    let navigationBarAppearance = UINavigationBarAppearance()
+    navigationBarAppearance.configureWithOpaqueBackground()
+    filtersViewController.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+    let toolBarAppearance = UIToolbarAppearance()
+    toolBarAppearance.configureWithOpaqueBackground()
+    if #available(iOS 15.0, *) {
+      filtersViewController.toolbar.scrollEdgeAppearance = toolBarAppearance
+    }
     switch UIDevice.current.userInterfaceIdiom {
     case .pad:
       filtersViewController.modalPresentationStyle = .popover

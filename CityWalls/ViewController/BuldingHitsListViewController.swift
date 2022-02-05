@@ -23,7 +23,7 @@ class BuldingHitsListViewController: UITableViewController, HitsController {
     super.viewDidLoad()
     tableView.register(BuildingTableViewCell.self, forCellReuseIdentifier: "buildingCell")
     tableView.rowHeight = 80
-    tableView.backgroundColor = .clear
+    tableView.backgroundColor = UIColor.clear
   }
   
   func reload() {

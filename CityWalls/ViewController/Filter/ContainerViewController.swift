@@ -16,10 +16,10 @@ class ContainerViewController: UIViewController {
   init(viewControllers: [UIViewController]) {
     self.viewControllers = viewControllers
     super.init(nibName: nil, bundle: nil)
-    for viewController in viewControllers {
-      addChild(viewController)
-      viewController.didMove(toParent: self)
-    }
+//    for viewController in viewControllers {
+//      addChild(viewController)
+//      viewController.didMove(toParent: self)
+//    }
   }
   
   required init?(coder: NSCoder) {
@@ -28,30 +28,49 @@ class ContainerViewController: UIViewController {
   
   func setVisibleViewController(atIndex index: Int) {
     guard index < viewControllers.count else { return }
-    self.viewControllers
-      .map(\.view)
-      .enumerated()
-      .forEach { viewIndex, view in
-        view?.isHidden = viewIndex != index
+    let viewControllerToPresent = viewControllers[index]
+    viewControllerToPresent.modalPresentationStyle = .currentContext
+    if let presentedViewController = presentedViewController {
+      if presentedViewController == viewControllerToPresent {
+        return
       }
+      presentedViewController.dismiss(animated: false) {
+        self.present(viewControllerToPresent, animated: false, completion: nil)
+      }
+    } else {
+      present(viewControllerToPresent, animated: false, completion: nil)
+    }
+//    self.viewControllers
+//      .map(\.view)
+//      .enumerated()
+//      .forEach { viewIndex, view in
+//        view?.isHidden = viewIndex != index
+//      }
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    let stackView = UIStackView()
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    viewControllers.compactMap(\.view).forEach {
-      $0.translatesAutoresizingMaskIntoConstraints = false
-      stackView.addArrangedSubview($0)
+//    let stackView = UIStackView()
+//    stackView.translatesAutoresizingMaskIntoConstraints = false
+//    viewControllers.compactMap(\.view).forEach {
+//      $0.translatesAutoresizingMaskIntoConstraints = false
+//      stackView.addArrangedSubview($0)
+//    }
+//    view.addSubview(stackView)
+//    activate(
+//      stackView.topAnchor.constraint(equalTo: view.topAnchor),
+//      stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//      stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//      stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+//    )
+//    setVisibleViewController(atIndex: 0)
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    if presentedViewController == nil {
+      setVisibleViewController(atIndex: 0)
     }
-    view.addSubview(stackView)
-    activate(
-      stackView.topAnchor.constraint(equalTo: view.topAnchor),
-      stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-      stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-    )
-    setVisibleViewController(atIndex: 0)
   }
   
 }

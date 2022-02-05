@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import BottomSheet
 
 extension SceneDelegate {
   
@@ -16,20 +17,26 @@ extension SceneDelegate {
                                            searchViewModel: SearchViewModel,
                                            filterHelper: FiltersHelper) -> UIViewController {
     
-    let unitViewController = CombinedHitsViewController(listViewController: listHitsViewController, mapViewController: mapHitsViewController)
-    let sidebarViewController = SidebarViewConttroller(contentController: unitViewController)
-    searchViewModel.configure(sidebarViewController.searchBar)
-    filterHelper.sourceViewController = sidebarViewController
-    sidebarViewController.toolbarItems = [
-      unitViewController.switchAppearanceModeBarButtonItem,
-      UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-      searchViewModel.hitsCountBarButtonItem(),
-      UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-      filterHelper.filterBarButtonItem
-    ]
+//    let unitViewController = CombinedHitsViewController(listViewController: listHitsViewController,
+//                                                        mapViewController: mapHitsViewController)
+//    let sidebarViewController = SidebarViewConttroller(contentController: unitViewController)
+//    searchViewModel.configure(sidebarViewController.searchBar)
+//    sidebarViewController.toolbarItems = [
+//      unitViewController.switchAppearanceModeBarButtonItem,
+//      UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+//      searchViewModel.hitsCountBarButtonItem(),
+//      UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+//      filterHelper.filterBarButtonItem
+//    ]
     
-    let navigationController = UINavigationController(rootViewController: sidebarViewController)
-    
+    let phoneViewController = PhoneViewController(listViewController: listHitsViewController,
+                                                  mapViewController: mapHitsViewController)
+    phoneViewController.overlayViewController.didTapFilterButton = { _ in
+      filterHelper.presentFilters()
+    }
+    filterHelper.sourceViewController = phoneViewController
+    searchViewModel.configure(phoneViewController.overlayViewController.searchTextField)
+    let navigationController = UINavigationController(rootViewController: phoneViewController)    
     mapHitsViewController.didSelect = { [weak navigationController] building, _ in
       let buildingViewController = BuildingViewController(building: building)
       buildingViewController.view.backgroundColor = .systemBackground
@@ -41,7 +48,7 @@ extension SceneDelegate {
       buildingViewController.view.backgroundColor = .systemBackground
       navigationController?.pushViewController(buildingViewController, animated: true)
     }
-
+    
     searchViewModel.searcher.search()
     return navigationController
   }

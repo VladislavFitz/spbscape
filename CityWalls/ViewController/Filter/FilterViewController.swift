@@ -43,7 +43,8 @@ class FilterViewController: UIViewController {
     queryInputInteractor.connectController(queryInputController)
     
     facetListConnectors = zip(FilterSection.allCases.map(\.attribute), viewControllers).map { [unowned multiSearcher] attribute, viewController in
-      let facetSearcher = multiSearcher.addFacetsSearcher(indexName: .buildings, attribute: attribute)
+      let facetSearcher = multiSearcher.addFacetsSearcher(indexName: .buildings,
+                                                          attribute: attribute)
       let facetListConnector = FacetListConnector(searcher: facetSearcher,
                                                   filterState: filterState,
                                                   attribute: attribute,
@@ -80,7 +81,6 @@ class FilterViewController: UIViewController {
       .map(\.isEmpty)
       .allSatisfy { $0 }
     clearFiltersBarButtonItem.isEnabled = hasAppliedFilter
-
   }
     
   required init?(coder: NSCoder) {
@@ -92,11 +92,11 @@ class FilterViewController: UIViewController {
     title = "Фильтры"
     view.backgroundColor = .systemBackground
     searchController.searchBar.showsScopeBar = true
-    searchController.automaticallyShowsSearchResultsController = false
-    searchController.obscuresBackgroundDuringPresentation = false
+//    searchController.automaticallyShowsSearchResultsController = false
+//    searchController.obscuresBackgroundDuringPresentation = false
     searchController.showsSearchResultsController = true
     searchController.isActive = true
-    searchController.searchBar.showsCancelButton = false
+    searchController.searchBar.showsCancelButton = true
     searchController.searchBar.scopeButtonTitles = FilterSection.allCases.map(\.title)
     searchController.searchBar.delegate = self
     queryInputInteractor.onQueryChanged.fire(nil)
