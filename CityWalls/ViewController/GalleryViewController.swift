@@ -41,6 +41,11 @@ class GalleryViewController: UICollectionViewController, UICollectionViewDelegat
   
   private func configurePageControl() {
     pageControl.numberOfPages = images.count
+    pageControl.addTarget(self, action: #selector(onPageChange(_:)), for: .valueChanged)
+  }
+  
+  @objc private func onPageChange(_ pageControl: UIPageControl) {
+    collectionView.scrollToItem(at: IndexPath(item: pageControl.currentPage, section: 0), at: .centeredHorizontally, animated: true)
   }
   
   //MARK: - CollectionView DataSource
