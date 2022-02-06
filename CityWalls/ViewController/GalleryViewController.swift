@@ -15,6 +15,8 @@ class GalleryViewController: UICollectionViewController, UICollectionViewDelegat
   let images: [URL]
   let pageControl: UIPageControl
   
+  var preselectedIndex: Int?
+  
   private var cellIdentifier: String { #function }
   
   init(images: [URL]) {
@@ -31,6 +33,33 @@ class GalleryViewController: UICollectionViewController, UICollectionViewDelegat
     fatalError("init(coder:) has not been implemented")
   }
   
+  fileprivate var prevIndexPathAtCenter: IndexPath?
+
+  var currentIndexPath: IndexPath? {
+      let center = view.convert(collectionView.center, to: collectionView)
+      return collectionView.indexPathForItem(at: center)
+  }
+    
+  override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    super.viewWillTransition(to: size, with: coordinator)
+    if let indexAtCenter = currentIndexPath {
+        prevIndexPathAtCenter = indexAtCenter
+    }
+    collectionView.collectionViewLayout.invalidateLayout()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    scrollToPreselectedIndex()
+  }
+  
+  @objc func scrollToPreselectedIndex() {
+    guard let preselectedIndex = preselectedIndex else {
+      return
+    }
+    collectionView.contentOffset.x = CGFloat(preselectedIndex) * collectionView.bounds.width
+  }
+    
   private func configureCollectionView() {
     collectionView.register(ImageCell.self, forCellWithReuseIdentifier: cellIdentifier)
     collectionView.isPagingEnabled = true
@@ -40,14 +69,15 @@ class GalleryViewController: UICollectionViewController, UICollectionViewDelegat
   }
   
   private func configurePageControl() {
+    pageControl.tintColor = ColorScheme.tintColor
     pageControl.numberOfPages = images.count
     pageControl.addTarget(self, action: #selector(onPageChange(_:)), for: .valueChanged)
   }
   
   @objc private func onPageChange(_ pageControl: UIPageControl) {
-    collectionView.scrollToItem(at: IndexPath(item: pageControl.currentPage, section: 0), at: .centeredHorizontally, animated: true)
+    collectionView.scrollToItem(at: .init(item: pageControl.currentPage, section: 0), at: .centeredHorizontally, animated: true)
   }
-  
+      
   //MARK: - CollectionView DataSource
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -58,7 +88,7 @@ class GalleryViewController: UICollectionViewController, UICollectionViewDelegat
     collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
   }
   
-  //MARK: - CollectiView Delegate
+  //MARK: - CollectionView Delegate
   
   override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
     guard let imageCell = cell as? ImageCell else { return }
@@ -67,7 +97,7 @@ class GalleryViewController: UICollectionViewController, UICollectionViewDelegat
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return .init(width: collectionView.frame.width, height: collectionView.frame.height)
+    return .init(width: collectionView.bounds.width, height: collectionView.bounds.height/* - collectionView.safeAreaInsets.top - collectionView.safeAreaInsets.bottom*/)
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -78,8 +108,21 @@ class GalleryViewController: UICollectionViewController, UICollectionViewDelegat
     return 0
   }
   
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    return .zero
+  }
+  
   override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+    pageControl.currentPage = Int(collectionView.contentOffset.x) / Int(collectionView.frame.width)
+  }
+  
+  override func collectionView(_ collectionView: UICollectionView, targetContentOffsetForProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
+    guard let oldCenter = prevIndexPathAtCenter else {
+      return proposedContentOffset
+    }
+    let attrs = collectionView.layoutAttributesForItem(at: oldCenter)
+    let newOriginForOldIndex = attrs?.frame.origin
+    return newOriginForOldIndex ?? proposedContentOffset
   }
   
 }

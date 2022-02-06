@@ -32,13 +32,15 @@ final class BuildingViewController: UIViewController {
     addChild(galleryViewController)
     galleryViewController.willMove(toParent: self)
     galleryViewController.view.translatesAutoresizingMaskIntoConstraints = false
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapImage(_:)))
+    galleryViewController.view.addGestureRecognizer(tapGestureRecognizer)
     configureButton()
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-    
+      
   func configureLayout() {
     let backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .prominent))
     backgroundView.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +61,7 @@ final class BuildingViewController: UIViewController {
     
     galleryViewController.pageControl.hidesForSinglePage = true
     galleryViewController.pageControl.pageIndicatorTintColor = .lightGray
-    galleryViewController.pageControl.currentPageIndicatorTintColor = .black
+    galleryViewController.pageControl.currentPageIndicatorTintColor = ColorScheme.tintColor
 
     galleryViewController.pageControl.layer.masksToBounds = true
     galleryViewController.pageControl.translatesAutoresizingMaskIntoConstraints = false
@@ -159,16 +161,27 @@ final class BuildingViewController: UIViewController {
     UIApplication.shared.open(building.buildingURL)
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-//    navigationController?.setNavigationBarHidden(false, animated: animated)
+  @objc func didTapImage(_ tapGestureRecognizer: UITapGestureRecognizer) {
+    guard presentedViewController == .none else { return }
+    let galleryViewController = GalleryViewController(images: building.photos.map(\.url))
+    galleryViewController.title = title
+    galleryViewController.preselectedIndex = self.galleryViewController.currentIndexPath?.item
+    galleryViewController.view.backgroundColor = .systemBackground
+    let navigationController = UINavigationController(rootViewController: galleryViewController)
+    let navigationBarAppearance = UINavigationBarAppearance()
+    navigationBarAppearance.configureWithDefaultBackground()
+    navigationController.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+    galleryViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"),
+                                                                              style: .done,
+                                                                              target: self,
+                                                                              action: #selector(dismissFullscreenGallery))
+    navigationController.modalPresentationStyle = .fullScreen
+    present(navigationController, animated: true)
   }
   
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-//    navigationController?.setNavigationBarHidden(true, animated: animated)
+  @objc func dismissFullscreenGallery() {
+    presentedViewController?.dismiss(animated: true, completion: nil)
   }
-
   
 }
 

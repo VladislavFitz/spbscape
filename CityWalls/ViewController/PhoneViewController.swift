@@ -72,7 +72,7 @@ class PhoneViewController: UIViewController {
     coordinator.animate(alongsideTransition: { _ in
       self.overlayController.set(self.overlayController.state, animated: false)
       self.view.layoutIfNeeded()
-    }, completion: nil)
+    })
   }
       
 }
