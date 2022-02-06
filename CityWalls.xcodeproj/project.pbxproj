@@ -20,10 +20,12 @@
 		AF6F4FED260803EC00408DF7 /* SceneDelegate+Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6F4FEC260803EC00408DF7 /* SceneDelegate+Phone.swift */; };
 		AF6F4FF0260803F500408DF7 /* SceneDelegate+Pad.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6F4FEF260803F500408DF7 /* SceneDelegate+Pad.swift */; };
 		AF76D06927ABDE3400AFE6C8 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = AF76D06827ABDE3400AFE6C8 /* BottomSheet */; };
-		AF76D06E27AE7FF900AFE6C8 /* SearchOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D06D27AE7FF900AFE6C8 /* SearchOverlayViewController.swift */; };
+		AF76D06E27AE7FF900AFE6C8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D06D27AE7FF900AFE6C8 /* SearchViewController.swift */; };
 		AF76D07027AE86BD00AFE6C8 /* PhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D06F27AE86BD00AFE6C8 /* PhoneViewController.swift */; };
 		AF76D07227AFC36300AFE6C8 /* HandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D07127AFC36300AFE6C8 /* HandleView.swift */; };
 		AF76D07427AFD01600AFE6C8 /* HitsCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D07327AFD01600AFE6C8 /* HitsCountView.swift */; };
+		AF76D07627AFDDEA00AFE6C8 /* OverlayControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D07527AFDDEA00AFE6C8 /* OverlayControllerDelegate.swift */; };
+		AF76D07827AFDE0A00AFE6C8 /* OverlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D07727AFDE0A00AFE6C8 /* OverlayController.swift */; };
 		AF7943D4253B925B006CEB2B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943D3253B925B006CEB2B /* FilterViewController.swift */; };
 		AF7943DE253C49D2006CEB2B /* BuldingHitsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943DD253C49D2006CEB2B /* BuldingHitsListViewController.swift */; };
 		AF7943E1253C4A36006CEB2B /* BuildingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943E0253C4A36006CEB2B /* BuildingTableViewCell.swift */; };
@@ -68,10 +70,12 @@
 		AF6D857F2584F84F004D699A /* FilterSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSection.swift; sourceTree = "<group>"; };
 		AF6F4FEC260803EC00408DF7 /* SceneDelegate+Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+Phone.swift"; sourceTree = "<group>"; };
 		AF6F4FEF260803F500408DF7 /* SceneDelegate+Pad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+Pad.swift"; sourceTree = "<group>"; };
-		AF76D06D27AE7FF900AFE6C8 /* SearchOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOverlayViewController.swift; sourceTree = "<group>"; };
+		AF76D06D27AE7FF900AFE6C8 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		AF76D06F27AE86BD00AFE6C8 /* PhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewController.swift; sourceTree = "<group>"; };
 		AF76D07127AFC36300AFE6C8 /* HandleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleView.swift; sourceTree = "<group>"; };
 		AF76D07327AFD01600AFE6C8 /* HitsCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitsCountView.swift; sourceTree = "<group>"; };
+		AF76D07527AFDDEA00AFE6C8 /* OverlayControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayControllerDelegate.swift; sourceTree = "<group>"; };
+		AF76D07727AFDE0A00AFE6C8 /* OverlayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayController.swift; sourceTree = "<group>"; };
 		AF7943D3253B925B006CEB2B /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		AF7943DD253C49D2006CEB2B /* BuldingHitsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuldingHitsListViewController.swift; sourceTree = "<group>"; };
 		AF7943E0253C4A36006CEB2B /* BuildingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingTableViewCell.swift; sourceTree = "<group>"; };
@@ -225,7 +229,7 @@
 				AF60557627839BD6006B2D04 /* BuildingTableViewCell+Building.swift */,
 				AF82DD0D244CB56B00CE8B95 /* GalleryViewController.swift */,
 				AF82DD0F244CB59D00CE8B95 /* BuildingViewController.swift */,
-				AF76D06D27AE7FF900AFE6C8 /* SearchOverlayViewController.swift */,
+				AF76D06D27AE7FF900AFE6C8 /* SearchViewController.swift */,
 				AFFE9E6125FE9B69000C3AC9 /* CombinedHitsViewController.swift */,
 				AFFE9E6425FEAD1E000C3AC9 /* FiltersHelper.swift */,
 				AF76D06F27AE86BD00AFE6C8 /* PhoneViewController.swift */,
@@ -233,6 +237,8 @@
 				AF0684522610DC51001E6F56 /* DetailsOverlayController.swift */,
 				AFB533B625B4FCBE0079EE21 /* ToolbarContainer.swift */,
 				AFE9C00025FD5B3700BF0E2D /* ToolbarDelegate.swift */,
+				AF76D07527AFDDEA00AFE6C8 /* OverlayControllerDelegate.swift */,
+				AF76D07727AFDE0A00AFE6C8 /* OverlayController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -372,6 +378,8 @@
 				AF7943E5253C4C9A006CEB2B /* IndexName+Convenience.swift in Sources */,
 				AFF4F6782783B98F0054100B /* FacetListViewController.swift in Sources */,
 				AF82DD1E244CB6CE00CE8B95 /* UIViewController+Convenience.swift in Sources */,
+				AF76D07627AFDDEA00AFE6C8 /* OverlayControllerDelegate.swift in Sources */,
+				AF76D07827AFDE0A00AFE6C8 /* OverlayController.swift in Sources */,
 				AFB533B725B4FCBF0079EE21 /* ToolbarContainer.swift in Sources */,
 				AFFA76C1255833AF00578914 /* ClusterView.swift in Sources */,
 				AF82DCF3244C77A300CE8B95 /* AppDelegate.swift in Sources */,
@@ -384,7 +392,7 @@
 				AFFE9E6225FE9B69000C3AC9 /* CombinedHitsViewController.swift in Sources */,
 				AFB533BF25B4FD3F0079EE21 /* UISearchToken+Convenience.swift in Sources */,
 				AF82DCF5244C77A300CE8B95 /* SceneDelegate.swift in Sources */,
-				AF76D06E27AE7FF900AFE6C8 /* SearchOverlayViewController.swift in Sources */,
+				AF76D06E27AE7FF900AFE6C8 /* SearchViewController.swift in Sources */,
 				AF0684532610DC51001E6F56 /* DetailsOverlayController.swift in Sources */,
 				AF60557727839BD6006B2D04 /* BuildingTableViewCell+Building.swift in Sources */,
 				AFFE9E5E25FE813E000C3AC9 /* HitsPresentationMode.swift in Sources */,

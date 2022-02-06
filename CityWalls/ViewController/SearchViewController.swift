@@ -1,5 +1,5 @@
 //
-//  SearchOverlayViewController.swift
+//  SearchViewController.swift
 //  CityWalls
 //
 //  Created by Vladislav Fitc on 05.02.2022.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SearchOverlayViewController: UIViewController {
+class SearchViewController: UIViewController {
   
   let searchTextField: UISearchTextField
   let childViewController: UIViewController

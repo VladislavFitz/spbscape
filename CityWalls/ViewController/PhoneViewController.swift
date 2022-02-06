@@ -13,15 +13,19 @@ class PhoneViewController: UIViewController {
   
   let listViewController: BuldingHitsListViewController
   let mapViewController: UIViewController
-  let overlayViewController: SearchOverlayViewController
-  var heightConstraint: NSLayoutConstraint!
+  let searchViewController: SearchViewController
+  let overlayController: OverlayController
+  
+  private var heightConstraint: NSLayoutConstraint!
+  private let overlayBottomOffset: CGFloat = 90
   
   init(listViewController: BuldingHitsListViewController, mapViewController: UIViewController) {
     self.listViewController = listViewController
     self.mapViewController = mapViewController
-    self.overlayViewController = .init(childViewController: listViewController)
+    self.searchViewController = .init(childViewController: listViewController)
+    self.overlayController = .init()
     super.init(nibName: nil, bundle: nil)
-    for viewController in [mapViewController, overlayViewController] {
+    for viewController in [mapViewController, searchViewController] {
       addChild(viewController)
       viewController.didMove(toParent: self)
     }
@@ -42,104 +46,60 @@ class PhoneViewController: UIViewController {
       mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
     )
-    let overlayView = overlayViewController.view!
+    let overlayView = searchViewController.view!
     overlayView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(overlayView)
-    heightConstraint = overlayView.heightAnchor.constraint(equalToConstant: overlayViewController.compactHeight)
+    heightConstraint = overlayView.heightAnchor.constraint(equalToConstant: searchViewController.compactHeight)
     activate(
       heightConstraint,
       overlayView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       overlayView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: bottomOffset)
+      overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: overlayBottomOffset)
     )
-    overlayViewController.searchTextField.delegate = self
-    state = .compact
+    searchViewController.searchTextField.delegate = self
+    overlayController.delegate = self
+    overlayController.set(.compact, animated: false)
   }
     
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(recognizer:)))
-    overlayViewController.view.addGestureRecognizer(panGestureRecognizer)
+    let panGestureRecognizer = UIPanGestureRecognizer(target: overlayController, action: #selector(overlayController.didPan(recognizer:)))
+    searchViewController.view.addGestureRecognizer(panGestureRecognizer)
   }
   
   override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
     super.viewWillTransition(to: size, with: coordinator)
     coordinator.animate(alongsideTransition: { _ in
-      self.set(self.state, animated: false)
+      self.overlayController.set(self.overlayController.state, animated: false)
       self.view.layoutIfNeeded()
     }, completion: nil)
   }
-    
-  private var initialHeight: CGFloat = 0
+      
+}
+
+extension PhoneViewController: OverlayControllerDelegate {
   
-  var threshold: CGFloat {
-    return view.bounds.height / 2 + overlayViewController.compactHeight
+  var currentHeight: CGFloat {
+    return heightConstraint.constant
   }
   
-  @objc func didPan(recognizer: UIPanGestureRecognizer) {
-    switch recognizer.state {
-    case .began:
-      initialHeight = heightConstraint.constant
-
-    case .changed:
-      let translationY = recognizer.translation(in: recognizer.view).y
-      let newHeight = initialHeight - translationY
-      set(.custom(newHeight), animated: false)
-
-    case .ended:
-      if heightConstraint.constant > threshold {
-        set(.fullScreen, animated: true)
-      } else {
-        set(.compact, animated: true)
-      }
-    case .cancelled, .failed:
-      break
-
-    default:
-      break
-    }
+  var switchStateThreshold: CGFloat {
+    return view.bounds.height / 2 + searchViewController.compactHeight
   }
-  
-  enum OverlayState: Equatable {
-    case fullScreen
-    case compact
-    case custom(CGFloat)
-  }
-  
-  let bottomOffset: CGFloat = 90
   
   var fullscreenOverlayHeight: CGFloat {
-    return view.bounds.height - view.safeAreaInsets.top + bottomOffset
+    return view.bounds.height - view.safeAreaInsets.top + overlayBottomOffset
   }
   
   var compactOverlayHeight: CGFloat {
-    return overlayViewController.compactHeight + bottomOffset
-  }
-  
-  var state: OverlayState = .compact {
-    didSet {
-      heightConstraint.constant = overlayHeight(for: state)
-    }
-  }
-  
-  func overlayHeight(for state: OverlayState) -> CGFloat {
-    switch state {
-    case .fullScreen:
-      return fullscreenOverlayHeight
-    case .compact:
-      return compactOverlayHeight
-    case .custom(let height):
-      return height
-    }
+    return searchViewController.compactHeight + overlayBottomOffset
   }
 
-  func set(_ state: OverlayState, animated: Bool) {
-    self.state = state
+  func shouldSetHeight(_ height: CGFloat, animated: Bool) {
+    heightConstraint.constant = height
     guard animated else {
-      if case .custom(let height) = state, height < threshold, overlayViewController.searchTextField.isEditing {
-        overlayViewController.searchTextField.endEditing(true)
-      } else if state == .compact, overlayViewController.searchTextField.isEditing {
-        overlayViewController.searchTextField.endEditing(true)
+      if searchViewController.searchTextField.isEditing, height < switchStateThreshold {
+          searchViewController.searchTextField.endEditing(true)
       }
       return
     }
@@ -147,12 +107,20 @@ class PhoneViewController: UIViewController {
     animator.addAnimations {
       self.view.layoutIfNeeded()
     }
-    if state == .compact, overlayViewController.searchTextField.isEditing {
-      animator.addCompletion { _ in
-          self.overlayViewController.searchTextField.endEditing(true)
-      }
+    if searchViewController.searchTextField.isEditing, height < switchStateThreshold {
+        animator.addCompletion { _ in
+            self.searchViewController.searchTextField.endEditing(true)
+        }
     }
     animator.startAnimation()
+  }
+  
+  func didChangeState(_ newState: OverlayController.State, animated: Bool) {
+    if case .compact = newState {
+      if searchViewController.searchTextField.isEditing {
+        searchViewController.searchTextField.endEditing(true)
+      }
+    }
   }
   
 }
@@ -160,8 +128,8 @@ class PhoneViewController: UIViewController {
 extension PhoneViewController: UITextFieldDelegate {
   
   func textFieldDidBeginEditing(_ textField: UITextField) {
-    if state == .compact {
-      set(.fullScreen, animated: true)
+    if overlayController.state == .compact {
+      overlayController.set(.fullScreen, animated: true)
     }
   }
   

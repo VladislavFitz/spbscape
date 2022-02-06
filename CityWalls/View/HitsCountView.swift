@@ -29,7 +29,7 @@ class HitsCountView: UIView {
     countLabel.translatesAutoresizingMaskIntoConstraints = false
     addSubview(countLabel)
     activate(
-      countLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -5),
+      countLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -7),
       countLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
       countLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5)
     )
