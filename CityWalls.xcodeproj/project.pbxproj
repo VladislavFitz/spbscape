@@ -19,7 +19,6 @@
 		AF6D85802584F84F004D699A /* FilterSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D857F2584F84F004D699A /* FilterSection.swift */; };
 		AF6F4FED260803EC00408DF7 /* SceneDelegate+Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6F4FEC260803EC00408DF7 /* SceneDelegate+Phone.swift */; };
 		AF6F4FF0260803F500408DF7 /* SceneDelegate+Pad.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6F4FEF260803F500408DF7 /* SceneDelegate+Pad.swift */; };
-		AF76D06927ABDE3400AFE6C8 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = AF76D06827ABDE3400AFE6C8 /* BottomSheet */; };
 		AF76D06E27AE7FF900AFE6C8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D06D27AE7FF900AFE6C8 /* SearchViewController.swift */; };
 		AF76D07027AE86BD00AFE6C8 /* PhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D06F27AE86BD00AFE6C8 /* PhoneViewController.swift */; };
 		AF76D07227AFC36300AFE6C8 /* HandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D07127AFC36300AFE6C8 /* HandleView.swift */; };
@@ -124,7 +123,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF60556C27838E82006B2D04 /* InstantSearchCore in Frameworks */,
-				AF76D06927ABDE3400AFE6C8 /* BottomSheet in Frameworks */,
 				AF3B4559258563C20048BBB8 /* AlgoliaSearchClient in Frameworks */,
 				AF60556F27839082006B2D04 /* CityWallsCore in Frameworks */,
 				AF82DD0A244C8A3500CE8B95 /* SDWebImage in Frameworks */,
@@ -298,7 +296,6 @@
 				AF60556B27838E82006B2D04 /* InstantSearchCore */,
 				AF60556E27839082006B2D04 /* CityWallsCore */,
 				AF60557027839320006B2D04 /* InstantSearch */,
-				AF76D06827ABDE3400AFE6C8 /* BottomSheet */,
 			);
 			productName = CityWalls;
 			productReference = AF82DCEF244C77A300CE8B95 /* CityWalls.app */;
@@ -332,7 +329,6 @@
 				AF82DD08244C8A3500CE8B95 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				AF60556A27838E82006B2D04 /* XCRemoteSwiftPackageReference "instantsearch-ios" */,
 				AF60556D27839082006B2D04 /* XCRemoteSwiftPackageReference "citywalls-crawler" */,
-				AF76D06727ABDE3400AFE6C8 /* XCRemoteSwiftPackageReference "BottomSheet" */,
 			);
 			productRefGroup = AF82DCF0244C77A300CE8B95 /* Products */;
 			projectDirPath = "";
@@ -616,14 +612,6 @@
 				kind = branch;
 			};
 		};
-		AF76D06727ABDE3400AFE6C8 /* XCRemoteSwiftPackageReference "BottomSheet" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/joomcode/BottomSheet";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		AF82DD08244C8A3500CE8B95 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
@@ -653,11 +641,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AF60556A27838E82006B2D04 /* XCRemoteSwiftPackageReference "instantsearch-ios" */;
 			productName = InstantSearch;
-		};
-		AF76D06827ABDE3400AFE6C8 /* BottomSheet */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AF76D06727ABDE3400AFE6C8 /* XCRemoteSwiftPackageReference "BottomSheet" */;
-			productName = BottomSheet;
 		};
 		AF82DD09244C8A3500CE8B95 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
