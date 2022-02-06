@@ -34,6 +34,10 @@ extension SceneDelegate {
     phoneViewController.overlayViewController.didTapFilterButton = { _ in
       filterHelper.presentFilters()
     }
+    searchViewModel.searcher.onResults.subscribePast(with: phoneViewController.overlayViewController) { (vc, response) in
+      vc.setHitsCount(response.searchStats.totalHitsCount)
+    }.onQueue(.main)
+    
     filterHelper.sourceViewController = phoneViewController
     searchViewModel.configure(phoneViewController.overlayViewController.searchTextField)
     let navigationController = UINavigationController(rootViewController: phoneViewController)    

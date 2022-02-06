@@ -23,6 +23,7 @@
 		AF76D06E27AE7FF900AFE6C8 /* SearchOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D06D27AE7FF900AFE6C8 /* SearchOverlayViewController.swift */; };
 		AF76D07027AE86BD00AFE6C8 /* PhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D06F27AE86BD00AFE6C8 /* PhoneViewController.swift */; };
 		AF76D07227AFC36300AFE6C8 /* HandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D07127AFC36300AFE6C8 /* HandleView.swift */; };
+		AF76D07427AFD01600AFE6C8 /* HitsCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D07327AFD01600AFE6C8 /* HitsCountView.swift */; };
 		AF7943D4253B925B006CEB2B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943D3253B925B006CEB2B /* FilterViewController.swift */; };
 		AF7943DE253C49D2006CEB2B /* BuldingHitsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943DD253C49D2006CEB2B /* BuldingHitsListViewController.swift */; };
 		AF7943E1253C4A36006CEB2B /* BuildingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943E0253C4A36006CEB2B /* BuildingTableViewCell.swift */; };
@@ -70,6 +71,7 @@
 		AF76D06D27AE7FF900AFE6C8 /* SearchOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOverlayViewController.swift; sourceTree = "<group>"; };
 		AF76D06F27AE86BD00AFE6C8 /* PhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewController.swift; sourceTree = "<group>"; };
 		AF76D07127AFC36300AFE6C8 /* HandleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleView.swift; sourceTree = "<group>"; };
+		AF76D07327AFD01600AFE6C8 /* HitsCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitsCountView.swift; sourceTree = "<group>"; };
 		AF7943D3253B925B006CEB2B /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		AF7943DD253C49D2006CEB2B /* BuldingHitsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuldingHitsListViewController.swift; sourceTree = "<group>"; };
 		AF7943E0253C4A36006CEB2B /* BuildingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingTableViewCell.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				AFFA76C32558340200578914 /* HitAnnotationView.swift */,
 				AFF4F6792783BFC50054100B /* NoResultsView.swift */,
 				AF76D07127AFC36300AFE6C8 /* HandleView.swift */,
+				AF76D07327AFD01600AFE6C8 /* HitsCountView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				AF60557727839BD6006B2D04 /* BuildingTableViewCell+Building.swift in Sources */,
 				AFFE9E5E25FE813E000C3AC9 /* HitsPresentationMode.swift in Sources */,
 				AFE9BFFE25FD57A700BF0E2D /* SearchViewModel.swift in Sources */,
+				AF76D07427AFD01600AFE6C8 /* HitsCountView.swift in Sources */,
 				AF76D07227AFC36300AFE6C8 /* HandleView.swift in Sources */,
 				AF82DD0C244CB54B00CE8B95 /* Builder.swift in Sources */,
 				AF6F4FF0260803F500408DF7 /* SceneDelegate+Pad.swift in Sources */,

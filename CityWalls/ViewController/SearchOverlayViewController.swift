@@ -16,25 +16,29 @@ class SearchOverlayViewController: UIViewController {
   var didTapFilterButton: ((UIButton) -> Void)?
   
   var compactHeight: CGFloat {
-    return handleViewHeight + searchBarHeight + placeholderHeight
+    return handleViewHeight + searchBarHeight + hitsCountViewHeight
+  }
+  
+  func setHitsCount(_ hitsCount: Int) {
+    self.hitsCountView.countLabel.text = "Зданий: \(hitsCount)"
   }
 
   private let stackView: UIStackView
   private let handleView: UIView
   private let searchBarContainer: UIStackView
-  private let placeHolderView: UIView
+  private let hitsCountView: HitsCountView
   private let backgroundView: UIVisualEffectView
   private let filterButton: UIButton
   
   private let handleViewHeight: CGFloat = 14
   private let searchBarHeight: CGFloat = 36
-  private let placeholderHeight: CGFloat = 40
+  private let hitsCountViewHeight: CGFloat = 40
     
   init(childViewController: UIViewController) {
     self.stackView = UIStackView()
     self.handleView = HandleView()
     self.searchBarContainer = UIStackView()
-    self.placeHolderView = UIView()
+    self.hitsCountView = HitsCountView()
     self.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .prominent))
     self.searchTextField = .init()
     self.childViewController = childViewController
@@ -52,7 +56,6 @@ class SearchOverlayViewController: UIViewController {
     super.viewDidLoad()
     setupLayout()
   }
-  
   
   fileprivate func setupLayout() {
     
@@ -87,7 +90,8 @@ class SearchOverlayViewController: UIViewController {
     searchBarContainer.alignment = .center
     
     // Configure placeholder view
-    placeHolderView.translatesAutoresizingMaskIntoConstraints = false
+    hitsCountView.translatesAutoresizingMaskIntoConstraints = false
+    hitsCountView.countLabel.text = "100500 hits"
     
     // Configure child view
     let childView = childViewController.view!
@@ -105,12 +109,12 @@ class SearchOverlayViewController: UIViewController {
       filterButton.heightAnchor.constraint(equalToConstant: 28),
       handleView.heightAnchor.constraint(equalToConstant: handleViewHeight),
       searchBarContainer.heightAnchor.constraint(equalToConstant: searchBarHeight),
-      placeHolderView.heightAnchor.constraint(equalToConstant: placeholderHeight)
+      hitsCountView.heightAnchor.constraint(equalToConstant: hitsCountViewHeight)
     )
     
     stackView.addArrangedSubview(handleView)
     stackView.addArrangedSubview(searchBarContainer)
-    stackView.addArrangedSubview(placeHolderView)
+    stackView.addArrangedSubview(hitsCountView)
     stackView.addArrangedSubview(childViewController.view)
   }
   
