@@ -26,7 +26,7 @@ class SearchViewModel {
 
     searcher.connectFilterState(filterState)
 
-    searcher.request.query.hitsPerPage = 100
+    searcher.request.query.hitsPerPage = 300
   }
   
   func configure(_ textField: UISearchTextField) {

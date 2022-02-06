@@ -91,7 +91,6 @@ class SearchViewController: UIViewController {
     
     // Configure placeholder view
     hitsCountView.translatesAutoresizingMaskIntoConstraints = false
-    hitsCountView.countLabel.text = "100500 hits"
     
     // Configure child view
     let childView = childViewController.view!
