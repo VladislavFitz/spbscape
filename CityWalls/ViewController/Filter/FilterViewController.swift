@@ -57,8 +57,6 @@ class FilterViewController: UIViewController {
     self.queryInputInteractor = queryInputInteractor
     
     super.init(nibName: nil, bundle: nil)
-        
-    searchController.hidesNavigationBarDuringPresentation = false
     navigationItem.searchController = searchController
     navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .done, target: self, action: #selector(dismissViewController))
     let clearFiltersBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .done, target: self, action: #selector(resetFilters))
@@ -76,11 +74,13 @@ class FilterViewController: UIViewController {
         .allSatisfy { $0 }
       clearFiltersBarButtonItem.isEnabled = hasAppliedFilter
     }.onQueue(.main)
+    
     let hasAppliedFilter = !FilterSection.allCases
       .map(\.attribute.rawValue)
       .map { filterState[or: $0] as OrGroupAccessor<Filter.Facet> }
       .map(\.isEmpty)
       .allSatisfy { $0 }
+    
     clearFiltersBarButtonItem.isEnabled = hasAppliedFilter
     
     addChild(resultsViewController)
@@ -95,25 +95,21 @@ class FilterViewController: UIViewController {
     super.viewDidLoad()
     title = "Фильтры"
     view.backgroundColor = .systemBackground
+    navigationController?.isToolbarHidden = false
+
+    searchController.hidesNavigationBarDuringPresentation = false
     searchController.searchBar.showsScopeBar = true
-    view.addSubview(resultsViewController.view)
-    resultsViewController.view.pin(to: view)
     searchController.isActive = true
-    searchController.searchBar.showsCancelButton = true
+    searchController.searchBar.showsCancelButton = false
     searchController.searchBar.scopeButtonTitles = FilterSection.allCases.map(\.title)
     searchController.searchBar.delegate = self
+    
+    view.addSubview(resultsViewController.view)
+    resultsViewController.view.pin(to: view)
+    
     queryInputInteractor.onQueryChanged.fire(nil)
-    navigationController?.isToolbarHidden = false
   }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-  }
-  
+    
   @objc private func resetFilters() {
     (filterState[or: FilterSection.architect.attribute.rawValue] as OrGroupAccessor<Filter.Facet>).removeAll()
     (filterState[or: FilterSection.style.attribute.rawValue] as OrGroupAccessor<Filter.Facet>).removeAll()
@@ -121,8 +117,7 @@ class FilterViewController: UIViewController {
     filterState.notifyChange()
   }
   
-  @objc
-  private func dismissViewController() {
+  @objc private func dismissViewController() {
     navigationController?.dismiss(animated: true, completion: nil)
   }
   
