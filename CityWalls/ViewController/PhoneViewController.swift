@@ -66,14 +66,10 @@ class PhoneViewController: UIViewController {
     super.viewWillTransition(to: size, with: coordinator)
     coordinator.animate(alongsideTransition: { _ in
       self.set(self.state, animated: false)
+      self.view.layoutIfNeeded()
     }, completion: nil)
   }
-  
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    set(state, animated: true)
-  }
-  
+    
   private var initialHeight: CGFloat = 0
   
   var threshold: CGFloat {
