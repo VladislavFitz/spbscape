@@ -18,8 +18,11 @@ extension SceneDelegate {
     
     filterHelper.sourceViewController = mapHitsViewController
     
-    let sidebarViewController = SidebarViewConttroller(contentController: listHitsViewController)
-    searchViewModel.configure(sidebarViewController.searchBar)
+    let sidebarViewController = SearchViewController(childViewController: listHitsViewController)
+    sidebarViewController.handleView.isHidden = true
+    sidebarViewController.hitsCountView.isHidden = true
+    sidebarViewController.filterButton.isHidden = true
+    searchViewModel.configure(sidebarViewController.searchTextField)
         
     let splitViewController: UISplitViewController
     if #available(macCatalyst 14.0, iOS 14.0, *) {
@@ -32,11 +35,13 @@ extension SceneDelegate {
     } else {
       splitViewController = .init()
       splitViewController.viewControllers = [
-        UINavigationController(rootViewController: sidebarViewController),
+        sidebarViewController,
+//        UINavigationController(rootViewController: sidebarViewController),
         UINavigationController(rootViewController: mapHitsViewController)
       ]
     }
     
+    sidebarViewController.navigationController?.isNavigationBarHidden = true
     // For macOS a system toolbar presented, for iPadOS a classic navigation bar
     #if targetEnvironment(macCatalyst)
     mapHitsViewController.navigationController?.isNavigationBarHidden = true

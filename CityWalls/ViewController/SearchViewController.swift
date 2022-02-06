@@ -24,11 +24,11 @@ class SearchViewController: UIViewController {
   }
 
   private let stackView: UIStackView
-  private let handleView: UIView
+  let handleView: UIView
   private let searchBarContainer: UIStackView
-  private let hitsCountView: HitsCountView
+  let hitsCountView: HitsCountView
   private let backgroundView: UIVisualEffectView
-  private let filterButton: UIButton
+  let filterButton: UIButton
   
   private let handleViewHeight: CGFloat = 14
   private let searchBarHeight: CGFloat = 36
