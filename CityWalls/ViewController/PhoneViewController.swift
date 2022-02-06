@@ -9,20 +9,18 @@
 import Foundation
 import UIKit
 
-class PhoneViewController: UIViewController, OverlayStateProvider {
+class PhoneViewController: UIViewController {
   
   let listViewController: BuldingHitsListViewController
   let mapViewController: UIViewController
   let overlayViewController: SearchOverlayViewController
-  var transitionCoordiantor: TransitionCoordinator!
-  var constraint: NSLayoutConstraint!
+  var heightConstraint: NSLayoutConstraint!
   
   init(listViewController: BuldingHitsListViewController, mapViewController: UIViewController) {
     self.listViewController = listViewController
     self.mapViewController = mapViewController
     self.overlayViewController = .init(childViewController: listViewController)
     super.init(nibName: nil, bundle: nil)
-    transitionCoordiantor = TransitionCoordinator(stateProvider: self)
     for viewController in [mapViewController, overlayViewController] {
       addChild(viewController)
       viewController.didMove(toParent: self)
@@ -47,66 +45,103 @@ class PhoneViewController: UIViewController, OverlayStateProvider {
     let overlayView = overlayViewController.view!
     overlayView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(overlayView)
-    constraint = overlayView.topAnchor.constraint(equalTo: view.bottomAnchor, constant: state.offset)
-    constraint.isActive = true
+    heightConstraint = overlayView.heightAnchor.constraint(equalToConstant: overlayViewController.compactHeight)
     activate(
+      heightConstraint,
       overlayView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       overlayView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      overlayView.heightAnchor.constraint(equalToConstant: 770)
+      overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: bottomOffset)
     )
     overlayViewController.searchTextField.delegate = self
+    state = .compact
   }
-  
+    
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    let panGestureRecognizer = UIPanGestureRecognizer(target: transitionCoordiantor, action: #selector(transitionCoordiantor.didPan(recognizer:)))
+    let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(recognizer:)))
     overlayViewController.view.addGestureRecognizer(panGestureRecognizer)
   }
   
-  enum OverlayState: Equatable {
-    
-    case fullScreen
-    case bottom
-    case custom(CGFloat)
-    
-    var offset: CGFloat {
-      switch self {
-      case .fullScreen:
-        return -720
-      case .bottom:
-        return -84
-      case .custom(let offset):
-        return offset
+  private var initialHeight: CGFloat = 0
+  
+  var threshold: CGFloat {
+    return view.bounds.height / 2 + overlayViewController.compactHeight
+  }
+  
+  @objc func didPan(recognizer: UIPanGestureRecognizer) {
+    switch recognizer.state {
+    case .began:
+      initialHeight = heightConstraint.constant
+
+    case .changed:
+      let translationY = recognizer.translation(in: recognizer.view).y
+      let newHeight = initialHeight - translationY
+      set(.custom(newHeight), animated: false)
+
+    case .ended:
+      if heightConstraint.constant > threshold {
+        set(.fullScreen, animated: true)
+      } else {
+        set(.compact, animated: true)
       }
+    case .cancelled, .failed:
+      break
+
+    default:
+      break
     }
-    
-    static let threshold: CGFloat = -450
-    
   }
   
-  var state: OverlayState = .bottom {
+  enum OverlayState: Equatable {
+    case fullScreen
+    case compact
+    case custom(CGFloat)
+  }
+  
+  let bottomOffset: CGFloat = 90
+  
+  var fullscreenOverlayHeight: CGFloat {
+    return view.bounds.height - view.safeAreaInsets.top + bottomOffset
+  }
+  
+  var compactOverlayHeight: CGFloat {
+    return overlayViewController.compactHeight + bottomOffset
+  }
+  
+  var state: OverlayState = .compact {
     didSet {
-      constraint.constant = state.offset
+      heightConstraint.constant = overlayHeight(for: state)
     }
   }
   
+  func overlayHeight(for state: OverlayState) -> CGFloat {
+    switch state {
+    case .fullScreen:
+      return fullscreenOverlayHeight
+    case .compact:
+      return compactOverlayHeight
+    case .custom(let height):
+      return height
+    }
+  }
+
   func set(_ state: OverlayState, animated: Bool) {
     self.state = state
     guard animated else {
-      if state == .bottom, overlayViewController.searchTextField.isEditing {
+      if case .custom(let height) = state, height < threshold, overlayViewController.searchTextField.isEditing {
+        overlayViewController.searchTextField.endEditing(true)
+      } else if state == .compact, overlayViewController.searchTextField.isEditing {
         overlayViewController.searchTextField.endEditing(true)
       }
       return
     }
-    let animator = UIViewPropertyAnimator(duration: 0.2, curve: .easeOut)
+    let animator = UIViewPropertyAnimator(duration: 0.4, curve: .easeInOut)
     animator.addAnimations {
       self.view.layoutIfNeeded()
     }
-    if state == .bottom {
+    if state == .compact, overlayViewController.searchTextField.isEditing {
       animator.addCompletion { _ in
-        if self.overlayViewController.searchTextField.isEditing {
           self.overlayViewController.searchTextField.endEditing(true)
-        }
       }
     }
     animator.startAnimation()
@@ -117,51 +152,8 @@ class PhoneViewController: UIViewController, OverlayStateProvider {
 extension PhoneViewController: UITextFieldDelegate {
   
   func textFieldDidBeginEditing(_ textField: UITextField) {
-    if state == .bottom {
+    if state == .compact {
       set(.fullScreen, animated: true)
-    }
-  }
-  
-}
-
-protocol OverlayStateProvider {
-  
-  var state: PhoneViewController.OverlayState { get set }
-  
-  func set(_ state: PhoneViewController.OverlayState, animated: Bool)
-
-}
-
-class TransitionCoordinator: NSObject {
-  
-  var stateProvider: OverlayStateProvider
-  private var initialPosition: CGFloat = 0
-
-  init(stateProvider: OverlayStateProvider) {
-    self.stateProvider = stateProvider
-  }
-    
-  @objc func didPan(recognizer: UIPanGestureRecognizer) {
-    switch recognizer.state {
-    case .began:
-      initialPosition = stateProvider.state.offset
-
-    case .changed:
-      let translationY = recognizer.translation(in: recognizer.view).y
-      let newPosition = initialPosition + translationY
-      stateProvider.state = .custom(newPosition)
-
-    case .ended:
-      if stateProvider.state.offset < PhoneViewController.OverlayState.threshold {
-        stateProvider.set(.fullScreen, animated: true)
-      } else {
-        stateProvider.set(.bottom, animated: true)
-      }
-    case .cancelled, .failed:
-      break
-
-    default:
-      break
     }
   }
   

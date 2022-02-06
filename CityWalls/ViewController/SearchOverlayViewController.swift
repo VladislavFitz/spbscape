@@ -14,17 +14,25 @@ class SearchOverlayViewController: UIViewController {
   let searchTextField: UISearchTextField
   let childViewController: UIViewController
   var didTapFilterButton: ((UIButton) -> Void)?
+  
+  var compactHeight: CGFloat {
+    return handleViewHeight + searchBarHeight + placeholderHeight
+  }
 
   private let stackView: UIStackView
-  private let topView: UIView
+  private let handleView: UIView
   private let searchBarContainer: UIStackView
   private let placeHolderView: UIView
   private let backgroundView: UIVisualEffectView
   private let filterButton: UIButton
   
+  private let handleViewHeight: CGFloat = 14
+  private let searchBarHeight: CGFloat = 36
+  private let placeholderHeight: CGFloat = 40
+    
   init(childViewController: UIViewController) {
     self.stackView = UIStackView()
-    self.topView = UIView()
+    self.handleView = HandleView()
     self.searchBarContainer = UIStackView()
     self.placeHolderView = UIView()
     self.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .prominent))
@@ -43,8 +51,8 @@ class SearchOverlayViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupLayout()
-
   }
+  
   
   fileprivate func setupLayout() {
     
@@ -66,8 +74,8 @@ class SearchOverlayViewController: UIViewController {
     backgroundView.layer.cornerRadius = 10
     backgroundView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
     
-    // Configure top view
-    topView.translatesAutoresizingMaskIntoConstraints = false
+    // Configure handle view
+    handleView.translatesAutoresizingMaskIntoConstraints = false
 
     // Configure search text field
     searchTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -95,12 +103,12 @@ class SearchOverlayViewController: UIViewController {
     activate(
       filterButton.widthAnchor.constraint(equalToConstant: 28),
       filterButton.heightAnchor.constraint(equalToConstant: 28),
-      topView.heightAnchor.constraint(equalToConstant: 12),
-      searchBarContainer.heightAnchor.constraint(equalToConstant: 44),
-      placeHolderView.heightAnchor.constraint(equalToConstant: 40)
+      handleView.heightAnchor.constraint(equalToConstant: handleViewHeight),
+      searchBarContainer.heightAnchor.constraint(equalToConstant: searchBarHeight),
+      placeHolderView.heightAnchor.constraint(equalToConstant: placeholderHeight)
     )
     
-    stackView.addArrangedSubview(topView)
+    stackView.addArrangedSubview(handleView)
     stackView.addArrangedSubview(searchBarContainer)
     stackView.addArrangedSubview(placeHolderView)
     stackView.addArrangedSubview(childViewController.view)
