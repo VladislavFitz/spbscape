@@ -35,7 +35,7 @@ class FilterViewController: UIViewController {
     let viewControllers: [FacetListViewController] = FilterSection.allCases.map { _ in .init(style: .plain) }
     
     resultsViewController = ContainerViewController(viewControllers: viewControllers)
-    searchController = UISearchController(searchResultsController: resultsViewController)
+    searchController = UISearchController(searchResultsController: nil)
     
     let queryInputInteractor = QueryInputInteractor()
     queryInputController = .init(searchBar: searchController.searchBar)
@@ -57,6 +57,7 @@ class FilterViewController: UIViewController {
     self.queryInputInteractor = queryInputInteractor
     
     super.init(nibName: nil, bundle: nil)
+        
     searchController.hidesNavigationBarDuringPresentation = false
     navigationItem.searchController = searchController
     navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .done, target: self, action: #selector(dismissViewController))
@@ -81,6 +82,9 @@ class FilterViewController: UIViewController {
       .map(\.isEmpty)
       .allSatisfy { $0 }
     clearFiltersBarButtonItem.isEnabled = hasAppliedFilter
+    
+    addChild(resultsViewController)
+    resultsViewController.didMove(toParent: self)
   }
     
   required init?(coder: NSCoder) {
@@ -92,9 +96,8 @@ class FilterViewController: UIViewController {
     title = "Фильтры"
     view.backgroundColor = .systemBackground
     searchController.searchBar.showsScopeBar = true
-//    searchController.automaticallyShowsSearchResultsController = false
-//    searchController.obscuresBackgroundDuringPresentation = false
-    searchController.showsSearchResultsController = true
+    view.addSubview(resultsViewController.view)
+    resultsViewController.view.pin(to: view)
     searchController.isActive = true
     searchController.searchBar.showsCancelButton = true
     searchController.searchBar.scopeButtonTitles = FilterSection.allCases.map(\.title)
@@ -105,7 +108,10 @@ class FilterViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    searchController.isActive = true
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
   }
   
   @objc private func resetFilters() {

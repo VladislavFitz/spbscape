@@ -62,6 +62,18 @@ class PhoneViewController: UIViewController {
     overlayViewController.view.addGestureRecognizer(panGestureRecognizer)
   }
   
+  override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    super.viewWillTransition(to: size, with: coordinator)
+    coordinator.animate(alongsideTransition: { _ in
+      self.set(self.state, animated: false)
+    }, completion: nil)
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    set(state, animated: true)
+  }
+  
   private var initialHeight: CGFloat = 0
   
   var threshold: CGFloat {
