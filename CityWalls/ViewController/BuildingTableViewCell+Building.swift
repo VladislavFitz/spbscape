@@ -16,9 +16,9 @@ extension BuildingTableViewCell {
   func configureWith(_ building: Building) {
     buildingImageView.sd_setImage(with: building.photos.first?.url)
     titleLabel.text = building.titles.first
-    architectsLabel.text = "Архитекторы: " + building.architects.map(\.title).joined(separator: ", ")
-    constructionYearsLabel.text = "Годы постройки: " + building.constructionYears.map(\.description).joined(separator: ", ")
-    stylesLabel.text = "Стили: " + building.styles.map(\.title).joined(separator: ", ")
+    architectsLabel.text = "\("architects".localize()): " + building.architects.map(\.title).joined(separator: ", ")
+    constructionYearsLabel.text = "\("yearsOfConstruction".localize()): " + building.constructionYears.map(\.description).joined(separator: ", ")
+    stylesLabel.text = "\("styles".localize()): " + building.styles.map(\.title).joined(separator: ", ")
     addressLabel.text = /*"Адрес: " +*/ building.addresses.map(\.description).joined(separator: ", ")
   }
   
@@ -28,11 +28,11 @@ extension BuildingTableViewCell {
     if case .array(let titles) = buildingHit.highlightResult?.value(forKey: "titles") {
       titleLabel.attributedText = NSAttributedString(highlightResult: titles.first!.value!, attributes: [.foregroundColor: ColorScheme.tintColor])
     } else {
-      titleLabel.text = building.titles.first
+      titleLabel.text = building.titles.first?.applyingTransform(.toLatin, reverse: false)
     }
-    architectsLabel.text = "Архитекторы: " + building.architects.map(\.title).joined(separator: ", ")
-    constructionYearsLabel.text = "Годы постройки: " + building.constructionYears.map(\.description).joined(separator: ", ")
-    stylesLabel.text = "Стили: " + building.styles.map(\.title).joined(separator: ", ")
+    architectsLabel.text = "\("architects".localize()): " + building.architects.map(\.title).joined(separator: ", ")
+    constructionYearsLabel.text = "\("yearsOfConstruction".localize()): " + building.constructionYears.map(\.description).joined(separator: ", ")
+    stylesLabel.text = "\("styles".localize()): " + building.styles.map(\.title).joined(separator: ", ")
     if case .array(let addresses) = buildingHit.highlightResult?.value(forKey: "addresses"), !addresses.isEmpty {
       addressLabel.attributedText = addresses.compactMap { address in
         if case .dictionary(let addressDict) = address {

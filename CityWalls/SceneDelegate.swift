@@ -8,6 +8,7 @@
 
 import UIKit
 import Combine
+import AlgoliaSearchClient
 
 struct ColorScheme {
   static let tintColor = UIColor(red: 253/255, green: 184/255, blue: 19/255, alpha: 1)
@@ -104,8 +105,10 @@ extension SceneDelegate {
     mapHitsViewController.mapView.showsUserLocation = true
     mapHitsViewController.didChangeVisibleRegion = { [weak searchViewModel, weak mapHitsViewController] visibleRect, byUser in
       guard let searchViewModel = searchViewModel, byUser else { return }
-      if let centerCoordinate = mapHitsViewController?.mapView.centerCoordinate {
-        searchViewModel.searcher.request.query.aroundLatLng = .init(.init(centerCoordinate))
+      if let mapRect = mapHitsViewController?.mapView.visibleMapRect {
+        searchViewModel.searcher.request.query.insideBoundingBox = [
+          BoundingBox(mapRect)
+        ]
       }
       searchViewModel.searcher.request.query.aroundRadius = .all
       searchViewModel.searcher.search()

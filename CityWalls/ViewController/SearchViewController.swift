@@ -16,11 +16,14 @@ class SearchViewController: UIViewController {
   var didTapFilterButton: ((UIButton) -> Void)?
   
   var compactHeight: CGFloat {
-    return handleViewHeight + searchBarHeight + hitsCountViewHeight
+    handleViewHeight +
+    searchBarHeight +
+    hitsCountViewHeight +
+    3 * stackSpacing
   }
   
   func setHitsCount(_ hitsCount: Int) {
-    self.hitsCountView.countLabel.text = "Зданий: \(hitsCount)"
+    self.hitsCountView.countLabel.text = "\("buildings".localize()): \(hitsCount)"
   }
 
   private let stackView: UIStackView
@@ -33,6 +36,7 @@ class SearchViewController: UIViewController {
   private let handleViewHeight: CGFloat = 14
   private let searchBarHeight: CGFloat = 36
   private let hitsCountViewHeight: CGFloat = 40
+  private let stackSpacing: CGFloat = 10
     
   init(childViewController: UIViewController) {
     self.stackView = UIStackView()
@@ -69,7 +73,7 @@ class SearchViewController: UIViewController {
     // Configure stack view
     stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.axis = .vertical
-    stackView.spacing = 0
+    stackView.spacing = stackSpacing
 
     // Configure background view
     backgroundView.translatesAutoresizingMaskIntoConstraints = false
@@ -99,7 +103,7 @@ class SearchViewController: UIViewController {
     view.addSubview(backgroundView)
     backgroundView.pin(to: view)
     backgroundView.contentView.addSubview(stackView)
-    stackView.pin(to: backgroundView, insets: .init(top: 0, left: 10, bottom: 0, right: -10))
+    stackView.pin(to: backgroundView.safeAreaLayoutGuide, insets: .init(top: 5, left: 10, bottom: 0, right: -10))
     searchBarContainer.addArrangedSubview(searchTextField)
     searchBarContainer.addArrangedSubview(filterButton)
     

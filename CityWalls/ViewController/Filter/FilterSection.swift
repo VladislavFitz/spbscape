@@ -17,11 +17,11 @@ enum FilterSection: Int, CaseIterable {
   var title: String {
     switch self {
     case .street:
-      return "Улицы"
+      return "streets".localize()
     case .architect:
-      return "Архитекторы"
+      return "architects".localize()
     case .style:
-      return "Cтили"
+      return "styles".localize()
     }
   }
   

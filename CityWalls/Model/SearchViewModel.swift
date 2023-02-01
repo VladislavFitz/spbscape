@@ -26,11 +26,11 @@ class SearchViewModel {
 
     searcher.connectFilterState(filterState)
 
-    searcher.request.query.hitsPerPage = 300
+    searcher.request.query.hitsPerPage = 100
   }
   
   func configure(_ textField: UISearchTextField) {
-    textField.placeholder = "Название, адрес, архитектор, стиль..."
+    textField.placeholder = "searchPlaceholder".localize()
     textField.addTarget(self, action: #selector(didChangeText(_:)), for: .editingChanged)
     let queryInputController = TextFieldController(textField: textField)
     queryInputConnector.connectController(queryInputController)
@@ -45,10 +45,10 @@ class SearchViewModel {
   }
   
   func hitsCountBarButtonItem() -> UIBarButtonItem {
-    let hitsCountBarButtonItem: UIBarButtonItem = .init(title: "Зданий: 0", style: .done, target: nil, action: nil)
+    let hitsCountBarButtonItem: UIBarButtonItem = .init(title: "\("buildings".localize()): 0", style: .done, target: nil, action: nil)
 
     searcher.onResults.subscribePast(with: hitsCountBarButtonItem) { (hitsCountBarButtonItem, response) in
-      hitsCountBarButtonItem.title = "Зданий: \(response.searchStats.totalHitsCount)"
+      hitsCountBarButtonItem.title = "\("buildings".localize()): \(response.searchStats.totalHitsCount)"
     }.onQueue(.main)
 
     return hitsCountBarButtonItem

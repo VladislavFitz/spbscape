@@ -74,10 +74,10 @@ final class BuildingViewController: UIViewController {
     stackView.addArrangedSubview(imageStackView)
 
     [
-      ("Адрес", building.addresses.map(\.description)),
-      ("Архитекторы", building.architects.map(\.title)),
-      ("Годы постройки", building.constructionYears.map(\.description)),
-      ("Стиль", building.styles.map(\.title)),
+      ("address".localize(), building.addresses.map(\.description)),
+      ("architects".localize(), building.architects.map(\.title)),
+      ("\("yearsOfConstruction".localize())", building.constructionYears.map(\.description)),
+      ("style".localize(), building.styles.map(\.title)),
     ]
       .filter { !$0.1.isEmpty }
       .map { getSV(title: $0.0, values: $0.1) }

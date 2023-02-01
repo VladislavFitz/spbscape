@@ -47,6 +47,8 @@
 		AFB533B725B4FCBF0079EE21 /* ToolbarContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB533B625B4FCBE0079EE21 /* ToolbarContainer.swift */; };
 		AFB533BB25B4FD250079EE21 /* UISearchTextField+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB533BA25B4FD250079EE21 /* UISearchTextField+Convenience.swift */; };
 		AFB533BF25B4FD3F0079EE21 /* UISearchToken+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB533BE25B4FD3F0079EE21 /* UISearchToken+Convenience.swift */; };
+		AFC4C972298A781400BFD6C0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFC4C974298A781400BFD6C0 /* Localizable.strings */; };
+		AFC4C977298A7BE800BFD6C0 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC4C976298A7BE800BFD6C0 /* String+Localization.swift */; };
 		AFE9BFFE25FD57A700BF0E2D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE9BFFD25FD57A700BF0E2D /* SearchViewModel.swift */; };
 		AFE9C00125FD5B3700BF0E2D /* ToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE9C00025FD5B3700BF0E2D /* ToolbarDelegate.swift */; };
 		AFF4F6782783B98F0054100B /* FacetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF4F6772783B98F0054100B /* FacetListViewController.swift */; };
@@ -104,6 +106,10 @@
 		AFB533B625B4FCBE0079EE21 /* ToolbarContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarContainer.swift; sourceTree = "<group>"; };
 		AFB533BA25B4FD250079EE21 /* UISearchTextField+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchTextField+Convenience.swift"; sourceTree = "<group>"; };
 		AFB533BE25B4FD3F0079EE21 /* UISearchToken+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchToken+Convenience.swift"; sourceTree = "<group>"; };
+		AFC4C96F298A77A100BFD6C0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		AFC4C973298A781400BFD6C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AFC4C975298A781800BFD6C0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AFC4C976298A7BE800BFD6C0 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		AFE9BFFD25FD57A700BF0E2D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		AFE9C00025FD5B3700BF0E2D /* ToolbarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDelegate.swift; sourceTree = "<group>"; };
 		AFF4F6772783B98F0054100B /* FacetListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetListViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +203,7 @@
 				AF9895592561ACB500B61F15 /* Petr.gpx */,
 				AF9895582561AC5900B61F15 /* VO.gpx */,
 				AF82DD0B244CB54B00CE8B95 /* Builder.swift */,
+				AFC4C974298A781400BFD6C0 /* Localizable.strings */,
 			);
 			path = CityWalls;
 			sourceTree = "<group>";
@@ -248,6 +255,7 @@
 				AF82DD1D244CB6CE00CE8B95 /* UIViewController+Convenience.swift */,
 				AF82DD20244CB9D600CE8B95 /* UIStackView+Convenience.swift */,
 				AF7943E4253C4C9A006CEB2B /* IndexName+Convenience.swift */,
+				AFC4C976298A7BE800BFD6C0 /* String+Localization.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -323,6 +331,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = AF82DCE6244C77A300CE8B95;
 			packageReferences = (
@@ -345,6 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF98955A2561ACB500B61F15 /* Petr.gpx in Resources */,
+				AFC4C972298A781400BFD6C0 /* Localizable.strings in Resources */,
 				AF82DCFF244C77A500CE8B95 /* LaunchScreen.storyboard in Resources */,
 				AF60557527839640006B2D04 /* Credentials.plist in Resources */,
 				AF98955D2561AD3B00B61F15 /* Center.gpx in Resources */,
@@ -383,6 +393,7 @@
 				AF82DD0E244CB56B00CE8B95 /* GalleryViewController.swift in Sources */,
 				AF82DD1C244CB6C200CE8B95 /* UIView+Convenience.swift in Sources */,
 				AFF4F67A2783BFC50054100B /* NoResultsView.swift in Sources */,
+				AFC4C977298A7BE800BFD6C0 /* String+Localization.swift in Sources */,
 				AFFE9E6525FEAD1E000C3AC9 /* FiltersHelper.swift in Sources */,
 				AF7943D4253B925B006CEB2B /* FilterViewController.swift in Sources */,
 				AFFE9E6225FE9B69000C3AC9 /* CombinedHitsViewController.swift in Sources */,
@@ -409,8 +420,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				AF82DCFE244C77A500CE8B95 /* Base */,
+				AFC4C96F298A77A100BFD6C0 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		AFC4C974298A781400BFD6C0 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AFC4C973298A781400BFD6C0 /* en */,
+				AFC4C975298A781800BFD6C0 /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -420,6 +441,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -480,6 +502,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
