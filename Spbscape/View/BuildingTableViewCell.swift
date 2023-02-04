@@ -78,9 +78,6 @@ class BuildingTableViewCell: UITableViewCell {
     infoStackView.axis = .vertical
     infoStackView.spacing = 5
     infoStackView.addArrangedSubview(titleLabel)
-//    infoStackView.addArrangedSubview(architectsLabel)
-//    infoStackView.addArrangedSubview(constructionYearsLabel)
-//    infoStackView.addArrangedSubview(stylesLabel)
     infoStackView.addArrangedSubview(addressLabel)
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false

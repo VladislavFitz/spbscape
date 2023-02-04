@@ -47,6 +47,7 @@
 		AFC4C972298A781400BFD6C0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFC4C974298A781400BFD6C0 /* Localizable.strings */; };
 		AFC4C977298A7BE800BFD6C0 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC4C976298A7BE800BFD6C0 /* String+Localization.swift */; };
 		AFC4CA35298F014E00BFD6C0 /* SpbscapeCore in Frameworks */ = {isa = PBXBuildFile; productRef = AFC4CA34298F014E00BFD6C0 /* SpbscapeCore */; };
+		AFC4CA37298F1BA400BFD6C0 /* MKCoordinateRegion+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC4CA36298F1BA400BFD6C0 /* MKCoordinateRegion+Convenience.swift */; };
 		AFE9BFFE25FD57A700BF0E2D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE9BFFD25FD57A700BF0E2D /* SearchViewModel.swift */; };
 		AFE9C00125FD5B3700BF0E2D /* ToolbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE9C00025FD5B3700BF0E2D /* ToolbarDelegate.swift */; };
 		AFF4F6782783B98F0054100B /* FacetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF4F6772783B98F0054100B /* FacetListViewController.swift */; };
@@ -105,6 +106,7 @@
 		AFC4C975298A781800BFD6C0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AFC4C976298A7BE800BFD6C0 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		AFC4CA33298F00CC00BFD6C0 /* SpbscapeCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SpbscapeCore; path = ../../spbscape/SpbscapeCore; sourceTree = "<group>"; };
+		AFC4CA36298F1BA400BFD6C0 /* MKCoordinateRegion+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Convenience.swift"; sourceTree = "<group>"; };
 		AFE9BFFD25FD57A700BF0E2D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		AFE9C00025FD5B3700BF0E2D /* ToolbarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDelegate.swift; sourceTree = "<group>"; };
 		AFF4F6772783B98F0054100B /* FacetListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetListViewController.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				AF60557627839BD6006B2D04 /* BuildingTableViewCell+Building.swift */,
 				AFB533BA25B4FD250079EE21 /* UISearchTextField+Convenience.swift */,
 				AFB533BE25B4FD3F0079EE21 /* UISearchToken+Convenience.swift */,
+				AFC4CA36298F1BA400BFD6C0 /* MKCoordinateRegion+Convenience.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				AF82DD10244CB59D00CE8B95 /* BuildingViewController.swift in Sources */,
 				AF7943E1253C4A36006CEB2B /* BuildingTableViewCell.swift in Sources */,
 				AF6D857C2584F83C004D699A /* ContainerViewController.swift in Sources */,
+				AFC4CA37298F1BA400BFD6C0 /* MKCoordinateRegion+Convenience.swift in Sources */,
 				AF6F4FED260803EC00408DF7 /* SceneDelegate+Phone.swift in Sources */,
 				AFE9C00125FD5B3700BF0E2D /* ToolbarDelegate.swift in Sources */,
 				AFFA76C42558340200578914 /* HitAnnotationView.swift in Sources */,

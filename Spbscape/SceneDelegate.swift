@@ -105,10 +105,9 @@ extension SceneDelegate {
     mapHitsViewController.mapView.showsUserLocation = true
     mapHitsViewController.didChangeVisibleRegion = { [weak searchViewModel, weak mapHitsViewController] visibleRect, byUser in
       guard let searchViewModel = searchViewModel, byUser else { return }
-      if let mapRect = mapHitsViewController?.mapView.visibleMapRect {
-        searchViewModel.searcher.request.query.insideBoundingBox = [
-          BoundingBox(mapRect)
-        ]
+      if let mapView = mapHitsViewController?.mapView {
+        searchViewModel.searcher.request.query.aroundPrecision = [.init(from: 0, value: mapView.region.sizeInMeters.h)]
+        searchViewModel.searcher.request.query.aroundLatLng = Point(mapView.centerCoordinate)
       }
       searchViewModel.searcher.request.query.aroundRadius = .all
       searchViewModel.searcher.search()
@@ -125,4 +124,3 @@ extension SceneDelegate {
   }
     
 }
-
