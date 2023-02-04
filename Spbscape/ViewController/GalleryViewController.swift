@@ -92,12 +92,13 @@ class GalleryViewController: UICollectionViewController, UICollectionViewDelegat
   
   override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
     guard let imageCell = cell as? ImageCell else { return }
+    imageCell.imageView.sd_imageIndicator = SDWebImageActivityIndicator.large
     imageCell.imageView.sd_setImage(with: images[indexPath.row], placeholderImage: UIImage(systemName: "photo"))
     imageCell.imageView.contentMode = .scaleAspectFit
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return .init(width: collectionView.bounds.width, height: collectionView.bounds.height/* - collectionView.safeAreaInsets.top - collectionView.safeAreaInsets.bottom*/)
+    return .init(width: collectionView.bounds.width, height: collectionView.bounds.height)
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

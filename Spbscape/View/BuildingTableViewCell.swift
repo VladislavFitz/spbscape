@@ -29,6 +29,7 @@ class BuildingTableViewCell: UITableViewCell {
     addressLabel = .init()
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     setupLayout()
+    buildingImageView.sd_imageIndicator = SDWebImageActivityIndicator.large
     backgroundColor = .clear
     contentView.backgroundColor = .clear
     backgroundView = UIView()
