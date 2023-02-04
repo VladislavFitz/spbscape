@@ -27,20 +27,7 @@ class ContainerViewController: UIViewController {
   }
   
   func setVisibleViewController(atIndex index: Int) {
-//    guard index < viewControllers.count else { return }
-//    let viewControllerToPresent = viewControllers[index]
-//    viewControllerToPresent.modalPresentationStyle = .currentContext
-//    if let presentedViewController = presentedViewController {
-//      if presentedViewController == viewControllerToPresent {
-//        return
-//      }
-//      presentedViewController.dismiss(animated: false) {
-//        self.present(viewControllerToPresent, animated: false, completion: nil)
-//      }
-//    } else {
-//      present(viewControllerToPresent, animated: false, completion: nil)
-//    }
-    self.viewControllers
+    viewControllers
       .map(\.view)
       .enumerated()
       .forEach { viewIndex, view in
