@@ -69,10 +69,7 @@ class BuildingTableViewCell: UITableViewCell {
     )
     mainStackView.addArrangedSubview(imageStackView)
     imageStackView.axis = .vertical
-    let phView = UIView()
-    phView.translatesAutoresizingMaskIntoConstraints = false
     imageStackView.addArrangedSubview(buildingImageView)
-    imageStackView.addArrangedSubview(phView)
     
     mainStackView.addArrangedSubview(infoStackView)
     infoStackView.axis = .vertical

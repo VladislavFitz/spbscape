@@ -12,19 +12,10 @@ import InstantSearchCore
 import SpbscapeCore
 
 extension BuildingTableViewCell {
-  
-  func configureWith(_ building: Building) {
-    buildingImageView.sd_setImage(with: building.photos.first?.url)
-    titleLabel.text = building.titles.first
-    architectsLabel.text = "\("architects".localize()): " + building.architects.map(\.title).joined(separator: ", ")
-    constructionYearsLabel.text = "\("yearsOfConstruction".localize()): " + building.constructionYears.map(\.description).joined(separator: ", ")
-    stylesLabel.text = "\("styles".localize()): " + building.styles.map(\.title).joined(separator: ", ")
-    addressLabel.text = /*"Адрес: " +*/ building.addresses.map(\.description).joined(separator: ", ")
-  }
-  
+    
   func configureWith(_ buildingHit: Hit<Building>) {
     let building = buildingHit.object
-    buildingImageView.sd_setImage(with: building.photos.first?.url)
+    buildingImageView.sd_setImage(with: building.photos.first?.url, placeholderImage: UIImage(systemName: "photo"))
     if case .array(let titles) = buildingHit.highlightResult?.value(forKey: "titles") {
       titleLabel.attributedText = NSAttributedString(highlightResult: titles.first!.value!, attributes: [.foregroundColor: ColorScheme.tintColor])
     } else {
