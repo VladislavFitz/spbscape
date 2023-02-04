@@ -103,7 +103,7 @@ class SearchViewController: UIViewController {
     view.addSubview(backgroundView)
     backgroundView.pin(to: view)
     backgroundView.contentView.addSubview(stackView)
-    stackView.pin(to: backgroundView.safeAreaLayoutGuide, insets: .init(top: 5, left: 10, bottom: 0, right: -10))
+    stackView.pin(to: backgroundView, insets: .init(top: 5, left: 10, bottom: 0, right: -10))
     searchBarContainer.addArrangedSubview(searchTextField)
     searchBarContainer.addArrangedSubview(filterButton)
     

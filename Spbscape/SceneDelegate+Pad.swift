@@ -286,7 +286,6 @@ class SidebarOverlayPresentationController: UIPresentationController {
       presentedViewController.view.leadingAnchor.constraint(equalTo: container.leadingAnchor),
     ])
 
-//    container.backgroundColor = .green
     container.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
       container.widthAnchor.constraint(equalTo: presentingViewController.view.widthAnchor, multiplier: 0.3),
