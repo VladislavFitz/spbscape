@@ -93,7 +93,7 @@ class FilterViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = "Фильтры"
+    title = "filters".localize()
     view.backgroundColor = .systemBackground
     navigationController?.isToolbarHidden = false
 

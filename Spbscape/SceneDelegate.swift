@@ -40,7 +40,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         titlebar.toolbar = toolbar
         titlebar.toolbarStyle = .automatic
       }
-      windowScene.title = "Санкт-Петербург"
+      windowScene.title = "saint-petersburg".localize()
     }
     #endif
 
