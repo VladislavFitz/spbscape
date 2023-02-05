@@ -13,10 +13,18 @@ extension UIImage {
   
   func resizeImageTo(size: CGSize) -> UIImage? {
     UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
-    self.draw(in: CGRect(origin: CGPoint.zero, size: size))
+    draw(in: CGRect(origin: CGPoint.zero, size: size))
     let resizedImage = UIGraphicsGetImageFromCurrentImageContext()!
     UIGraphicsEndImageContext()
     return resizedImage
   }
   
+}
+
+extension UIImage {
+  static var placeholder: UIImage {
+    UIImage(systemName: "photo")!
+      .resizeImageTo(size: CGSize(width: 138, height: 108))!
+      .withTintColor(.lightGray)
+  }
 }

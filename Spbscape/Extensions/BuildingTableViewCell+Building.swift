@@ -15,7 +15,7 @@ extension BuildingTableViewCell {
     
   func configureWith(_ buildingHit: Hit<Building>) {
     let building = buildingHit.object
-    buildingImageView.sd_setImage(with: building.photos.first?.url, placeholderImage: UIImage(systemName: "photo"))
+    buildingImageView.sd_setImage(with: building.photos.first?.url, placeholderImage: .placeholder)
     if case .array(let titles) = buildingHit.highlightResult?.value(forKey: "titles") {
       titleLabel.attributedText = NSAttributedString(highlightResult: titles.first!.value!, attributes: [.foregroundColor: ColorScheme.primaryColor])
     } else {
