@@ -81,7 +81,7 @@ class SearchViewController: UIViewController {
     backgroundView.translatesAutoresizingMaskIntoConstraints = false
     backgroundView.clipsToBounds = true
     if style == .overlay {
-      backgroundView.layer.cornerRadius = 15
+      backgroundView.layer.cornerRadius = 12
       backgroundView.layer.maskedCorners = [
         .layerMaxXMinYCorner,
         .layerMinXMinYCorner
