@@ -122,7 +122,7 @@ final class BuildingViewController: UIViewController {
   }
   
   func configureButton() {
-    goToCityWallsButton.setTitle("Перейти на CityWalls", for: .normal)
+    goToCityWallsButton.setTitle("go-to-citywalls".localize(), for: .normal)
     goToCityWallsButton.backgroundColor = ColorScheme.primaryColor
     goToCityWallsButton.layer.cornerRadius = 10
     goToCityWallsButton.addTarget(self, action: #selector(goToCityWalls), for: .touchUpInside)
