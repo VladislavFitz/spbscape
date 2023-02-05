@@ -39,5 +39,16 @@ extension UIView {
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }
+  
+  static func placeHolder(width: CGFloat? = nil, height: CGFloat? = nil) -> UIView {
+    let placeholder = self.placeholder
+    if let width = width {
+      placeholder.widthAnchor.constraint(equalToConstant: width).isActive = true
+    }
+    if let height = height {
+      placeholder.heightAnchor.constraint(equalToConstant: height).isActive = true
+    }
+    return placeholder
+  }
 
 }

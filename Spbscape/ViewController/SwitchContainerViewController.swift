@@ -1,5 +1,5 @@
 //
-//  FilterResultViewController.swift
+//  SwitchContainerViewController.swift
 //  Spbscape
 //
 //  Created by Vladislav Fitc on 12/12/2020.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ContainerViewController: UIViewController {
+class SwitchContainerViewController: UIViewController {
   
   var viewControllers: [UIViewController]
   

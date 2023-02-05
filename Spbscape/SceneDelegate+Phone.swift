@@ -15,7 +15,7 @@ extension SceneDelegate {
                                            mapHitsViewController: BuldingHitsMapViewController,
                                            searchViewModel: SearchViewModel,
                                            filterHelper: FiltersHelper) -> UIViewController {
-    let searchViewController = SearchViewController(childViewController: listHitsViewController)
+    let searchViewController = SearchViewController(childViewController: listHitsViewController, style: .overlay)
     let phoneViewController = CompactViewController(mainViewController: mapHitsViewController,
                                                     overlayViewController: searchViewController,
                                                     compactHeight: searchViewController.compactHeight,

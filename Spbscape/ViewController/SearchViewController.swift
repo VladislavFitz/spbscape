@@ -25,9 +25,10 @@ class SearchViewController: UIViewController {
   func setHitsCount(_ hitsCount: Int) {
     self.hitsCountView.countLabel.text = "\("buildings".localize()): \(hitsCount)"
   }
-
+  
+  var style: Style
   private let stackView: UIStackView
-  let handleView: UIView
+  let handleView: HandleView
   private let searchBarContainer: UIStackView
   let hitsCountView: HitsCountView
   private let backgroundView: UIVisualEffectView
@@ -38,15 +39,16 @@ class SearchViewController: UIViewController {
   private let hitsCountViewHeight: CGFloat = 40
   private let stackSpacing: CGFloat = 10
     
-  init(childViewController: UIViewController) {
+  init(childViewController: UIViewController, style: Style) {
     self.stackView = UIStackView()
     self.handleView = HandleView()
     self.searchBarContainer = UIStackView()
     self.hitsCountView = HitsCountView()
     self.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .prominent))
-    self.searchTextField = .init()
+    self.searchTextField = UISearchTextField()
     self.childViewController = childViewController
     self.filterButton = UIButton()
+    self.style = style
     super.init(nibName: .none, bundle: .none)
     addChild(childViewController)
     childViewController.didMove(toParent: self)
@@ -78,10 +80,16 @@ class SearchViewController: UIViewController {
     // Configure background view
     backgroundView.translatesAutoresizingMaskIntoConstraints = false
     backgroundView.clipsToBounds = true
-    backgroundView.layer.cornerRadius = 10
-    backgroundView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+    if style == .overlay {
+      backgroundView.layer.cornerRadius = 10
+      backgroundView.layer.maskedCorners = [
+        .layerMaxXMinYCorner,
+        .layerMinXMinYCorner
+      ]
+    }
     
     // Configure handle view
+    handleView.handleBar.isHidden = style == .fullscreen
     handleView.translatesAutoresizingMaskIntoConstraints = false
 
     // Configure search text field
@@ -101,11 +109,26 @@ class SearchViewController: UIViewController {
     childView.translatesAutoresizingMaskIntoConstraints = false
 
     view.addSubview(backgroundView)
-    backgroundView.pin(to: view)
+    let topAnchor: NSLayoutYAxisAnchor
+    #if targetEnvironment(macCatalyst)
+    topAnchor = view.safeAreaLayoutGuide.topAnchor
+    #else
+    topAnchor = view.topAnchor
+    #endif
+    activate(
+      backgroundView.topAnchor.constraint(equalTo: topAnchor),
+      backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+      backgroundView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+      backgroundView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+    )
     backgroundView.contentView.addSubview(stackView)
-    stackView.pin(to: backgroundView, insets: .init(top: 5, left: 10, bottom: 0, right: -10))
+    stackView.pin(to: backgroundView,
+                  insets: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0))
+
+    searchBarContainer.addArrangedSubview(.placeHolder(width: 0))
     searchBarContainer.addArrangedSubview(searchTextField)
     searchBarContainer.addArrangedSubview(filterButton)
+    searchBarContainer.addArrangedSubview(.placeHolder(width: 0))
     
     activate(
       filterButton.widthAnchor.constraint(equalToConstant: 28),
@@ -125,4 +148,13 @@ class SearchViewController: UIViewController {
     didTapFilterButton?(filterButton)
   }
 
+}
+
+extension SearchViewController {
+  
+  enum Style {
+    case overlay
+    case fullscreen
+  }
+  
 }

@@ -20,7 +20,7 @@ class FilterViewController: UIViewController {
   let queryInputInteractor: QueryInputInteractor
   let queryInputController: TextFieldController
   
-  let resultsViewController: ContainerViewController
+  let resultsViewController: SwitchContainerViewController
   
   let hitsCountBarButtonItem: UIBarButtonItem
   
@@ -34,7 +34,7 @@ class FilterViewController: UIViewController {
     
     let viewControllers: [FacetListViewController] = FilterSection.allCases.map { _ in .init(style: .plain) }
     
-    resultsViewController = ContainerViewController(viewControllers: viewControllers)
+    resultsViewController = SwitchContainerViewController(viewControllers: viewControllers)
     searchController = UISearchController(searchResultsController: nil)
     
     let queryInputInteractor = QueryInputInteractor()

@@ -29,29 +29,36 @@ final class FiltersHelper {
   @objc
   func presentFilters() {
     guard let sourceViewController = sourceViewController else { return }
-    let filtersViewController = UINavigationController(rootViewController: FilterViewController(filterState: searchViewModel.filterState, hitsCountBarButtonItem: searchViewModel.hitsCountBarButtonItem()))
+    if let presentedViewController = sourceViewController.presentedViewController {
+      presentedViewController.dismiss(animated: true)
+      return
+    }
+    let filterViewController = FilterViewController(filterState: searchViewModel.filterState,
+                                                    hitsCountBarButtonItem: searchViewModel.hitsCountBarButtonItem())
+    let filtersNavigationController = UINavigationController(rootViewController: filterViewController)
     let navigationBarAppearance = UINavigationBarAppearance()
     navigationBarAppearance.configureWithOpaqueBackground()
-    filtersViewController.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+    filtersNavigationController.navigationBar.scrollEdgeAppearance = navigationBarAppearance
     let toolBarAppearance = UIToolbarAppearance()
     toolBarAppearance.configureWithOpaqueBackground()
     if #available(iOS 15.0, *) {
-      filtersViewController.toolbar.scrollEdgeAppearance = toolBarAppearance
+      filtersNavigationController.toolbar.scrollEdgeAppearance = toolBarAppearance
     }
+    
     switch UIDevice.current.userInterfaceIdiom {
     case .pad:
-      filtersViewController.modalPresentationStyle = .popover
-      filtersViewController.preferredContentSize = .init(width: 300, height: 400)
+      filtersNavigationController.modalPresentationStyle = .popover
+      filtersNavigationController.preferredContentSize = .init(width: 300, height: 400)
       #if targetEnvironment(macCatalyst)
-      filtersViewController.popoverPresentationController?.sourceView = sourceViewController.view
-      filtersViewController.popoverPresentationController?.sourceRect = .init(x: sourceViewController.view.bounds.width - 50, y: 20, width: 32, height: 32)
+      filtersNavigationController.popoverPresentationController?.sourceView = sourceViewController.view
+      filtersNavigationController.popoverPresentationController?.sourceRect = .init(x: sourceViewController.view.bounds.width - 50, y: 20, width: 32, height: 32)
       #else
-      filtersViewController.popoverPresentationController?.barButtonItem = filterBarButtonItem
+      filtersNavigationController.popoverPresentationController?.barButtonItem = filterBarButtonItem
       #endif
     default:
       break
     }
     
-    sourceViewController.present(filtersViewController, animated: true, completion: nil)
+    sourceViewController.present(filtersNavigationController, animated: true, completion: nil)
   }
 }
