@@ -23,7 +23,7 @@ class HitAnnotationView: MKMarkerAnnotationView {
     
   func configure(with annotation: MKAnnotation) {
     guard annotation is BuildingAnnotation else { fatalError("Unexpected annotation type: \(annotation)") }
-    markerTintColor = ColorScheme.tintColor
+    markerTintColor = ColorScheme.primaryColor
     glyphImage = UIImage(systemName: "building.2")
     clusteringIdentifier = String(describing: HitAnnotationView.self)
   }
@@ -57,7 +57,7 @@ class BuildingClusterAnnotationView: MKMarkerAnnotationView {
 
   func configure(with annotation: MKAnnotation) {
     guard let clusterAnnotation = annotation as? BuildingClusterAnnotation else { fatalError("Unexpected annotation type: \(annotation)") }
-    markerTintColor = ColorScheme.tintColor
+    markerTintColor = ColorScheme.primaryColor
     glyphText = "\(clusterAnnotation.count)"
     clusteringIdentifier = String(describing: ClusterView.self)
   }

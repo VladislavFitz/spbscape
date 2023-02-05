@@ -17,7 +17,7 @@ extension BuildingTableViewCell {
     let building = buildingHit.object
     buildingImageView.sd_setImage(with: building.photos.first?.url, placeholderImage: UIImage(systemName: "photo"))
     if case .array(let titles) = buildingHit.highlightResult?.value(forKey: "titles") {
-      titleLabel.attributedText = NSAttributedString(highlightResult: titles.first!.value!, attributes: [.foregroundColor: ColorScheme.tintColor])
+      titleLabel.attributedText = NSAttributedString(highlightResult: titles.first!.value!, attributes: [.foregroundColor: ColorScheme.primaryColor])
     } else {
       titleLabel.text = building.titles.first?.applyingTransform(.toLatin, reverse: false)
     }
@@ -27,8 +27,8 @@ extension BuildingTableViewCell {
     if case .array(let addresses) = buildingHit.highlightResult?.value(forKey: "addresses"), !addresses.isEmpty {
       addressLabel.attributedText = addresses.compactMap { address in
         if case .dictionary(let addressDict) = address {
-          let streetName = NSAttributedString(highlightResult: addressDict["streetName"]!.value!, attributes: [.foregroundColor: ColorScheme.tintColor])
-          let buildingIdentifier = NSAttributedString(highlightResult: addressDict["streetBuildingIdentifier"]!.value!, attributes: [.foregroundColor: ColorScheme.tintColor])
+          let streetName = NSAttributedString(highlightResult: addressDict["streetName"]!.value!, attributes: [.foregroundColor: ColorScheme.primaryColor])
+          let buildingIdentifier = NSAttributedString(highlightResult: addressDict["streetBuildingIdentifier"]!.value!, attributes: [.foregroundColor: ColorScheme.primaryColor])
           let addressString = NSMutableAttributedString()
           addressString.append(streetName)
           addressString.append(NSAttributedString(string: ", "))

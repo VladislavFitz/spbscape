@@ -47,7 +47,7 @@ class FacetListViewController: UITableViewController, FacetListController {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
     let selectableRefinement = selectableItems[indexPath.row]
     if let highlightedValue = selectableRefinement.item.highlighted.flatMap(HighlightedString.init) {
-      cell.textLabel?.attributedText = NSAttributedString(highlightedString: highlightedValue, attributes: [.foregroundColor: ColorScheme.tintColor])
+      cell.textLabel?.attributedText = NSAttributedString(highlightedString: highlightedValue, attributes: [.foregroundColor: ColorScheme.primaryColor])
     } else {
       cell.textLabel?.text = selectableRefinement.item.value
     }

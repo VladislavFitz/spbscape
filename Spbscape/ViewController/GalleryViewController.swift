@@ -69,7 +69,7 @@ class GalleryViewController: UICollectionViewController, UICollectionViewDelegat
   }
   
   private func configurePageControl() {
-    pageControl.tintColor = ColorScheme.tintColor
+    pageControl.tintColor = ColorScheme.primaryColor
     pageControl.numberOfPages = images.count
     pageControl.addTarget(self, action: #selector(onPageChange(_:)), for: .valueChanged)
   }
@@ -92,8 +92,8 @@ class GalleryViewController: UICollectionViewController, UICollectionViewDelegat
   
   override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
     guard let imageCell = cell as? ImageCell else { return }
-    imageCell.imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-    imageCell.imageView.sd_setImage(with: images[indexPath.row], placeholderImage: UIImage(systemName: "photo"))
+    imageCell.imageView.sd_imageIndicator = SDWebImageActivityIndicator.large
+    imageCell.imageView.sd_setImage(with: images[indexPath.row])
     imageCell.imageView.contentMode = .scaleAspectFit
   }
   

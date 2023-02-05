@@ -40,6 +40,7 @@
 		AF82DD1E244CB6CE00CE8B95 /* UIViewController+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DD1D244CB6CE00CE8B95 /* UIViewController+Convenience.swift */; };
 		AF82DD21244CB9D600CE8B95 /* UIStackView+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DD20244CB9D600CE8B95 /* UIStackView+Convenience.swift */; };
 		AF82DD26244CBA4300CE8B95 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DD25244CBA4300CE8B95 /* ImageCell.swift */; };
+		AF8E9EC2298FCB3F0066A021 /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9EC1298FCB3F0066A021 /* ColorScheme.swift */; };
 		AF98955A2561ACB500B61F15 /* Petr.gpx in Resources */ = {isa = PBXBuildFile; fileRef = AF9895592561ACB500B61F15 /* Petr.gpx */; };
 		AF98955D2561AD3B00B61F15 /* Center.gpx in Resources */ = {isa = PBXBuildFile; fileRef = AF98955C2561AD3B00B61F15 /* Center.gpx */; };
 		AFB533BB25B4FD250079EE21 /* UISearchTextField+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB533BA25B4FD250079EE21 /* UISearchTextField+Convenience.swift */; };
@@ -96,6 +97,7 @@
 		AF82DD1D244CB6CE00CE8B95 /* UIViewController+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Convenience.swift"; sourceTree = "<group>"; };
 		AF82DD20244CB9D600CE8B95 /* UIStackView+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Convenience.swift"; sourceTree = "<group>"; };
 		AF82DD25244CBA4300CE8B95 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		AF8E9EC1298FCB3F0066A021 /* ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
 		AF9895582561AC5900B61F15 /* VO.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VO.gpx; sourceTree = "<group>"; };
 		AF9895592561ACB500B61F15 /* Petr.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Petr.gpx; sourceTree = "<group>"; };
 		AF98955C2561AD3B00B61F15 /* Center.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Center.gpx; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				AF82DD20244CB9D600CE8B95 /* UIStackView+Convenience.swift */,
 				AF7943E4253C4C9A006CEB2B /* IndexName+Convenience.swift */,
 				AFC4C976298A7BE800BFD6C0 /* String+Localization.swift */,
+				AF8E9EC1298FCB3F0066A021 /* ColorScheme.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF82DD10244CB59D00CE8B95 /* BuildingViewController.swift in Sources */,
+				AF8E9EC2298FCB3F0066A021 /* ColorScheme.swift in Sources */,
 				AF7943E1253C4A36006CEB2B /* BuildingTableViewCell.swift in Sources */,
 				AF6D857C2584F83C004D699A /* ContainerViewController.swift in Sources */,
 				AFC4CA37298F1BA400BFD6C0 /* MKCoordinateRegion+Convenience.swift in Sources */,

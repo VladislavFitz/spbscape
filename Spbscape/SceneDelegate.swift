@@ -10,10 +10,6 @@ import UIKit
 import Combine
 import AlgoliaSearchClient
 
-struct ColorScheme {
-  static let tintColor = UIColor(red: 253/255, green: 184/255, blue: 19/255, alpha: 1)
-}
-
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   var window: UIWindow?
@@ -45,8 +41,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     #endif
 
 
-    UIToolbar.appearance().tintColor = ColorScheme.tintColor
-    window?.tintColor = ColorScheme.tintColor
+    UIToolbar.appearance().tintColor = ColorScheme.primaryColor
+    window?.tintColor = ColorScheme.primaryColor
     window?.rootViewController = SceneDelegate.buildRootViewController(searchViewModel: searchViewModel, filterHelper: filtersHelper)
     window?.makeKeyAndVisible()
 
@@ -56,34 +52,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
               guard let self = self else { return }
             self.filtersHelper.presentFilters()
           })
-  }
-
-  func sceneDidDisconnect(_ scene: UIScene) {
-    // Called as the scene is being released by the system.
-    // This occurs shortly after the scene enters the background, or when its session is discarded.
-    // Release any resources associated with this scene that can be re-created the next time the scene connects.
-    // The scene may re-connect later, as its session was not neccessarily discarded (see `application:didDiscardSceneSessions` instead).
-  }
-
-  func sceneDidBecomeActive(_ scene: UIScene) {
-    // Called when the scene has moved from an inactive state to an active state.
-    // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-  }
-
-  func sceneWillResignActive(_ scene: UIScene) {
-    // Called when the scene will move from an active state to an inactive state.
-    // This may occur due to temporary interruptions (ex. an incoming phone call).
-  }
-
-  func sceneWillEnterForeground(_ scene: UIScene) {
-    // Called as the scene transitions from the background to the foreground.
-    // Use this method to undo the changes made on entering the background.
-  }
-
-  func sceneDidEnterBackground(_ scene: UIScene) {
-    // Called as the scene transitions from the foreground to the background.
-    // Use this method to save data, release shared resources, and store enough scene-specific state information
-    // to restore the scene back to its current state.
   }
   
 }

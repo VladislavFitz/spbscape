@@ -61,7 +61,7 @@ final class BuildingViewController: UIViewController {
     
     galleryViewController.pageControl.hidesForSinglePage = true
     galleryViewController.pageControl.pageIndicatorTintColor = .lightGray
-    galleryViewController.pageControl.currentPageIndicatorTintColor = ColorScheme.tintColor
+    galleryViewController.pageControl.currentPageIndicatorTintColor = ColorScheme.primaryColor
 
     galleryViewController.pageControl.layer.masksToBounds = true
     galleryViewController.pageControl.translatesAutoresizingMaskIntoConstraints = false
@@ -123,7 +123,7 @@ final class BuildingViewController: UIViewController {
   
   func configureButton() {
     goToCityWallsButton.setTitle("Перейти на CityWalls", for: .normal)
-    goToCityWallsButton.backgroundColor = ColorScheme.tintColor
+    goToCityWallsButton.backgroundColor = ColorScheme.primaryColor
     goToCityWallsButton.layer.cornerRadius = 10
     goToCityWallsButton.addTarget(self, action: #selector(goToCityWalls), for: .touchUpInside)
   }

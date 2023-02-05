@@ -24,7 +24,7 @@ class HitsCountView: UIView {
   }
   
   private func setupLayout() {
-    countLabel.textColor = ColorScheme.tintColor
+    countLabel.textColor = ColorScheme.primaryColor
     countLabel.textAlignment = .center
     countLabel.translatesAutoresizingMaskIntoConstraints = false
     addSubview(countLabel)

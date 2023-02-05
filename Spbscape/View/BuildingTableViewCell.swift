@@ -40,7 +40,7 @@ class BuildingTableViewCell: UITableViewCell {
   }
   
   override func setSelected(_ selected: Bool, animated: Bool) {
-    let backgroundColor = selected ? ColorScheme.tintColor.withAlphaComponent(0.2) : .clear
+    let backgroundColor = selected ? ColorScheme.primaryColor.withAlphaComponent(0.2) : .clear
     contentView.backgroundColor = backgroundColor
   }
   
