@@ -81,7 +81,7 @@ class GalleryViewController: UICollectionViewController, UICollectionViewDelegat
   //MARK: - CollectionView DataSource
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return images.count
+    images.count
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -92,25 +92,25 @@ class GalleryViewController: UICollectionViewController, UICollectionViewDelegat
   
   override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
     guard let imageCell = cell as? ImageCell else { return }
-    imageCell.imageView.sd_imageIndicator = SDWebImageActivityIndicator.large
+    imageCell.imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
     imageCell.imageView.sd_setImage(with: images[indexPath.row], placeholderImage: UIImage(systemName: "photo"))
     imageCell.imageView.contentMode = .scaleAspectFit
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return .init(width: collectionView.bounds.width, height: collectionView.bounds.height)
+    CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    return 0
+    0
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 0
+    0
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-    return .zero
+    .zero
   }
   
   override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
