@@ -15,7 +15,7 @@ class NoResultsView: UIView {
     super.init(frame: frame)
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.text = "Нет результатов"
+    label.text = "no-results".localize()
     label.textAlignment = .center
     addSubview(label)
     activate(
