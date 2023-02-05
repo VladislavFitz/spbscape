@@ -16,7 +16,7 @@ protocol OverlayControllerDelegate: AnyObject {
   var compactOverlayHeight: CGFloat { get }
   var switchStateThreshold: CGFloat { get }
   
-  func didChangeState(_ newState: OverlayController.State, animated: Bool)
+  func didChangeState(_ newState: OverlayStateController.State, animated: Bool)
   func shouldSetHeight(_ height: CGFloat, animated: Bool)
   
 }

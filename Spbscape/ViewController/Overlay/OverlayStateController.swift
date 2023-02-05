@@ -1,5 +1,5 @@
 //
-//  OverlayController.swift
+//  OverlayStateController.swift
 //  Spbscape
 //
 //  Created by Vladislav Fitc on 06.02.2022.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class OverlayController: NSObject {
+class OverlayStateController: NSObject {
   
   weak var delegate: OverlayControllerDelegate?
   

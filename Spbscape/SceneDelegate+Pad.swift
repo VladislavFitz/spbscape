@@ -36,7 +36,6 @@ extension SceneDelegate {
       splitViewController = .init()
       splitViewController.viewControllers = [
         sidebarViewController,
-//        UINavigationController(rootViewController: sidebarViewController),
         UINavigationController(rootViewController: mapHitsViewController)
       ]
     }
@@ -231,7 +230,6 @@ class SidebarOverlayPresentationController: UIPresentationController {
             let presented = presentedView,
             let container = containerView else { return }
       
-//    print(pan.translation(in: presentingViewController.view))
     let location = pan.translation(in: presentingViewController.view)
     
       switch pan.state {
@@ -274,7 +272,6 @@ class SidebarOverlayPresentationController: UIPresentationController {
   override func presentationTransitionWillBegin() {
     guard let container = containerView else { return }
     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(tap:)))
-//    container.isUserInteractionEnabled = false
     container.addGestureRecognizer(tapGestureRecognizer)
     
     presentedViewController.view.translatesAutoresizingMaskIntoConstraints = false

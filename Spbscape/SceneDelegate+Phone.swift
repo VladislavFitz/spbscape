@@ -15,30 +15,20 @@ extension SceneDelegate {
                                            mapHitsViewController: BuldingHitsMapViewController,
                                            searchViewModel: SearchViewModel,
                                            filterHelper: FiltersHelper) -> UIViewController {
-    
-//    let unitViewController = CombinedHitsViewController(listViewController: listHitsViewController,
-//                                                        mapViewController: mapHitsViewController)
-//    let sidebarViewController = SidebarViewConttroller(contentController: unitViewController)
-//    searchViewModel.configure(sidebarViewController.searchBar)
-//    sidebarViewController.toolbarItems = [
-//      unitViewController.switchAppearanceModeBarButtonItem,
-//      UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-//      searchViewModel.hitsCountBarButtonItem(),
-//      UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-//      filterHelper.filterBarButtonItem
-//    ]
-    
-    let phoneViewController = PhoneViewController(listViewController: listHitsViewController,
-                                                  mapViewController: mapHitsViewController)
-    phoneViewController.searchViewController.didTapFilterButton = { _ in
+    let searchViewController = SearchViewController(childViewController: listHitsViewController)
+    let phoneViewController = CompactViewController(mainViewController: mapHitsViewController,
+                                                    overlayViewController: searchViewController,
+                                                    compactHeight: searchViewController.compactHeight,
+                                                    searchTextField: searchViewController.searchTextField)
+    searchViewController.didTapFilterButton = { _ in
       filterHelper.presentFilters()
     }
-    searchViewModel.searcher.onResults.subscribePast(with: phoneViewController.searchViewController) { (vc, response) in
+    searchViewModel.searcher.onResults.subscribePast(with: searchViewController) { (vc, response) in
       vc.setHitsCount(response.searchStats.totalHitsCount)
     }.onQueue(.main)
     
     filterHelper.sourceViewController = phoneViewController
-    searchViewModel.configure(phoneViewController.searchViewController.searchTextField)
+    searchViewModel.configure(searchViewController.searchTextField)
     let navigationController = UINavigationController(rootViewController: phoneViewController)    
     mapHitsViewController.didSelect = { [weak navigationController] building, _ in
       let buildingViewController = BuildingViewController(building: building)

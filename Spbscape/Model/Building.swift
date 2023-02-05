@@ -34,7 +34,6 @@ extension Array where Element == Building {
       .url(forResource: "hundredBuildings", withExtension: nil)
       .flatMap { try? Data.init(contentsOf: $0) }
       .flatMap { try? JSONDecoder().decode([Building].self, from: $0) } ?? []
-
   }
 
 }
