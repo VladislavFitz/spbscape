@@ -14,7 +14,7 @@ class ToolbarDelegate: NSObject {
 }
 
 extension Notification.Name {
-  static let showFilters = Self.init(rawValue: "com.spbscape.filters")
+  static let showFilters = Self(rawValue: "com.spbscape.filters")
 }
 
 #if targetEnvironment(macCatalyst)
@@ -58,8 +58,10 @@ extension ToolbarDelegate: NSToolbarDelegate {
         
       case .filters:
         let item = NSToolbarItem(itemIdentifier: itemIdentifier)
-        item.image = UIImage(systemName: "line.horizontal.3.decrease")
-        item.label = "Show Filters"
+        item.image = UIImage(systemName: "line.horizontal.3.decrease.circle")?
+          .resizeImageTo(size: CGSize(width: 40, height: 40))?
+          .withRenderingMode(.alwaysTemplate)
+        item.label = "filters".localize()
         item.action = #selector(showFilters(_:))
         item.target = self
         toolbarItem = item

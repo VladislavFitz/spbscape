@@ -46,6 +46,7 @@
 		AF8E9EC929903CC40066A021 /* TransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9EC829903CC40066A021 /* TransitioningDelegate.swift */; };
 		AF8E9ECB29903CF20066A021 /* PresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9ECA29903CF20066A021 /* PresentAnimationController.swift */; };
 		AF8E9ECD29903D100066A021 /* DismissAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9ECC29903D100066A021 /* DismissAnimationController.swift */; };
+		AF8E9ECF29905E3E0066A021 /* UIImage+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9ECE29905E3E0066A021 /* UIImage+Convenience.swift */; };
 		AF98955A2561ACB500B61F15 /* Petr.gpx in Resources */ = {isa = PBXBuildFile; fileRef = AF9895592561ACB500B61F15 /* Petr.gpx */; };
 		AF98955D2561AD3B00B61F15 /* Center.gpx in Resources */ = {isa = PBXBuildFile; fileRef = AF98955C2561AD3B00B61F15 /* Center.gpx */; };
 		AFB533BB25B4FD250079EE21 /* UISearchTextField+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB533BA25B4FD250079EE21 /* UISearchTextField+Convenience.swift */; };
@@ -108,6 +109,7 @@
 		AF8E9EC829903CC40066A021 /* TransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitioningDelegate.swift; sourceTree = "<group>"; };
 		AF8E9ECA29903CF20066A021 /* PresentAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentAnimationController.swift; sourceTree = "<group>"; };
 		AF8E9ECC29903D100066A021 /* DismissAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimationController.swift; sourceTree = "<group>"; };
+		AF8E9ECE29905E3E0066A021 /* UIImage+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Convenience.swift"; sourceTree = "<group>"; };
 		AF9895582561AC5900B61F15 /* VO.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VO.gpx; sourceTree = "<group>"; };
 		AF9895592561ACB500B61F15 /* Petr.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Petr.gpx; sourceTree = "<group>"; };
 		AF98955C2561AD3B00B61F15 /* Center.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Center.gpx; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				AFB533BA25B4FD250079EE21 /* UISearchTextField+Convenience.swift */,
 				AFB533BE25B4FD3F0079EE21 /* UISearchToken+Convenience.swift */,
 				AFC4CA36298F1BA400BFD6C0 /* MKCoordinateRegion+Convenience.swift */,
+				AF8E9ECE29905E3E0066A021 /* UIImage+Convenience.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				AF46B4302557807A003DA57E /* BuildingAnnotation.swift in Sources */,
 				AF76D07027AE86BD00AFE6C8 /* CompactViewController.swift in Sources */,
 				AF7943DE253C49D2006CEB2B /* BuldingHitsListViewController.swift in Sources */,
+				AF8E9ECF29905E3E0066A021 /* UIImage+Convenience.swift in Sources */,
 				AF6D85802584F84F004D699A /* FilterSection.swift in Sources */,
 				AF7943E5253C4C9A006CEB2B /* IndexName+Convenience.swift in Sources */,
 				AFF4F6782783B98F0054100B /* FacetListViewController.swift in Sources */,
