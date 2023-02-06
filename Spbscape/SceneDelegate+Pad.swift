@@ -20,9 +20,6 @@ extension SceneDelegate {
     
     let searchViewController = SearchViewController(childViewController: listHitsViewController,
                                                     style: .fullscreen)
-    searchViewController.handleView.handleBar.isHidden = true
-    searchViewController.hitsCountView.isHidden = true
-    searchViewController.filterButton.isHidden = true
     searchViewModel.configure(searchViewController.searchTextField)
             
     let splitViewController: UISplitViewController
@@ -55,10 +52,12 @@ extension SceneDelegate {
       mapHitsViewController.hitsCountLabel.text = hitsCountText
     }.onQueue(.main)
     mapHitsViewController.filterButton.addTarget(searchViewController,
-                                                 action: #selector(searchViewController.didTapFilterButton(_:)), for: .touchUpInside)
+                                                 action: #selector(searchViewController.didTapFilterButton(_:)),
+                                                 for: .touchUpInside)
 
     searchViewController.didTapFilterButton = { _ in
-      filterHelper.sourceRect = mapHitsViewController.view.convert(mapHitsViewController.filterButton.frame, from: mapHitsViewController.floatingPanel.stackView)
+      filterHelper.sourceRect = mapHitsViewController.view.convert(mapHitsViewController.filterButton.frame,
+                                                                   from: mapHitsViewController.floatingPanel.stackView)
       filterHelper.presentFilters(showHitsCount: false)
     }
 

@@ -224,7 +224,8 @@ extension BoundingBox {
 extension Point {
   
   init(_ mapPoint: MKMapPoint) {
-    self.init(latitude: mapPoint.coordinate.latitude, longitude: mapPoint.coordinate.longitude)
+    self.init(latitude: mapPoint.coordinate.latitude,
+              longitude: mapPoint.coordinate.longitude)
   }
   
 }

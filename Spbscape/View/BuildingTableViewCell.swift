@@ -65,8 +65,8 @@ class BuildingTableViewCell: UITableViewCell {
     activate(
       mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
       mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
-      mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-      mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5)
+      mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 14),
+      mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -14)
     )
     mainStackView.addArrangedSubview(imageStackView)
     imageStackView.axis = .vertical

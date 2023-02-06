@@ -94,7 +94,7 @@ class SearchViewController: UIViewController {
     // Configure search bar container
     searchBarContainer.translatesAutoresizingMaskIntoConstraints = false
     searchBarContainer.axis = .horizontal
-    searchBarContainer.spacing = 7
+    searchBarContainer.spacing = 0
     searchBarContainer.alignment = .center
     
     // Configure placeholder view
@@ -121,10 +121,13 @@ class SearchViewController: UIViewController {
     stackView.pin(to: backgroundView,
                   insets: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0))
 
-    searchBarContainer.addArrangedSubview(.placeHolder(width: 0))
+    searchBarContainer.addArrangedSubview(.placeHolder(width: 14))
     searchBarContainer.addArrangedSubview(searchTextField)
-    searchBarContainer.addArrangedSubview(filterButton)
-    searchBarContainer.addArrangedSubview(.placeHolder(width: 0))
+    if style == .overlay {
+      searchBarContainer.addArrangedSubview(.placeHolder(width: 7))
+      searchBarContainer.addArrangedSubview(filterButton)
+    }
+    searchBarContainer.addArrangedSubview(.placeHolder(width: 14))
     
     activate(
       handleView.heightAnchor.constraint(equalToConstant: handleViewHeight),
@@ -134,7 +137,9 @@ class SearchViewController: UIViewController {
     
     stackView.addArrangedSubview(handleView)
     stackView.addArrangedSubview(searchBarContainer)
-    stackView.addArrangedSubview(hitsCountView)
+    if style == .overlay {
+      stackView.addArrangedSubview(hitsCountView)
+    }
     stackView.addArrangedSubview(childViewController.view)
   }
   
