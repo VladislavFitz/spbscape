@@ -21,7 +21,7 @@ extension SceneDelegate {
                                                     compactHeight: searchViewController.compactHeight,
                                                     searchTextField: searchViewController.searchTextField)
     searchViewController.didTapFilterButton = { _ in
-      filterHelper.presentFilters()
+      filterHelper.presentFilters(showHitsCount: true)
     }
     searchViewModel.searcher.onResults.subscribePast(with: searchViewController) { (vc, response) in
       vc.setHitsCount(response.searchStats.totalHitsCount)

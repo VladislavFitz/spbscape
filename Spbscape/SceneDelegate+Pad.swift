@@ -24,7 +24,7 @@ extension SceneDelegate {
     searchViewController.hitsCountView.isHidden = true
     searchViewController.filterButton.isHidden = true
     searchViewModel.configure(searchViewController.searchTextField)
-        
+            
     let splitViewController: UISplitViewController
     if #available(macCatalyst 14.0, iOS 14.0, *) {
       splitViewController = UISplitViewController(style: .doubleColumn)
@@ -47,12 +47,21 @@ extension SceneDelegate {
     searchViewController.navigationController?.isNavigationBarHidden = true
     #else
     searchViewController.navigationController?.isNavigationBarHidden = true
-    mapHitsViewController.navigationItem.rightBarButtonItems = [
-      splitViewController.displayModeButtonItem,
-      filterHelper.filterBarButtonItem,
-      UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-      searchViewModel.hitsCountBarButtonItem()
-    ]
+    mapHitsViewController.navigationController?.isNavigationBarHidden = true
+    
+    _ = mapHitsViewController.floatingPanel
+    searchViewModel.searcher.onResults.subscribePast(with: searchViewController) { (vc, response) in
+      let hitsCountText = "\("buildings".localize()): \(response.searchStats.totalHitsCount)"
+      mapHitsViewController.hitsCountLabel.text = hitsCountText
+    }.onQueue(.main)
+    mapHitsViewController.filterButton.addTarget(searchViewController,
+                                                 action: #selector(searchViewController.didTapFilterButton(_:)), for: .touchUpInside)
+
+    searchViewController.didTapFilterButton = { _ in
+      filterHelper.sourceRect = mapHitsViewController.view.convert(mapHitsViewController.filterButton.frame, from: mapHitsViewController.floatingPanel.stackView)
+      filterHelper.presentFilters(showHitsCount: false)
+    }
+
     #endif
     
     listHitsViewController.didSelect = { [weak mapHitsViewController] building in
@@ -68,5 +77,5 @@ extension SceneDelegate {
     searchViewModel.searcher.search()
     return splitViewController
   }
-  
+    
 }

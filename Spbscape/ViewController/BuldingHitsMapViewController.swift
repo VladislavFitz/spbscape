@@ -27,6 +27,33 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
   
   var didSelect: ((Building, MKAnnotationView) -> Void)?
   var didChangeVisibleRegion: ((MKMapRect, Bool) -> Void)? = nil
+  
+  lazy var hitsCountLabel: UILabel = {
+    let hitsCountLabel = UILabel()
+    hitsCountLabel.translatesAutoresizingMaskIntoConstraints = false
+    hitsCountLabel.textColor = ColorScheme.primaryColor
+    return hitsCountLabel
+  }()
+  
+  lazy var filterButton: UIButton = {
+    let filterButton = UIButton.filter
+    return filterButton
+  }()
+  
+  lazy var floatingPanel: BlurryPanel = {
+    let floatingPanel = BlurryPanel()
+    floatingPanel.translatesAutoresizingMaskIntoConstraints = false
+    floatingPanel.stackView.addArrangedSubview(hitsCountLabel)
+    floatingPanel.stackView.addArrangedSubview(filterButton)
+    view.addSubview(floatingPanel)
+    NSLayoutConstraint.activate([
+      floatingPanel.heightAnchor.constraint(equalToConstant: 44),
+      floatingPanel.widthAnchor.constraint(equalToConstant: 200),
+      floatingPanel.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
+      floatingPanel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+    ])
+    return floatingPanel
+  }()
     
   init() {
     self.mapView = MKMapView()

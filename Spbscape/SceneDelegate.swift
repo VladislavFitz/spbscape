@@ -47,7 +47,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
           .receive(on: RunLoop.main)
           .sink(receiveValue: { [weak self] notification in
               guard let self = self else { return }
-            self.filtersHelper.presentFilters()
+            self.filtersHelper.presentFilters(showHitsCount: true)
           })
   }
   
@@ -87,5 +87,5 @@ extension SceneDelegate {
     searchViewModel.hitsConnector.connectController(listHitsViewController)
     return listHitsViewController
   }
-    
+      
 }

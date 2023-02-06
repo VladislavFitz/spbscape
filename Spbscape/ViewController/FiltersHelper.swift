@@ -14,6 +14,7 @@ final class FiltersHelper {
   let searchViewModel: SearchViewModel
   var buildFilterViewController: (() -> UIViewController)?
   weak var sourceViewController: UIViewController?
+  var sourceRect: CGRect? = nil
   
   lazy var filterBarButtonItem: UIBarButtonItem = .init(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: self, action: #selector(presentFilters))
 
@@ -27,14 +28,15 @@ final class FiltersHelper {
   }
 
   @objc
-  func presentFilters() {
+  func presentFilters(showHitsCount: Bool) {
     guard let sourceViewController = sourceViewController else { return }
     if let presentedViewController = sourceViewController.presentedViewController {
       presentedViewController.dismiss(animated: true)
       return
     }
+    let hitsCountItem: UIBarButtonItem? = showHitsCount ? searchViewModel.hitsCountBarButtonItem() : nil
     let filterViewController = FilterViewController(filterState: searchViewModel.filterState,
-                                                    hitsCountBarButtonItem: searchViewModel.hitsCountBarButtonItem())
+                                                    hitsCountBarButtonItem: hitsCountItem)
     let filtersNavigationController = UINavigationController(rootViewController: filterViewController)
     let navigationBarAppearance = UINavigationBarAppearance()
     navigationBarAppearance.configureWithOpaqueBackground()
@@ -48,12 +50,15 @@ final class FiltersHelper {
     switch UIDevice.current.userInterfaceIdiom {
     case .pad:
       filtersNavigationController.modalPresentationStyle = .popover
-      filtersNavigationController.preferredContentSize = .init(width: 300, height: 400)
+      filtersNavigationController.preferredContentSize = .init(width: 300, height: 500)
       #if targetEnvironment(macCatalyst)
       filtersNavigationController.popoverPresentationController?.sourceView = sourceViewController.view
       filtersNavigationController.popoverPresentationController?.sourceRect = .init(x: sourceViewController.view.bounds.width - 50, y: 20, width: 32, height: 32)
       #else
-      filtersNavigationController.popoverPresentationController?.barButtonItem = filterBarButtonItem
+      filtersNavigationController.popoverPresentationController?.sourceView = sourceViewController.view
+      if let sourceRect = sourceRect {
+          filtersNavigationController.popoverPresentationController?.sourceRect = sourceRect
+      }
       #endif
     default:
       break

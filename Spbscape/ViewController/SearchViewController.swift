@@ -47,7 +47,7 @@ class SearchViewController: UIViewController {
     self.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .prominent))
     self.searchTextField = UISearchTextField()
     self.childViewController = childViewController
-    self.filterButton = UIButton()
+    self.filterButton = .filter
     self.style = style
     super.init(nibName: .none, bundle: .none)
     addChild(childViewController)
@@ -66,10 +66,6 @@ class SearchViewController: UIViewController {
   fileprivate func setupLayout() {
     
     // Configure filter button
-    filterButton.translatesAutoresizingMaskIntoConstraints = false
-    filterButton.setImage(UIImage(systemName: "line.horizontal.3.decrease.circle"), for: .normal)
-    filterButton.contentVerticalAlignment = .fill
-    filterButton.contentHorizontalAlignment = .fill
     filterButton.addTarget(self, action: #selector(didTapFilterButton(_:)), for: .touchUpInside)
     
     // Configure stack view
@@ -131,8 +127,6 @@ class SearchViewController: UIViewController {
     searchBarContainer.addArrangedSubview(.placeHolder(width: 0))
     
     activate(
-      filterButton.widthAnchor.constraint(equalToConstant: 28),
-      filterButton.heightAnchor.constraint(equalToConstant: 28),
       handleView.heightAnchor.constraint(equalToConstant: handleViewHeight),
       searchBarContainer.heightAnchor.constraint(equalToConstant: searchBarHeight),
       hitsCountView.heightAnchor.constraint(equalToConstant: hitsCountViewHeight)
@@ -144,7 +138,7 @@ class SearchViewController: UIViewController {
     stackView.addArrangedSubview(childViewController.view)
   }
   
-  @objc private func didTapFilterButton(_ filterButton: UIButton) {
+  @objc func didTapFilterButton(_ filterButton: UIButton) {
     didTapFilterButton?(filterButton)
   }
 

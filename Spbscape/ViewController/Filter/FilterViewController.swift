@@ -16,21 +16,18 @@ class FilterViewController: UIViewController {
   let filterState: FilterState
   
   let facetListConnectors: [FacetListConnector]
-
+  
   let queryInputInteractor: QueryInputInteractor
   let queryInputController: TextFieldController
   
   let resultsViewController: SwitchContainerViewController
   
-  let hitsCountBarButtonItem: UIBarButtonItem
-  
   let multiSearcher: MultiSearcher
   
-  init(filterState: FilterState, hitsCountBarButtonItem: UIBarButtonItem) {
+  init(filterState: FilterState, hitsCountBarButtonItem: UIBarButtonItem?) {
     
     self.multiSearcher = MultiSearcher(appID: .spbscapeAppID, apiKey: .spbscape)
     self.filterState = filterState
-    self.hitsCountBarButtonItem = hitsCountBarButtonItem
     
     let viewControllers: [FacetListViewController] = FilterSection.allCases.map { _ in .init(style: .plain) }
     
@@ -60,9 +57,11 @@ class FilterViewController: UIViewController {
     navigationItem.searchController = searchController
     navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .done, target: self, action: #selector(dismissViewController))
     let clearFiltersBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .done, target: self, action: #selector(resetFilters))
-    toolbarItems = [
+    let additionalBarButtonItems = hitsCountBarButtonItem.flatMap { [
       UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-      hitsCountBarButtonItem,
+      $0
+    ] } ?? []
+    toolbarItems = additionalBarButtonItems + [
       UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
       clearFiltersBarButtonItem
     ]
@@ -86,7 +85,7 @@ class FilterViewController: UIViewController {
     addChild(resultsViewController)
     resultsViewController.didMove(toParent: self)
   }
-    
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -96,7 +95,7 @@ class FilterViewController: UIViewController {
     title = "filters".localize()
     view.backgroundColor = .systemBackground
     navigationController?.isToolbarHidden = false
-
+    
     searchController.hidesNavigationBarDuringPresentation = false
     searchController.searchBar.showsScopeBar = true
     searchController.isActive = true
@@ -109,7 +108,7 @@ class FilterViewController: UIViewController {
     
     queryInputInteractor.onQueryChanged.fire(nil)
   }
-    
+  
   @objc private func resetFilters() {
     (filterState[or: FilterSection.architect.attribute.rawValue] as OrGroupAccessor<Filter.Facet>).removeAll()
     (filterState[or: FilterSection.style.attribute.rawValue] as OrGroupAccessor<Filter.Facet>).removeAll()

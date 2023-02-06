@@ -47,6 +47,8 @@
 		AF8E9ECB29903CF20066A021 /* PresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9ECA29903CF20066A021 /* PresentAnimationController.swift */; };
 		AF8E9ECD29903D100066A021 /* DismissAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9ECC29903D100066A021 /* DismissAnimationController.swift */; };
 		AF8E9ECF29905E3E0066A021 /* UIImage+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9ECE29905E3E0066A021 /* UIImage+Convenience.swift */; };
+		AF8E9ED129906B090066A021 /* UIButton+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9ED029906B090066A021 /* UIButton+Factory.swift */; };
+		AF8E9ED329906CA80066A021 /* BlurryPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9ED229906CA80066A021 /* BlurryPanel.swift */; };
 		AF98955A2561ACB500B61F15 /* Petr.gpx in Resources */ = {isa = PBXBuildFile; fileRef = AF9895592561ACB500B61F15 /* Petr.gpx */; };
 		AF98955D2561AD3B00B61F15 /* Center.gpx in Resources */ = {isa = PBXBuildFile; fileRef = AF98955C2561AD3B00B61F15 /* Center.gpx */; };
 		AFB533BB25B4FD250079EE21 /* UISearchTextField+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB533BA25B4FD250079EE21 /* UISearchTextField+Convenience.swift */; };
@@ -110,6 +112,8 @@
 		AF8E9ECA29903CF20066A021 /* PresentAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentAnimationController.swift; sourceTree = "<group>"; };
 		AF8E9ECC29903D100066A021 /* DismissAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimationController.swift; sourceTree = "<group>"; };
 		AF8E9ECE29905E3E0066A021 /* UIImage+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Convenience.swift"; sourceTree = "<group>"; };
+		AF8E9ED029906B090066A021 /* UIButton+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Factory.swift"; sourceTree = "<group>"; };
+		AF8E9ED229906CA80066A021 /* BlurryPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurryPanel.swift; sourceTree = "<group>"; };
 		AF9895582561AC5900B61F15 /* VO.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VO.gpx; sourceTree = "<group>"; };
 		AF9895592561ACB500B61F15 /* Petr.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Petr.gpx; sourceTree = "<group>"; };
 		AF98955C2561AD3B00B61F15 /* Center.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Center.gpx; sourceTree = "<group>"; };
@@ -278,6 +282,7 @@
 				AF76D07127AFC36300AFE6C8 /* HandleView.swift */,
 				AF76D07327AFD01600AFE6C8 /* HitsCountView.swift */,
 				AF7943E0253C4A36006CEB2B /* BuildingTableViewCell.swift */,
+				AF8E9ED229906CA80066A021 /* BlurryPanel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 				AFB533BE25B4FD3F0079EE21 /* UISearchToken+Convenience.swift */,
 				AFC4CA36298F1BA400BFD6C0 /* MKCoordinateRegion+Convenience.swift */,
 				AF8E9ECE29905E3E0066A021 /* UIImage+Convenience.swift */,
+				AF8E9ED029906B090066A021 /* UIButton+Factory.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -396,6 +402,7 @@
 				AF6D857C2584F83C004D699A /* SwitchContainerViewController.swift in Sources */,
 				AFC4CA37298F1BA400BFD6C0 /* MKCoordinateRegion+Convenience.swift in Sources */,
 				AF6F4FED260803EC00408DF7 /* SceneDelegate+Phone.swift in Sources */,
+				AF8E9ED329906CA80066A021 /* BlurryPanel.swift in Sources */,
 				AFE9C00125FD5B3700BF0E2D /* ToolbarDelegate.swift in Sources */,
 				AF8E9EC729903C9A0066A021 /* BuldingHitsMapViewController+Sidebar.swift in Sources */,
 				AFFA76C42558340200578914 /* HitAnnotationView.swift in Sources */,
@@ -414,6 +421,7 @@
 				AFFA76C1255833AF00578914 /* ClusterView.swift in Sources */,
 				AF82DCF3244C77A300CE8B95 /* AppDelegate.swift in Sources */,
 				AF82DD21244CB9D600CE8B95 /* UIStackView+Convenience.swift in Sources */,
+				AF8E9ED129906B090066A021 /* UIButton+Factory.swift in Sources */,
 				AF82DD0E244CB56B00CE8B95 /* GalleryViewController.swift in Sources */,
 				AF82DD1C244CB6C200CE8B95 /* UIView+Convenience.swift in Sources */,
 				AFF4F67A2783BFC50054100B /* NoResultsView.swift in Sources */,
