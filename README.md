@@ -21,4 +21,4 @@ Available for iPhone, iPad, and macOS, our app brings the beauty of Saint Peters
 <img src="Resources/pad-screen1.png"  alt="1" width = 640px height = 448px >
 
 ## macOS
-<img src="Resources/mac-screen1.png"  alt="1" width = 600px height = 450px >
+<img src="Resources/mac-screen1.png"  alt="1" width = 660px height = 495px >
