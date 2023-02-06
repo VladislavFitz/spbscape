@@ -1,4 +1,4 @@
-# <img src="Resources/icon.png"  alt="1" width = 28px height = 28px > Spbscape
+# <img src="Resources/icon.png"  alt="1" width = 32px height = 32px > Spbscape
 
 Discover the architectural wonders of Saint Petersburg with **Spbscape** app. Explore all the iconic buildings of the
 city with just a few taps on your phone. You can search for buildings by style, architect, and address.
