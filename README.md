@@ -9,16 +9,16 @@ Available for iPhone, iPad, and macOS, our app brings the beauty of Saint Peters
 ## iOS
 <table>
   <tr>
-    <td><img src="Resources/phone-screen1.png"  alt="1" width = 320px height = 640px ></td>
-    <td><img src="Resources/phone-screen2.png" alt="2" width = 320px height = 640px></td>
-    <td><img src="Resources/phone-screen3.png" alt="3" width = 320px height = 640px></td>
-    <td><img src="Resources/phone-screen4.png" align="right" alt="4" width = 320px height = 640px>
+    <td><img src="Resources/phone-screen1.png"  alt="1" width = 160px height = 320px ></td>
+    <td><img src="Resources/phone-screen2.png" alt="2" width = 160px height = 320px></td>
+    <td><img src="Resources/phone-screen3.png" alt="3" width = 160px height = 320px></td>
+    <td><img src="Resources/phone-screen4.png" align="right" alt="4" width = 160px height = 320px>
   </td>
   </tr>
 </table>
 
 ## iPadOS
-<img src="Resources/pad-screen1.png"  alt="1" width = 1280px height = 896px >
+<img src="Resources/pad-screen1.png"  alt="1" width = 640px height = 448px >
 
 ## macOS
-<img src="Resources/mac-screen1.png"  alt="1" width = 1280px height = 896px >
+<img src="Resources/mac-screen1.png"  alt="1" width = 600px height = 450px >
