@@ -1,5 +1,5 @@
 //
-//  FiltersHelper.swift
+//  UIViewController+Filters.swift
 //  Spbscape
 //
 //  Created by Vladislav Fitc on 14/03/2021.
@@ -12,7 +12,7 @@ import InstantSearchCore
 
 extension UIViewController {
   
-  func presentFilters(viewControllerBuilder: () -> FilterViewController,
+  func presentFilters(viewControllerBuilder: () -> FiltersViewController,
                       sourceRect: CGRect? = nil) {
     let filterViewController = viewControllerBuilder()
     let filtersNavigationController = UINavigationController(rootViewController: filterViewController)

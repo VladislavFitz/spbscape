@@ -15,7 +15,7 @@ final class BuildingViewController: UIViewController {
   let building: Building
   
   let titleLabel: UILabel
-  let galleryViewController: GalleryViewController
+  let galleryViewController: MediaGalleryViewController
   let goToCityWallsButton: UIButton
   
   init(building: Building) {
@@ -163,7 +163,7 @@ final class BuildingViewController: UIViewController {
   
   @objc func didTapImage(_ tapGestureRecognizer: UITapGestureRecognizer) {
     guard presentedViewController == .none else { return }
-    let galleryViewController = GalleryViewController(images: building.photos.map(\.url))
+    let galleryViewController = MediaGalleryViewController(images: building.photos.map(\.url))
     galleryViewController.title = title
     galleryViewController.preselectedIndex = self.galleryViewController.currentIndexPath?.item
     galleryViewController.view.backgroundColor = .systemBackground

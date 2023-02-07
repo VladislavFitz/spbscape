@@ -1,5 +1,5 @@
 //
-//  GalleryViewController.swift
+//  MediaGalleryViewController.swift
 //  Spbscape
 //
 //  Created by Vladislav Fitc on 19/04/2020.
@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SDWebImage
 
-class GalleryViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class MediaGalleryViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
   
   let images: [URL]
   let pageControl: UIPageControl

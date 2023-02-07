@@ -1,5 +1,5 @@
 //
-//  CompactViewController.swift
+//  InteractiveSheetViewController.swift
 //  Spbscape
 //
 //  Created by Vladislav Fitc on 05.02.2022.
@@ -9,8 +9,7 @@
 import Foundation
 import UIKit
 
-/// Shows two views overlay
-class CompactViewController: UIViewController {
+class InteractiveSheetViewController: UIViewController {
   
   let mainViewController: UIViewController
   let overlayViewController: UIViewController
@@ -66,7 +65,7 @@ class CompactViewController: UIViewController {
       
 }
 
-private extension CompactViewController {
+private extension InteractiveSheetViewController {
   
   func setupMainView() {
     let mainView = mainViewController.view!
@@ -95,7 +94,7 @@ private extension CompactViewController {
   
 }
 
-extension CompactViewController: OverlayControllerDelegate {
+extension InteractiveSheetViewController: OverlayControllerDelegate {
   
   var currentHeight: CGFloat {
     return heightConstraint.constant
@@ -143,7 +142,7 @@ extension CompactViewController: OverlayControllerDelegate {
   
 }
 
-extension CompactViewController: UITextFieldDelegate {
+extension InteractiveSheetViewController: UITextFieldDelegate {
   
   func textFieldDidBeginEditing(_ textField: UITextField) {
     if overlayStateController.state == .compact {

@@ -15,26 +15,21 @@ extension SceneDelegate {
                                            mapHitsViewController: BuldingHitsMapViewController,
                                            searchViewModel: SearchViewModel) -> UIViewController {
     let searchViewController = SearchViewController(childViewController: listHitsViewController,
-                                                    style: .overlay,
-                                                    filterButton: searchViewModel.filtersButton())
-    let phoneViewController = CompactViewController(mainViewController: mapHitsViewController,
-                                                    overlayViewController: searchViewController,
-                                                    compactHeight: searchViewController.compactHeight,
-                                                    searchTextField: searchViewController.searchTextField)
-    searchViewController.didTapFilterButton = { _ in      
-      phoneViewController.presentFilters {
-        let filtersViewController = FilterViewController(clearFiltersBarButtonItem: searchViewModel.clearFiltersBarButtonItem(),
-                                                         hitsCountBarButtonItem: searchViewModel.hitsCountBarButtonItem())
-        searchViewModel.filtersController.setup(filtersViewController)
+                                                    style: .overlay)
+    let interactiveSheetViewController = InteractiveSheetViewController(mainViewController: mapHitsViewController,
+                                                                        overlayViewController: searchViewController,
+                                                                        compactHeight: searchViewController.compactHeight,
+                                                                        searchTextField: searchViewController.searchTextField)
+    searchViewController.didTapFilterButton = { _ in
+      interactiveSheetViewController.presentFilters {
+        let filtersViewController = FiltersViewController(showResultsCount: true)
+        searchViewModel.setup(filtersViewController)
         return filtersViewController
       }
     }
-    searchViewModel.searcher.onResults.subscribePast(with: searchViewController) { (vc, response) in
-      vc.setHitsCount(response.searchStats.totalHitsCount)
-    }.onQueue(.main)
+    searchViewModel.setup(searchViewController)
     
-    searchViewModel.configure(searchViewController.searchTextField)
-    let navigationController = UINavigationController(rootViewController: phoneViewController)    
+    let navigationController = UINavigationController(rootViewController: interactiveSheetViewController)
     mapHitsViewController.didSelect = { [weak navigationController] building, _ in
       let buildingViewController = BuildingViewController(building: building)
       buildingViewController.view.backgroundColor = .systemBackground

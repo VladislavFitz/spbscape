@@ -16,9 +16,8 @@ extension SceneDelegate {
                                          searchViewModel: SearchViewModel) -> UIViewController {
     
     let searchViewController = SearchViewController(childViewController: listHitsViewController,
-                                                    style: .fullscreen,
-                                                    filterButton: searchViewModel.filtersButton())
-    searchViewModel.configure(searchViewController.searchTextField)
+                                                    style: .fullscreen)
+    searchViewModel.setup(searchViewController)
     
     let splitViewController: UISplitViewController
     if #available(macCatalyst 14.0, iOS 14.0, *) {
@@ -38,15 +37,13 @@ extension SceneDelegate {
     
     // For macOS a system toolbar presented, for iPadOS a classic navigation bar
 #if targetEnvironment(macCatalyst)
-    searchViewController.handleView.isHidden = true
     searchViewController.navigationController?.isNavigationBarHidden = true
     searchViewController.showFilterSubscriber = NotificationCenter.default.publisher(for: .showFilters)
       .receive(on: RunLoop.main)
       .sink(receiveValue: { [weak mapHitsViewController] notification in
         mapHitsViewController?.presentFilters(viewControllerBuilder: {
-          let filtersViewController = FilterViewController(clearFiltersBarButtonItem: searchViewModel.clearFiltersBarButtonItem(),
-                                                           hitsCountBarButtonItem: searchViewModel.hitsCountBarButtonItem())
-          searchViewModel.filtersController.setup(filtersViewController)
+          let filtersViewController = FiltersViewController(showResultsCount: true)
+          searchViewModel.setup(filtersViewController)
           return filtersViewController
         })
       })
@@ -54,7 +51,8 @@ extension SceneDelegate {
     searchViewController.navigationController?.isNavigationBarHidden = true
     mapHitsViewController.navigationController?.isNavigationBarHidden = true
     
-    let filtersButton = searchViewModel.filtersButton()
+    let filtersButton = FiltersButton()
+    searchViewModel.filtersViewModel.setupFiltersButton(filtersButton)
     let panel = mapHitsViewController.addFloatingPanel(withFilterButton: filtersButton)
     
     searchViewModel.searcher.onResults.subscribePast(with: searchViewController) { (vc, response) in
@@ -70,9 +68,8 @@ extension SceneDelegate {
       let sourceRect = mapHitsViewController.view.convert(filtersButton.frame,
                                                           from: panel.stackView)
       mapHitsViewController.presentFilters(viewControllerBuilder: {
-        let filtersViewController = FilterViewController(clearFiltersBarButtonItem: searchViewModel.clearFiltersBarButtonItem(),
-                                                         hitsCountBarButtonItem: nil)
-        searchViewModel.filtersController.setup(filtersViewController)
+        let filtersViewController = FiltersViewController(showResultsCount: false)
+        searchViewModel.setup(filtersViewController)
         return filtersViewController
       }, sourceRect: sourceRect)
     }
@@ -86,8 +83,6 @@ extension SceneDelegate {
       guard let mapHitsViewController = mapHitsViewController else { return }
       mapHitsViewController.presentSidebar(for: building)
     }
-    
-    searchViewModel.searcher.search()
     return splitViewController
   }
   

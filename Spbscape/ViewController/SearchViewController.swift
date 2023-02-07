@@ -12,7 +12,6 @@ import UIKit
 import Combine
 #endif
 
-
 class SearchViewController: UIViewController {
   
   let searchTextField: UISearchTextField
@@ -26,17 +25,15 @@ class SearchViewController: UIViewController {
     3 * stackSpacing
   }
   
-  func setHitsCount(_ hitsCount: Int) {
-    self.hitsCountView.countLabel.text = "\("buildings".localize()): \(hitsCount)"
-  }
-  
   var style: Style
-  private let stackView: UIStackView
-  let handleView: HandleView
-  private let searchBarContainer: UIStackView
+  
   let hitsCountView: HitsCountView
+  let filterButton: FiltersButton
+  
+  private let stackView: UIStackView
+  private let handleView: HandleView
+  private let searchBarContainer: UIStackView
   private let backgroundView: UIVisualEffectView
-  let filterButton: UIButton
   
   #if targetEnvironment(macCatalyst)
   var showFilterSubscriber: AnyCancellable?
@@ -48,8 +45,7 @@ class SearchViewController: UIViewController {
   private let stackSpacing: CGFloat = 10
     
   init(childViewController: UIViewController,
-       style: Style,
-       filterButton: UIButton) {
+       style: Style) {
     self.stackView = UIStackView()
     self.handleView = HandleView()
     self.searchBarContainer = UIStackView()
@@ -57,7 +53,7 @@ class SearchViewController: UIViewController {
     self.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .prominent))
     self.searchTextField = UISearchTextField()
     self.childViewController = childViewController
-    self.filterButton = filterButton
+    self.filterButton = FiltersButton()
     self.style = style
     super.init(nibName: .none, bundle: .none)
     addChild(childViewController)
@@ -95,6 +91,9 @@ class SearchViewController: UIViewController {
     }
     
     // Configure handle view
+    #if targetEnvironment(macCatalyst)
+    handleView.isHidden = true
+    #endif
     handleView.handleBar.isHidden = style == .fullscreen
     handleView.translatesAutoresizingMaskIntoConstraints = false
 
