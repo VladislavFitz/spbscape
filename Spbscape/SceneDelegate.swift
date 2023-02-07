@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Combine
 import AlgoliaSearchClient
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -15,8 +14,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   var window: UIWindow?
   var toolbarDelegate = ToolbarDelegate()
   let searchViewModel = SearchViewModel()
-  private var showFilterSubscriber: AnyCancellable?
-  lazy var filtersHelper = FiltersHelper(searchViewModel: searchViewModel)
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -40,28 +37,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     UIToolbar.appearance().tintColor = ColorScheme.primaryColor
     window?.tintColor = ColorScheme.primaryColor
-    window?.rootViewController = SceneDelegate.buildRootViewController(searchViewModel: searchViewModel, filterHelper: filtersHelper)
+    window?.rootViewController = SceneDelegate.buildRootViewController(searchViewModel: searchViewModel)
     window?.makeKeyAndVisible()
-
-    showFilterSubscriber = NotificationCenter.default.publisher(for: .showFilters)
-          .receive(on: RunLoop.main)
-          .sink(receiveValue: { [weak self] notification in
-              guard let self = self else { return }
-            self.filtersHelper.presentFilters(showHitsCount: true)
-          })
   }
   
 }
 
 extension SceneDelegate {
   
-  static func buildRootViewController(searchViewModel: SearchViewModel, filterHelper: FiltersHelper) -> UIViewController {
+  static func buildRootViewController(searchViewModel: SearchViewModel) -> UIViewController {
     let mapHitsViewController = buildHitsMapViewController(searchViewModel: searchViewModel)
     let listHitsViewController = buildHitsListViewController(searchViewModel: searchViewModel)
     if UIDevice.current.userInterfaceIdiom == .phone {
-      return buildRootPhoneViewController(listHitsViewController: listHitsViewController, mapHitsViewController: mapHitsViewController, searchViewModel: searchViewModel, filterHelper: filterHelper)
+      return buildRootPhoneViewController(listHitsViewController: listHitsViewController,
+                                          mapHitsViewController: mapHitsViewController, searchViewModel: searchViewModel)
     } else {
-      return buildRootPadViewController(listHitsViewController: listHitsViewController, mapHitsViewController: mapHitsViewController, searchViewModel: searchViewModel, filterHelper: filterHelper)
+      return buildRootPadViewController(listHitsViewController: listHitsViewController, mapHitsViewController: mapHitsViewController, searchViewModel: searchViewModel)
     }
   }
   

@@ -28,3 +28,12 @@ extension UIImage {
       .withTintColor(.lightGray)
   }
 }
+
+extension UIImage {
+  
+  static func filters(empty: Bool) -> UIImage? {
+    let iconName = empty ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill"
+    return UIImage(systemName: iconName)
+  }
+  
+}

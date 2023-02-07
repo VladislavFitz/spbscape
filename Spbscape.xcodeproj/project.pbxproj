@@ -47,8 +47,10 @@
 		AF8E9ECB29903CF20066A021 /* PresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9ECA29903CF20066A021 /* PresentAnimationController.swift */; };
 		AF8E9ECD29903D100066A021 /* DismissAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9ECC29903D100066A021 /* DismissAnimationController.swift */; };
 		AF8E9ECF29905E3E0066A021 /* UIImage+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9ECE29905E3E0066A021 /* UIImage+Convenience.swift */; };
-		AF8E9ED129906B090066A021 /* UIButton+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9ED029906B090066A021 /* UIButton+Factory.swift */; };
 		AF8E9ED329906CA80066A021 /* BlurryPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9ED229906CA80066A021 /* BlurryPanel.swift */; };
+		AF8E9ED52992B9D10066A021 /* FiltersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9ED42992B9D10066A021 /* FiltersButton.swift */; };
+		AF8E9ED72992BCE00066A021 /* ResultsCountBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9ED62992BCE00066A021 /* ResultsCountBarButtonItem.swift */; };
+		AF8E9ED92992C7020066A021 /* FiltersBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9ED82992C7020066A021 /* FiltersBarButtonItem.swift */; };
 		AF98955A2561ACB500B61F15 /* Petr.gpx in Resources */ = {isa = PBXBuildFile; fileRef = AF9895592561ACB500B61F15 /* Petr.gpx */; };
 		AF98955D2561AD3B00B61F15 /* Center.gpx in Resources */ = {isa = PBXBuildFile; fileRef = AF98955C2561AD3B00B61F15 /* Center.gpx */; };
 		AFB533BB25B4FD250079EE21 /* UISearchTextField+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB533BA25B4FD250079EE21 /* UISearchTextField+Convenience.swift */; };
@@ -112,8 +114,10 @@
 		AF8E9ECA29903CF20066A021 /* PresentAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentAnimationController.swift; sourceTree = "<group>"; };
 		AF8E9ECC29903D100066A021 /* DismissAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimationController.swift; sourceTree = "<group>"; };
 		AF8E9ECE29905E3E0066A021 /* UIImage+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Convenience.swift"; sourceTree = "<group>"; };
-		AF8E9ED029906B090066A021 /* UIButton+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Factory.swift"; sourceTree = "<group>"; };
 		AF8E9ED229906CA80066A021 /* BlurryPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurryPanel.swift; sourceTree = "<group>"; };
+		AF8E9ED42992B9D10066A021 /* FiltersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersButton.swift; sourceTree = "<group>"; };
+		AF8E9ED62992BCE00066A021 /* ResultsCountBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCountBarButtonItem.swift; sourceTree = "<group>"; };
+		AF8E9ED82992C7020066A021 /* FiltersBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersBarButtonItem.swift; sourceTree = "<group>"; };
 		AF9895582561AC5900B61F15 /* VO.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VO.gpx; sourceTree = "<group>"; };
 		AF9895592561ACB500B61F15 /* Petr.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Petr.gpx; sourceTree = "<group>"; };
 		AF98955C2561AD3B00B61F15 /* Center.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Center.gpx; sourceTree = "<group>"; };
@@ -283,6 +287,9 @@
 				AF76D07327AFD01600AFE6C8 /* HitsCountView.swift */,
 				AF7943E0253C4A36006CEB2B /* BuildingTableViewCell.swift */,
 				AF8E9ED229906CA80066A021 /* BlurryPanel.swift */,
+				AF8E9ED42992B9D10066A021 /* FiltersButton.swift */,
+				AF8E9ED82992C7020066A021 /* FiltersBarButtonItem.swift */,
+				AF8E9ED62992BCE00066A021 /* ResultsCountBarButtonItem.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -305,7 +312,6 @@
 				AFB533BE25B4FD3F0079EE21 /* UISearchToken+Convenience.swift */,
 				AFC4CA36298F1BA400BFD6C0 /* MKCoordinateRegion+Convenience.swift */,
 				AF8E9ECE29905E3E0066A021 /* UIImage+Convenience.swift */,
-				AF8E9ED029906B090066A021 /* UIButton+Factory.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -402,6 +408,7 @@
 				AF6D857C2584F83C004D699A /* SwitchContainerViewController.swift in Sources */,
 				AFC4CA37298F1BA400BFD6C0 /* MKCoordinateRegion+Convenience.swift in Sources */,
 				AF6F4FED260803EC00408DF7 /* SceneDelegate+Phone.swift in Sources */,
+				AF8E9ED92992C7020066A021 /* FiltersBarButtonItem.swift in Sources */,
 				AF8E9ED329906CA80066A021 /* BlurryPanel.swift in Sources */,
 				AFE9C00125FD5B3700BF0E2D /* ToolbarDelegate.swift in Sources */,
 				AF8E9EC729903C9A0066A021 /* BuldingHitsMapViewController+Sidebar.swift in Sources */,
@@ -421,12 +428,12 @@
 				AFFA76C1255833AF00578914 /* ClusterView.swift in Sources */,
 				AF82DCF3244C77A300CE8B95 /* AppDelegate.swift in Sources */,
 				AF82DD21244CB9D600CE8B95 /* UIStackView+Convenience.swift in Sources */,
-				AF8E9ED129906B090066A021 /* UIButton+Factory.swift in Sources */,
 				AF82DD0E244CB56B00CE8B95 /* GalleryViewController.swift in Sources */,
 				AF82DD1C244CB6C200CE8B95 /* UIView+Convenience.swift in Sources */,
 				AFF4F67A2783BFC50054100B /* NoResultsView.swift in Sources */,
 				AF8E9EC929903CC40066A021 /* TransitioningDelegate.swift in Sources */,
 				AFC4C977298A7BE800BFD6C0 /* String+Localization.swift in Sources */,
+				AF8E9ED52992B9D10066A021 /* FiltersButton.swift in Sources */,
 				AFFE9E6525FEAD1E000C3AC9 /* FiltersHelper.swift in Sources */,
 				AF7943D4253B925B006CEB2B /* FilterViewController.swift in Sources */,
 				AFB533BF25B4FD3F0079EE21 /* UISearchToken+Convenience.swift in Sources */,
@@ -440,6 +447,7 @@
 				AF8E9ECD29903D100066A021 /* DismissAnimationController.swift in Sources */,
 				AF76D07227AFC36300AFE6C8 /* HandleView.swift in Sources */,
 				AF82DD0C244CB54B00CE8B95 /* Builder.swift in Sources */,
+				AF8E9ED72992BCE00066A021 /* ResultsCountBarButtonItem.swift in Sources */,
 				AF6F4FF0260803F500408DF7 /* SceneDelegate+Pad.swift in Sources */,
 				AFB533BB25B4FD250079EE21 /* UISearchTextField+Convenience.swift in Sources */,
 				AF82DD26244CBA4300CE8B95 /* ImageCell.swift in Sources */,
@@ -594,19 +602,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Spbscape/Spbscape.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3MM327Z8HD;
+				DEVELOPMENT_TEAM = SAJW9H6FUP;
 				INFOPLIST_FILE = Spbscape/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fitc.spbscaper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spbscape;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
@@ -616,19 +626,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Spbscape/Spbscape.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3MM327Z8HD;
+				DEVELOPMENT_TEAM = SAJW9H6FUP;
 				INFOPLIST_FILE = Spbscape/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fitc.spbscaper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spbscape;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Release;
 		};

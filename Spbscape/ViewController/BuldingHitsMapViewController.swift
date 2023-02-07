@@ -18,9 +18,8 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
   var hitsSource: HitsInteractor<Hit<Building>>?
   var hashFacets: [Attribute: [Facet]]
   let userTrackingButton: MKUserTrackingButton
-  
-  var window: UIWindow?
-  
+  var didTapFilterButton: ((UIButton) -> Void)?
+
   var detailsTransitioningDelegate: TransitioningDelegate!
 
   private var nextRegionChangeIsFromUserInteraction = false
@@ -35,12 +34,7 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
     return hitsCountLabel
   }()
   
-  lazy var filterButton: UIButton = {
-    let filterButton = UIButton.filter
-    return filterButton
-  }()
-  
-  lazy var floatingPanel: BlurryPanel = {
+  func addFloatingPanel(withFilterButton filterButton: UIButton) -> BlurryPanel {
     let floatingPanel = BlurryPanel()
     floatingPanel.translatesAutoresizingMaskIntoConstraints = false
     floatingPanel.stackView.addArrangedSubview(hitsCountLabel)
@@ -53,7 +47,7 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
       floatingPanel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
     ])
     return floatingPanel
-  }()
+  }
     
   init() {
     self.mapView = MKMapView()
@@ -139,7 +133,10 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
       presentedViewController.dismiss(animated: true, completion: nil)
     }
   }
-
+  
+  @objc func didTapFilterButton(_ filterButton: UIButton) {
+    didTapFilterButton?(filterButton)
+  }
   
   func isVisible(_ building: Building) -> Bool {
     return mapView.annotations.contains(where: { annotation in (annotation as? BuildingAnnotation)?.building.id == building.id })

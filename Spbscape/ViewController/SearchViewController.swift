@@ -8,6 +8,10 @@
 
 import Foundation
 import UIKit
+#if targetEnvironment(macCatalyst)
+import Combine
+#endif
+
 
 class SearchViewController: UIViewController {
   
@@ -34,12 +38,18 @@ class SearchViewController: UIViewController {
   private let backgroundView: UIVisualEffectView
   let filterButton: UIButton
   
+  #if targetEnvironment(macCatalyst)
+  var showFilterSubscriber: AnyCancellable?
+  #endif
+    
   private let handleViewHeight: CGFloat = 14
   private let searchBarHeight: CGFloat = 36
   private let hitsCountViewHeight: CGFloat = 40
   private let stackSpacing: CGFloat = 10
     
-  init(childViewController: UIViewController, style: Style) {
+  init(childViewController: UIViewController,
+       style: Style,
+       filterButton: UIButton) {
     self.stackView = UIStackView()
     self.handleView = HandleView()
     self.searchBarContainer = UIStackView()
@@ -47,7 +57,7 @@ class SearchViewController: UIViewController {
     self.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .prominent))
     self.searchTextField = UISearchTextField()
     self.childViewController = childViewController
-    self.filterButton = .filter
+    self.filterButton = filterButton
     self.style = style
     super.init(nibName: .none, bundle: .none)
     addChild(childViewController)
