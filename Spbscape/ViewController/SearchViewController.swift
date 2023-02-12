@@ -12,7 +12,9 @@ import UIKit
 import Combine
 #endif
 
-class SearchViewController: UIViewController {
+
+
+final class SearchViewController: UIViewController {
   
   let searchTextField: UISearchTextField
   let childViewController: UIViewController
@@ -21,21 +23,22 @@ class SearchViewController: UIViewController {
   var compactHeight: CGFloat {
     handleViewHeight +
     searchBarHeight +
-    hitsCountViewHeight +
+    footerViewHeight +
     3 * stackSpacing
   }
   
   var style: Style
   
-  let hitsCountView: HitsCountView
-  let filterButton: UIButton
-  let resultsCountViewModel: ResultsCountViewModel
-  let filtersStateViewModel: FiltersStateViewModel
+  private let resultsCountViewModel: ResultsCountViewModel
+  private let filtersStateViewModel: FiltersStateViewModel
   
-  private let stackView: UIStackView
-  private let handleView: HandleView
-  private let searchBarContainer: UIStackView
   private let backgroundView: UIVisualEffectView
+  private let mainStackView: UIStackView
+  private let headerView: HandleView
+  private let bodyStackView: UIStackView
+  private let footerView: UIView
+  private let filtersButton: UIButton
+  private let resultsCountLabel: UILabel
   
   #if targetEnvironment(macCatalyst)
   var showFilterSubscriber: AnyCancellable?
@@ -43,34 +46,29 @@ class SearchViewController: UIViewController {
     
   private let handleViewHeight: CGFloat = 14
   private let searchBarHeight: CGFloat = 36
-  private let hitsCountViewHeight: CGFloat = 40
+  private let footerViewHeight: CGFloat = 40
   private let stackSpacing: CGFloat = 10
     
   init(childViewController: UIViewController,
        filtersStateViewModel: FiltersStateViewModel,
        resultsCountViewModel: ResultsCountViewModel,
        style: Style) {
-    self.stackView = UIStackView()
-    self.handleView = HandleView()
-    self.searchBarContainer = UIStackView()
-    self.hitsCountView = HitsCountView()
+    self.mainStackView = UIStackView()
+    self.headerView = HandleView()
+    self.bodyStackView = UIStackView()
     self.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .prominent))
     self.searchTextField = UISearchTextField()
     self.childViewController = childViewController
-    self.filterButton = UIButton()
+    self.filtersButton = UIButton()
+    self.resultsCountLabel = UILabel()
+    self.footerView = UIView()
     self.style = style
     self.resultsCountViewModel = resultsCountViewModel
     self.filtersStateViewModel = filtersStateViewModel
     super.init(nibName: .none, bundle: .none)
     addChild(childViewController)
     childViewController.didMove(toParent: self)
-    filterButton.setImage(filtersStateViewModel.filtersButtonImage(), for: .normal)
-    filterButton.contentVerticalAlignment = .fill
-    filterButton.contentHorizontalAlignment = .fill
-
     filtersStateViewModel.addObserver(self)
-    
-    hitsCountView.countLabel.text = resultsCountViewModel.resultsCountTitle()
     resultsCountViewModel.addObserver(self)
   }
   
@@ -80,92 +78,15 @@ class SearchViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupBackgroundView()
+    setupMainStackView()
+    setupBodyStackView()
+    setupHeaderView()
+    setupFooterView()
+    setupFiltersButton()
+    setupResultsCountLabel()
+    setupSearchTextField()
     setupLayout()
-  }
-  
-  fileprivate func setupLayout() {
-    
-    // Configure filter button
-    filterButton.addTarget(self, action: #selector(didTapFilterButton(_:)), for: .touchUpInside)
-    
-    // Configure stack view
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.axis = .vertical
-    stackView.spacing = stackSpacing
-
-    // Configure background view
-    backgroundView.translatesAutoresizingMaskIntoConstraints = false
-    backgroundView.clipsToBounds = true
-    if style == .overlay {
-      backgroundView.layer.cornerRadius = 12
-      backgroundView.layer.maskedCorners = [
-        .layerMaxXMinYCorner,
-        .layerMinXMinYCorner
-      ]
-    }
-    
-    // Configure handle view
-    #if targetEnvironment(macCatalyst)
-    handleView.isHidden = true
-    #endif
-    handleView.handleBar.isHidden = style == .fullscreen
-    handleView.translatesAutoresizingMaskIntoConstraints = false
-
-    // Configure search text field
-    searchTextField.translatesAutoresizingMaskIntoConstraints = false
-
-    // Configure search bar container
-    searchBarContainer.translatesAutoresizingMaskIntoConstraints = false
-    searchBarContainer.axis = .horizontal
-    searchBarContainer.spacing = 0
-    searchBarContainer.alignment = .center
-    
-    // Configure placeholder view
-    hitsCountView.translatesAutoresizingMaskIntoConstraints = false
-    
-    // Configure child view
-    let childView = childViewController.view!
-    childView.translatesAutoresizingMaskIntoConstraints = false
-
-    view.addSubview(backgroundView)
-    let topAnchor: NSLayoutYAxisAnchor
-    #if targetEnvironment(macCatalyst)
-    topAnchor = view.safeAreaLayoutGuide.topAnchor
-    #else
-    topAnchor = view.topAnchor
-    #endif
-    activate(
-      backgroundView.topAnchor.constraint(equalTo: topAnchor),
-      backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-      backgroundView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-      backgroundView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-    )
-    backgroundView.contentView.addSubview(stackView)
-    stackView.pin(to: backgroundView,
-                  insets: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0))
-
-    searchBarContainer.addArrangedSubview(.placeHolder(width: 14))
-    searchBarContainer.addArrangedSubview(searchTextField)
-    if style == .overlay {
-      searchBarContainer.addArrangedSubview(.placeHolder(width: 7))
-      searchBarContainer.addArrangedSubview(filterButton)
-    }
-    searchBarContainer.addArrangedSubview(.placeHolder(width: 14))
-    
-    activate(
-      handleView.heightAnchor.constraint(equalToConstant: handleViewHeight),
-      searchBarContainer.heightAnchor.constraint(equalToConstant: searchBarHeight),
-      hitsCountView.heightAnchor.constraint(equalToConstant: hitsCountViewHeight),
-      filterButton.widthAnchor.constraint(equalToConstant: 28),
-      filterButton.heightAnchor.constraint(equalToConstant: 28)
-    )
-    
-    stackView.addArrangedSubview(handleView)
-    stackView.addArrangedSubview(searchBarContainer)
-    if style == .overlay {
-      stackView.addArrangedSubview(hitsCountView)
-    }
-    stackView.addArrangedSubview(childViewController.view)
   }
   
   @objc func didTapFilterButton(_ filterButton: UIButton) {
@@ -177,6 +98,125 @@ class SearchViewController: UIViewController {
     filtersStateViewModel.removeObserver(self)
   }
 
+}
+
+private extension SearchViewController {
+  
+  func setupLayout() {
+      
+    footerView.addSubview(resultsCountLabel)
+    activate(
+      resultsCountLabel.centerYAnchor.constraint(equalTo: footerView.centerYAnchor, constant: -7),
+      resultsCountLabel.leadingAnchor.constraint(equalTo: footerView.leadingAnchor, constant: 5),
+      resultsCountLabel.trailingAnchor.constraint(equalTo: footerView.trailingAnchor, constant: -5)
+    )
+
+    view.addSubview(backgroundView)
+    
+    let topAnchor: NSLayoutYAxisAnchor
+    #if targetEnvironment(macCatalyst)
+    topAnchor = view.safeAreaLayoutGuide.topAnchor
+    #else
+    topAnchor = view.topAnchor
+    #endif
+    
+    activate(
+      backgroundView.topAnchor.constraint(equalTo: topAnchor),
+      backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+      backgroundView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+      backgroundView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+    )
+    backgroundView.contentView.addSubview(mainStackView)
+    let mainStackViewInsets = UIEdgeInsets(top: 5,
+                                           left: 0,
+                                           bottom: 0,
+                                           right: 0)
+    mainStackView.pin(to: backgroundView,
+                  insets: mainStackViewInsets)
+
+    bodyStackView.addArrangedSubview(.placeHolder(width: 14))
+    bodyStackView.addArrangedSubview(searchTextField)
+    if style == .overlay {
+      bodyStackView.addArrangedSubview(.placeHolder(width: 7))
+      bodyStackView.addArrangedSubview(filtersButton)
+    }
+    bodyStackView.addArrangedSubview(.placeHolder(width: 14))
+    
+    activate(
+      headerView.heightAnchor.constraint(equalToConstant: handleViewHeight),
+      bodyStackView.heightAnchor.constraint(equalToConstant: searchBarHeight),
+      footerView.heightAnchor.constraint(equalToConstant: footerViewHeight),
+      filtersButton.widthAnchor.constraint(equalToConstant: 28),
+      filtersButton.heightAnchor.constraint(equalToConstant: 28)
+    )
+    
+    mainStackView.addArrangedSubview(headerView)
+    mainStackView.addArrangedSubview(bodyStackView)
+    if style == .overlay {
+      mainStackView.addArrangedSubview(footerView)
+    }
+
+    let childView = childViewController.view!
+    childView.translatesAutoresizingMaskIntoConstraints = false
+    mainStackView.addArrangedSubview(childViewController.view)
+  }
+
+  
+  func setupFiltersButton() {
+    filtersButton.setImage(filtersStateViewModel.filtersButtonImage(), for: .normal)
+    filtersButton.contentVerticalAlignment = .fill
+    filtersButton.contentHorizontalAlignment = .fill
+    filtersButton.addTarget(self, action: #selector(didTapFilterButton(_:)), for: .touchUpInside)
+  }
+  
+  func setupResultsCountLabel() {
+    resultsCountLabel.text = resultsCountViewModel.resultsCountTitle()
+    resultsCountLabel.textColor = ColorScheme.primaryColor
+    resultsCountLabel.textAlignment = .center
+    resultsCountLabel.translatesAutoresizingMaskIntoConstraints = false
+  }
+  
+  func setupBackgroundView() {
+    backgroundView.translatesAutoresizingMaskIntoConstraints = false
+    backgroundView.clipsToBounds = true
+    if style == .overlay {
+      backgroundView.layer.cornerRadius = 12
+      backgroundView.layer.maskedCorners = [
+        .layerMaxXMinYCorner,
+        .layerMinXMinYCorner
+      ]
+    }
+  }
+  
+  func setupHeaderView() {
+    headerView.translatesAutoresizingMaskIntoConstraints = false
+    #if targetEnvironment(macCatalyst)
+    headerView.isHidden = true
+    #endif
+    headerView.handleBar.isHidden = style == .fullscreen
+  }
+  
+  func setupFooterView() {
+    footerView.translatesAutoresizingMaskIntoConstraints = false
+  }
+  
+  func setupSearchTextField() {
+    searchTextField.translatesAutoresizingMaskIntoConstraints = false
+  }
+  
+  func setupBodyStackView() {
+    bodyStackView.translatesAutoresizingMaskIntoConstraints = false
+    bodyStackView.axis = .horizontal
+    bodyStackView.spacing = 0
+    bodyStackView.alignment = .center
+  }
+  
+  func setupMainStackView() {
+    mainStackView.translatesAutoresizingMaskIntoConstraints = false
+    mainStackView.axis = .vertical
+    mainStackView.spacing = stackSpacing
+  }
+  
 }
 
 extension SearchViewController {
@@ -191,7 +231,7 @@ extension SearchViewController {
 extension SearchViewController: ResultsCountObserver {
   
   func setResultsCount(_ resultsCount: String) {
-    hitsCountView.countLabel.text = resultsCount
+    resultsCountLabel.text = resultsCount
   }
   
 }
@@ -199,7 +239,7 @@ extension SearchViewController: ResultsCountObserver {
 extension SearchViewController: FiltersStateObserver {
   
   func setFiltersEmpty(_ empty: Bool) {
-    filterButton.setImage(filtersStateViewModel.filtersButtonImage(), for: .normal)
+    filtersButton.setImage(filtersStateViewModel.filtersButtonImage(), for: .normal)
   }
   
 }

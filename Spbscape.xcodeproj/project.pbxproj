@@ -18,7 +18,6 @@
 		AF76D06E27AE7FF900AFE6C8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D06D27AE7FF900AFE6C8 /* SearchViewController.swift */; };
 		AF76D07027AE86BD00AFE6C8 /* InteractiveSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D06F27AE86BD00AFE6C8 /* InteractiveSheetViewController.swift */; };
 		AF76D07227AFC36300AFE6C8 /* HandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D07127AFC36300AFE6C8 /* HandleView.swift */; };
-		AF76D07427AFD01600AFE6C8 /* HitsCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D07327AFD01600AFE6C8 /* HitsCountView.swift */; };
 		AF76D07627AFDDEA00AFE6C8 /* OverlayControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D07527AFDDEA00AFE6C8 /* OverlayControllerDelegate.swift */; };
 		AF76D07827AFDE0A00AFE6C8 /* OverlayStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF76D07727AFDE0A00AFE6C8 /* OverlayStateController.swift */; };
 		AF7943D4253B925B006CEB2B /* FiltersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7943D3253B925B006CEB2B /* FiltersViewModel.swift */; };
@@ -52,6 +51,7 @@
 		AF8E9EE929984AA30066A021 /* UIBarButtonItem+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9EE829984AA30066A021 /* UIBarButtonItem+Convenience.swift */; };
 		AF8E9EEB29984D850066A021 /* FiltersStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9EEA29984D850066A021 /* FiltersStateViewModel.swift */; };
 		AF8E9EED2998577F0066A021 /* ToolpanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9EEC2998577F0066A021 /* ToolpanelViewController.swift */; };
+		AF8E9EF1299906DA0066A021 /* SearchHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9EF0299906DA0066A021 /* SearchHeaderViewController.swift */; };
 		AF98955A2561ACB500B61F15 /* Petr.gpx in Resources */ = {isa = PBXBuildFile; fileRef = AF9895592561ACB500B61F15 /* Petr.gpx */; };
 		AF98955D2561AD3B00B61F15 /* Center.gpx in Resources */ = {isa = PBXBuildFile; fileRef = AF98955C2561AD3B00B61F15 /* Center.gpx */; };
 		AFB533BB25B4FD250079EE21 /* UISearchTextField+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB533BA25B4FD250079EE21 /* UISearchTextField+Convenience.swift */; };
@@ -80,7 +80,6 @@
 		AF76D06D27AE7FF900AFE6C8 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		AF76D06F27AE86BD00AFE6C8 /* InteractiveSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveSheetViewController.swift; sourceTree = "<group>"; };
 		AF76D07127AFC36300AFE6C8 /* HandleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleView.swift; sourceTree = "<group>"; };
-		AF76D07327AFD01600AFE6C8 /* HitsCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitsCountView.swift; sourceTree = "<group>"; };
 		AF76D07527AFDDEA00AFE6C8 /* OverlayControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayControllerDelegate.swift; sourceTree = "<group>"; };
 		AF76D07727AFDE0A00AFE6C8 /* OverlayStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayStateController.swift; sourceTree = "<group>"; };
 		AF7943D3253B925B006CEB2B /* FiltersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewModel.swift; sourceTree = "<group>"; };
@@ -120,6 +119,7 @@
 		AF8E9EE829984AA30066A021 /* UIBarButtonItem+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Convenience.swift"; sourceTree = "<group>"; };
 		AF8E9EEA29984D850066A021 /* FiltersStateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersStateViewModel.swift; sourceTree = "<group>"; };
 		AF8E9EEC2998577F0066A021 /* ToolpanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolpanelViewController.swift; sourceTree = "<group>"; };
+		AF8E9EF0299906DA0066A021 /* SearchHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderViewController.swift; sourceTree = "<group>"; };
 		AF9895582561AC5900B61F15 /* VO.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VO.gpx; sourceTree = "<group>"; };
 		AF9895592561ACB500B61F15 /* Petr.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Petr.gpx; sourceTree = "<group>"; };
 		AF98955C2561AD3B00B61F15 /* Center.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Center.gpx; sourceTree = "<group>"; };
@@ -260,6 +260,7 @@
 				AF76D06D27AE7FF900AFE6C8 /* SearchViewController.swift */,
 				AFE9C00025FD5B3700BF0E2D /* ToolbarDelegate.swift */,
 				AF8E9EE229983F280066A021 /* ViewControllerFactory.swift */,
+				AF8E9EF0299906DA0066A021 /* SearchHeaderViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -285,7 +286,6 @@
 				AFFA76C32558340200578914 /* HitAnnotationView.swift */,
 				AFF4F6792783BFC50054100B /* NoResultsView.swift */,
 				AF76D07127AFC36300AFE6C8 /* HandleView.swift */,
-				AF76D07327AFD01600AFE6C8 /* HitsCountView.swift */,
 				AF7943E0253C4A36006CEB2B /* BuildingTableViewCell.swift */,
 			);
 			path = View;
@@ -443,6 +443,7 @@
 				AF8E9EC5299011650066A021 /* SidebarOverlayPresentationController.swift in Sources */,
 				AF76D07827AFDE0A00AFE6C8 /* OverlayStateController.swift in Sources */,
 				AFFA76C1255833AF00578914 /* ClusterView.swift in Sources */,
+				AF8E9EF1299906DA0066A021 /* SearchHeaderViewController.swift in Sources */,
 				AF82DCF3244C77A300CE8B95 /* AppDelegate.swift in Sources */,
 				AF8E9EEB29984D850066A021 /* FiltersStateViewModel.swift in Sources */,
 				AF82DD21244CB9D600CE8B95 /* UIStackView+Convenience.swift in Sources */,
@@ -463,7 +464,6 @@
 				AFFE9E5E25FE813E000C3AC9 /* HitsPresentationMode.swift in Sources */,
 				AFE9BFFE25FD57A700BF0E2D /* SearchViewModel.swift in Sources */,
 				AF8E9EE329983F280066A021 /* ViewControllerFactory.swift in Sources */,
-				AF76D07427AFD01600AFE6C8 /* HitsCountView.swift in Sources */,
 				AF8E9ECD29903D100066A021 /* DismissAnimationController.swift in Sources */,
 				AF76D07227AFC36300AFE6C8 /* HandleView.swift in Sources */,
 				AF8E9EDD2992F2570066A021 /* FiltersViewController.swift in Sources */,
