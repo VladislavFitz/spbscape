@@ -8,6 +8,7 @@
 
 import Foundation
 import AlgoliaSearchClient
+import SpbscapeCore
 import UIKit
 
 final class ViewControllerFactory {
@@ -27,11 +28,13 @@ final class ViewControllerFactory {
   static func searchViewController(with listHitsViewController: UIViewController,
                                    searchViewModel: SearchViewModel) -> SearchViewController {
     let searchViewController: SearchViewController
-    let style: SearchViewController.Style = UIDevice.current.userInterfaceIdiom == .phone ? .overlay : .fullscreen
-    searchViewController = SearchViewController(childViewController: listHitsViewController,
-                                                filtersStateViewModel: searchViewModel.filtersStateViewModel,
-                                                resultsCountViewModel: searchViewModel.resultsCountViewModel,
-                                                style: style)
+    let style: SearchHeaderViewController.Style = UIDevice.current.userInterfaceIdiom == .phone ? .overlay : .fullscreen
+    
+    let headerViewController = SearchHeaderViewController(filtersStateViewModel: searchViewModel.filtersStateViewModel,
+                                                          resultsCountViewModel: searchViewModel.resultsCountViewModel,
+                                                          style: style)
+    searchViewController = SearchViewController(headerViewController: headerViewController,
+                                                bodyViewController: listHitsViewController)
     searchViewModel.setup(searchViewController)
     return searchViewController
   }
@@ -150,28 +153,30 @@ final class ViewControllerFactory {
                                               listHitsViewController: BuldingHitsListViewController,
                                               mapHitsViewController: BuldingHitsMapViewController,
                                               searchViewModel: SearchViewModel) -> UIViewController {
-    
     let interactiveSheetViewController = InteractiveSheetViewController(mainViewController: mapHitsViewController,
-                                                                        overlayViewController: searchViewController,
-                                                                        compactHeight: searchViewController.compactHeight,
-                                                                        searchTextField: searchViewController.searchTextField)
-    searchViewController.didTapFilterButton = { [weak interactiveSheetViewController, weak searchViewModel] _ in
+                                                                        overlayViewController: searchViewController)
+    let headerViewController = searchViewController.headerViewController
+    headerViewController.searchTextField.delegate = interactiveSheetViewController
+    headerViewController.didTapFilterButton = { [weak interactiveSheetViewController, weak searchViewModel] _ in
       guard let interactiveSheetViewController, let searchViewModel else { return }
       let filtersViewController = ViewControllerFactory.filtersViewController(searchViewModel: searchViewModel)
       interactiveSheetViewController.present(filtersViewController)
     }
     
     let navigationController = UINavigationController(rootViewController: interactiveSheetViewController)
-    mapHitsViewController.didSelect = { [weak navigationController] building, _ in
+    
+    func showBuilding(_ building: Building) {
       let buildingViewController = BuildingViewController(building: building)
       buildingViewController.view.backgroundColor = .systemBackground
-      navigationController?.pushViewController(buildingViewController, animated: true)
+      navigationController.pushViewController(buildingViewController, animated: true)
     }
     
-    listHitsViewController.didSelect = { [weak navigationController] building in
-      let buildingViewController = BuildingViewController(building: building)
-      buildingViewController.view.backgroundColor = .systemBackground
-      navigationController?.pushViewController(buildingViewController, animated: true)
+    mapHitsViewController.didSelect = { building, _ in
+      showBuilding(building)
+    }
+    
+    listHitsViewController.didSelect = { building in
+      showBuilding(building)
     }
     return navigationController
   }

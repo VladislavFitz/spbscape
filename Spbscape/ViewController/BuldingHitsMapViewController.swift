@@ -219,38 +219,3 @@ extension Point {
   }
   
 }
-
-extension BuldingHitsMapViewController {
-  
-  func presentPopover(for building: Building, from annotation: MKAnnotationView) {
-    let buildingViewController = BuildingViewController(building: building)
-    let item = UIBarButtonItem(image: UIImage(systemName: "arrow.up.left.and.arrow.down.right"), style: .done, target: self, action: #selector(tryFullscreen))
-    buildingViewController.navigationItem.rightBarButtonItem = item
-    let navigationController = UINavigationController(rootViewController: buildingViewController)
-    navigationController.preferredContentSize = .init(width: 300, height: 320)
-    navigationController.modalPresentationStyle = .popover
-    navigationController.popoverPresentationController?.sourceView = annotation
-    navigationController.popoverPresentationController?.sourceRect = annotation.bounds.insetBy(dx: annotation.calloutOffset.x - 20, dy: annotation.calloutOffset.y - 20)
-    present(navigationController, animated: true, completion: nil)
-  }
-  
-  @objc func tryFullscreen() {
-    
-    if let navigationController = presentedViewController as? UINavigationController, navigationController.viewControllers.first is BuildingViewController, navigationController.modalPresentationStyle == .popover {
-      navigationController.dismiss(animated: true) {
-        let dismissBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .done, target: self, action: #selector(self.dismissFullscreen))
-        navigationController.viewControllers.first?.navigationItem.rightBarButtonItem = dismissBarButtonItem
-        navigationController.viewControllers.first?.preferredContentSize = CGSize(width: 500, height: 700)
-        navigationController.modalPresentationStyle = .formSheet
-        self.present(navigationController, animated: true, completion: nil)
-      }
-    }
-  }
-  
-  @objc func dismissFullscreen() {
-    if let navigationController = presentedViewController as? UINavigationController, navigationController.viewControllers.first is BuildingViewController, navigationController.modalPresentationStyle == .formSheet {
-      navigationController.dismiss(animated: true, completion: nil)
-    }
-  }
-  
-}

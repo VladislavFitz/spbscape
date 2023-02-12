@@ -22,13 +22,14 @@ class SearchViewModel {
   let filtersStateViewModel: FiltersStateViewModel
   
   init() {
-    filterState = .init()
-    filtersViewModel = .init(filterState: filterState)
+    filterState = FilterState()
+    filtersViewModel = FiltersViewModel(filterState: filterState)
     searcher = HitsSearcher(appID: .spbscapeAppID, apiKey: .spbscape, indexName: .buildings)
-    hitsConnector = .init(searcher: searcher, filterState: filterState)
-    queryInputConnector = .init(searcher: searcher)
-    resultsCountViewModel = .init(resultsCount: 0)
-    filtersStateViewModel = .init(areFiltersEmpty: true, clearFilters: filtersViewModel.resetFilters)
+    hitsConnector = HitsConnector(searcher: searcher, filterState: filterState)
+    queryInputConnector = QueryInputConnector(searcher: searcher)
+    resultsCountViewModel = ResultsCountViewModel(resultsCount: 0)
+    filtersStateViewModel = FiltersStateViewModel(areFiltersEmpty: true,
+                                                  clearFilters: filtersViewModel.resetFilters)
     searcher.connectFilterState(filterState)
     searcher.request.query.hitsPerPage = 200
     searcher.onResults.subscribePast(with: self) { (viewModel, response) in
@@ -41,7 +42,7 @@ class SearchViewModel {
   }
   
   func setup(_ searchViewController: SearchViewController) {
-    setup(searchViewController.searchTextField)
+    setup(searchViewController.headerViewController.searchTextField)
   }
   
   func setup(_ filtersViewController: FiltersViewController) {

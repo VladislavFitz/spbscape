@@ -13,10 +13,10 @@ import InstantSearch
 
 final class FiltersViewModel {
   
-  let facetValuesSearcher: MultiSearcher
-  let facetListConnectors: [FacetListConnector]
   let filterState: FilterState
   let facetValuesQueryInputInteractor: QueryInputInteractor
+  let facetValuesSearcher: MultiSearcher
+  let facetListConnectors: [FacetListConnector]
   
   var appliedFiltersCount: Int {
     filterState.toFilterGroups().map(\.filters).map(\.count).reduce(0, +)

@@ -12,23 +12,17 @@ import UIKit
 class InteractiveSheetViewController: UIViewController {
   
   let mainViewController: UIViewController
-  let overlayViewController: UIViewController
-  let searchTextField: UITextField
-  let overlayCompactHeight: CGFloat
+  let overlayViewController: UIViewController & OverlayingView
   
   private let overlayStateController: OverlayStateController
   private var heightConstraint: NSLayoutConstraint!
   private let overlayBottomOffset: CGFloat = 90
   
   init(mainViewController: UIViewController,
-       overlayViewController: UIViewController,
-       compactHeight: CGFloat,
-       searchTextField: UITextField) {
+       overlayViewController: UIViewController & OverlayingView) {
     self.mainViewController = mainViewController
     self.overlayViewController = overlayViewController
     self.overlayStateController = OverlayStateController()
-    self.overlayCompactHeight = compactHeight
-    self.searchTextField = searchTextField
     super.init(nibName: nil, bundle: nil)
     for viewController in [mainViewController, overlayViewController] {
       addChild(viewController)
@@ -44,7 +38,6 @@ class InteractiveSheetViewController: UIViewController {
     super.viewDidLoad()
     setupMainView()
     setupOverlayView()
-    searchTextField.delegate = self
     overlayStateController.delegate = self
     overlayStateController.set(.compact, animated: false)
   }
@@ -83,7 +76,7 @@ private extension InteractiveSheetViewController {
     let overlayView = overlayViewController.view!
     overlayView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(overlayView)
-    heightConstraint = overlayView.heightAnchor.constraint(equalToConstant: overlayCompactHeight)
+    heightConstraint = overlayView.heightAnchor.constraint(equalToConstant: overlayViewController.compactHeight)
     activate(
       heightConstraint,
       overlayView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -101,7 +94,7 @@ extension InteractiveSheetViewController: OverlayControllerDelegate {
   }
   
   var switchStateThreshold: CGFloat {
-    return view.bounds.height / 2 + overlayCompactHeight
+    return view.bounds.height / 2 + overlayViewController.compactHeight
   }
   
   var fullscreenOverlayHeight: CGFloat {
@@ -109,14 +102,14 @@ extension InteractiveSheetViewController: OverlayControllerDelegate {
   }
   
   var compactOverlayHeight: CGFloat {
-    return overlayCompactHeight + overlayBottomOffset
+    return overlayViewController.compactHeight + overlayBottomOffset
   }
 
   func shouldSetHeight(_ height: CGFloat, animated: Bool) {
     heightConstraint.constant = height
     guard animated else {
-      if searchTextField.isEditing, height < switchStateThreshold {
-          searchTextField.endEditing(true)
+      if height < switchStateThreshold {
+        overlayViewController.notifyCompact()
       }
       return
     }
@@ -124,9 +117,9 @@ extension InteractiveSheetViewController: OverlayControllerDelegate {
     animator.addAnimations {
       self.view.layoutIfNeeded()
     }
-    if searchTextField.isEditing, height < switchStateThreshold {
+    if height < switchStateThreshold {
         animator.addCompletion { _ in
-            self.searchTextField.endEditing(true)
+          self.overlayViewController.notifyCompact()
         }
     }
     animator.startAnimation()
@@ -134,9 +127,7 @@ extension InteractiveSheetViewController: OverlayControllerDelegate {
   
   func didChangeState(_ newState: OverlayStateController.State, animated: Bool) {
     if case .compact = newState {
-      if searchTextField.isEditing {
-        searchTextField.endEditing(true)
-      }
+      overlayViewController.notifyCompact()
     }
   }
   
