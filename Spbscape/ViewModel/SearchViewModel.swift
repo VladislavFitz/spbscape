@@ -18,51 +18,36 @@ class SearchViewModel {
   let hitsConnector: HitsConnector<Hit<Building>>
   let filterState: FilterState
   let filtersViewModel: FiltersViewModel
-
+  let resultsCountViewModel: ResultsCountViewModel
+  let filtersStateViewModel: FiltersStateViewModel
+  
   init() {
     filterState = .init()
     filtersViewModel = .init(filterState: filterState)
     searcher = HitsSearcher(appID: .spbscapeAppID, apiKey: .spbscape, indexName: .buildings)
     hitsConnector = .init(searcher: searcher, filterState: filterState)
     queryInputConnector = .init(searcher: searcher)
+    resultsCountViewModel = .init(resultsCount: 0)
+    filtersStateViewModel = .init(areFiltersEmpty: true, clearFilters: filtersViewModel.resetFilters)
     searcher.connectFilterState(filterState)
     searcher.request.query.hitsPerPage = 200
+    searcher.onResults.subscribePast(with: self) { (viewModel, response) in
+      let searchResultsCount = response.searchStats.totalHitsCount
+      let notification = Notification(name: .updateSearchResultsCount,
+                                      object: self,
+                                      userInfo: ["searchResultsCount": searchResultsCount])
+      NotificationCenter.default.post(notification)
+    }.onQueue(.main)
   }
   
   func setup(_ searchViewController: SearchViewController) {
     setup(searchViewController.searchTextField)
-    setupResultsCountView(searchViewController.hitsCountView)
-    filtersViewModel.setupFiltersButton(searchViewController.filterButton)
-    searcher.search()
   }
   
   func setup(_ filtersViewController: FiltersViewController) {
-    if let resultsCountItem = filtersViewController.resultsCountBarButtonItem {
-      setupResultsCountBarButtonItem(resultsCountItem)
-    }
     filtersViewModel.setup(filtersViewController)
   }
-  
-  private static func resultsCountTitle(count: Int) -> String {
-    "\("buildings".localize()): \(count)"
-  }
-  
-  private func setupResultsCountBarButtonItem(_ barButtonItem: UIBarButtonItem) {
-    barButtonItem.title = SearchViewModel.resultsCountTitle(count: 0)
-    searcher.onResults.subscribePast(with: barButtonItem) { (barButtonItem, response) in
-      let hitsCount = response.searchStats.totalHitsCount
-      barButtonItem.title = SearchViewModel.resultsCountTitle(count: hitsCount)
-    }.onQueue(.main)
-  }
-  
-  private func setupResultsCountView(_ hitsCountView: HitsCountView) {
-    hitsCountView.countLabel.text = SearchViewModel.resultsCountTitle(count: 0)
-    searcher.onResults.subscribePast(with: hitsCountView) { (view, response) in
-      let hitsCount = response.searchStats.totalHitsCount
-      view.countLabel.text = SearchViewModel.resultsCountTitle(count: hitsCount)
-    }.onQueue(.main)
-  }
-  
+      
   private func setup(_ textField: UISearchTextField) {
     textField.placeholder = "searchPlaceholder".localize()
     textField.addTarget(self, action: #selector(didChangeText(_:)), for: .editingChanged)
@@ -78,7 +63,7 @@ class SearchViewModel {
     }
   }
   
-  @objc func didChangeText(_ textField: UISearchTextField) {
+  @objc private func didChangeText(_ textField: UISearchTextField) {
     let filtersFromTokens = Set(textField.tokens.compactMap { $0.representedObject as? Filter.Facet })
     filterState
       .toFilterGroups()

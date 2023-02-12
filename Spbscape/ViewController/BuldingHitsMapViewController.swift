@@ -18,42 +18,22 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
   var hitsSource: HitsInteractor<Hit<Building>>?
   var hashFacets: [Attribute: [Facet]]
   let userTrackingButton: MKUserTrackingButton
-  var didTapFilterButton: ((UIButton) -> Void)?
-
+  
+  let toolpanelViewController: ToolpanelViewController?
+  
   var detailsTransitioningDelegate: TransitioningDelegate!
 
   private var nextRegionChangeIsFromUserInteraction = false
   
   var didSelect: ((Building, MKAnnotationView) -> Void)?
   var didChangeVisibleRegion: ((MKMapRect, Bool) -> Void)? = nil
-  
-  lazy var hitsCountLabel: UILabel = {
-    let hitsCountLabel = UILabel()
-    hitsCountLabel.translatesAutoresizingMaskIntoConstraints = false
-    hitsCountLabel.textColor = ColorScheme.primaryColor
-    return hitsCountLabel
-  }()
-  
-  func addFloatingPanel(withFilterButton filterButton: UIButton) -> BlurryPanel {
-    let floatingPanel = BlurryPanel()
-    floatingPanel.translatesAutoresizingMaskIntoConstraints = false
-    floatingPanel.stackView.addArrangedSubview(hitsCountLabel)
-    floatingPanel.stackView.addArrangedSubview(filterButton)
-    view.addSubview(floatingPanel)
-    NSLayoutConstraint.activate([
-      floatingPanel.heightAnchor.constraint(equalToConstant: 44),
-      floatingPanel.widthAnchor.constraint(equalToConstant: 200),
-      floatingPanel.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
-      floatingPanel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-    ])
-    return floatingPanel
-  }
-    
-  init() {
+      
+  init(toolpanelViewController: ToolpanelViewController?) {
     self.mapView = MKMapView()
     self.locationManager = .init()
     self.hashFacets = [:]
     self.userTrackingButton = MKUserTrackingButton(mapView: mapView)
+    self.toolpanelViewController = toolpanelViewController
     super.init(nibName: nil, bundle: nil)
     mapView.register(HitAnnotationView.self, forAnnotationViewWithReuseIdentifier: "buildingAnnotationView")
     mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
@@ -86,6 +66,10 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
     userTrackingButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -20).isActive = true
     
     view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTap)))
+    
+    if let toolpanelViewController {
+      setup(toolpanelViewController)
+    }
   }
   
   private func configureLayout() {
@@ -119,6 +103,19 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
       mapView.addAnnotations(annotationsToAdd)
     }
   }
+  
+  private func setup(_ toolpanelViewController: ToolpanelViewController) {
+    addChild(toolpanelViewController)
+    toolpanelViewController.didMove(toParent: self)
+    toolpanelViewController.view.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(toolpanelViewController.view)
+    NSLayoutConstraint.activate([
+      toolpanelViewController.view.heightAnchor.constraint(equalToConstant: 44),
+      toolpanelViewController.view.widthAnchor.constraint(equalToConstant: 200),
+      toolpanelViewController.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
+      toolpanelViewController.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+    ])
+  }
       
   func reload() {
     placeAnnotations()
@@ -133,11 +130,7 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
       presentedViewController.dismiss(animated: true, completion: nil)
     }
   }
-  
-  @objc func didTapFilterButton(_ filterButton: UIButton) {
-    didTapFilterButton?(filterButton)
-  }
-  
+    
   func isVisible(_ building: Building) -> Bool {
     return mapView.annotations.contains(where: { annotation in (annotation as? BuildingAnnotation)?.building.id == building.id })
   }

@@ -28,7 +28,9 @@ class SearchViewController: UIViewController {
   var style: Style
   
   let hitsCountView: HitsCountView
-  let filterButton: FiltersButton
+  let filterButton: UIButton
+  let resultsCountViewModel: ResultsCountViewModel
+  let filtersStateViewModel: FiltersStateViewModel
   
   private let stackView: UIStackView
   private let handleView: HandleView
@@ -45,6 +47,8 @@ class SearchViewController: UIViewController {
   private let stackSpacing: CGFloat = 10
     
   init(childViewController: UIViewController,
+       filtersStateViewModel: FiltersStateViewModel,
+       resultsCountViewModel: ResultsCountViewModel,
        style: Style) {
     self.stackView = UIStackView()
     self.handleView = HandleView()
@@ -53,11 +57,21 @@ class SearchViewController: UIViewController {
     self.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .prominent))
     self.searchTextField = UISearchTextField()
     self.childViewController = childViewController
-    self.filterButton = FiltersButton()
+    self.filterButton = UIButton()
     self.style = style
+    self.resultsCountViewModel = resultsCountViewModel
+    self.filtersStateViewModel = filtersStateViewModel
     super.init(nibName: .none, bundle: .none)
     addChild(childViewController)
     childViewController.didMove(toParent: self)
+    filterButton.setImage(filtersStateViewModel.filtersButtonImage(), for: .normal)
+    filterButton.contentVerticalAlignment = .fill
+    filterButton.contentHorizontalAlignment = .fill
+
+    filtersStateViewModel.addObserver(self)
+    
+    hitsCountView.countLabel.text = resultsCountViewModel.resultsCountTitle()
+    resultsCountViewModel.addObserver(self)
   }
   
   required init?(coder: NSCoder) {
@@ -141,7 +155,9 @@ class SearchViewController: UIViewController {
     activate(
       handleView.heightAnchor.constraint(equalToConstant: handleViewHeight),
       searchBarContainer.heightAnchor.constraint(equalToConstant: searchBarHeight),
-      hitsCountView.heightAnchor.constraint(equalToConstant: hitsCountViewHeight)
+      hitsCountView.heightAnchor.constraint(equalToConstant: hitsCountViewHeight),
+      filterButton.widthAnchor.constraint(equalToConstant: 28),
+      filterButton.heightAnchor.constraint(equalToConstant: 28)
     )
     
     stackView.addArrangedSubview(handleView)
@@ -155,6 +171,11 @@ class SearchViewController: UIViewController {
   @objc func didTapFilterButton(_ filterButton: UIButton) {
     didTapFilterButton?(filterButton)
   }
+  
+  deinit {
+    resultsCountViewModel.removeObserver(self)
+    filtersStateViewModel.removeObserver(self)
+  }
 
 }
 
@@ -163,6 +184,22 @@ extension SearchViewController {
   enum Style {
     case overlay
     case fullscreen
+  }
+  
+}
+
+extension SearchViewController: ResultsCountObserver {
+  
+  func setResultsCount(_ resultsCount: String) {
+    hitsCountView.countLabel.text = resultsCount
+  }
+  
+}
+
+extension SearchViewController: FiltersStateObserver {
+  
+  func setFiltersEmpty(_ empty: Bool) {
+    filterButton.setImage(filtersStateViewModel.filtersButtonImage(), for: .normal)
   }
   
 }

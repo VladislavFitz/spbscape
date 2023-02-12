@@ -21,6 +21,7 @@ class BuldingHitsListViewController: UITableViewController, HitsController {
     
   override func viewDidLoad() {
     super.viewDidLoad()
+    tableView.keyboardDismissMode = .onDrag
     tableView.register(BuildingTableViewCell.self, forCellReuseIdentifier: "buildingCell")
     tableView.rowHeight = 80
     tableView.backgroundColor = UIColor.clear

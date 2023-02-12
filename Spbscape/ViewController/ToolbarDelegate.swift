@@ -13,9 +13,6 @@ class ToolbarDelegate: NSObject {
   
 }
 
-extension Notification.Name {
-  static let showFilters = Self(rawValue: "com.spbscape.filters")
-}
 
 #if targetEnvironment(macCatalyst)
 

@@ -12,9 +12,9 @@ import InstantSearchCore
 
 extension UIViewController {
   
-  func presentFilters(viewControllerBuilder: () -> FiltersViewController,
-                      sourceRect: CGRect? = nil) {
-    let filterViewController = viewControllerBuilder()
+  func present(_ filtersViewController: FiltersViewController,
+               from sourceRect: CGRect? = nil) {
+    let filterViewController = filtersViewController
     let filtersNavigationController = UINavigationController(rootViewController: filterViewController)
     let navigationBarAppearance = UINavigationBarAppearance()
     navigationBarAppearance.configureWithOpaqueBackground()

@@ -10,54 +10,33 @@ import Foundation
 import UIKit
 import InstantSearch
 
-class FiltersViewController: UIViewController {
+final class FiltersViewController: UIViewController {
   
-  let searchController: UISearchController
+  private let searchController: UISearchController
+  private let resultsViewController: SwitchContainerViewController
+
   let queryInputController: TextFieldController
-  let resultsViewController: SwitchContainerViewController
   let viewControllers: [FacetListViewController]
   
-  lazy var clearFiltersBarButtonItem: UIBarButtonItem = {
-    UIBarButtonItem(image: UIImage(systemName: "trash.circle"),
-                                                style: .done,
-                                                target: self,
-                                                action: #selector(_clearFilters))
-  }()
-  
-  let resultsCountBarButtonItem: UIBarButtonItem?
-  
-  var clearFilters: (() -> Void)?
-  
-  init(showResultsCount: Bool) {
+  private let resultsCountViewModel: ResultsCountViewModel?
+  private let filtersStateViewModel: FiltersStateViewModel
+  private var resultsCountBarButtonItem: UIBarButtonItem?
+  private var clearFiltersBarButtonItem: UIBarButtonItem?
+    
+  init(filtersStateViewModel: FiltersStateViewModel,
+       resultsCountViewModel: ResultsCountViewModel?) {
+    self.filtersStateViewModel = filtersStateViewModel
+    self.resultsCountViewModel = resultsCountViewModel
     viewControllers = FilterSection.allCases.map { _ in FacetListViewController(style: .plain) }
     resultsViewController = SwitchContainerViewController(viewControllers: viewControllers)
     searchController = UISearchController(searchResultsController: nil)
     queryInputController = TextFieldController(searchBar: searchController.searchBar)
-    resultsCountBarButtonItem = showResultsCount ? UIBarButtonItem() : nil
+    clearFiltersBarButtonItem = nil
+    resultsCountBarButtonItem = nil
     super.init(nibName: nil, bundle: nil)
     navigationItem.searchController = searchController
-    let closeBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark.circle"),
-                                             style: .done,
-                                             target: self,
-                                             action: #selector(dismissViewController))
-    
-    let additionalBarButtonItems: [UIBarButtonItem] = resultsCountBarButtonItem.flatMap {
-      [
-        UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
-                        target: nil,
-                        action: nil),
-        $0
-      ]
-    } ?? []
-    
-    toolbarItems =
-    [clearFiltersBarButtonItem] +
-    additionalBarButtonItems + [
-      UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-      closeBarButtonItem
-    ]
-    addChild(resultsViewController)
-    resultsViewController.didMove(toParent: self)
+    resultsCountViewModel?.addObserver(self)
+    filtersStateViewModel.addObserver(self)
   }
   
   required init?(coder: NSCoder) {
@@ -70,22 +49,71 @@ class FiltersViewController: UIViewController {
     view.backgroundColor = .systemBackground
     navigationController?.isToolbarHidden = false
     setupSearchController()
-    view.addSubview(resultsViewController.view)
-    resultsViewController.view.pin(to: view)
+    setupResultsViewController()
+    setupToolbar()
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    searchController.isActive = false
   }
   
   @objc private func dismissViewController() {
     navigationController?.dismiss(animated: true, completion: nil)
   }
   
-  @objc private func _clearFilters() {
-    clearFilters?()
+  @objc private func clearFilters() {
+    filtersStateViewModel.clearFilters()
   }
   
-  private func setupSearchController() {
+  deinit {
+    resultsCountViewModel?.removeObserver(self)
+    filtersStateViewModel.removeObserver(self)
+  }
+  
+}
+
+private extension FiltersViewController {
+  
+  func setupToolbar() {
+    let closeBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark.circle"),
+                                             style: .done,
+                                             target: self,
+                                             action: #selector(dismissViewController))
+    let clearFiltersBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "trash.circle"),
+                                                    style: .done,
+                                                    target: self,
+                                                    action: #selector(clearFilters))
+    self.clearFiltersBarButtonItem = clearFiltersBarButtonItem
+    clearFiltersBarButtonItem.isEnabled = !filtersStateViewModel.areFiltersEmpty
+    
+    var toolbarItems: [UIBarButtonItem] = []
+    toolbarItems.append(clearFiltersBarButtonItem)
+    
+    if let resultsCountViewModel {
+      let resultsCountBarButtonItem = UIBarButtonItem()
+      self.resultsCountBarButtonItem = resultsCountBarButtonItem
+      resultsCountBarButtonItem.title = resultsCountViewModel.resultsCountTitle()
+      toolbarItems.append(.flexibleSpace)
+      toolbarItems.append(resultsCountBarButtonItem)
+    }
+    toolbarItems.append(.flexibleSpace)
+    toolbarItems.append(closeBarButtonItem)
+    
+    self.toolbarItems = toolbarItems
+  }
+  
+  func setupResultsViewController() {
+    addChild(resultsViewController)
+    resultsViewController.didMove(toParent: self)
+    view.addSubview(resultsViewController.view)
+    resultsViewController.view.pin(to: view)
+  }
+  
+  func setupSearchController() {
+    searchController.isActive = true
     searchController.hidesNavigationBarDuringPresentation = false
     searchController.searchBar.showsScopeBar = true
-    searchController.isActive = true
     searchController.searchBar.showsCancelButton = false
     searchController.searchBar.scopeButtonTitles = FilterSection.allCases.map(\.title)
     searchController.searchBar.delegate = self
@@ -101,3 +129,20 @@ extension FiltersViewController: UISearchBarDelegate {
   
 }
 
+extension FiltersViewController: ResultsCountObserver {
+  
+  func setResultsCount(_ resultsCount: String) {
+    if let resultsCountBarButtonItem, let resultsCountViewModel {
+      resultsCountBarButtonItem.title = resultsCountViewModel.resultsCountTitle()
+    }
+  }
+  
+}
+
+extension FiltersViewController: FiltersStateObserver {
+  
+  func setFiltersEmpty(_ empty: Bool) {
+    clearFiltersBarButtonItem?.isEnabled = !empty
+  }
+  
+}
