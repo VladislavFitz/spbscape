@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class ToolpanelViewController: UIViewController {
   
@@ -15,6 +16,9 @@ class ToolpanelViewController: UIViewController {
   let hitsCountLabel: UILabel
   let filtersButton: UIButton
   var didTapFiltersButton: ((UIButton) -> Void)?
+  
+  private var filtersStateSubscriber: AnyCancellable?
+  private var resultsCountSubscriber: AnyCancellable?
 
   private let filtersStateViewModel: FiltersStateViewModel
   private let resultsCountViewModel: ResultsCountViewModel
@@ -30,7 +34,7 @@ class ToolpanelViewController: UIViewController {
     hitsCountLabel.textColor = ColorScheme.primaryColor
     hitsCountLabel.textAlignment = .center
     hitsCountLabel.translatesAutoresizingMaskIntoConstraints = false
-    hitsCountLabel.text = resultsCountViewModel.resultsCountTitle()
+    hitsCountLabel.text = resultsCountViewModel.resultsCountTitle
     
     filtersButton = UIButton()
     filtersButton.contentVerticalAlignment = .fill
@@ -41,10 +45,16 @@ class ToolpanelViewController: UIViewController {
     filtersButton.addTarget(self,
                             action: #selector(_didTapFiltersButton),
                             for: .touchUpInside)
-    filtersButton.setImage(filtersStateViewModel.filtersButtonImage(), for: .normal)
-    filtersStateViewModel.addObserver(self)
-    resultsCountViewModel.addObserver(self)
-    
+    filtersStateSubscriber = filtersStateViewModel
+      .$filtersButtonImage
+      .receive(on: DispatchQueue.main)
+      .sink { [weak filtersButton] image in
+        filtersButton?.setImage(image, for: .normal)
+      }
+    resultsCountSubscriber = resultsCountViewModel
+      .$resultsCountTitle
+      .receive(on: DispatchQueue.main)
+      .assign(to: \.text, on: hitsCountLabel)
   }
   
   required init?(coder: NSCoder) {
@@ -77,27 +87,6 @@ class ToolpanelViewController: UIViewController {
   
   @objc private func _didTapFiltersButton(_ filterButton: UIButton) {
     didTapFiltersButton?(filterButton)
-  }
-  
-  deinit {
-    resultsCountViewModel.removeObserver(self)
-    filtersStateViewModel.removeObserver(self)
-  }
-  
-}
-
-extension ToolpanelViewController: ResultsCountObserver {
-  
-  func setResultsCount(_ resultsCount: String) {
-    hitsCountLabel.text = resultsCountViewModel.resultsCountTitle()
-  }
-
-}
-
-extension ToolpanelViewController: FiltersStateObserver {
-  
-  func setFiltersEmpty(_ empty: Bool) {
-    filtersButton.setImage(filtersStateViewModel.filtersButtonImage(), for: .normal)
   }
   
 }

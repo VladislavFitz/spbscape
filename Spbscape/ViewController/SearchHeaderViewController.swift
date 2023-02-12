@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 final class SearchHeaderViewController: UIViewController {
   
@@ -37,6 +38,9 @@ final class SearchHeaderViewController: UIViewController {
   private let footerView: UIView
   private let filtersButton: UIButton
   private let resultsCountLabel: UILabel
+  
+  private var filtersStateSubscriber: AnyCancellable?
+  private var resultsCountSubscriber: AnyCancellable?
 
   init(filtersStateViewModel: FiltersStateViewModel,
        resultsCountViewModel: ResultsCountViewModel,
@@ -52,8 +56,17 @@ final class SearchHeaderViewController: UIViewController {
     self.resultsCountViewModel = resultsCountViewModel
     self.filtersStateViewModel = filtersStateViewModel
     super.init(nibName: nil, bundle: nil)
-    filtersStateViewModel.addObserver(self)
-    resultsCountViewModel.addObserver(self)
+    filtersStateSubscriber = filtersStateViewModel
+      .$filtersButtonImage
+      .receive(on: DispatchQueue.main)
+      .sink { [weak filtersButton] image in
+        filtersButton?.setImage(image, for: .normal)
+      }
+    resultsCountSubscriber = resultsCountViewModel
+      .$resultsCountTitle
+      .receive(on: DispatchQueue.main)
+      .map { $0 as String? }
+      .assign(to: \.text, on: resultsCountLabel)
   }
   
   override func viewDidLoad() {
@@ -72,10 +85,6 @@ final class SearchHeaderViewController: UIViewController {
     didTapFilterButton?(filterButton)
   }
   
-  deinit {
-    resultsCountViewModel.removeObserver(self)
-    filtersStateViewModel.removeObserver(self)
-  }
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -125,14 +134,12 @@ private extension SearchHeaderViewController {
 
   
   func setupFiltersButton() {
-    filtersButton.setImage(filtersStateViewModel.filtersButtonImage(), for: .normal)
     filtersButton.contentVerticalAlignment = .fill
     filtersButton.contentHorizontalAlignment = .fill
     filtersButton.addTarget(self, action: #selector(didTapFilterButton(_:)), for: .touchUpInside)
   }
   
   func setupResultsCountLabel() {
-    resultsCountLabel.text = resultsCountViewModel.resultsCountTitle()
     resultsCountLabel.textColor = ColorScheme.primaryColor
     resultsCountLabel.textAlignment = .center
     resultsCountLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -168,23 +175,6 @@ extension SearchHeaderViewController {
   enum Style {
     case overlay
     case fullscreen
-  }
-  
-}
-
-
-extension SearchHeaderViewController: ResultsCountObserver {
-  
-  func setResultsCount(_ resultsCount: String) {
-    resultsCountLabel.text = resultsCount
-  }
-  
-}
-
-extension SearchHeaderViewController: FiltersStateObserver {
-  
-  func setFiltersEmpty(_ empty: Bool) {
-    filtersButton.setImage(filtersStateViewModel.filtersButtonImage(), for: .normal)
   }
   
 }

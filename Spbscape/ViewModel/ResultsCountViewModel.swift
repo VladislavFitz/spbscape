@@ -10,24 +10,13 @@ import Foundation
 
 final class ResultsCountViewModel {
   
-  private var resultsCount: Int {
-    didSet {
-      for (id, observation) in observations {
-        guard let observer = observation.observer else {
-          observations.removeValue(forKey: id)
-          continue
-        }
-        observer.setResultsCount(resultsCountTitle())
-      }
-    }
-  }
+  @Published var resultsCount: Int = 0
+  @Published var resultsCountTitle: String? = nil
   
   private var observer: NSObjectProtocol?
-  private var observations: [ObjectIdentifier : Observation]
   
   public init(resultsCount: Int) {
     self.resultsCount = resultsCount
-    self.observations = [:]
     observer = NotificationCenter.default.addObserver(forName: .updateSearchResultsCount,
                                                       object: nil,
                                                       queue: .main) { [weak self] notification in
@@ -35,21 +24,8 @@ final class ResultsCountViewModel {
         return
       }
       self.resultsCount = resultsCount
+      self.resultsCountTitle =  "\("buildings".localize()): \(resultsCount)"
     }
-  }
-  
-  public func resultsCountTitle() -> String {
-    "\("buildings".localize()): \(resultsCount)"
-  }
-  
-  public func addObserver(_ observer: ResultsCountObserver) {
-    let id = ObjectIdentifier(observer)
-    observations[id] = Observation(observer: observer)
-  }
-  
-  func removeObserver(_ observer: ResultsCountObserver) {
-    let id = ObjectIdentifier(observer)
-    observations.removeValue(forKey: id)
   }
   
   deinit {
@@ -58,16 +34,4 @@ final class ResultsCountViewModel {
     }
   }
   
-}
-
-private extension ResultsCountViewModel {
-  
-  struct Observation {
-    weak var observer: ResultsCountObserver?
-  }
-  
-}
-
-protocol ResultsCountObserver: AnyObject {
-  func setResultsCount(_ resultsCount: String)
 }

@@ -11,26 +11,15 @@ import UIKit
 
 final class FiltersStateViewModel {
   
-  var areFiltersEmpty: Bool {
-    didSet {
-      for (id, observation) in observations {
-        guard let observer = observation.observer else {
-          observations.removeValue(forKey: id)
-          continue
-        }
-        observer.setFiltersEmpty(areFiltersEmpty)
-      }
-    }
-  }
-  
   private var _clearFilters: () -> Void
+  
+  @Published var areFiltersEmpty: Bool = true
+  @Published var filtersButtonImage: UIImage? = UIImage(systemName: "line.horizontal.3.decrease.circle")
   private var observer: NSObjectProtocol?
-  private var observations: [ObjectIdentifier: Observation]
   
   init(areFiltersEmpty: Bool, clearFilters: @escaping () -> Void) {
     self._clearFilters = clearFilters
     self.areFiltersEmpty = areFiltersEmpty
-    self.observations = [:]
     observer = NotificationCenter.default.addObserver(forName: .updateAppliedFiltersCount,
                                                       object: nil,
                                                       queue: .main) { [weak self] notification in
@@ -38,40 +27,13 @@ final class FiltersStateViewModel {
         return
       }
       self.areFiltersEmpty = appliedFiltersCount == 0
+      let iconName = appliedFiltersCount == 0 ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill"
+      self.filtersButtonImage = UIImage(systemName: iconName)
     }
-  }
-  
-  public func addObserver(_ observer: FiltersStateObserver) {
-    let id = ObjectIdentifier(observer)
-    observations[id] = Observation(observer: observer)
-  }
-  
-  func removeObserver(_ observer: FiltersStateObserver) {
-    let id = ObjectIdentifier(observer)
-    observations.removeValue(forKey: id)
-  }
-  
-  func filtersButtonImage() -> UIImage {
-    let iconName = areFiltersEmpty ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill"
-    return UIImage(systemName: iconName)!
   }
   
   func clearFilters() {
     _clearFilters()
   }
-  
-}
-
-private extension FiltersStateViewModel {
-  
-  struct Observation {
-    weak var observer: FiltersStateObserver?
-  }
-  
-}
-
-protocol FiltersStateObserver: AnyObject {
-  
-  func setFiltersEmpty(_ empty: Bool)
   
 }

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import InstantSearch
+import Combine
 
 final class FiltersViewController: UIViewController {
   
@@ -22,6 +23,9 @@ final class FiltersViewController: UIViewController {
   private let filtersStateViewModel: FiltersStateViewModel
   private var resultsCountBarButtonItem: UIBarButtonItem?
   private var clearFiltersBarButtonItem: UIBarButtonItem?
+  
+  private var filtersStateSubscriber: AnyCancellable?
+  private var resultsCountSubscriber: AnyCancellable?
     
   init(filtersStateViewModel: FiltersStateViewModel,
        resultsCountViewModel: ResultsCountViewModel?) {
@@ -35,8 +39,6 @@ final class FiltersViewController: UIViewController {
     resultsCountBarButtonItem = nil
     super.init(nibName: nil, bundle: nil)
     navigationItem.searchController = searchController
-    resultsCountViewModel?.addObserver(self)
-    filtersStateViewModel.addObserver(self)
   }
   
   required init?(coder: NSCoder) {
@@ -66,11 +68,6 @@ final class FiltersViewController: UIViewController {
     filtersStateViewModel.clearFilters()
   }
   
-  deinit {
-    resultsCountViewModel?.removeObserver(self)
-    filtersStateViewModel.removeObserver(self)
-  }
-  
 }
 
 private extension FiltersViewController {
@@ -85,7 +82,11 @@ private extension FiltersViewController {
                                                     target: self,
                                                     action: #selector(clearFilters))
     self.clearFiltersBarButtonItem = clearFiltersBarButtonItem
-    clearFiltersBarButtonItem.isEnabled = !filtersStateViewModel.areFiltersEmpty
+    filtersStateSubscriber = filtersStateViewModel
+      .$areFiltersEmpty
+      .receive(on: DispatchQueue.main)
+      .map { !$0 }
+      .assign(to: \.isEnabled, on: clearFiltersBarButtonItem)
     
     var toolbarItems: [UIBarButtonItem] = []
     toolbarItems.append(clearFiltersBarButtonItem)
@@ -93,7 +94,12 @@ private extension FiltersViewController {
     if let resultsCountViewModel {
       let resultsCountBarButtonItem = UIBarButtonItem()
       self.resultsCountBarButtonItem = resultsCountBarButtonItem
-      resultsCountBarButtonItem.title = resultsCountViewModel.resultsCountTitle()
+      resultsCountSubscriber = resultsCountViewModel
+        .$resultsCountTitle
+        .receive(on: DispatchQueue.main)
+        .sink { title in
+          resultsCountBarButtonItem.title = title
+        }
       toolbarItems.append(.flexibleSpace)
       toolbarItems.append(resultsCountBarButtonItem)
     }
@@ -125,24 +131,6 @@ extension FiltersViewController: UISearchBarDelegate {
   
   func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
     resultsViewController.setVisibleViewController(atIndex: selectedScope)
-  }
-  
-}
-
-extension FiltersViewController: ResultsCountObserver {
-  
-  func setResultsCount(_ resultsCount: String) {
-    if let resultsCountBarButtonItem, let resultsCountViewModel {
-      resultsCountBarButtonItem.title = resultsCountViewModel.resultsCountTitle()
-    }
-  }
-  
-}
-
-extension FiltersViewController: FiltersStateObserver {
-  
-  func setFiltersEmpty(_ empty: Bool) {
-    clearFiltersBarButtonItem?.isEnabled = !empty
   }
   
 }
