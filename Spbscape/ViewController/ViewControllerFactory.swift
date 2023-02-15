@@ -10,6 +10,7 @@ import Foundation
 import AlgoliaSearchClient
 import SpbscapeCore
 import UIKit
+import SwiftUI
 
 final class ViewControllerFactory {
   
@@ -106,7 +107,7 @@ final class ViewControllerFactory {
       splitViewController = UISplitViewController(style: .doubleColumn)
       splitViewController.primaryBackgroundStyle = .sidebar
       splitViewController.presentsWithGesture = false
-      splitViewController.preferredDisplayMode = .allVisible
+      splitViewController.preferredDisplayMode = .oneBesideSecondary
       splitViewController.setViewController(searchViewController, for: .primary)
       splitViewController.setViewController(mapHitsViewController, for: .secondary)
     } else {
@@ -166,9 +167,9 @@ final class ViewControllerFactory {
     let navigationController = UINavigationController(rootViewController: interactiveSheetViewController)
     
     func showBuilding(_ building: Building) {
-      let buildingViewController = BuildingViewController(building: building)
-      buildingViewController.view.backgroundColor = .systemBackground
-      navigationController.pushViewController(buildingViewController, animated: true)
+      let buildingView = BuildingView(viewModel: BuildingViewModel(building: building))
+      let hostingViewController = UIHostingController(rootView: buildingView)
+      navigationController.pushViewController(hostingViewController, animated: true)
     }
     
     mapHitsViewController.didSelect = { building, _ in

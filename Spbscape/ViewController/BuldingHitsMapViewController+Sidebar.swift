@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 import SpbscapeCore
 
 extension BuldingHitsMapViewController {
@@ -15,7 +16,9 @@ extension BuldingHitsMapViewController {
   func presentSidebar(for building: Building) {
     
     func presentBuilding(mode: TransitioningDelegate.Mode) {
-      let buildingViewController = BuildingViewController(building: building)
+      let viewModel = BuildingViewModel(building: building)
+      let buildingViewController = UIHostingController(rootView: BuildingView(viewModel: viewModel))
+      //BuildingViewController(building: building)
       let navigationController = UINavigationController(rootViewController: buildingViewController)
       navigationController.modalPresentationStyle = .custom
       let view = UIView()

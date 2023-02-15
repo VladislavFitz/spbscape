@@ -143,17 +143,6 @@ final class BuildingViewController: UIViewController {
     valueLabel.text = values.joined(separator: ", ")
     valueLabel.font = .systemFont(ofSize: 14, weight: .semibold)
     stackView.addArrangedSubview(valueLabel)
-//    let valuesStackView = UIStackView()
-//      .set(\.translatesAutoresizingMaskIntoConstraints, to: false)
-//      .set(\.axis, to: .vertical)
-//      .set(\.alignment, to: .leading)
-//    for value in values {
-//      let valueLabel = UILabel()
-//      valueLabel.text = value
-//      valuesStackView.addArrangedSubview(valueLabel)
-//    }
-//    valuesStackView.addArrangedSubview(.init())
-//    stackView.addArrangedSubview(valuesStackView)
     return stackView
   }
   
