@@ -75,6 +75,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		403F1EA7299CF6C000989BC4 /* spbscape-core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "spbscape-core"; path = "../spbscape-core"; sourceTree = "<group>"; };
 		AF48C4F7253639EE00262367 /* Architect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Architect.swift; sourceTree = "<group>"; };
 		AF48C4F8253639EE00262367 /* Street.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Street.swift; sourceTree = "<group>"; };
 		AF60557427839640006B2D04 /* Credentials.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
@@ -137,7 +138,6 @@
 		AFC4C973298A781400BFD6C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AFC4C975298A781800BFD6C0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AFC4C976298A7BE800BFD6C0 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
-		AFC4CA33298F00CC00BFD6C0 /* SpbscapeCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SpbscapeCore; path = ../../spbscape/SpbscapeCore; sourceTree = "<group>"; };
 		AFC4CA36298F1BA400BFD6C0 /* MKCoordinateRegion+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Convenience.swift"; sourceTree = "<group>"; };
 		AFE9BFFD25FD57A700BF0E2D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		AFE9C00025FD5B3700BF0E2D /* ToolbarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDelegate.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 		AF6055672783652B006B2D04 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				AFC4CA33298F00CC00BFD6C0 /* SpbscapeCore */,
+				403F1EA7299CF6C000989BC4 /* spbscape-core */,
 			);
 			name = Packages;
 			sourceTree = "<group>";

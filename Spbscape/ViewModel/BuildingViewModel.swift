@@ -8,6 +8,7 @@
 
 import Foundation
 import SpbscapeCore
+import SwiftUI
 
 class BuildingViewModel: ObservableObject {
   
@@ -21,6 +22,9 @@ class BuildingViewModel: ObservableObject {
   
   @Published var showImageViewer: Bool = false
   @Published var selectedImageURL: URL = URL(string: "www.a.com")!
+  @Published var imageViewerOffset: CGSize = .zero
+  
+  @Published var backgroundOpacity: Double = 1
   
   init(title: String,
        images: [URL],
@@ -56,5 +60,33 @@ class BuildingViewModel: ObservableObject {
       ("style", style),
     ]
   }
+  
+  func onChange(value: CGSize) {
+    imageViewerOffset = value
+    let halfHeight = UIScreen.main.bounds.height / 2
+//    print(value.height)
+    let progress = abs(imageViewerOffset.height) / halfHeight
+    withAnimation(.default) {
+      backgroundOpacity = Double(1 - progress)
+    }
+  }
+  
+  func onEnd(value: DragGesture.Value) {
+    withAnimation(.easeInOut) {
+      var translation = value.translation.height
+      if translation < 0 {
+        translation = -translation
+      }
+      if translation < 250 {
+        imageViewerOffset = .zero
+        backgroundOpacity = 1
+      } else {
+        showImageViewer.toggle()
+        imageViewerOffset = .zero
+        backgroundOpacity = 1
+      }
+    }
+  }
+  
   
 }
