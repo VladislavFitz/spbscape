@@ -169,7 +169,8 @@ final class ViewControllerFactory {
     func showBuilding(_ building: Building) {
       let buildingView = BuildingView(viewModel: BuildingViewModel(building: building))
       let hostingViewController = UIHostingController(rootView: buildingView)
-      navigationController.pushViewController(hostingViewController, animated: true)
+      navigationController.present(hostingViewController, animated: true)
+//      navigationController.pushViewController(hostingViewController, animated: true)
     }
     
     mapHitsViewController.didSelect = { building, _ in

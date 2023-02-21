@@ -25,6 +25,7 @@ class BuildingViewModel: ObservableObject {
   @Published var imageViewerOffset: CGSize = .zero
   
   @Published var backgroundOpacity: Double = 1
+  @Published var imageScale: CGFloat = 1
   
   init(title: String,
        images: [URL],
@@ -61,10 +62,13 @@ class BuildingViewModel: ObservableObject {
     ]
   }
   
+  func scaleEffect(for imageURL: URL) -> CGFloat {
+    selectedImageURL == imageURL ? (imageScale > 1 ? imageScale : 1) : 1
+  }
+  
   func onChange(value: CGSize) {
     imageViewerOffset = value
     let halfHeight = UIScreen.main.bounds.height / 2
-//    print(value.height)
     let progress = abs(imageViewerOffset.height) / halfHeight
     withAnimation(.default) {
       backgroundOpacity = Double(1 - progress)
@@ -79,12 +83,11 @@ class BuildingViewModel: ObservableObject {
       }
       if translation < 250 {
         imageViewerOffset = .zero
-        backgroundOpacity = 1
       } else {
         showImageViewer.toggle()
         imageViewerOffset = .zero
-        backgroundOpacity = 1
       }
+      backgroundOpacity = 1
     }
   }
   

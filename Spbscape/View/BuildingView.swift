@@ -14,12 +14,13 @@ struct BuildingView: View {
   @StateObject var viewModel: BuildingViewModel
   
   @Environment(\.openURL) var openURL
-    
+  
   var body: some View {
     VStack {
       Text(viewModel.title)
         .font(.system(size: 23, weight: .heavy))
         .padding(.horizontal, 10)
+        .padding(.top, 15)
       TabView {
         ForEach(viewModel.images.indices, id: \.self) { index in
           let image = viewModel.images[index]
@@ -31,7 +32,7 @@ struct BuildingView: View {
           }, label: {
             AsyncImage(url: image) { image in
               image
-                  .resizable()
+                .resizable()
             } placeholder: {
               ProgressView()
             }
@@ -58,7 +59,7 @@ struct BuildingView: View {
         openURL(URL(string: "https://www.citywalls.ru/house\(viewModel.citywallsID).html")!)
       } label: {
         Text(LocalizedStringKey("go-to-citywalls"))
-            .frame(maxWidth: .infinity)
+          .frame(maxWidth: .infinity)
       }
       .buttonStyle(.borderedProminent)
       .frame(maxWidth: .infinity)
@@ -68,6 +69,10 @@ struct BuildingView: View {
     .overlay (
       ZStack {
         if viewModel.showImageViewer {
+          Color
+            .black
+            .opacity(viewModel.backgroundOpacity)
+            .ignoresSafeArea()
           ImageView()
             .environmentObject(viewModel)
         }

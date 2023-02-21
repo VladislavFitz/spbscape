@@ -75,7 +75,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		403F1EA7299CF6C000989BC4 /* spbscape-core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "spbscape-core"; path = "../spbscape-core"; sourceTree = "<group>"; };
 		AF48C4F7253639EE00262367 /* Architect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Architect.swift; sourceTree = "<group>"; };
 		AF48C4F8253639EE00262367 /* Street.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Street.swift; sourceTree = "<group>"; };
 		AF60557427839640006B2D04 /* Credentials.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
@@ -129,6 +128,7 @@
 		AF8E9EF429998DF40066A021 /* BuildingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingView.swift; sourceTree = "<group>"; };
 		AF8E9EF8299C42200066A021 /* BuildingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingViewModel.swift; sourceTree = "<group>"; };
 		AF8E9EFA299C442C0066A021 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		AF8E9EFC29A57EA00066A021 /* SpbscapeCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SpbscapeCore; path = ../../spbscape/SpbscapeCore; sourceTree = "<group>"; };
 		AF9895582561AC5900B61F15 /* VO.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VO.gpx; sourceTree = "<group>"; };
 		AF9895592561ACB500B61F15 /* Petr.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Petr.gpx; sourceTree = "<group>"; };
 		AF98955C2561AD3B00B61F15 /* Center.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Center.gpx; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 		AF6055672783652B006B2D04 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				403F1EA7299CF6C000989BC4 /* spbscape-core */,
+				AF8E9EFC29A57EA00066A021 /* SpbscapeCore */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
