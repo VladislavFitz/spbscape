@@ -18,7 +18,6 @@ extension BuldingHitsMapViewController {
     func presentBuilding(mode: TransitioningDelegate.Mode) {
       let viewModel = BuildingViewModel(building: building)
       let buildingViewController = UIHostingController(rootView: BuildingView(viewModel: viewModel))
-      //BuildingViewController(building: building)
       let navigationController = UINavigationController(rootViewController: buildingViewController)
       navigationController.modalPresentationStyle = .custom
       let view = UIView()

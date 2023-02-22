@@ -11,34 +11,36 @@ import SwiftUI
 
 struct ImageView: View {
   
-  @EnvironmentObject var buildingViewModel: BuildingViewModel
+  @EnvironmentObject var viewModel: BuildingViewModel
   @GestureState var draggingOffset: CGSize = .zero
   
   var body: some View {
-    TabView(selection: $buildingViewModel.selectedImageURL) {
-      ForEach(buildingViewModel.images, id: \.self) { imageURL in
+    TabView(selection: $viewModel.selectedImageIndex) {
+      ForEach(viewModel.images.indices, id: \.self) { index in
+        let imageURL = viewModel.images[index]
         AsyncImage(url: imageURL) { image in
           image
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .scaleEffect(buildingViewModel.scaleEffect(for: imageURL))
+            .scaleEffect(viewModel.scaleEffectForImage(atIndex: index))
         } placeholder: {
           ProgressView()
+            .progressViewStyle(CircularProgressViewStyle())
         }
-        .background(Color.gray)
         .scaledToFit()
-        .offset(y: buildingViewModel.imageViewerOffset.height)
+        .offset(y: viewModel.imageViewerOffset.height)
+        .tag(imageURL)
         .gesture(
           MagnificationGesture().onChanged({ value in
-            buildingViewModel.imageScale = value
+            viewModel.imageScale = value
           }).onEnded({ _ in
             withAnimation(.spring()) {
-              buildingViewModel.imageScale = 1
+              viewModel.imageScale = 1
             }
           })
           .simultaneously(with: TapGesture(count: 2).onEnded({
             withAnimation {
-              buildingViewModel.imageScale = buildingViewModel.imageScale > 1 ? 1 : 4
+              viewModel.imageScale = viewModel.imageScale > 1 ? 1 : 4
             }
           }))
         )
@@ -48,12 +50,12 @@ struct ImageView: View {
     .overlay(
       Button(action: {
         withAnimation(.default) {
-          buildingViewModel.showImageViewer.toggle()
+          viewModel.showImageViewer.toggle()
         }
       }, label: {
         Image(systemName: "xmark")
           .foregroundColor(.white)
-          .padding()
+          .padding(.all, 7)
           .background(Color.white.opacity(0.35))
           .clipShape(Circle())
       })
@@ -62,8 +64,8 @@ struct ImageView: View {
     )
     .gesture(DragGesture().updating($draggingOffset, body: { value, outValue, transaction in
       outValue = value.translation
-      buildingViewModel.onChange(value: draggingOffset)
-    }).onEnded(buildingViewModel.onEnd(value:)))
+      viewModel.onChange(value: draggingOffset)
+    }).onEnded(viewModel.onEnd(value:)))
   }
   
 }

@@ -19,7 +19,6 @@ class HitAnnotationView: MKMarkerAnnotationView {
       newValue.flatMap(configure(with:))
     }
   }
-  var buildingViewController: BuildingViewController!
     
   func configure(with annotation: MKAnnotation) {
     guard annotation is BuildingAnnotation else { fatalError("Unexpected annotation type: \(annotation)") }

@@ -169,6 +169,7 @@ final class ViewControllerFactory {
     func showBuilding(_ building: Building) {
       let buildingView = BuildingView(viewModel: BuildingViewModel(building: building))
       let hostingViewController = UIHostingController(rootView: buildingView)
+//      hostingViewController.modalPresentationStyle = .
       navigationController.present(hostingViewController, animated: true)
 //      navigationController.pushViewController(hostingViewController, animated: true)
     }

@@ -31,8 +31,6 @@
 		AF82DCFF244C77A500CE8B95 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF82DCFD244C77A500CE8B95 /* LaunchScreen.storyboard */; };
 		AF82DD0A244C8A3500CE8B95 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = AF82DD09244C8A3500CE8B95 /* SDWebImage */; };
 		AF82DD0C244CB54B00CE8B95 /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DD0B244CB54B00CE8B95 /* Builder.swift */; };
-		AF82DD0E244CB56B00CE8B95 /* MediaGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DD0D244CB56B00CE8B95 /* MediaGalleryViewController.swift */; };
-		AF82DD10244CB59D00CE8B95 /* BuildingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DD0F244CB59D00CE8B95 /* BuildingViewController.swift */; };
 		AF82DD1C244CB6C200CE8B95 /* UIView+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DD1B244CB6C200CE8B95 /* UIView+Convenience.swift */; };
 		AF82DD1E244CB6CE00CE8B95 /* UIViewController+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DD1D244CB6CE00CE8B95 /* UIViewController+Convenience.swift */; };
 		AF82DD21244CB9D600CE8B95 /* UIStackView+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82DD20244CB9D600CE8B95 /* UIStackView+Convenience.swift */; };
@@ -56,6 +54,8 @@
 		AF8E9EF529998DF40066A021 /* BuildingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9EF429998DF40066A021 /* BuildingView.swift */; };
 		AF8E9EF9299C42200066A021 /* BuildingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9EF8299C42200066A021 /* BuildingViewModel.swift */; };
 		AF8E9EFB299C442C0066A021 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9EFA299C442C0066A021 /* ImageView.swift */; };
+		AF8E9EFE29A58FAA0066A021 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9EFD29A58FAA0066A021 /* PageControl.swift */; };
+		AF8E9F0029A65CC40066A021 /* GaugeProgressStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8E9EFF29A65CC40066A021 /* GaugeProgressStyle.swift */; };
 		AF98955A2561ACB500B61F15 /* Petr.gpx in Resources */ = {isa = PBXBuildFile; fileRef = AF9895592561ACB500B61F15 /* Petr.gpx */; };
 		AF98955D2561AD3B00B61F15 /* Center.gpx in Resources */ = {isa = PBXBuildFile; fileRef = AF98955C2561AD3B00B61F15 /* Center.gpx */; };
 		AFB533BB25B4FD250079EE21 /* UISearchTextField+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB533BA25B4FD250079EE21 /* UISearchTextField+Convenience.swift */; };
@@ -99,8 +99,6 @@
 		AF82DCFE244C77A500CE8B95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF82DD00244C77A500CE8B95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF82DD0B244CB54B00CE8B95 /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = "<group>"; };
-		AF82DD0D244CB56B00CE8B95 /* MediaGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaGalleryViewController.swift; sourceTree = "<group>"; };
-		AF82DD0F244CB59D00CE8B95 /* BuildingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingViewController.swift; sourceTree = "<group>"; };
 		AF82DD13244CB61300CE8B95 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		AF82DD15244CB62300CE8B95 /* ConstructionYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructionYear.swift; sourceTree = "<group>"; };
 		AF82DD17244CB67700CE8B95 /* BuildingAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingAnnotation.swift; sourceTree = "<group>"; };
@@ -129,6 +127,8 @@
 		AF8E9EF8299C42200066A021 /* BuildingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingViewModel.swift; sourceTree = "<group>"; };
 		AF8E9EFA299C442C0066A021 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		AF8E9EFC29A57EA00066A021 /* SpbscapeCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SpbscapeCore; path = ../../spbscape/SpbscapeCore; sourceTree = "<group>"; };
+		AF8E9EFD29A58FAA0066A021 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
+		AF8E9EFF29A65CC40066A021 /* GaugeProgressStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaugeProgressStyle.swift; sourceTree = "<group>"; };
 		AF9895582561AC5900B61F15 /* VO.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VO.gpx; sourceTree = "<group>"; };
 		AF9895592561ACB500B61F15 /* Petr.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Petr.gpx; sourceTree = "<group>"; };
 		AF98955C2561AD3B00B61F15 /* Center.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Center.gpx; sourceTree = "<group>"; };
@@ -260,8 +260,6 @@
 				AF8E9EEC2998577F0066A021 /* ToolpanelViewController.swift */,
 				AF8E9EC629903C9A0066A021 /* BuldingHitsMapViewController+Sidebar.swift */,
 				AF7943DD253C49D2006CEB2B /* BuldingHitsListViewController.swift */,
-				AF82DD0F244CB59D00CE8B95 /* BuildingViewController.swift */,
-				AF82DD0D244CB56B00CE8B95 /* MediaGalleryViewController.swift */,
 				AF8E9EF2299919970066A021 /* OverlayingView.swift */,
 				AF8E9EC829903CC40066A021 /* TransitioningDelegate.swift */,
 				AF8E9ECA29903CF20066A021 /* PresentAnimationController.swift */,
@@ -297,7 +295,9 @@
 				AF76D07127AFC36300AFE6C8 /* HandleView.swift */,
 				AF7943E0253C4A36006CEB2B /* BuildingTableViewCell.swift */,
 				AF8E9EF429998DF40066A021 /* BuildingView.swift */,
+				AF8E9EFD29A58FAA0066A021 /* PageControl.swift */,
 				AF8E9EFA299C442C0066A021 /* ImageView.swift */,
+				AF8E9EFF29A65CC40066A021 /* GaugeProgressStyle.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -433,7 +433,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF82DD10244CB59D00CE8B95 /* BuildingViewController.swift in Sources */,
 				AF8E9EC2298FCB3F0066A021 /* ColorScheme.swift in Sources */,
 				AF8E9EF9299C42200066A021 /* BuildingViewModel.swift in Sources */,
 				AF7943E1253C4A36006CEB2B /* BuildingTableViewCell.swift in Sources */,
@@ -463,7 +462,7 @@
 				AF8E9EEB29984D850066A021 /* FiltersStateViewModel.swift in Sources */,
 				AF8E9EF529998DF40066A021 /* BuildingView.swift in Sources */,
 				AF82DD21244CB9D600CE8B95 /* UIStackView+Convenience.swift in Sources */,
-				AF82DD0E244CB56B00CE8B95 /* MediaGalleryViewController.swift in Sources */,
+				AF8E9EFE29A58FAA0066A021 /* PageControl.swift in Sources */,
 				AF82DD1C244CB6C200CE8B95 /* UIView+Convenience.swift in Sources */,
 				AF8E9EE929984AA30066A021 /* UIBarButtonItem+Convenience.swift in Sources */,
 				AFF4F67A2783BFC50054100B /* NoResultsView.swift in Sources */,
@@ -474,6 +473,7 @@
 				AF7943D4253B925B006CEB2B /* FiltersViewModel.swift in Sources */,
 				AFB533BF25B4FD3F0079EE21 /* UISearchToken+Convenience.swift in Sources */,
 				AF82DCF5244C77A300CE8B95 /* SceneDelegate.swift in Sources */,
+				AF8E9F0029A65CC40066A021 /* GaugeProgressStyle.swift in Sources */,
 				AF76D06E27AE7FF900AFE6C8 /* SearchViewController.swift in Sources */,
 				AF60557727839BD6006B2D04 /* BuildingTableViewCell+Building.swift in Sources */,
 				AF8E9ECB29903CF20066A021 /* PresentAnimationController.swift in Sources */,

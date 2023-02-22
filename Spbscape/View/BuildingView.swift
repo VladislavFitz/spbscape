@@ -18,15 +18,15 @@ struct BuildingView: View {
   var body: some View {
     VStack {
       Text(viewModel.title)
-        .font(.system(size: 23, weight: .heavy))
+        .font(.system(size: 23, weight: .bold))
         .padding(.horizontal, 10)
         .padding(.top, 15)
-      TabView {
+      TabView(selection: $viewModel.selectedImageIndex) {
         ForEach(viewModel.images.indices, id: \.self) { index in
           let image = viewModel.images[index]
           Button(action: {
             withAnimation(.easeInOut) {
-              viewModel.selectedImageURL = viewModel.images[index]
+              viewModel.selectedImageIndex = index
               viewModel.showImageViewer.toggle()
             }
           }, label: {
@@ -35,14 +35,16 @@ struct BuildingView: View {
                 .resizable()
             } placeholder: {
               ProgressView()
+                .progressViewStyle(CircularProgressViewStyle())
             }
-            .background(Color.gray)
             .scaledToFit()
+            .tag(index)
           })
         }
       }
-      .tabViewStyle(.page)
-      .indexViewStyle(.page(backgroundDisplayMode: .always))
+      .tabViewStyle(.page(indexDisplayMode: .never))
+      PageControl(numberOfPages: viewModel.images.count,
+                  currentPage: $viewModel.selectedImageIndex)
       ScrollView {
         VStack {
           ForEach(viewModel.content(), id: \.key) { key, value in
@@ -60,24 +62,17 @@ struct BuildingView: View {
       } label: {
         Text(LocalizedStringKey("go-to-citywalls"))
           .frame(maxWidth: .infinity)
+          .padding(.vertical, 7)
       }
       .buttonStyle(.borderedProminent)
       .frame(maxWidth: .infinity)
       .padding(.horizontal, 10)
     }
     .frame(maxHeight: .infinity, alignment: .top)
-    .overlay (
-      ZStack {
-        if viewModel.showImageViewer {
-          Color
-            .black
-            .opacity(viewModel.backgroundOpacity)
-            .ignoresSafeArea()
-          ImageView()
-            .environmentObject(viewModel)
-        }
-      }
-    )
+    .fullScreenCover(isPresented: $viewModel.showImageViewer) {
+      ImageView()
+        .environmentObject(viewModel)
+    }
   }
   
 }

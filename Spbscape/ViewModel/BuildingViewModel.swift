@@ -21,9 +21,8 @@ class BuildingViewModel: ObservableObject {
   let citywallsID: String
   
   @Published var showImageViewer: Bool = false
-  @Published var selectedImageURL: URL = URL(string: "www.a.com")!
+  @Published var selectedImageIndex: Int = 0
   @Published var imageViewerOffset: CGSize = .zero
-  
   @Published var backgroundOpacity: Double = 1
   @Published var imageScale: CGFloat = 1
   
@@ -62,8 +61,8 @@ class BuildingViewModel: ObservableObject {
     ]
   }
   
-  func scaleEffect(for imageURL: URL) -> CGFloat {
-    selectedImageURL == imageURL ? (imageScale > 1 ? imageScale : 1) : 1
+  func scaleEffectForImage(atIndex index: Int) -> CGFloat {
+    selectedImageIndex == index ? (imageScale > 1 ? imageScale : 1) : 1
   }
   
   func onChange(value: CGSize) {
