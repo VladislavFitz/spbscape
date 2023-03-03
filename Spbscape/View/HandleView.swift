@@ -10,9 +10,8 @@ import Foundation
 import UIKit
 
 class HandleView: UIView {
-  
   let handleBar: UIVisualEffectView
-  
+
   var visualEffect: UIVisualEffect {
     switch traitCollection.userInterfaceStyle {
     case .dark:
@@ -21,23 +20,24 @@ class HandleView: UIView {
       return UIBlurEffect(style: .systemThinMaterialDark)
     }
   }
-  
+
   override init(frame: CGRect) {
-    self.handleBar = UIVisualEffectView()
+    handleBar = UIVisualEffectView()
     super.init(frame: frame)
     handleBar.effect = visualEffect
     setupLayout()
   }
-  
-  required init?(coder: NSCoder) {
+
+  @available(*, unavailable)
+  required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
     super.traitCollectionDidChange(previousTraitCollection)
     handleBar.effect = visualEffect
   }
-  
+
   private func setupLayout() {
     addSubview(handleBar)
     handleBar.clipsToBounds = true
@@ -50,5 +50,4 @@ class HandleView: UIView {
       handleBar.centerYAnchor.constraint(equalTo: centerYAnchor)
     )
   }
-  
 }

@@ -6,14 +6,14 @@
 //  Copyright © 2020 Vladislav Fitc. All rights reserved.
 //
 
-import Foundation
 import AlgoliaSearchClient
+import Foundation
 
 enum FilterSection: Int, CaseIterable {
   case street
   case architect
   case style
-  
+
   var title: String {
     switch self {
     case .street:
@@ -24,7 +24,7 @@ enum FilterSection: Int, CaseIterable {
       return "styles".localize()
     }
   }
-  
+
   var attribute: Attribute {
     switch self {
     case .street:
@@ -35,5 +35,4 @@ enum FilterSection: Int, CaseIterable {
       return "styles.title"
     }
   }
-  
 }

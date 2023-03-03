@@ -10,14 +10,13 @@ import Foundation
 import UIKit
 
 class OverlayStateController: NSObject {
-  
   weak var delegate: OverlayControllerDelegate?
-  
+
   enum State: Equatable {
     case fullScreen
     case compact
   }
-  
+
   private(set) var state: State = .compact {
     didSet {
       guard let delegate = delegate else {
@@ -26,7 +25,7 @@ class OverlayStateController: NSObject {
       delegate.didChangeState(state, animated: false)
     }
   }
-  
+
   func overlayHeight(for state: State) -> CGFloat {
     switch state {
     case .fullScreen:
@@ -35,7 +34,7 @@ class OverlayStateController: NSObject {
       return delegate?.compactOverlayHeight ?? 0
     }
   }
-  
+
   func set(_ state: State, animated: Bool) {
     self.state = state
     guard let delegate = delegate else {
@@ -43,14 +42,14 @@ class OverlayStateController: NSObject {
     }
     delegate.shouldSetHeight(overlayHeight(for: state), animated: animated)
   }
-  
+
   private var initialHeight: CGFloat = 0
 
   @objc public func didPan(recognizer: UIPanGestureRecognizer) {
     guard let delegate = delegate else {
       return
     }
-    
+
     switch recognizer.state {
     case .began:
       initialHeight = delegate.currentHeight
@@ -73,5 +72,4 @@ class OverlayStateController: NSObject {
       break
     }
   }
-
 }

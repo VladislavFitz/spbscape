@@ -10,9 +10,8 @@ import Foundation
 import UIKit
 
 class SwitchContainerViewController: UIViewController {
-  
   var viewControllers: [UIViewController]
-  
+
   init(viewControllers: [UIViewController]) {
     self.viewControllers = viewControllers
     super.init(nibName: nil, bundle: nil)
@@ -21,11 +20,12 @@ class SwitchContainerViewController: UIViewController {
       viewController.didMove(toParent: self)
     }
   }
-  
-  required init?(coder: NSCoder) {
+
+  @available(*, unavailable)
+  required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   func setVisibleViewController(atIndex index: Int) {
     viewControllers
       .map(\.view)
@@ -34,7 +34,7 @@ class SwitchContainerViewController: UIViewController {
         view?.isHidden = viewIndex != index
       }
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     let stackView = UIStackView()
@@ -52,12 +52,11 @@ class SwitchContainerViewController: UIViewController {
     )
     setVisibleViewController(atIndex: 0)
   }
-  
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     if presentedViewController == nil {
       setVisibleViewController(atIndex: 0)
     }
   }
-  
 }

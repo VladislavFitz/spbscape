@@ -10,11 +10,10 @@ import Foundation
 import SwiftUI
 
 struct BuildingView: View {
-  
   @StateObject var viewModel: BuildingViewModel
-  
+
   @Environment(\.openURL) var openURL
-  
+
   var body: some View {
     VStack {
       Text(viewModel.title)
@@ -74,25 +73,21 @@ struct BuildingView: View {
         .environmentObject(viewModel)
     }
   }
-  
 }
 
 struct BuldingView_Previews: PreviewProvider {
-  
   static var previews: some View {
     BuildingView(viewModel: .test)
   }
-  
 }
 
 extension BuildingViewModel {
-  
   static let test = BuildingViewModel(
     title: "Доходный дом М. М. Горбова",
     images: [
       URL(string: "https://p2.citywalls.ru/photo_4-4518.jpg")!,
       URL(string: "https://p2.citywalls.ru/photo_80-82266.jpg")!,
-      URL(string: "https://p3.citywalls.ru/photo_259-265387.jpg")!,
+      URL(string: "https://p3.citywalls.ru/photo_259-265387.jpg")!
     ],
     address: "Каменноостровский пр., 20, Мира ул., 10, Австрийская пл., 3",
     architects: "Шауб В. В.",
@@ -100,5 +95,4 @@ extension BuildingViewModel {
     style: "Модерн",
     citywallsID: "836"
   )
-  
 }

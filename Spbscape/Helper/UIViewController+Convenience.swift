@@ -10,10 +10,7 @@ import Foundation
 import UIKit
 
 extension UIViewController {
-  
   func activate(_ constraints: NSLayoutConstraint...) {
     NSLayoutConstraint.activate(constraints)
   }
-    
 }
-

@@ -7,11 +7,10 @@
 //
 
 import Foundation
-import UIKit
 import InstantSearchCore
+import UIKit
 
 extension UISearchTextField {
-    
   func removeTokensForFilter(withAttribute attribute: Attribute) {
     tokens
       .enumerated()
@@ -19,7 +18,7 @@ extension UISearchTextField {
       .map { $0.offset }
       .forEach(removeToken(at:))
   }
-  
+
   func removeTokensForBoundingBox() {
     tokens
       .enumerated()
@@ -27,5 +26,4 @@ extension UISearchTextField {
       .map { $0.0 }
       .forEach(removeToken(at:))
   }
-  
 }

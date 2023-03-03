@@ -7,26 +7,25 @@
 //
 
 import Foundation
-import UIKit
 import SDWebImage
 import SpbscapeCore
+import UIKit
 
 class BuildingTableViewCell: UITableViewCell {
-  
   let buildingImageView: UIImageView
   let titleLabel: UILabel
   let architectsLabel: UILabel
   let constructionYearsLabel: UILabel
   let stylesLabel: UILabel
   let addressLabel: UILabel
-  
+
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-    buildingImageView = .init()
-    titleLabel = .init()
-    architectsLabel = .init()
-    constructionYearsLabel = .init()
-    stylesLabel = .init()
-    addressLabel = .init()
+    buildingImageView = .init(autolayout: ())
+    titleLabel = .init(autolayout: ())
+    architectsLabel = .init(autolayout: ())
+    constructionYearsLabel = .init(autolayout: ())
+    stylesLabel = .init(autolayout: ())
+    addressLabel = .init(autolayout: ())
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     setupLayout()
     buildingImageView.sd_imageIndicator = SDWebImageActivityIndicator.large
@@ -34,31 +33,21 @@ class BuildingTableViewCell: UITableViewCell {
     contentView.backgroundColor = .clear
     backgroundView = UIView()
   }
-  
-  required init?(coder: NSCoder) {
+
+  @available(*, unavailable)
+  required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  override func setSelected(_ selected: Bool, animated: Bool) {
+
+  override func setSelected(_ selected: Bool, animated _: Bool) {
     let backgroundColor = selected ? ColorScheme.primaryColor.withAlphaComponent(0.2) : .clear
     contentView.backgroundColor = backgroundColor
   }
-  
+
   func setupLayout() {
-    let mainStackView = UIStackView()
-    let imageStackView = UIStackView()
-    let infoStackView = UIStackView()
-    [
-     buildingImageView,
-     titleLabel,
-     architectsLabel,
-     constructionYearsLabel,
-     stylesLabel,
-     addressLabel,
-     mainStackView,
-     imageStackView,
-     infoStackView
-    ].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+    let mainStackView = UIStackView(autolayout: ())
+    let imageStackView = UIStackView(autolayout: ())
+    let infoStackView = UIStackView(autolayout: ())
     mainStackView.axis = .horizontal
     mainStackView.spacing = 10
     contentView.addSubview(mainStackView)
@@ -71,7 +60,7 @@ class BuildingTableViewCell: UITableViewCell {
     mainStackView.addArrangedSubview(imageStackView)
     imageStackView.axis = .vertical
     imageStackView.addArrangedSubview(buildingImageView)
-    
+
     mainStackView.addArrangedSubview(infoStackView)
     infoStackView.axis = .vertical
     infoStackView.spacing = 5
@@ -84,10 +73,14 @@ class BuildingTableViewCell: UITableViewCell {
     buildingImageView.contentMode = .scaleAspectFill
     buildingImageView.clipsToBounds = true
     buildingImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2).isActive = true
-    
+
     titleLabel.font = .systemFont(ofSize: 14, weight: .semibold)
     titleLabel.numberOfLines = 0
-    [architectsLabel, constructionYearsLabel, stylesLabel, addressLabel].forEach { $0.font = . systemFont(ofSize: 12, weight: .light)}
+    [
+      architectsLabel,
+      constructionYearsLabel,
+      stylesLabel,
+      addressLabel
+    ].forEach { $0.font = .systemFont(ofSize: 12, weight: .light) }
   }
-  
 }

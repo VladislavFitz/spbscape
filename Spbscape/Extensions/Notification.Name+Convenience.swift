@@ -9,12 +9,9 @@
 import Foundation
 
 extension Notification.Name {
-  
   static let updateAppliedFiltersCount = Self(rawValue: "updateAppliedFiltersCount")
   static let updateSearchResultsCount = Self(rawValue: "updateSearchResultsCount")
-  
 }
-
 
 extension Notification.Name {
   static let showFilters = Self(rawValue: "com.spbscape.filters")
