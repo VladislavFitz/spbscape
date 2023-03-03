@@ -10,6 +10,12 @@ import Foundation
 import UIKit
 
 extension UIView {
+
+  convenience init(autolayout: Void) {
+    self.init(frame: .zero)
+    translatesAutoresizingMaskIntoConstraints = false
+  }
+
   func activate(_ constraints: NSLayoutConstraint...) {
     NSLayoutConstraint.activate(constraints)
   }

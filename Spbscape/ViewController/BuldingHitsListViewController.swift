@@ -36,7 +36,9 @@ class BuldingHitsListViewController: UITableViewController, HitsController {
   }
 
   func highlight(_ building: Building) {
-    guard let buildingIndex = hitsSource?.getCurrentHits().firstIndex(where: { $0.object.id == building.id }) else { return }
+    guard let buildingIndex = hitsSource?
+      .getCurrentHits()
+      .firstIndex(where: { $0.object.id == building.id }) else { return }
     let buildingIndexPath = IndexPath(row: buildingIndex, section: 0)
     tableView.selectRow(at: buildingIndexPath, animated: true, scrollPosition: .middle)
   }

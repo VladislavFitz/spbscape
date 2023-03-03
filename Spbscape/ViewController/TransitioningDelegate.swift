@@ -18,12 +18,15 @@ class TransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
   let presentController: PresentAnimationController
   let dismissController: DismissAnimationController
 
-  init(presentController: PresentAnimationController = .init(), dismissController: DismissAnimationController = .init()) {
+  init(presentController: PresentAnimationController = .init(),
+       dismissController: DismissAnimationController = .init()) {
     self.presentController = presentController
     self.dismissController = dismissController
   }
 
-  func animationController(forPresented _: UIViewController, presenting _: UIViewController, source _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+  func animationController(forPresented _: UIViewController,
+                           presenting _: UIViewController,
+                           source _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
     return presentController
   }
 
@@ -31,7 +34,10 @@ class TransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
     return dismissController
   }
 
-  func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source _: UIViewController) -> UIPresentationController? {
-    return SidebarOverlayPresentationController(presentedViewController: presented, presenting: presenting)
+  func presentationController(forPresented presented: UIViewController,
+                              presenting: UIViewController?,
+                              source _: UIViewController) -> UIPresentationController? {
+    return SidebarOverlayPresentationController(presentedViewController: presented,
+                                                presenting: presenting)
   }
 }

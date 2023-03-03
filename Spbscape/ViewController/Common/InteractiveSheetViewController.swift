@@ -44,7 +44,8 @@ class InteractiveSheetViewController: UIViewController {
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    let panGestureRecognizer = UIPanGestureRecognizer(target: overlayStateController, action: #selector(overlayStateController.didPan(recognizer:)))
+    let panGestureRecognizer = UIPanGestureRecognizer(target: overlayStateController,
+                                                      action: #selector(overlayStateController.didPan(recognizer:)))
     overlayViewController.view.addGestureRecognizer(panGestureRecognizer)
   }
 

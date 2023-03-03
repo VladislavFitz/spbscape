@@ -20,12 +20,12 @@ class BuildingTableViewCell: UITableViewCell {
   let addressLabel: UILabel
 
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-    buildingImageView = .init()
-    titleLabel = .init()
-    architectsLabel = .init()
-    constructionYearsLabel = .init()
-    stylesLabel = .init()
-    addressLabel = .init()
+    buildingImageView = .init(autolayout: ())
+    titleLabel = .init(autolayout: ())
+    architectsLabel = .init(autolayout: ())
+    constructionYearsLabel = .init(autolayout: ())
+    stylesLabel = .init(autolayout: ())
+    addressLabel = .init(autolayout: ())
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     setupLayout()
     buildingImageView.sd_imageIndicator = SDWebImageActivityIndicator.large
@@ -45,20 +45,9 @@ class BuildingTableViewCell: UITableViewCell {
   }
 
   func setupLayout() {
-    let mainStackView = UIStackView()
-    let imageStackView = UIStackView()
-    let infoStackView = UIStackView()
-    [
-      buildingImageView,
-      titleLabel,
-      architectsLabel,
-      constructionYearsLabel,
-      stylesLabel,
-      addressLabel,
-      mainStackView,
-      imageStackView,
-      infoStackView
-    ].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+    let mainStackView = UIStackView(autolayout: ())
+    let imageStackView = UIStackView(autolayout: ())
+    let infoStackView = UIStackView(autolayout: ())
     mainStackView.axis = .horizontal
     mainStackView.spacing = 10
     contentView.addSubview(mainStackView)
@@ -87,6 +76,11 @@ class BuildingTableViewCell: UITableViewCell {
 
     titleLabel.font = .systemFont(ofSize: 14, weight: .semibold)
     titleLabel.numberOfLines = 0
-    [architectsLabel, constructionYearsLabel, stylesLabel, addressLabel].forEach { $0.font = .systemFont(ofSize: 12, weight: .light) }
+    [
+      architectsLabel,
+      constructionYearsLabel,
+      stylesLabel,
+      addressLabel
+    ].forEach { $0.font = .systemFont(ofSize: 12, weight: .light) }
   }
 }

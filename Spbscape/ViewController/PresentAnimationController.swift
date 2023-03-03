@@ -34,7 +34,10 @@ class PresentAnimationController: NSObject, UIViewControllerAnimatedTransitionin
       }
     case .fade:
       toView.alpha = 0
-      toView.frame = .init(x: fromView.frame.width - presentedWidth, y: 0, width: presentedWidth, height: fromView.frame.height)
+      toView.frame = .init(x: fromView.frame.width - presentedWidth,
+                           y: 0,
+                           width: presentedWidth,
+                           height: fromView.frame.height)
       UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseIn]) {
         toView.alpha = 1
       } completion: { completed in

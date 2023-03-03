@@ -50,7 +50,9 @@ class BuildingClusterAnnotationView: MKMarkerAnnotationView {
   }
 
   func configure(with annotation: MKAnnotation) {
-    guard let clusterAnnotation = annotation as? BuildingClusterAnnotation else { fatalError("Unexpected annotation type: \(annotation)") }
+    guard let clusterAnnotation = annotation as? BuildingClusterAnnotation else {
+      fatalError("Unexpected annotation type: \(annotation)")
+    }
     markerTintColor = ColorScheme.primaryColor
     glyphText = "\(clusterAnnotation.count)"
     clusteringIdentifier = String(describing: ClusterView.self)

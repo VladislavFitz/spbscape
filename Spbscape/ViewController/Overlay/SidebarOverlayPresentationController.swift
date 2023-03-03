@@ -23,8 +23,8 @@ class SidebarOverlayPresentationController: UIPresentationController {
     let location = pan.translation(in: presentingViewController.view)
 
     switch pan.state {
-    case .changed where location.x > 0: // where location.x > 0 && presented.frame.origin.x >= presentingViewController.view.frame.width * 0.66:
-      presented.frame.origin.x = /* container.frame.origin.x + */ location.x
+    case .changed where location.x > 0:
+      presented.frame.origin.x = location.x
 
     case .ended:
       let maxPresentedX = container.frame.width * 0.5 /* 0.66 + container.frame.width / 6 */
@@ -55,7 +55,10 @@ class SidebarOverlayPresentationController: UIPresentationController {
 
   override var frameOfPresentedViewInContainerView: CGRect {
     guard let container = containerView else { return .zero }
-    return CGRect(x: /* container.bounds.width * 2 / 3 */ 0, y: 0, width: container.bounds.width / 3, height: container.bounds.height)
+    return CGRect(x: 0,
+                  y: 0,
+                  width: container.bounds.width / 3,
+                  height: container.bounds.height)
   }
 
   override func presentationTransitionWillBegin() {

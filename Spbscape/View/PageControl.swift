@@ -21,7 +21,9 @@ struct PageControl: UIViewRepresentable {
     let control = UIPageControl()
     control.backgroundStyle = .prominent
     control.numberOfPages = numberOfPages
-    control.addTarget(context.coordinator, action: #selector(Coordinator.updateCurrentPage(sender:)), for: .valueChanged)
+    control.addTarget(context.coordinator,
+                      action: #selector(Coordinator.updateCurrentPage(sender:)),
+                      for: .valueChanged)
     return control
   }
 

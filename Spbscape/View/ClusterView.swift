@@ -48,7 +48,10 @@ private extension ClusterView {
     image = renderer.image { _ in
       color.setFill()
       UIBezierPath(ovalIn: CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0)).fill()
-      let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 20.0)]
+      let attributes: [NSAttributedString.Key: Any] = [
+        .foregroundColor: UIColor.white,
+        .font: UIFont.boldSystemFont(ofSize: 20.0)
+      ]
       let text = "\(count)"
       let size = text.size(withAttributes: attributes)
       let rect = CGRect(x: 20 - size.width / 2, y: 20 - size.height / 2, width: size.width, height: size.height)

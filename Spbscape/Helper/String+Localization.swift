@@ -18,7 +18,10 @@ extension String {
 
     // Load resource for default language to be used as
     // the fallback language
-    guard let path = Bundle.main.path(forResource: defaultLanguage, ofType: "lproj"), let bundle = Bundle(path: path) else {
+    guard
+      let path = Bundle.main.path(forResource: defaultLanguage,
+                                  ofType: "lproj"),
+      let bundle = Bundle(path: path) else {
       return value
     }
 

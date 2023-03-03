@@ -14,15 +14,15 @@ import UIKit
 
 final class ViewControllerFactory {
   static func toolpanelViewController(searchViewModel: SearchViewModel) -> ToolpanelViewController? {
-    #if targetEnvironment(macCatalyst)
+#if targetEnvironment(macCatalyst)
+    return nil
+#else
+    guard UIDevice.current.userInterfaceIdiom != .phone else {
       return nil
-    #else
-      guard UIDevice.current.userInterfaceIdiom != .phone else {
-        return nil
-      }
-      return ToolpanelViewController(filtersStateViewModel: searchViewModel.filtersStateViewModel,
-                                     resultsCountViewModel: searchViewModel.resultsCountViewModel)
-    #endif
+    }
+    return ToolpanelViewController(filtersStateViewModel: searchViewModel.filtersStateViewModel,
+                                   resultsCountViewModel: searchViewModel.resultsCountViewModel)
+#endif
   }
 
   static func searchViewController(with listHitsViewController: UIViewController,
@@ -45,7 +45,9 @@ final class ViewControllerFactory {
     mapHitsViewController.didChangeVisibleRegion = { [weak searchViewModel, weak mapHitsViewController] _, byUser in
       guard let searchViewModel = searchViewModel, byUser else { return }
       if let mapView = mapHitsViewController?.mapView {
-        searchViewModel.searcher.request.query.aroundPrecision = [AroundPrecision(from: 0, value: mapView.region.sizeInMeters.h)]
+        searchViewModel.searcher.request.query.aroundPrecision = [
+          AroundPrecision(from: 0, value: mapView.region.sizeInMeters.h)
+        ]
         searchViewModel.searcher.request.query.aroundLatLng = Point(mapView.centerCoordinate)
       }
       searchViewModel.searcher.request.query.aroundRadius = .all
@@ -63,15 +65,15 @@ final class ViewControllerFactory {
 
   static func filtersViewController(searchViewModel: SearchViewModel) -> FiltersViewController {
     let resultsCountViewModel: ResultsCountViewModel?
-    #if targetEnvironment(macCatalyst)
+#if targetEnvironment(macCatalyst)
+    resultsCountViewModel = searchViewModel.resultsCountViewModel
+#else
+    if UIDevice.current.userInterfaceIdiom == .phone {
       resultsCountViewModel = searchViewModel.resultsCountViewModel
-    #else
-      if UIDevice.current.userInterfaceIdiom == .phone {
-        resultsCountViewModel = searchViewModel.resultsCountViewModel
-      } else {
-        resultsCountViewModel = nil
-      }
-    #endif
+    } else {
+      resultsCountViewModel = nil
+    }
+#endif
     let filtersViewController = FiltersViewController(filtersStateViewModel: searchViewModel.filtersStateViewModel,
                                                       resultsCountViewModel: resultsCountViewModel)
     searchViewModel.filtersViewModel.setup(filtersViewController)
@@ -119,24 +121,25 @@ final class ViewControllerFactory {
     searchViewController.navigationController?.isNavigationBarHidden = true
 
     // For macOS a system toolbar presented, for iPadOS a classic navigation bar
-    #if targetEnvironment(macCatalyst)
-      searchViewController.showFilterSubscriber = NotificationCenter.default.publisher(for: .showFilters)
-        .receive(on: RunLoop.main)
-        .sink(receiveValue: { [weak searchViewModel, weak mapHitsViewController] _ in
-          guard let searchViewModel, let mapHitsViewController else { return }
-          let filtersViewController = filtersViewController(searchViewModel: searchViewModel)
-          mapHitsViewController.present(filtersViewController)
-        })
-    #else
-      mapHitsViewController.navigationController?.isNavigationBarHidden = true
-      mapHitsViewController.toolpanelViewController?.didTapFiltersButton = { [weak searchViewModel, weak mapHitsViewController] filtersButton in
+#if targetEnvironment(macCatalyst)
+    searchViewController.showFilterSubscriber = NotificationCenter.default.publisher(for: .showFilters)
+      .receive(on: RunLoop.main)
+      .sink(receiveValue: { [weak searchViewModel, weak mapHitsViewController] _ in
         guard let searchViewModel, let mapHitsViewController else { return }
-        let sourceRect = mapHitsViewController.view.convert(filtersButton.frame,
-                                                            from: filtersButton.superview)
-        let filtersViewController = ViewControllerFactory.filtersViewController(searchViewModel: searchViewModel)
-        mapHitsViewController.present(filtersViewController, from: sourceRect)
-      }
-    #endif
+        let filtersViewController = filtersViewController(searchViewModel: searchViewModel)
+        mapHitsViewController.present(filtersViewController)
+      })
+#else
+    mapHitsViewController.navigationController?.isNavigationBarHidden = true
+    let buttonHandler: (UIButton) -> Void = { [weak searchViewModel, weak mapHitsViewController] filtersButton in
+      guard let searchViewModel, let mapHitsViewController else { return }
+      let sourceRect = mapHitsViewController.view.convert(filtersButton.frame,
+                                                          from: filtersButton.superview)
+      let filtersViewController = ViewControllerFactory.filtersViewController(searchViewModel: searchViewModel)
+      mapHitsViewController.present(filtersViewController, from: sourceRect)
+    }
+    mapHitsViewController.toolpanelViewController?.didTapFiltersButton = buttonHandler
+#endif
     listHitsViewController.didSelect = { [weak mapHitsViewController] building in
       mapHitsViewController?.highlight(building)
     }
@@ -167,9 +170,9 @@ final class ViewControllerFactory {
     func showBuilding(_ building: Building) {
       let buildingView = BuildingView(viewModel: BuildingViewModel(building: building))
       let hostingViewController = UIHostingController(rootView: buildingView)
-//      hostingViewController.modalPresentationStyle = .
+      //      hostingViewController.modalPresentationStyle = .
       navigationController.present(hostingViewController, animated: true)
-//      navigationController.pushViewController(hostingViewController, animated: true)
+      //      navigationController.pushViewController(hostingViewController, animated: true)
     }
 
     mapHitsViewController.didSelect = { building, _ in

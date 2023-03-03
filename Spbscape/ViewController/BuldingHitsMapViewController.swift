@@ -35,9 +35,15 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
     self.toolpanelViewController = toolpanelViewController
     super.init(nibName: nil, bundle: nil)
     mapView.register(HitAnnotationView.self, forAnnotationViewWithReuseIdentifier: "buildingAnnotationView")
-    mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
-    let saintPetersburgCenterCoordinate = CLLocationCoordinate2D(latitude: 59.9411, longitude: 30.3009)
-    mapView.setCamera(.init(lookingAtCenter: saintPetersburgCenterCoordinate, fromDistance: 20000, pitch: 0, heading: 0), animated: false)
+    mapView.register(ClusterView.self,
+                     forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
+    let saintPetersburgCenterCoordinate = CLLocationCoordinate2D(latitude: 59.9411,
+                                                                 longitude: 30.3009)
+    mapView.setCamera(.init(lookingAtCenter: saintPetersburgCenterCoordinate,
+                            fromDistance: 20000,
+                            pitch: 0,
+                            heading: 0),
+                      animated: false)
   }
 
   @available(*, unavailable)
@@ -92,13 +98,20 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
     let buildingIDsToRemove = presentedBuildingsIDs.subtracting(buildingIDsToKeep)
     let buildingIDsToAdd = fetchedBuildingsIDs.subtracting(buildingIDsToKeep)
 
-    let annotationsToRemove = mapView.annotations.compactMap { ($0 as? BuildingAnnotation)?.building.id }.filter(buildingIDsToRemove.contains)
+    let annotationsToRemove = mapView
+      .annotations
+      .compactMap { ($0 as? BuildingAnnotation)?.building.id }.filter(buildingIDsToRemove.contains)
 
     if !annotationsToRemove.isEmpty {
-      mapView.removeAnnotations(mapView.annotations.compactMap { $0 as? BuildingAnnotation }.filter { annotationsToRemove.contains($0.building.id) })
+      mapView.removeAnnotations(mapView
+        .annotations
+        .compactMap { $0 as? BuildingAnnotation }
+        .filter { annotationsToRemove.contains($0.building.id) })
     }
 
-    let annotationsToAdd = buildings.filter { buildingIDsToAdd.contains($0.object.id) }.map(BuildingAnnotation.init)
+    let annotationsToAdd = buildings
+      .filter { buildingIDsToAdd.contains($0.object.id) }
+      .map(BuildingAnnotation.init)
     if !annotationsToAdd.isEmpty {
       mapView.addAnnotations(annotationsToAdd)
     }
@@ -113,7 +126,8 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
       toolpanelViewController.view.heightAnchor.constraint(equalToConstant: 44),
       toolpanelViewController.view.widthAnchor.constraint(equalToConstant: 200),
       toolpanelViewController.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
-      toolpanelViewController.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10)
+      toolpanelViewController.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                                             constant: -10)
     ])
   }
 
@@ -130,11 +144,15 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
   }
 
   func isVisible(_ building: Building) -> Bool {
-    return mapView.annotations.contains(where: { annotation in (annotation as? BuildingAnnotation)?.building.id == building.id })
+    return mapView
+      .annotations
+      .contains(where: { annotation in (annotation as? BuildingAnnotation)?.building.id == building.id })
   }
 
   func highlight(_ building: Building, completion: @escaping () -> Void = {}) {
-    guard let buildingAnnotation = mapView.annotations.first(where: { annotation in (annotation as? BuildingAnnotation)?.building.id == building.id
+    guard let buildingAnnotation = mapView
+      .annotations
+      .first(where: { annotation in (annotation as? BuildingAnnotation)?.building.id == building.id
     }) else { return }
 
     MKMapView.animate(withDuration: 1) { [weak mapView] in
@@ -161,11 +179,9 @@ extension BuldingHitsMapViewController: MKMapViewDelegate {
 
     guard let mapGestureRecognizers = mapView.subviews.first?.gestureRecognizers else { return }
 
-    for gestureRecognizer in mapGestureRecognizers {
-      if [.began, .ended].contains(gestureRecognizer.state) {
-        nextRegionChangeIsFromUserInteraction = true
-        break
-      }
+    for gestureRecognizer in mapGestureRecognizers where [.began, .ended].contains(gestureRecognizer.state) {
+      nextRegionChangeIsFromUserInteraction = true
+      break
     }
   }
 
@@ -181,10 +197,6 @@ extension BuldingHitsMapViewController: MKMapViewDelegate {
     switch annotation {
     case is BuildingAnnotation:
       return mapView.dequeueReusableAnnotationView(withIdentifier: "buildingAnnotationView", for: annotation)
-//    case is MKClusterAnnotation:
-//      return mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier, for: annotation)
-//    case is BuildingClusterAnnotation:
-//      return mapView.dequeueReusableAnnotationView(withIdentifier: "buildingClusterAnnotation", for: annotation)
     default:
       return nil
     }

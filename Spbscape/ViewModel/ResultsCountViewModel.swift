@@ -10,7 +10,7 @@ import Foundation
 
 final class ResultsCountViewModel {
   @Published var resultsCount: Int = 0
-  @Published var resultsCountTitle: String? = nil
+  @Published var resultsCountTitle: String?
 
   private var observer: NSObjectProtocol?
 

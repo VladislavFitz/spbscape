@@ -26,7 +26,12 @@ final class FiltersStateViewModel {
         return
       }
       self.areFiltersEmpty = appliedFiltersCount == 0
-      let iconName = appliedFiltersCount == 0 ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill"
+      let iconName: String
+      if appliedFiltersCount == 0 {
+        iconName = "line.horizontal.3.decrease.circle"
+      } else {
+        iconName = "line.horizontal.3.decrease.circle.fill"
+      }
       self.filtersButtonImage = UIImage(systemName: iconName)
     }
   }
