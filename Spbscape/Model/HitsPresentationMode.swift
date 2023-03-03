@@ -12,7 +12,7 @@ import UIKit
 enum HitsPresentationMode {
   case list
   case map
-  
+
   var nextMode: HitsPresentationMode {
     switch self {
     case .list:
@@ -21,7 +21,7 @@ enum HitsPresentationMode {
       return .list
     }
   }
-  
+
   var buttonImage: UIImage? {
     let symbolName: String
     switch self {
@@ -32,7 +32,7 @@ enum HitsPresentationMode {
     }
     return UIImage(systemName: symbolName)
   }
-  
+
   var controllerIndex: Int {
     switch self {
     case .list:
@@ -41,9 +41,8 @@ enum HitsPresentationMode {
       return 1
     }
   }
-  
+
   mutating func toggle() {
     self = (self == .list) ? .map : .list
   }
-  
 }

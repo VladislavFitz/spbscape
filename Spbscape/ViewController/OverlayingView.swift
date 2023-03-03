@@ -9,9 +9,7 @@
 import Foundation
 
 protocol OverlayingView {
-  
   var compactHeight: CGFloat { get }
-  
+
   func notifyCompact()
-  
 }

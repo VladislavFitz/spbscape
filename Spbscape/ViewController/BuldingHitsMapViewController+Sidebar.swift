@@ -7,14 +7,12 @@
 //
 
 import Foundation
-import UIKit
-import SwiftUI
 import SpbscapeCore
+import SwiftUI
+import UIKit
 
 extension BuldingHitsMapViewController {
-    
   func presentSidebar(for building: Building) {
-    
     func presentBuilding(mode: TransitioningDelegate.Mode) {
       let viewModel = BuildingViewModel(building: building)
       let buildingViewController = UIHostingController(rootView: BuildingView(viewModel: viewModel))
@@ -38,7 +36,7 @@ extension BuldingHitsMapViewController {
         self.detailsTransitioningDelegate.dismissController.mode = .slide
       }
     }
-    
+
     if let presentedViewController = presentedViewController {
       detailsTransitioningDelegate.dismissController.mode = .fade
       presentedViewController.dismiss(animated: true) {
@@ -47,7 +45,5 @@ extension BuldingHitsMapViewController {
     } else {
       presentBuilding(mode: .slide)
     }
-
   }
-  
 }

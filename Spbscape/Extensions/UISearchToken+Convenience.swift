@@ -7,12 +7,11 @@
 //
 
 import Foundation
-import UIKit
 import InstantSearchCore
 import SpbscapeCore
+import UIKit
 
 extension UISearchToken {
-  
   convenience init?(filter: FilterType) {
     if let facetFilter = filter as? Filter.Facet {
       self.init(facetFilter: facetFilter)
@@ -20,7 +19,7 @@ extension UISearchToken {
       return nil
     }
   }
-  
+
   convenience init?(facetFilter: Filter.Facet) {
     switch facetFilter.attribute {
     case "addresses.streetName":
@@ -34,12 +33,12 @@ extension UISearchToken {
     }
     representedObject = facetFilter
   }
-  
+
   convenience init(architect: Architect) {
     self.init(icon: UIImage(systemName: "person.circle"), text: architect.name)
     representedObject = Filter.Facet(attribute: "architects.id", stringValue: "\(architect.id)")
   }
-  
+
   convenience init(style: Style) {
     self.init(icon: UIImage(systemName: "building.columns"), text: style.name)
     representedObject = Filter.Facet(attribute: "styles.id", stringValue: "\(style.id)")
@@ -49,10 +48,9 @@ extension UISearchToken {
     self.init(icon: UIImage(systemName: "mappin.circle"), text: street.title)
     representedObject = Filter.Facet(attribute: "addresses.id", stringValue: "\(street.id)")
   }
-  
+
   convenience init(boundingBox: BoundingBox) {
     self.init(icon: UIImage(systemName: "rectangle.dashed"), text: "Участок карты")
     representedObject = boundingBox
   }
-  
 }

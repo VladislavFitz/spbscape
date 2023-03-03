@@ -10,25 +10,25 @@ import Foundation
 import UIKit
 
 class ImageCell: UICollectionViewCell {
-  
   let imageView: UIImageView
-  
+
   override init(frame: CGRect) {
-    self.imageView = .init()
+    imageView = .init()
     super.init(frame: frame)
     configureLayout()
     contentView.backgroundColor = .clear
   }
-  
-  required init?(coder: NSCoder) {
+
+  @available(*, unavailable)
+  required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func prepareForReuse() {
     super.prepareForReuse()
     imageView.image = nil
   }
-  
+
   private func configureLayout() {
     imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.clipsToBounds = true
@@ -40,5 +40,4 @@ class ImageCell: UICollectionViewCell {
       imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
     )
   }
-  
 }

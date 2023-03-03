@@ -10,18 +10,17 @@ import Foundation
 import UIKit
 
 class DismissAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
-  
   var mode: TransitioningDelegate.Mode = .slide
 
-  func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+  func transitionDuration(using _: UIViewControllerContextTransitioning?) -> TimeInterval {
     return 5
   }
-  
+
   func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
     // Retrieve the view controllers participating in the current transition from the context.
     let fromView = transitionContext.viewController(forKey: .from)!.view!
     let toView = transitionContext.viewController(forKey: .to)!.view!
-        
+
     switch mode {
     case .slide:
       UIView.animate(withDuration: 0.5) {
@@ -36,7 +35,5 @@ class DismissAnimationController: NSObject, UIViewControllerAnimatedTransitionin
         transitionContext.completeTransition(completed)
       }
     }
-
   }
-  
 }

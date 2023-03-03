@@ -10,30 +10,30 @@ import Foundation
 import UIKit
 
 class InteractiveSheetViewController: UIViewController {
-  
   let mainViewController: UIViewController
   let overlayViewController: UIViewController & OverlayingView
-  
+
   private let overlayStateController: OverlayStateController
   private var heightConstraint: NSLayoutConstraint!
   private let overlayBottomOffset: CGFloat = 90
-  
+
   init(mainViewController: UIViewController,
        overlayViewController: UIViewController & OverlayingView) {
     self.mainViewController = mainViewController
     self.overlayViewController = overlayViewController
-    self.overlayStateController = OverlayStateController()
+    overlayStateController = OverlayStateController()
     super.init(nibName: nil, bundle: nil)
     for viewController in [mainViewController, overlayViewController] {
       addChild(viewController)
       viewController.didMove(toParent: self)
     }
   }
-  
-  required init?(coder: NSCoder) {
+
+  @available(*, unavailable)
+  required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainView()
@@ -41,13 +41,13 @@ class InteractiveSheetViewController: UIViewController {
     overlayStateController.delegate = self
     overlayStateController.set(.compact, animated: false)
   }
-    
+
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     let panGestureRecognizer = UIPanGestureRecognizer(target: overlayStateController, action: #selector(overlayStateController.didPan(recognizer:)))
     overlayViewController.view.addGestureRecognizer(panGestureRecognizer)
   }
-  
+
   override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
     super.viewWillTransition(to: size, with: coordinator)
     coordinator.animate(alongsideTransition: { _ in
@@ -55,11 +55,9 @@ class InteractiveSheetViewController: UIViewController {
       self.view.layoutIfNeeded()
     })
   }
-      
 }
 
 private extension InteractiveSheetViewController {
-  
   func setupMainView() {
     let mainView = mainViewController.view!
     mainView.translatesAutoresizingMaskIntoConstraints = false
@@ -71,7 +69,7 @@ private extension InteractiveSheetViewController {
       mainView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
     )
   }
-  
+
   func setupOverlayView() {
     let overlayView = overlayViewController.view!
     overlayView.translatesAutoresizingMaskIntoConstraints = false
@@ -84,23 +82,21 @@ private extension InteractiveSheetViewController {
       overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: overlayBottomOffset)
     )
   }
-  
 }
 
 extension InteractiveSheetViewController: OverlayControllerDelegate {
-  
   var currentHeight: CGFloat {
     return heightConstraint.constant
   }
-  
+
   var switchStateThreshold: CGFloat {
     return view.bounds.height / 2 + overlayViewController.compactHeight
   }
-  
+
   var fullscreenOverlayHeight: CGFloat {
     return view.bounds.height - view.safeAreaInsets.top + overlayBottomOffset
   }
-  
+
   var compactOverlayHeight: CGFloat {
     return overlayViewController.compactHeight + overlayBottomOffset
   }
@@ -118,27 +114,24 @@ extension InteractiveSheetViewController: OverlayControllerDelegate {
       self.view.layoutIfNeeded()
     }
     if height < switchStateThreshold {
-        animator.addCompletion { _ in
-          self.overlayViewController.notifyCompact()
-        }
+      animator.addCompletion { _ in
+        self.overlayViewController.notifyCompact()
+      }
     }
     animator.startAnimation()
   }
-  
-  func didChangeState(_ newState: OverlayStateController.State, animated: Bool) {
+
+  func didChangeState(_ newState: OverlayStateController.State, animated _: Bool) {
     if case .compact = newState {
       overlayViewController.notifyCompact()
     }
   }
-  
 }
 
 extension InteractiveSheetViewController: UITextFieldDelegate {
-  
-  func textFieldDidBeginEditing(_ textField: UITextField) {
+  func textFieldDidBeginEditing(_: UITextField) {
     if overlayStateController.state == .compact {
       overlayStateController.set(.fullScreen, animated: true)
     }
   }
-  
 }

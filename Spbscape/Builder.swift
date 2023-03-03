@@ -11,7 +11,6 @@ import Foundation
 public protocol Builder {}
 
 public extension Builder {
-
   func set<T>(_ keyPath: WritableKeyPath<Self, T>, to newValue: T) -> Self {
     var copy = self
     copy[keyPath: keyPath] = newValue
@@ -24,5 +23,4 @@ public extension Builder {
     copy[keyPath: keyPath] = value
     return copy
   }
-
 }

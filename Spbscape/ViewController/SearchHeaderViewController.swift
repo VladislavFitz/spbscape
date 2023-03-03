@@ -6,52 +6,51 @@
 //  Copyright © 2023 Vladislav Fitc. All rights reserved.
 //
 
+import Combine
 import Foundation
 import UIKit
-import Combine
 
 final class SearchHeaderViewController: UIViewController {
-  
   let searchTextField: UISearchTextField
   var didTapFilterButton: ((UIButton) -> Void)?
 
   var compactHeight: CGFloat {
     handleViewHeight +
-    searchBarHeight +
-    footerViewHeight +
-    3 * stackSpacing
+      searchBarHeight +
+      footerViewHeight +
+      3 * stackSpacing
   }
-  
+
   private let handleViewHeight: CGFloat = 14
   private let searchBarHeight: CGFloat = 36
   private let footerViewHeight: CGFloat = 40
   private let stackSpacing: CGFloat = 10
-  
+
   var style: Style
-  
+
   private let resultsCountViewModel: ResultsCountViewModel
   private let filtersStateViewModel: FiltersStateViewModel
-  
+
   private let mainStackView: UIStackView
   private let headerView: HandleView
   private let bodyStackView: UIStackView
   private let footerView: UIView
   private let filtersButton: UIButton
   private let resultsCountLabel: UILabel
-  
+
   private var filtersStateSubscriber: AnyCancellable?
   private var resultsCountSubscriber: AnyCancellable?
 
   init(filtersStateViewModel: FiltersStateViewModel,
        resultsCountViewModel: ResultsCountViewModel,
        style: Style) {
-    self.headerView = HandleView()
-    self.bodyStackView = UIStackView()
-    self.mainStackView = UIStackView()
-    self.searchTextField = UISearchTextField()
-    self.filtersButton = UIButton()
-    self.resultsCountLabel = UILabel()
-    self.footerView = UIView()
+    headerView = HandleView()
+    bodyStackView = UIStackView()
+    mainStackView = UIStackView()
+    searchTextField = UISearchTextField()
+    filtersButton = UIButton()
+    resultsCountLabel = UILabel()
+    footerView = UIView()
     self.style = style
     self.resultsCountViewModel = resultsCountViewModel
     self.filtersStateViewModel = filtersStateViewModel
@@ -68,7 +67,7 @@ final class SearchHeaderViewController: UIViewController {
       .map { $0 as String? }
       .assign(to: \.text, on: resultsCountLabel)
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setupLayout()
@@ -80,19 +79,18 @@ final class SearchHeaderViewController: UIViewController {
     setupResultsCountLabel()
     setupSearchTextField()
   }
-  
+
   @objc func didTapFilterButton(_ filterButton: UIButton) {
     didTapFilterButton?(filterButton)
   }
-  
-  required init?(coder: NSCoder) {
+
+  @available(*, unavailable)
+  required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
 }
 
 private extension SearchHeaderViewController {
-  
   func setupLayout() {
     footerView.addSubview(resultsCountLabel)
     activate(
@@ -100,7 +98,7 @@ private extension SearchHeaderViewController {
       resultsCountLabel.leadingAnchor.constraint(equalTo: footerView.leadingAnchor, constant: 5),
       resultsCountLabel.trailingAnchor.constraint(equalTo: footerView.trailingAnchor, constant: -5)
     )
-    
+
     bodyStackView.addArrangedSubview(.placeHolder(width: 14))
     bodyStackView.addArrangedSubview(searchTextField)
     if style == .overlay {
@@ -108,7 +106,7 @@ private extension SearchHeaderViewController {
       bodyStackView.addArrangedSubview(filtersButton)
     }
     bodyStackView.addArrangedSubview(.placeHolder(width: 14))
-    
+
     activate(
       headerView.heightAnchor.constraint(equalToConstant: handleViewHeight),
       bodyStackView.heightAnchor.constraint(equalToConstant: searchBarHeight),
@@ -125,56 +123,52 @@ private extension SearchHeaderViewController {
       mainStackView.addArrangedSubview(footerView)
     }
   }
-  
+
   func setupMainStackView() {
     mainStackView.translatesAutoresizingMaskIntoConstraints = false
     mainStackView.axis = .vertical
     mainStackView.spacing = stackSpacing
   }
 
-  
   func setupFiltersButton() {
     filtersButton.contentVerticalAlignment = .fill
     filtersButton.contentHorizontalAlignment = .fill
     filtersButton.addTarget(self, action: #selector(didTapFilterButton(_:)), for: .touchUpInside)
   }
-  
+
   func setupResultsCountLabel() {
     resultsCountLabel.textColor = ColorScheme.primaryColor
     resultsCountLabel.textAlignment = .center
     resultsCountLabel.translatesAutoresizingMaskIntoConstraints = false
   }
-  
+
   func setupHeaderView() {
     headerView.translatesAutoresizingMaskIntoConstraints = false
     #if targetEnvironment(macCatalyst)
-    headerView.isHidden = true
+      headerView.isHidden = true
     #endif
     headerView.handleBar.isHidden = style == .fullscreen
   }
-  
+
   func setupFooterView() {
     footerView.translatesAutoresizingMaskIntoConstraints = false
   }
-  
+
   func setupSearchTextField() {
     searchTextField.translatesAutoresizingMaskIntoConstraints = false
   }
-  
+
   func setupBodyStackView() {
     bodyStackView.translatesAutoresizingMaskIntoConstraints = false
     bodyStackView.axis = .horizontal
     bodyStackView.spacing = 0
     bodyStackView.alignment = .center
   }
-  
 }
 
 extension SearchHeaderViewController {
-  
   enum Style {
     case overlay
     case fullscreen
   }
-  
 }

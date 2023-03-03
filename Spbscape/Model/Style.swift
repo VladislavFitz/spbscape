@@ -14,7 +14,5 @@ struct Style: Codable {
 }
 
 extension Style: CustomStringConvertible {
-  
   var description: String { name }
-  
 }

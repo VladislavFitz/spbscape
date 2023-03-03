@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 extension UIImage {
-  
   func resizeImageTo(size: CGSize) -> UIImage? {
     UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
     draw(in: CGRect(origin: CGPoint.zero, size: size))
@@ -18,7 +17,6 @@ extension UIImage {
     UIGraphicsEndImageContext()
     return resizedImage
   }
-  
 }
 
 extension UIImage {
@@ -30,10 +28,8 @@ extension UIImage {
 }
 
 extension UIImage {
-  
   static func filters(empty: Bool) -> UIImage? {
     let iconName = empty ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill"
     return UIImage(systemName: iconName)
   }
-  
 }

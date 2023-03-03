@@ -10,11 +10,10 @@ import Foundation
 import UIKit
 
 extension UIView {
-  
   func activate(_ constraints: NSLayoutConstraint...) {
     NSLayoutConstraint.activate(constraints)
   }
-  
+
   func pin(to view: UIView, insets: UIEdgeInsets = .zero) {
     activate(
       topAnchor.constraint(equalTo: view.topAnchor, constant: insets.top),
@@ -23,7 +22,7 @@ extension UIView {
       trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: insets.right)
     )
   }
-  
+
   func pin(to layoutGuide: UILayoutGuide, insets: UIEdgeInsets = .zero) {
     activate(
       topAnchor.constraint(equalTo: layoutGuide.topAnchor, constant: insets.top),
@@ -33,13 +32,12 @@ extension UIView {
     )
   }
 
-  
   static var placeholder: UIView {
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }
-  
+
   static func placeHolder(width: CGFloat? = nil, height: CGFloat? = nil) -> UIView {
     let placeholder = self.placeholder
     if let width = width {
@@ -50,5 +48,4 @@ extension UIView {
     }
     return placeholder
   }
-
 }

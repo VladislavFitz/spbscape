@@ -7,11 +7,10 @@
 //
 
 import Foundation
-import UIKit
 import InstantSearchCore
+import UIKit
 
 extension UIViewController {
-  
   func present(_ filtersViewController: FiltersViewController,
                from sourceRect: CGRect? = nil) {
     let filterViewController = filtersViewController
@@ -33,15 +32,14 @@ extension UIViewController {
                                                                 height: 500)
       filtersNavigationController.popoverPresentationController?.sourceView = view
       if let sourceRect = sourceRect {
-          filtersNavigationController.popoverPresentationController?.sourceRect = sourceRect
+        filtersNavigationController.popoverPresentationController?.sourceRect = sourceRect
       }
     default:
       break
     }
-    
+
     present(filtersNavigationController,
             animated: true,
             completion: nil)
   }
-  
 }

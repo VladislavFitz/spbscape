@@ -10,16 +10,13 @@ import Foundation
 import InstantSearchCore
 
 extension IndexName {
-  
   static var buildings: IndexName { "buildings" }
   static var streets: IndexName { "streets" }
   static var architects: IndexName { "architects" }
   static var styles: IndexName { "styles" }
-
 }
 
-struct SpbscapeCredentials {
-  
+enum SpbscapeCredentials {
   static var credentials: (appID: ApplicationID, APIKey: APIKey) = {
     guard let path = Bundle.main.path(forResource: "Credentials", ofType: "plist") else {
       assertionFailure("Credentials.plist not found")
@@ -39,7 +36,6 @@ struct SpbscapeCredentials {
     }
     return (ApplicationID(rawValue: rawAppID), APIKey(rawValue: rawAPIKey))
   }()
-
 }
 
 extension ApplicationID {
@@ -51,7 +47,6 @@ extension APIKey {
 }
 
 extension String {
-
   init?(environmentVariable: String) {
     if
       let rawValue = getenv(environmentVariable),
@@ -61,5 +56,4 @@ extension String {
       return nil
     }
   }
-
 }

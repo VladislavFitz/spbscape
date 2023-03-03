@@ -6,27 +6,26 @@
 //  Copyright © 2023 Vladislav Fitc. All rights reserved.
 //
 
-import Foundation
-import UIKit
-import InstantSearch
 import Combine
+import Foundation
+import InstantSearch
+import UIKit
 
 final class FiltersViewController: UIViewController {
-  
   private let searchController: UISearchController
   private let resultsViewController: SwitchContainerViewController
 
   let queryInputController: TextFieldController
   let viewControllers: [FacetListViewController]
-  
+
   private let resultsCountViewModel: ResultsCountViewModel?
   private let filtersStateViewModel: FiltersStateViewModel
   private var resultsCountBarButtonItem: UIBarButtonItem?
   private var clearFiltersBarButtonItem: UIBarButtonItem?
-  
+
   private var filtersStateSubscriber: AnyCancellable?
   private var resultsCountSubscriber: AnyCancellable?
-    
+
   init(filtersStateViewModel: FiltersStateViewModel,
        resultsCountViewModel: ResultsCountViewModel?) {
     self.filtersStateViewModel = filtersStateViewModel
@@ -40,11 +39,12 @@ final class FiltersViewController: UIViewController {
     super.init(nibName: nil, bundle: nil)
     navigationItem.searchController = searchController
   }
-  
-  required init?(coder: NSCoder) {
+
+  @available(*, unavailable)
+  required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "filters".localize()
@@ -54,24 +54,22 @@ final class FiltersViewController: UIViewController {
     setupResultsViewController()
     setupToolbar()
   }
-  
+
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
     searchController.isActive = false
   }
-  
+
   @objc private func dismissViewController() {
     navigationController?.dismiss(animated: true, completion: nil)
   }
-  
+
   @objc private func clearFilters() {
     filtersStateViewModel.clearFilters()
   }
-  
 }
 
 private extension FiltersViewController {
-  
   func setupToolbar() {
     let closeBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark.circle"),
                                              style: .done,
@@ -87,10 +85,10 @@ private extension FiltersViewController {
       .receive(on: DispatchQueue.main)
       .map { !$0 }
       .assign(to: \.isEnabled, on: clearFiltersBarButtonItem)
-    
+
     var toolbarItems: [UIBarButtonItem] = []
     toolbarItems.append(clearFiltersBarButtonItem)
-    
+
     if let resultsCountViewModel {
       let resultsCountBarButtonItem = UIBarButtonItem()
       self.resultsCountBarButtonItem = resultsCountBarButtonItem
@@ -105,17 +103,17 @@ private extension FiltersViewController {
     }
     toolbarItems.append(.flexibleSpace)
     toolbarItems.append(closeBarButtonItem)
-    
+
     self.toolbarItems = toolbarItems
   }
-  
+
   func setupResultsViewController() {
     addChild(resultsViewController)
     resultsViewController.didMove(toParent: self)
     view.addSubview(resultsViewController.view)
     resultsViewController.view.pin(to: view)
   }
-  
+
   func setupSearchController() {
     searchController.isActive = true
     searchController.hidesNavigationBarDuringPresentation = false
@@ -124,13 +122,10 @@ private extension FiltersViewController {
     searchController.searchBar.scopeButtonTitles = FilterSection.allCases.map(\.title)
     searchController.searchBar.delegate = self
   }
-  
 }
 
 extension FiltersViewController: UISearchBarDelegate {
-  
-  func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+  func searchBar(_: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
     resultsViewController.setVisibleViewController(atIndex: selectedScope)
   }
-  
 }

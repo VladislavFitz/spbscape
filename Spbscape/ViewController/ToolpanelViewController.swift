@@ -6,23 +6,22 @@
 //  Copyright © 2023 Vladislav Fitc. All rights reserved.
 //
 
+import Combine
 import Foundation
 import UIKit
-import Combine
 
 class ToolpanelViewController: UIViewController {
-  
   let stackView: UIStackView
   let hitsCountLabel: UILabel
   let filtersButton: UIButton
   var didTapFiltersButton: ((UIButton) -> Void)?
-  
+
   private var filtersStateSubscriber: AnyCancellable?
   private var resultsCountSubscriber: AnyCancellable?
 
   private let filtersStateViewModel: FiltersStateViewModel
   private let resultsCountViewModel: ResultsCountViewModel
-    
+
   init(filtersStateViewModel: FiltersStateViewModel, resultsCountViewModel: ResultsCountViewModel) {
     self.filtersStateViewModel = filtersStateViewModel
     self.resultsCountViewModel = resultsCountViewModel
@@ -35,7 +34,7 @@ class ToolpanelViewController: UIViewController {
     hitsCountLabel.textAlignment = .center
     hitsCountLabel.translatesAutoresizingMaskIntoConstraints = false
     hitsCountLabel.text = resultsCountViewModel.resultsCountTitle
-    
+
     filtersButton = UIButton()
     filtersButton.contentVerticalAlignment = .fill
     filtersButton.contentHorizontalAlignment = .fill
@@ -56,18 +55,19 @@ class ToolpanelViewController: UIViewController {
       .receive(on: DispatchQueue.main)
       .assign(to: \.text, on: hitsCountLabel)
   }
-  
-  required init?(coder: NSCoder) {
+
+  @available(*, unavailable)
+  required init?(coder _: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func loadView() {
     let backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .prominent))
     backgroundView.layer.cornerRadius = 12
     backgroundView.layer.masksToBounds = true
     view = backgroundView
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     (view as? UIVisualEffectView)?.contentView.addSubview(stackView)
@@ -81,12 +81,11 @@ class ToolpanelViewController: UIViewController {
     stackView.addArrangedSubview(filtersButton)
     NSLayoutConstraint.activate([
       filtersButton.widthAnchor.constraint(equalToConstant: 28),
-      filtersButton.heightAnchor.constraint(equalToConstant: 28),
+      filtersButton.heightAnchor.constraint(equalToConstant: 28)
     ])
   }
-  
+
   @objc private func _didTapFiltersButton(_ filterButton: UIButton) {
     didTapFiltersButton?(filterButton)
   }
-  
 }

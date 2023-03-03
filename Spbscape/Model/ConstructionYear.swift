@@ -14,7 +14,6 @@ enum ConstructionYear {
 }
 
 extension ConstructionYear: Codable {
-  
   init(from decoder: Decoder) throws {
     var container = try decoder.unkeyedContainer()
     let firstDate = try container.decode(Date.self)
@@ -25,33 +24,28 @@ extension ConstructionYear: Codable {
       self = .single(firstDate)
     }
   }
-  
+
   func encode(to encoder: Encoder) throws {
     var container = encoder.unkeyedContainer()
     switch self {
-    case .single(let date):
+    case let .single(date):
       try container.encode(date)
-    case .interval(let start, let end):
+    case let .interval(start, end):
       try container.encode(start)
       try container.encode(end)
     }
   }
-  
 }
 
 extension ConstructionYear: CustomStringConvertible {
-  
   var description: String {
     let formatter = DateFormatter()
     formatter.dateFormat = "YYYY"
     switch self {
-    case .single(let year):
+    case let .single(year):
       return formatter.string(from: year)
-    case .interval(let start, let end):
+    case let .interval(start, end):
       return "\(formatter.string(from: start)) - \(formatter.string(from: end))"
     }
   }
-  
 }
-
-

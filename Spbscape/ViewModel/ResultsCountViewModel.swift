@@ -9,12 +9,11 @@
 import Foundation
 
 final class ResultsCountViewModel {
-  
   @Published var resultsCount: Int = 0
   @Published var resultsCountTitle: String? = nil
-  
+
   private var observer: NSObjectProtocol?
-  
+
   public init(resultsCount: Int) {
     self.resultsCount = resultsCount
     observer = NotificationCenter.default.addObserver(forName: .updateSearchResultsCount,
@@ -24,14 +23,13 @@ final class ResultsCountViewModel {
         return
       }
       self.resultsCount = resultsCount
-      self.resultsCountTitle =  "\("buildings".localize()): \(resultsCount)"
+      self.resultsCountTitle = "\("buildings".localize()): \(resultsCount)"
     }
   }
-  
+
   deinit {
     if let observer {
       NotificationCenter.default.removeObserver(observer)
     }
   }
-  
 }

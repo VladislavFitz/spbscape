@@ -10,15 +10,14 @@ import Foundation
 import UIKit
 
 final class FiltersStateViewModel {
-  
   private var _clearFilters: () -> Void
-  
+
   @Published var areFiltersEmpty: Bool = true
   @Published var filtersButtonImage: UIImage? = UIImage(systemName: "line.horizontal.3.decrease.circle")
   private var observer: NSObjectProtocol?
-  
+
   init(areFiltersEmpty: Bool, clearFilters: @escaping () -> Void) {
-    self._clearFilters = clearFilters
+    _clearFilters = clearFilters
     self.areFiltersEmpty = areFiltersEmpty
     observer = NotificationCenter.default.addObserver(forName: .updateAppliedFiltersCount,
                                                       object: nil,
@@ -31,9 +30,8 @@ final class FiltersStateViewModel {
       self.filtersButtonImage = UIImage(systemName: iconName)
     }
   }
-  
+
   func clearFilters() {
     _clearFilters()
   }
-  
 }
