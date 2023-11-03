@@ -11,33 +11,31 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   var window: UIWindow?
-  var toolbarDelegate = ToolbarDelegate()
-  let searchViewModel = SearchViewModel()
+  let coordinator: Coordinator = {
+    if UIDevice.current.userInterfaceIdiom == .phone {
+      PhoneCoordinator()
+    } else {
+      PadCoordinator()
+    }
+  }()
 
   func scene(_ scene: UIScene, willConnectTo _: UISceneSession, options _: UIScene.ConnectionOptions) {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     window = UIWindow(frame: windowScene.coordinateSpace.bounds)
     window?.windowScene = windowScene
-
-    #if targetEnvironment(macCatalyst)
-      if #available(macCatalyst 14.0, *) {
-        let toolbar = NSToolbar(identifier: "main")
-        toolbar.delegate = toolbarDelegate
-        toolbar.displayMode = .iconOnly
-        if let titlebar = windowScene.titlebar {
-          titlebar.titleVisibility = .visible
-          titlebar.toolbar = toolbar
-          titlebar.toolbarStyle = .automatic
-        }
-        windowScene.title = "saint-petersburg".localize()
-      }
-    #endif
-
-    UIToolbar.appearance().tintColor = ColorScheme.primaryColor
     window?.tintColor = ColorScheme.primaryColor
-    window?.rootViewController = ViewControllerFactory.rootViewController(searchViewModel: searchViewModel)
+    window?.rootViewController = coordinator.rootViewController()
     window?.makeKeyAndVisible()
-    searchViewModel.searcher.search()
+    coordinator.presentRoot()
+    UIToolbar.appearance().tintColor = ColorScheme.primaryColor
+    #if targetEnvironment(macCatalyst)
+    if let titlebar = windowScene.titlebar {
+      titlebar.titleVisibility = .visible
+      titlebar.toolbar = (coordinator as? PadCoordinator)?.toolbar
+      titlebar.toolbarStyle = .automatic
+    }
+    windowScene.title = "saint-petersburg".localize()
+    #endif
   }
 }
 

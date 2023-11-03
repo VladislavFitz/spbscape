@@ -44,13 +44,13 @@ final class SearchHeaderViewController: UIViewController {
   init(filtersStateViewModel: FiltersStateViewModel,
        resultsCountViewModel: ResultsCountViewModel,
        style: Style) {
-    headerView = HandleView()
-    bodyStackView = UIStackView()
-    mainStackView = UIStackView()
-    searchTextField = UISearchTextField()
-    filtersButton = UIButton()
-    resultsCountLabel = UILabel()
-    footerView = UIView()
+    headerView = HandleView(autolayout: ())
+    bodyStackView = UIStackView(autolayout: ())
+    mainStackView = UIStackView(autolayout: ())
+    searchTextField = UISearchTextField(autolayout: ())
+    filtersButton = UIButton(autolayout: ())
+    resultsCountLabel = UILabel(autolayout: ())
+    footerView = UIView(autolayout: ())
     self.style = style
     self.resultsCountViewModel = resultsCountViewModel
     self.filtersStateViewModel = filtersStateViewModel
@@ -74,10 +74,8 @@ final class SearchHeaderViewController: UIViewController {
     setupMainStackView()
     setupBodyStackView()
     setupHeaderView()
-    setupFooterView()
     setupFiltersButton()
     setupResultsCountLabel()
-    setupSearchTextField()
   }
 
   @objc func didTapFilterButton(_ filterButton: UIButton) {
@@ -110,6 +108,7 @@ private extension SearchHeaderViewController {
     activate(
       headerView.heightAnchor.constraint(equalToConstant: handleViewHeight),
       bodyStackView.heightAnchor.constraint(equalToConstant: searchBarHeight),
+      searchTextField.heightAnchor.constraint(equalToConstant: searchBarHeight),
       footerView.heightAnchor.constraint(equalToConstant: footerViewHeight),
       filtersButton.widthAnchor.constraint(equalToConstant: 28),
       filtersButton.heightAnchor.constraint(equalToConstant: 28)
@@ -125,7 +124,6 @@ private extension SearchHeaderViewController {
   }
 
   func setupMainStackView() {
-    mainStackView.translatesAutoresizingMaskIntoConstraints = false
     mainStackView.axis = .vertical
     mainStackView.spacing = stackSpacing
   }
@@ -139,27 +137,16 @@ private extension SearchHeaderViewController {
   func setupResultsCountLabel() {
     resultsCountLabel.textColor = ColorScheme.primaryColor
     resultsCountLabel.textAlignment = .center
-    resultsCountLabel.translatesAutoresizingMaskIntoConstraints = false
   }
 
   func setupHeaderView() {
-    headerView.translatesAutoresizingMaskIntoConstraints = false
     #if targetEnvironment(macCatalyst)
       headerView.isHidden = true
     #endif
     headerView.handleBar.isHidden = style == .fullscreen
   }
 
-  func setupFooterView() {
-    footerView.translatesAutoresizingMaskIntoConstraints = false
-  }
-
-  func setupSearchTextField() {
-    searchTextField.translatesAutoresizingMaskIntoConstraints = false
-  }
-
   func setupBodyStackView() {
-    bodyStackView.translatesAutoresizingMaskIntoConstraints = false
     bodyStackView.axis = .horizontal
     bodyStackView.spacing = 0
     bodyStackView.alignment = .center

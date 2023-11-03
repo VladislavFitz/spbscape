@@ -20,8 +20,6 @@ class BuldingHitsMapViewController: UIViewController, HitsController {
 
   let toolpanelViewController: ToolpanelViewController?
 
-  var detailsTransitioningDelegate: TransitioningDelegate!
-
   private var nextRegionChangeIsFromUserInteraction = false
 
   var didSelect: ((Building, MKAnnotationView) -> Void)?

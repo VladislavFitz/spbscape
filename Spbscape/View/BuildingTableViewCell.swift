@@ -66,9 +66,7 @@ class BuildingTableViewCell: UITableViewCell {
     infoStackView.spacing = 5
     infoStackView.addArrangedSubview(titleLabel)
     infoStackView.addArrangedSubview(addressLabel)
-    let view = UIView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    infoStackView.addArrangedSubview(view)
+    infoStackView.addArrangedSubview(.placeholder)
     buildingImageView.layer.cornerRadius = 10
     buildingImageView.contentMode = .scaleAspectFill
     buildingImageView.clipsToBounds = true
