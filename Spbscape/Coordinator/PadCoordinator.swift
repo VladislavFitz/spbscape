@@ -12,7 +12,7 @@ import SpbscapeCore
 import SwiftUI
 
 final class PadCoordinator: Coordinator {
-  
+
   let viewControllerFactory: ViewControllerFactory
   let splitViewController: UISplitViewController
   var detailsTransitioningDelegate: TransitioningDelegate!
@@ -32,7 +32,7 @@ final class PadCoordinator: Coordinator {
     self.toolbarDelegate = ToolbarDelegate()
     viewModelFactory.searchViewModel().searcher.search()
   }
-  
+
   #if targetEnvironment(macCatalyst)
   lazy var toolbar: NSToolbar = {
     let toolbar = NSToolbar(identifier: "main")
@@ -41,11 +41,11 @@ final class PadCoordinator: Coordinator {
     return toolbar
   }()
   #endif
-  
+
   func rootViewController() -> UIViewController {
     splitViewController
   }
-  
+
   func presentRoot() {
     let mapHitsViewController = viewControllerFactory.hitsMapViewController()
     let listHitsViewController = viewControllerFactory.hitsListViewController()
@@ -68,8 +68,9 @@ final class PadCoordinator: Coordinator {
         self?.presentFilters(from: .init(x: 50, y: 50, width: 40, height: 40))
       })
 #else
+    let toolpanelViewController = mapHitsViewController.toolpanelViewController
     mapHitsViewController.navigationController?.isNavigationBarHidden = true
-    mapHitsViewController.toolpanelViewController?.didTapFiltersButton = { [weak self, weak mapHitsViewController] button in
+    toolpanelViewController?.didTapFiltersButton = { [weak self, weak mapHitsViewController] button in
       let sourceRect = mapHitsViewController?.view.convert(button.frame,
                                                            from: button.superview)
       self?.presentFilters(from: sourceRect)
@@ -83,11 +84,11 @@ final class PadCoordinator: Coordinator {
       self?.presentBuilding(building)
     }
   }
-  
+
   var secondaryViewController: UIViewController {
     splitViewController.viewControllers.last!
   }
-  
+
   func presentFilters(from sourceRect: CGRect? = nil) {
     let filtersViewController = viewControllerFactory.filtersViewController()
     let filtersNavigationController = UINavigationController(rootViewController: filtersViewController)
@@ -111,10 +112,10 @@ final class PadCoordinator: Coordinator {
     if let sourceRect = sourceRect {
       filtersNavigationController.popoverPresentationController?.sourceRect = sourceRect
     }
-    
+
     secondaryViewController.present(filtersNavigationController, animated: true)
   }
-  
+
   func presentBuilding(_ building: Building) {
     func presentBuilding(mode: TransitioningDelegate.Mode) {
       let buildingViewController = viewControllerFactory.buildingViewController(for: building)
@@ -147,5 +148,5 @@ final class PadCoordinator: Coordinator {
       presentBuilding(mode: .slide)
     }
   }
-    
+
 }

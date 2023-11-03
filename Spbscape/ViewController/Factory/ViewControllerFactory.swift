@@ -13,13 +13,13 @@ import SwiftUI
 import UIKit
 
 class ViewControllerFactory {
-  
+
   let viewModelFactory: ViewModelFactory
-  
+
   init(viewModelFactory: ViewModelFactory) {
     self.viewModelFactory = viewModelFactory
   }
-  
+
   func toolpanelViewController() -> ToolpanelViewController? {
 #if targetEnvironment(macCatalyst)
     return nil
@@ -31,14 +31,14 @@ class ViewControllerFactory {
                                    resultsCountViewModel: viewModelFactory.resultsCountViewModel())
 #endif
   }
-  
+
   func searchHeaderViewController() -> SearchHeaderViewController {
     let style: SearchHeaderViewController.Style = UIDevice.current.userInterfaceIdiom == .phone ? .overlay : .fullscreen
     return SearchHeaderViewController(filtersStateViewModel: viewModelFactory.filtersStateViewModel(),
                                       resultsCountViewModel: viewModelFactory.resultsCountViewModel(),
                                       style: style)
   }
-  
+
   func searchViewController(with bodyViewController: UIViewController) -> SearchViewController {
     let headerViewController = searchHeaderViewController()
     let searchViewController = SearchViewController(headerViewController: headerViewController,
@@ -46,7 +46,7 @@ class ViewControllerFactory {
     viewModelFactory.searchViewModel().setup(searchViewController)
     return searchViewController
   }
-  
+
   func hitsMapViewController() -> BuldingHitsMapViewController {
     let searchViewModel = viewModelFactory.searchViewModel()
     let toolpanelViewController = toolpanelViewController()
@@ -65,14 +65,14 @@ class ViewControllerFactory {
     searchViewModel.hitsConnector.connectController(mapHitsViewController)
     return mapHitsViewController
   }
-  
+
   func hitsListViewController() -> BuldingHitsListViewController {
     let viewModel = viewModelFactory.searchViewModel()
     let listHitsViewController = BuldingHitsListViewController()
     viewModel.hitsConnector.connectController(listHitsViewController)
     return listHitsViewController
   }
-  
+
   func filtersViewController() -> FiltersViewController {
     let resultsCountViewModel: ResultsCountViewModel?
 #if targetEnvironment(macCatalyst)
@@ -89,12 +89,12 @@ class ViewControllerFactory {
     viewModelFactory.searchViewModel().filtersViewModel.setup(filtersViewController)
     return filtersViewController
   }
-  
+
   func buildingViewController(for building: Building) -> UIViewController {
     let viewModel = BuildingViewModel(building: building)
     let view = BuildingView(viewModel: viewModel)
     let hostingViewController = UIHostingController(rootView: view)
     return hostingViewController
   }
-  
+
 }

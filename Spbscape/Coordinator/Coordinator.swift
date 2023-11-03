@@ -11,7 +11,7 @@ import UIKit
 import SpbscapeCore
 
 protocol Coordinator {
-  
+
   func rootViewController() -> UIViewController
   func presentRoot()
   func presentBuilding(_ building: Building)

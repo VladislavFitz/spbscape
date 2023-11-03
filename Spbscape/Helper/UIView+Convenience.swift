@@ -19,7 +19,7 @@ extension UIView {
   func activate(_ constraints: NSLayoutConstraint...) {
     NSLayoutConstraint.activate(constraints)
   }
-  
+
   func pin(top: NSLayoutYAxisAnchor? = nil,
            _ topPadding: CGFloat = 0,
            bottom: NSLayoutYAxisAnchor? = nil,

@@ -9,23 +9,23 @@
 import Foundation
 
 final class ViewModelFactory {
-  
+
   private let svm: SearchViewModel
-  
+
   init() {
     self.svm = SearchViewModel()
   }
-  
+
   func searchViewModel() -> SearchViewModel {
     svm
   }
-  
+
   func filtersStateViewModel() -> FiltersStateViewModel {
     svm.filtersStateViewModel
   }
-  
+
   func resultsCountViewModel() -> ResultsCountViewModel {
     svm.resultsCountViewModel
   }
-  
+
 }

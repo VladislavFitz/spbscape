@@ -12,21 +12,21 @@ import SwiftUI
 import UIKit
 
 final class PhoneCoordinator: Coordinator {
-  
+
   let viewControllerFactory: ViewControllerFactory
   let navigationController: UINavigationController
-  
+
   init() {
     let viewModelFactory = ViewModelFactory()
     self.viewControllerFactory = ViewControllerFactory(viewModelFactory: viewModelFactory)
     self.navigationController = UINavigationController()
     viewModelFactory.searchViewModel().searcher.search()
   }
-      
+
   func rootViewController() -> UIViewController {
     navigationController
   }
-  
+
   func presentRoot() {
     let mapHitsViewController = viewControllerFactory.hitsMapViewController()
     let listHitsViewController = viewControllerFactory.hitsListViewController()
@@ -45,7 +45,7 @@ final class PhoneCoordinator: Coordinator {
     }
     navigationController.pushViewController(interactiveSheetViewController, animated: false)
   }
-  
+
   func presentFilters() {
     let filtersViewController = viewControllerFactory.filtersViewController()
     let filtersNavigationController = UINavigationController(rootViewController: filtersViewController)
@@ -60,11 +60,11 @@ final class PhoneCoordinator: Coordinator {
     navigationController.present(filtersNavigationController,
                                  animated: true)
   }
-  
+
   func presentBuilding(_ building: Building) {
     let buildingViewController = viewControllerFactory.buildingViewController(for: building)
     navigationController.present(buildingViewController,
                                  animated: true)
   }
-    
+
 }

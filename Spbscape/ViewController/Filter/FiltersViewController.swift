@@ -12,7 +12,7 @@ import InstantSearch
 import UIKit
 
 final class FiltersViewController: UIViewController {
-  
+
   private let searchController: UISearchController
   private let resultsViewController: SwitchContainerViewController
 
