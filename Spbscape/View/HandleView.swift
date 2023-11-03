@@ -22,7 +22,7 @@ class HandleView: UIView {
   }
 
   override init(frame: CGRect) {
-    handleBar = UIVisualEffectView()
+    handleBar = UIVisualEffectView(autolayout: ())
     super.init(frame: frame)
     handleBar.effect = visualEffect
     setupLayout()
@@ -42,7 +42,6 @@ class HandleView: UIView {
     addSubview(handleBar)
     handleBar.clipsToBounds = true
     handleBar.layer.cornerRadius = 2
-    handleBar.translatesAutoresizingMaskIntoConstraints = false
     activate(
       handleBar.heightAnchor.constraint(equalToConstant: 4),
       handleBar.widthAnchor.constraint(equalToConstant: 40),

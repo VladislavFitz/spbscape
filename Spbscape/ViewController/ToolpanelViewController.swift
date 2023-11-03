@@ -25,14 +25,12 @@ class ToolpanelViewController: UIViewController {
   init(filtersStateViewModel: FiltersStateViewModel, resultsCountViewModel: ResultsCountViewModel) {
     self.filtersStateViewModel = filtersStateViewModel
     self.resultsCountViewModel = resultsCountViewModel
-    stackView = UIStackView()
-    stackView.translatesAutoresizingMaskIntoConstraints = false
+    stackView = UIStackView(autolayout: ())
     stackView.axis = .horizontal
     stackView.alignment = .center
-    hitsCountLabel = UILabel()
+    hitsCountLabel = UILabel(autolayout: ())
     hitsCountLabel.textColor = ColorScheme.primaryColor
     hitsCountLabel.textAlignment = .center
-    hitsCountLabel.translatesAutoresizingMaskIntoConstraints = false
     hitsCountLabel.text = resultsCountViewModel.resultsCountTitle
 
     filtersButton = UIButton()

@@ -37,8 +37,7 @@ class SwitchContainerViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    let stackView = UIStackView()
-    stackView.translatesAutoresizingMaskIntoConstraints = false
+    let stackView = UIStackView(autolayout: ())
     viewControllers.compactMap(\.view).forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       stackView.addArrangedSubview($0)

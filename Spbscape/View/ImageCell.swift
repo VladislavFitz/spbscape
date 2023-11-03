@@ -13,7 +13,7 @@ class ImageCell: UICollectionViewCell {
   let imageView: UIImageView
 
   override init(frame: CGRect) {
-    imageView = .init()
+    imageView = UIImageView(autolayout: ())
     super.init(frame: frame)
     configureLayout()
     contentView.backgroundColor = .clear
@@ -30,7 +30,6 @@ class ImageCell: UICollectionViewCell {
   }
 
   private func configureLayout() {
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.clipsToBounds = true
     contentView.addSubview(imageView)
     activate(
